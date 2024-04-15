@@ -17,7 +17,7 @@ USUARIO NO REGISTRADO
     ○ e-mail
     ○ username
     ○ Contraseña
-● Login con enlace de recuperación contraseña
+    ● Login con enlace de recuperación contraseña
 
 USUARIO REGISTRADO / CLIENTE
 ● Visualizar la landing con el listado de experiencias
