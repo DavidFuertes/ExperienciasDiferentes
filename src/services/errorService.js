@@ -1,11 +1,9 @@
-//Creación de errores personalizados 
-//Estructura modelo de ejemplo:
-/* export const nombreDelError = () => {
-    throw {
-        httpStatus: XXX,
-        code: 'nombre código para nosotros',
-        message: 'Mensaje para el cliente',
-    };
-}; */
 
+export const notFoundError = (resource) => {
+    throw {
+        httpStatus: 404,
+        code: 'RESOURCE_NOT_FOUND',
+        message: `El recurso ${resource} no fue encontrado`,
+    };
+};
 
