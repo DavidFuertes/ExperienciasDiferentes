@@ -1,3 +1,4 @@
+
 export const notFoundError = (resource) => {
     throw {
         httpStatus: 404,
@@ -5,3 +6,4 @@ export const notFoundError = (resource) => {
         message: `El recurso ${resource} no fue encontrado`,
     };
 };
+
