@@ -1,41 +1,53 @@
-// importamos express para crear el servidor
+//Importamos las dependencias necesarias
 import express from 'express';
+import cors from 'cors';
+import path from 'path';
 import fileUpload from 'express-fileupload';
 
-// Importamos morgan para mostrar información de las peticiones
-import morgan from 'morgan';
-
-// Importamos cors para evitar problemas con las CORS
-//import cors from 'cors';
-
-// Importamos las rutas
-import { routes } from './src/routes/index.js';
-
-// Importamos los controladores de errores
-import {
-  notFoundController,
-  errorController,
-} from './src/controllers/errors/index.js';
-
-// Obtenemos las variables de entorno
+// Obtenemos las variables de entorno.
 import { PORT } from './env.js';
 
-//const db = getPool();
-const app = express(); // crea servidor
 
-const appPORT = PORT || 3000;
+// Importamos las funciones controladoras.
+import { notFoundController } from './src/controllers/errors/notFoundController.js';
+import { errorController } from './src/controllers/errors/errorController.js';
 
-app.use(express.json()); // Milddeware para parsear el body
+// Importamos el enrutador para las rutas
+import routes from './src/routes/index.js';
+
+
+
+//Creación del servidor con express
+const app = express();
+
+
+// Middleware de análisis de cuerpo
+app.use(expres.json());
+app.use(express.urlencoded({ extended: true }));
+
+//Middleware upload de archivos
 app.use(fileUpload());
 
-app.use(morgan('dev')); // Milddewar de morgan
+// Middleware CORS
+app.use(cors());
 
-app.use(routes); // Milddewar que indica a express donde estan las rutas cuando esten hechas
+// Middleware de archivos estáticos
+app.use('/imagenes', express.static(path.join(__dirname, 'public/images')));
 
-app.use(notFoundController); // Milddewar de ruta no encontrada
+// Middleware de Ruta No Encontrada que ejecuta su función controladora
+app.use(notFoundController);
 
-app.use(errorController); //Milddewar de Error
+// Middleware de errores
+app.use(errorController);
 
-app.listen(appPORT, () => {
-  console.log(`🚀 Servidor escuchando en http://localhost:${appPORT}`);
+
+
+// Middleware para indicar a express dónde están las rutas.
+app.use(routes);
+
+
+// Le indicamos al servidor que escuche peticiones en el puerto establecido en
+// las variables de entorno.
+app.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
