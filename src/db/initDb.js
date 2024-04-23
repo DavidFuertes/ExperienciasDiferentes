@@ -107,6 +107,9 @@ async function createTables(connection) {
                 password VARCHAR(255) NOT NULL,
                 date DATE,
                 avatar VARCHAR(255),
+                registrationCode VARCHAR(255),
+                active BOOLEAN DEFAULT false,
+                role ENUM('admin','público') DEFAULT 'public'
                 register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         `);
