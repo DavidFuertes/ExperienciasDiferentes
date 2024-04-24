@@ -2,7 +2,8 @@
 import nodemailer from 'nodemailer';
 
 // Importamos las variables de entorno.
-import { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } from '../../env.js';
+import 'dotenv/config.js';
+const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
 
 // Importamos los errores.
 import { sendEmailError } from '../services/errorService.js';

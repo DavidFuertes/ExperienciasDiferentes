@@ -8,13 +8,15 @@ import { insertUserModel } from '../../models/users/insertUserModels.js';
 import { sendMail } from '../../utilities/sendMail.js';
 
 // Importamos la función que valida esquemas.
-import { validateSchema } from '../../utilities/validateSchema.js';
+import validateSchema from '../../utilities/validateSchema.js';
 
 // Importamos el esquema de Joi.
 import { newUserSchema } from '../../schemas/users/newUserSchema.js';
 
 // Importamos las variables de entorno.
-import { PORT } from '../../../env.js';
+import 'dotenv/config.js';
+
+const port = process.env.PORT
 
 // Función controladora final que crea un nuevo usuario.
 export const newUserController = async (req, res, next) => {
@@ -40,7 +42,7 @@ export const newUserController = async (req, res, next) => {
 
             Gracias por registrarte en Diario de Viajes. Para activar tu cuenta, haz clic en el siguiente enlace:
 
-            <a href="http://localhost:${PORT}/users/validate/${registrationCode}">¡Activar mi cuenta!</a>
+            <a href="http://localhost:${port}/users/validate/${registrationCode}">¡Activar mi cuenta!</a>
         `;
 
     // Enviamos el email de verificación al usuario.

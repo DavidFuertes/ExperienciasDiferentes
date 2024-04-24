@@ -2,7 +2,7 @@
 import joi from 'joi';
 
 // Importamos joiErrorMessages.
-import { joiErrorMessages } from '../joiErrorMessages.js';
+import joiErrorMessages from '../joiErrorMessages.js';
 
 // Esquema para validar el body de la petición. y mensaje de error con joi
 export const newUserSchema = joi.object({

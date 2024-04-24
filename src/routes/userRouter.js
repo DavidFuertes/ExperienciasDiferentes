@@ -7,7 +7,7 @@ import { newUserController } from '../controllers/users/newUserController.js';
 
 import { validateUserController } from '../controllers/users/validateUserController.js';
 
-import { loginUserController } from '../controllers/users/index.js';
+import loginUserController from '../controllers/users/loginUserController.js';
 
 import { changeUserPasswordController } from '../controllers/users/changeUserPasswordController.js';
 
@@ -15,18 +15,20 @@ import { changeUserPasswordController } from '../controllers/users/changeUserPas
 
 // Creamos un enrutador con express, que permite definir rutas y manejar
 // solicitudes HTTP específicas para esas rutas.
-export const router = express.Router();
+const userRouter = express.Router();
 
 // Crear un usuario pendiente de activar.
-router.post('/users/register', newUserController);
+userRouter.post('/register', newUserController);
 
 // Validar a un usuario.
-router.get('/users/validate/:registrationCode', validateUserController);
+userRouter.get('/validate/:registrationCode', validateUserController);
 
 
 // Middleware de login de usuario.
-router.post('/users/login', loginUserController);
+userRouter.post('/login', loginUserController);
 
 
 // Cambio de contraseña
-router.put('/users/changePassword', changeUserPasswordController);
+userRouter.put('/changePassword', changeUserPasswordController);
+
+export { userRouter };

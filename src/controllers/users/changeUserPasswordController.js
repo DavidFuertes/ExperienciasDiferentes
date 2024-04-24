@@ -1,5 +1,5 @@
 // Importamos los modelos.
-import { validateSchema } from '../../utilities/validateSchema.js';
+import validateSchema from '../../utilities/validateSchema.js';
 import { changeUserPasswordSchema } from '../../schemas/users/changeUserPasswordSchema.js';
 
 import { changeUserPasswordModel } from '../../models/users/changeUserPasswordModel.js';
