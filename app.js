@@ -42,5 +42,5 @@ app.use('/api/experiences', experiencesRouter);
 //app.use(errorController); //Milddewar de Error
 
 app.listen(port, () => {
-  console.log(🚀 Servidor escuchando en http://localhost:${port});
+  console.log(`🚀 Servidor escuchando en http://localhost:${port}`);
 });
