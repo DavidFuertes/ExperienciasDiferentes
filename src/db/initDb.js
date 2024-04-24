@@ -160,6 +160,17 @@ async function createTables(connection) {
             )
         `);
 
+        await connection.query(`
+        CREATE TABLE IF NOT EXISTS Ratings(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT,
+            experience_id INT,
+            rating INT CHECK(rating >= 1 AND rating <= 5),
+            FOREIGN KEY (user_id) REFERENCES Users(id),
+            FOREIGN KEY (experience_id) REFERENCES Experiences(id)
+        )
+        `);
+
         console.log('Tablas creadas exitosamente.');
     } catch (error) {
         console.error('Error al crear las tablas:', error.message);
