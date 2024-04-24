@@ -2,7 +2,7 @@
 import bcrypt from 'bcrypt';
 
 // Importamos la función que devuelve una conexión con la base de datos.
-import  getPool from '../../db/getPool.js';
+import  { getPool } from '../../db/poolQuery.js';
 
 // Importamos los errores.
 import {
@@ -20,7 +20,7 @@ export const insertUserModel = async (
   const pool = await getPool();
 
   // Buscamos en la base de datos algún usuario con ese nombre.
-  let [users] = await pool.query(`SELECT id FROM users WHERE username = ?`, [
+  let [users] = await pool.query(`SELECT id FROM Users WHERE name = ?`, [
     username,
   ]);
 
@@ -30,7 +30,7 @@ export const insertUserModel = async (
   }
 
   // Buscamos en la base de datos algún usuario con ese email.
-  [users] = await pool.query(`SELECT id FROM users WHERE email = ?`, [email]);
+  [users] = await pool.query(`SELECT id FROM Users WHERE email = ?`, [email]);
 
   // Si existe algún usuario con ese email lanzamos un error.
   if (users.length > 0) {
@@ -42,7 +42,7 @@ export const insertUserModel = async (
 
   // Insertamos el usuario.
   await pool.query(
-    `INSERT INTO users (username, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
+    `INSERT INTO Users (name, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
     [username, email, hashedPass, registrationCode]
   );
 };
