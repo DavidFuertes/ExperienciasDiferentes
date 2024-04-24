@@ -11,6 +11,10 @@ import loginUserController from '../controllers/users/loginUserController.js';
 
 import { changeUserPasswordController } from '../controllers/users/changeUserPasswordController.js';
 
+import sendRecoverPassController from '../controllers/users/sendRecoverPassController.js';
+
+
+
 // Aquí se importan las funciones controladoras intermedias.
 
 // Creamos un enrutador con express, que permite definir rutas y manejar
@@ -30,5 +34,8 @@ userRouter.post('/login', loginUserController);
 
 // Cambio de contraseña
 userRouter.put('/changePassword', changeUserPasswordController);
+
+// Enviar email de recuperación de contraseña.
+userRouter.post('/password/recover', sendRecoverPassController);
 
 export { userRouter };
