@@ -1,53 +1,46 @@
-//Importamos las dependencias necesarias
+// importamos express para crear el servidor
 import express from 'express';
-import cors from 'cors';
-import path from 'path';
 import fileUpload from 'express-fileupload';
 
-// Obtenemos las variables de entorno.
-import { PORT } from './env.js';
+import 'dotenv/config.js';
 
+// Importamos morgan para mostrar información de las peticiones
+import morgan from 'morgan';
 
-// Importamos las funciones controladoras.
-import { notFoundController } from './src/controllers/errors/notFoundController.js';
-import { errorController } from './src/controllers/errors/errorController.js';
+// Importamos cors para evitar problemas con las CORS
+//import cors from 'cors';
 
-// Importamos el enrutador para las rutas
-import routes from './src/routes/index.js';
+// Importamos las rutas
+//import { routes } from './src/routes/index.js';
+import { experiencesRouter } from './src/routes/experiencesRouter.js';
+import { userRouter } from './src/routes/userRouter.js';
 
+// Importamos los controladores de errores
+//import {
+//  notFoundController,
+//  errorController,
+//} from './src/controllers/errors/index.js';
 
+// Obtenemos las variables de entorno
+//import { PORT } from './env.js';
 
-//Creación del servidor con express
-const app = express();
+//const db = getPool();
+const app = express(); // crea servidor
 
+const port = process.env.PORT ?? 3000
 
-// Middleware de análisis de cuerpo
-app.use(expres.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // Milddeware para parsear el body
+//app.use(fileUpload());
 
-//Middleware upload de archivos
-app.use(fileUpload());
+app.use(morgan('dev')); // Milddewar de morgan
 
-// Middleware CORS
-app.use(cors());
+//app.use(routes); // Milddewar que indica a express donde estan las rutas cuando esten hechas
+app.use('/api/users', userRouter)
+app.use('/api/experiences', experiencesRouter);
+//app.use(notFoundController); // Milddewar de ruta no encontrada
 
-// Middleware de archivos estáticos
-app.use('/imagenes', express.static(path.join(__dirname, 'public/images')));
+//app.use(errorController); //Milddewar de Error
 
-// Middleware de Ruta No Encontrada que ejecuta su función controladora
-app.use(notFoundController);
-
-// Middleware de errores
-app.use(errorController);
-
-
-
-// Middleware para indicar a express dónde están las rutas.
-app.use(routes);
-
-
-// Le indicamos al servidor que escuche peticiones en el puerto establecido en
-// las variables de entorno.
-app.listen(PORT, () => {
-    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(🚀 Servidor escuchando en http://localhost:${port});
 });

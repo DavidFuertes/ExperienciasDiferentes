@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 //Importamos las funciones modelos.
-import selectUserByEmailModel from '../../models/users/selectUserByEmailModel';
+import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 
 //Importamos la función que valida esquemas.
 import validateSchema from '../../utilities/validateSchema.js';
@@ -17,7 +17,9 @@ import loginUserSchema from '../../schemas/users/loginUserSchema.js';
 
 // Importamos la variable de entorno SECRET necesaria para
 // crear el token
-import { SECRET } from '../../../env.js';
+import 'dotenv/config.js';
+
+const SECRET = process.env.SECRET;
 
 //Función controladora final que logea a un usuario retornando un token
 const loginUserController = async (req, res, next) => {
