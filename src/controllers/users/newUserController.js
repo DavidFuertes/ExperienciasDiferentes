@@ -40,7 +40,7 @@ export const newUserController = async (req, res, next) => {
     const emailBody = `
             ¡Bienvenid@ ${username}!
 
-            Gracias por registrarte en Diario de Viajes. Para activar tu cuenta, haz clic en el siguiente enlace:
+            Gracias por registrarte en experiencias diferentes. Para activar tu cuenta, haz clic en el siguiente enlace:
 
             <a href="http://localhost:${port}/users/validate/${registrationCode}">¡Activar mi cuenta!</a>
         `;
