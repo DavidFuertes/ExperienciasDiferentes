@@ -1,6 +1,6 @@
 // importamos express para crear el servidor
 import express from 'express';
-import fileUpload from 'express-fileupload';
+//import fileUpload from 'express-fileupload';
 
 import 'dotenv/config.js';
 
