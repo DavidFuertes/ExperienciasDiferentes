@@ -15,7 +15,7 @@ async function experienceRating (req, res) {
             VALUES(?, ?, ?)
         `, [user_id, experience_id, rating]);
 
-        console.log(insertInfo)
+        console.log("hola" + insertInfo)
 
         res.status(201).send({
             message: 'Experiencia valorada con éxito.',

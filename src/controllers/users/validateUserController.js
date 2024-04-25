@@ -5,7 +5,7 @@ import { updateActiveUserModel } from '../../models/users/updateActiveUserModel.
 export const validateUserController = async (req, res, next) => {
   try {
     // Obtenemos el código de registro.
-    const { registrationCode } = req.params;
+    const { registrationCode } = req.body;
 
     // Activamos el usuario.
     await updateActiveUserModel(registrationCode);

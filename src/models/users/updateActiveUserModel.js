@@ -1,5 +1,5 @@
 // Importamos la función que devuelve una conexión con la base de datos.
-import getPool from '../../db/getPool.js';
+import { getPool } from '../../db/poolQuery.js';
 
 // Importamos los errores.
 import { notFoundError } from '../../services/errorService.js';
@@ -10,7 +10,7 @@ export const updateActiveUserModel = async (registrationCode) => {
 
   // Buscamos a un usuario con el código de registro proporcionado.
   const [users] = await pool.query(
-    `SELECT id FROM users WHERE registrationCode = ?`,
+    `SELECT id FROM Users WHERE registrationCode = ?`,
     [registrationCode]
   );
 
@@ -21,7 +21,7 @@ export const updateActiveUserModel = async (registrationCode) => {
 
   // Activamos al usuario.
   await pool.query(
-    `UPDATE users SET active = true, registrationCode = null WHERE registrationCode = ?`,
+    `UPDATE Users SET active = true, registrationCode = null WHERE registrationCode = ?`,
     [registrationCode]
   );
 };

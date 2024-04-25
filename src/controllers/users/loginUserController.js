@@ -34,6 +34,7 @@ const loginUserController = async (req, res, next) => {
 
         // Esta variable almacena un valor booleano indicando si la contraseña es correcto o no.
         let validPass;
+        console.log(user)
 
         if (user) {
             // Comprobamos si la contraseña que nos llega del cliente coincide con la del usuario seleccionado.

@@ -29,7 +29,7 @@ async function userAuth (req, res, next)  {
 
     } catch (error) {
         res.send({
-            message: 'NO'
+            message: 'No puedes votar sin estar registrado.'
         })
         console.log(error.message)
         

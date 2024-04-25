@@ -166,7 +166,7 @@ async function createTables(connection) {
             id INT AUTO_INCREMENT PRIMARY KEY,
             user_id INT,
             experience_id INT,
-            rating INT CHECK(rating >= 1 AND rating <= 5),
+            rating INT CHECK(rating >= 1 AND rating <= 5) NOT NULL,
             FOREIGN KEY (user_id) REFERENCES Users(id),
             FOREIGN KEY (experience_id) REFERENCES Experiences(id)
         )

@@ -2,7 +2,7 @@
 import bcrypt from 'bcrypt';
 
 // Importamos la función que devuelve una conexión con la base de datos.
-import getPool from '../../db/getPool.js';
+import { getPool } from '../../db/poolQuery.js';
 
 // Importamos los errores.
 import {
@@ -20,7 +20,7 @@ export const changeUserPasswordModel = async (
 
   // Buscamos en la base de datos algún usuario con ese nombre y sacamos su password.
   const [users] = await pool.query(
-    `SELECT id,password FROM users WHERE username = ?`,
+    `SELECT id,password FROM Users WHERE name = ?`,
     [username]
   );
 
@@ -45,7 +45,7 @@ export const changeUserPasswordModel = async (
   const newPassHash = await bcrypt.hash(newPassword, 10);
 
   await pool.query(
-    `UPDATE users SET password = "${newPassHash}" WHERE username = ?`,
+    `UPDATE Users SET password = "${newPassHash}" WHERE name = ?`,
     [username]
   );
 };
