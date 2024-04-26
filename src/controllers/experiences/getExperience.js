@@ -3,38 +3,40 @@ import { getPool } from "../../db/poolQuery.js";
 
 async function getExperience (req, res) {
 
-    const experience = req.body;
-    const { experience_id } = experience;
-    
-    try {
+    const { id } = req.query;
 
+    try {
+        
         const pool = await getPool();
+
 
         const [data] = await pool.query(`
         SELECT title, description, city, image, date, price, min_places, total_places FROM Experiences WHERE id = ?
-    `, [experience_id]);
+        `, [id]);
     
         const [rate] = await pool.query(`
         SELECT AVG(rate) AS average_rate
         FROM Comments
         WHERE experience_id = ?
-        `, [experience_id]);
+        `, [id]);
 
         const [inscribed] = await pool.query(`
             SELECT name, email, avatar FROM Users   
             INNER JOIN Reservations ON Users.id = Reservations.user_id WHERE Reservations.experience_id = ?
-        `, [experience_id]);
+        `, [id]);
+
+        const [comments] = await pool.query(`
+            SELECT content From Comments WHERE experience_id = ?
+        `, [id]);
 
         const fullExperience = {
         data,
+        comments,
         rate,
         inscribed
         };
-        const fullExperienceJson = JSON.stringify(fullExperience);
 
-        console.log(fullExperienceJson);
-
-        res.json(fullExperienceJson);
+        res.json(fullExperience);
 
     } catch (error) {
         res.send({

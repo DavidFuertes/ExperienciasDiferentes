@@ -25,7 +25,7 @@ async function getPool () {
     }
 };
 
-// Esta funcion es para no hacer getPool en todos los controllers. En los de "movies" está de la otra manera. En "users" empiezo a usar esta forma ==>
+// Esta funcion es para no hacer getPool en todos los controllers. ==>
 async function sendQuery (query, values) {
     try {
         const pool = await getPool();

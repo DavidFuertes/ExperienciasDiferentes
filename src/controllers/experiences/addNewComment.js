@@ -1,28 +1,26 @@
 import 'dotenv/config.js';
 import { getPool } from "../../db/poolQuery.js";
 
-async function addNewExperience (req, res) {
+async function addNewComment (req, res) {
 
     const newExperience = req.body;
-    const { title, description, type, city, image, date, price, min_places, total_places } = newExperience;
-    const role = req.user;
+    const { content, rate } = newExperience;
+    const { id } = req.query;
+    const user_id = req.headers.user_id;
     
     try {
-        if (role !== "admin") {
-            throw new Error("no eres adminn");
-            return;
-        }
+
         const pool = await getPool();
 
         const [insertInfo] = await pool.query(`
-            INSERT INTO Experiences (title, description, type, city, image, date, price, min_places, total_places)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `, [title, description, type, city, image, date, price, min_places, total_places]);
+            INSERT INTO Comments (user_id, experience_id, content, rate)
+            VALUES(?, ?, ?, ?)
+        `, [user_id, id, content, rate]);
 
         console.log(insertInfo)
 
         const [postedData] = await pool.query(`
-            SELECT * FROM Experiences WHERE id = ?
+            SELECT * FROM Comments WHERE id = ?
         `, [insertInfo.insertId]);
 
         const resInfo = [{ 
@@ -45,4 +43,4 @@ async function addNewExperience (req, res) {
 
 }
 
-export { addNewExperience };
+export { addNewComment };

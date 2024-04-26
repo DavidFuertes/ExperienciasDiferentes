@@ -7,14 +7,16 @@ import { listExperiences } from '../controllers/experiences/listExperiences.js'
 import { experienceRating } from '../controllers/experiences/experienceRating.js'
 import { getExperience } from '../controllers/experiences/getExperience.js';
 import { userAuth } from '../middlewares/userAuth.js';
+import { addNewComment } from '../controllers/experiences/addNewComment.js';
 
 
 const experiencesRouter = express.Router();
 
-experiencesRouter.get('/experience/:id', getExperience)
+experiencesRouter.get('/detail/', getExperience)
 experiencesRouter.get('/', listExperiences);
-experiencesRouter.post('/', addNewExperience);
-experiencesRouter.patch('/:id', changeExperienceStatus);
+experiencesRouter.post('/newexperience', userAuth, addNewExperience);
+experiencesRouter.post('/', addNewComment)
+experiencesRouter.patch('/', changeExperienceStatus);
 experiencesRouter.post('/reservation', experienceReservation);
 experiencesRouter.post('/rate', userAuth, experienceRating);
 

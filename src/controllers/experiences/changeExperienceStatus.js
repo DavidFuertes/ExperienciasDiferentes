@@ -2,7 +2,8 @@ import { getPool } from "../../db/poolQuery.js";
 
 async function changeExperienceStatus (req, res) {
 
-    const { experienceId, is_active } = req.body;
+    const { is_active } = req.body;
+    const { id } = req.query;
 
     try {
         const pool = await getPool();
@@ -10,7 +11,7 @@ async function changeExperienceStatus (req, res) {
             UPDATE Experiences
             SET active = ?
             WHERE id = ?;
-        `, [is_active, experienceId]);
+        `, [is_active, id]);
 
         res.status(200).send({ message: 'OK' })
     } catch (error) {
