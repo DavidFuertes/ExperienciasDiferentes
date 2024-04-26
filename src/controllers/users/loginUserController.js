@@ -34,7 +34,7 @@ const loginUserController = async (req, res, next) => {
 
         // Esta variable almacena un valor booleano indicando si la contraseña es correcto o no.
         let validPass;
-        console.log(user)
+        console.log(user);
 
         if (user) {
             // Comprobamos si la contraseña que nos llega del cliente coincide con la del usuario seleccionado.
@@ -57,7 +57,7 @@ const loginUserController = async (req, res, next) => {
 
         // Creamos el token y expirará en 1 hora
         const token = jwt.sign(tokenInfo, SECRET, {
-            expiresIn: '1h',
+            expiresIn: '30d',
         });
 
         res.status(201).send({

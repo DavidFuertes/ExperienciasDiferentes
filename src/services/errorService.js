@@ -46,3 +46,11 @@ export const userNotValidPasswordError = () => {
         message: 'La constraseña no es válida',
     };
 };
+
+export const userNotValid = () => {
+    throw {
+        httpStatus: 409,
+        code: 'USER_NOT_VALID',
+        message: 'El usuario no es válido',
+    };
+};

@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config.js';
 import { errorController } from '../controllers/errors/errorController.js';
 import { getPool } from '../db/poolQuery.js';
+import { userNotValid } from '../services/errorService.js';
 
 async function userAuth(req, res, next) {
     // Aquí va la lógica de verificación de autenticación
@@ -13,8 +14,7 @@ async function userAuth(req, res, next) {
 
     try {
         if (!auth) {
-            throw new Error('no hay token');
-            return;
+            userNotValid();
         }
         const userInfo = jwt.verify(auth, secret);
         const { role } = userInfo;
@@ -22,10 +22,7 @@ async function userAuth(req, res, next) {
         req.user = role;
         next();
     } catch (error) {
-        res.send({
-            message: 'No puedes votar sin estar registrado.',
-        });
-        console.log(error.message);
+        errorController(error, req, res);
     }
 }
 
