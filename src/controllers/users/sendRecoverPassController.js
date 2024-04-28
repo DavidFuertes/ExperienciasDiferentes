@@ -5,7 +5,6 @@ import randomstring from 'randomstring';
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
 
-
 //Importamos la función que valida esquemas.
 import validateSchema from '../../utilities/validateSchema.js';
 
@@ -13,7 +12,7 @@ import validateSchema from '../../utilities/validateSchema.js';
 import emailUserSchema from '../../schemas/users/emailUserSchema.js';
 
 // Importamos los errores.
-import { notFoundError } from '../../services/errorService.js';
+import { userNotExistError } from '../../services/errorService.js';
 
 // Función controladora final para que el usuario recupere la contraseña.
 const sendRecoverPassController = async (req, res, next) => {
@@ -28,8 +27,9 @@ const sendRecoverPassController = async (req, res, next) => {
         const user = await selectUserByEmailModel(email);
 
         // Si no existe un usuario con ese email lanzamos un error.
+        console.log(user);
         if (!user) {
-            notFoundError('usuario');
+            userNotExistError();
         }
 
         // Generamos el código de recuperación de contraseña.

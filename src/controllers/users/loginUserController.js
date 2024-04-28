@@ -18,6 +18,10 @@ import loginUserSchema from '../../schemas/users/loginUserSchema.js';
 // Importamos la variable de entorno SECRET necesaria para
 // crear el token
 import 'dotenv/config.js';
+import {
+    invalidCredentialsError,
+    userNotActive,
+} from '../../services/errorService.js';
 
 const SECRET = process.env.SECRET;
 
@@ -48,6 +52,9 @@ const loginUserController = async (req, res, next) => {
         //Deberíamos lanzar un error si el usuario está pendiente de
         //aprobación porque aún no haya activado la cuenta, es decir,
         //que esté inactivo
+        if (user.active === 0) {
+            userNotActive();
+        }
 
         // Creamos un objeto con la info que queremos meter en el token.
         const tokenInfo = {

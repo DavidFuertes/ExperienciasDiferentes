@@ -49,8 +49,40 @@ export const userNotValidPasswordError = () => {
 
 export const userNotValid = () => {
     throw {
-        httpStatus: 409,
+        httpStatus: 403,
         code: 'USER_NOT_VALID',
         message: 'El usuario no es válido',
+    };
+};
+
+export const invalidCredentialsError = () => {
+    throw {
+        httpStatus: 401,
+        code: 'CREDENTIALS_NOT_VALID',
+        message: 'El usuario y/o la constraseña no son correctas',
+    };
+};
+
+export const invalidToken = () => {
+    throw {
+        httpStatus: 401,
+        code: 'INVALID_TOKEN',
+        message: 'El token es inválido',
+    };
+};
+
+export const userNotActive = () => {
+    throw {
+        httpStatus: 403,
+        code: 'USER_NOT_ACTIVE',
+        message: 'Debes confirmar tu cuenta antes de iniciar sesión',
+    };
+};
+
+export const notAuthUser = () => {
+    throw {
+        httpStatus: 403,
+        code: 'USER_NOT_AUTHORIZED',
+        message: 'Este usuario no tiene los permisos necesarios',
     };
 };

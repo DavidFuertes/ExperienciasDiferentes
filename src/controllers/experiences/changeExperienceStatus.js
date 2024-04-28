@@ -1,15 +1,17 @@
 import { getPool } from '../../db/poolQuery.js';
+import { notAuthUser } from '../../services/errorService.js';
 
-async function changeExperienceStatus(req, res) {
+async function changeExperienceStatus(req, res, next) {
     const { is_active } = req.body;
     const { id } = req.query;
     const role = req.user;
 
     try {
+        // Todo: Habría que validar que sea admin o el autor del post (post.userid == user.id)
         if (role !== 'admin') {
-            throw new Error('no eres admin');
-            return;
+            notAuthUser();
         }
+
         const pool = await getPool();
         await pool.query(
             `
@@ -22,7 +24,7 @@ async function changeExperienceStatus(req, res) {
 
         res.status(200).send({ message: 'OK' });
     } catch (error) {
-        console.log(error.message);
+        next(error);
     }
 }
 

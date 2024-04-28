@@ -6,46 +6,46 @@ import { getPool } from '../../db/poolQuery.js';
 
 // Importamos los errores.
 import {
-  userNotExistError,
-  userNotValidPasswordError,
+    userNotExistError,
+    userNotValidPasswordError,
 } from '../../services/errorService.js';
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 export const changeUserPasswordModel = async (
-  username,
-  currentPassword,
-  newPassword
+    username,
+    currentPassword,
+    newPassword,
 ) => {
-  const pool = await getPool();
+    const pool = await getPool();
 
-  // Buscamos en la base de datos algún usuario con ese nombre y sacamos su password.
-  const [users] = await pool.query(
-    `SELECT id,password FROM Users WHERE name = ?`,
-    [username]
-  );
+    // Buscamos en la base de datos algún usuario con ese nombre y sacamos su password.
+    const [users] = await pool.query(
+        `SELECT id,password FROM Users WHERE name = ?`,
+        [username],
+    );
 
-  // Si no existe algún usuario con ese nombre lanzamos un error.
-  if (users.length == 0) {
-    userNotExistError();
-  }
+    // Si no existe algún usuario con ese nombre lanzamos un error.
+    if (users.length == 0) {
+        userNotExistError();
+    }
 
-  //Comparar la currentPassword con la password de la base de datos
+    //Comparar la currentPassword con la password de la base de datos
 
-  const passwordHash = users[0].password;
-  const validPassword = await bcrypt.compare(currentPassword, passwordHash);
+    const passwordHash = users[0].password;
+    const validPassword = await bcrypt.compare(currentPassword, passwordHash);
 
-  // Si la contraseña no es válida lanzamos un error.
+    // Si la contraseña no es válida lanzamos un error.
 
-  if (!validPassword) {
-    userNotValidPasswordError();
-  }
+    if (!validPassword) {
+        userNotValidPasswordError();
+    }
 
-  // Encriptamos la nueva contraseña y la actualizamos en la base de datos.
+    // Encriptamos la nueva contraseña y la actualizamos en la base de datos.
 
-  const newPassHash = await bcrypt.hash(newPassword, 10);
+    const newPassHash = await bcrypt.hash(newPassword, 10);
 
-  await pool.query(
-    `UPDATE Users SET password = "${newPassHash}" WHERE name = ?`,
-    [username]
-  );
+    await pool.query(
+        `UPDATE Users SET password = "${newPassHash}" WHERE name = ?`,
+        [username],
+    );
 };

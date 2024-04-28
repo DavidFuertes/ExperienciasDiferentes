@@ -1,7 +1,7 @@
 import 'dotenv/config.js';
 import { getPool } from '../../db/poolQuery.js';
 
-async function addNewExperience(req, res) {
+async function addNewExperience(req, res, next) {
     const newExperience = req.body;
     const {
         title,
@@ -62,10 +62,7 @@ async function addNewExperience(req, res) {
 
         res.status(201).json(resInfo);
     } catch (error) {
-        res.send({
-            message: 'NO',
-        });
-        console.log(error.message);
+        next(error);
     }
 }
 

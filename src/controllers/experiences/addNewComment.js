@@ -1,15 +1,17 @@
 import 'dotenv/config.js';
 import { getPool } from '../../db/poolQuery.js';
-import { errorController } from '../errors/errorController.js';
 import { userNotValid } from '../../services/errorService.js';
 
-async function addNewComment(req, res) {
+async function addNewComment(req, res, next) {
     const newExperience = req.body;
     const { content, rate } = newExperience;
     const { id } = req.query;
     const user_id = req.headers.user_id;
 
     try {
+        if (!user_id) {
+            userNotValid();
+        }
         const pool = await getPool();
 
         const [insertInfo] = await pool.query(
@@ -41,11 +43,7 @@ async function addNewComment(req, res) {
 
         res.status(201).json(resInfo);
     } catch (error) {
-        errorController(error, req, res);
-        // res.send(errorController(error));
-        // res.send({
-        //     message: 'NO'
-        // })
+        next(error);
     }
 }
 
