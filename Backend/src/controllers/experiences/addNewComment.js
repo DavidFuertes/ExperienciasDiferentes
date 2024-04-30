@@ -1,6 +1,8 @@
 import 'dotenv/config.js';
 import { getPool } from '../../db/poolQuery.js';
 import { userNotValid } from '../../services/errorService.js';
+import validateSchema from '../../utilities/validateSchema.js';
+import { addNewComentSchema } from '../../schemas/experiences/addNewComentSchema.js';
 
 async function addNewComment(req, res, next) {
     const newExperience = req.body;
@@ -9,6 +11,9 @@ async function addNewComment(req, res, next) {
     const user_id = req.headers.user_id;
 
     try {
+        //Validamos el body con joi
+        await validateSchema(addNewComentSchema, req.body);
+
         if (!user_id) {
             userNotValid();
         }

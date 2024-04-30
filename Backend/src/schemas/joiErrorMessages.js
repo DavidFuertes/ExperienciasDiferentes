@@ -3,7 +3,8 @@ const joiErrorMessages = {
     'string.base': 'El valor de "{#key}" debe ser una cadena',
     'string.empty': 'El campo "{#key}" no debe estar vacío',
     'number.base': 'El valor de "{#key}" debe ser un número',
-    'number.max': 'El archivo no debe exceder los 6 MB',
+    'number.max': 'El valor de "{#key}" no debe exceder {#limit}',
+    'number.min': 'El valor de "{#key}" no puede ser inferior a {#limit}',
     'object.base': 'El valor de "{#key}" debe ser un objeto',
     'any.only': 'Solo se permiten fotos con formato jpeg o png',
     'string.email':
