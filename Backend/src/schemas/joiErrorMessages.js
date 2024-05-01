@@ -14,6 +14,8 @@ const joiErrorMessages = {
     'string.min': 'El campo "{#key}" debe tener al menos {#limit} caracteres',
     'string.max': 'El campo "{#key}" no debe exceder los {#limit} caracteres',
     'object.unknown': 'No se permiten campos adicionales en este objeto',
+    'any.only':
+        'El valor debe ser uno de los siguientes: Relajado, Medio, Adrenalina Pura',
 };
 
 export default joiErrorMessages;
