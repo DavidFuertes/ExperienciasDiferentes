@@ -1,5 +1,7 @@
 import 'dotenv/config.js';
 import { getPool } from '../../db/poolQuery.js';
+import { addNewExperienceSchema } from '../../schemas/experiences/addNewExperienceSchema.js';
+import validateSchema from '../../utilities/validateSchema.js';
 
 async function addNewExperience(req, res, next) {
     const newExperience = req.body;
@@ -17,6 +19,9 @@ async function addNewExperience(req, res, next) {
     const role = req.user;
 
     try {
+        //Validamos el body con joi
+        await validateSchema(addNewExperienceSchema, req.body);
+
         if (role !== 'admin') {
             throw new Error('no eres admin');
             return;
