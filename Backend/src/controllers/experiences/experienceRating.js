@@ -4,10 +4,9 @@ import { getPool } from '../../db/poolQuery.js';
 async function experienceRating(req, res, next) {
     const rateExperience = req.body;
     const { user_id, experience_id, rating } = rateExperience;
-    const role = req.user;
+    const { role } = req.user;
 
     try {
-        console.log(role);
         const pool = await getPool();
 
         const [insertInfo] = await pool.query(
