@@ -1,10 +1,15 @@
 import 'dotenv/config.js';
 import { getPool } from '../../db/poolQuery.js';
+import { experienceNotExistError } from '../../services/errorService.js';
 
 async function getExperience(req, res, next) {
     const { id } = req.query;
 
     try {
+        if (!id) {
+            experienceNotExistError();
+        }
+
         const pool = await getPool();
 
         const [data] = await pool.query(

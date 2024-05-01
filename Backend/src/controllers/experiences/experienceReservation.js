@@ -1,10 +1,15 @@
 import { getPool } from '../../db/poolQuery.js';
+import { experienceReservationSchema } from '../../schemas/experiences/experienceReservationSchema.js';
+import validateSchema from '../../utilities/validateSchema.js';
 
 async function experienceReservation(req, res, next) {
     const newReservation = req.body;
-    const { user_id, experience_id, cancelation } = newReservation;
+    const { experience_id, cancelation } = newReservation;
+    const { id } = req.user;
 
     try {
+        //Validamos el boy con joi
+        await validateSchema(experienceReservationSchema, req.body);
         const pool = await getPool();
 
         if (!cancelation) {
@@ -13,7 +18,7 @@ async function experienceReservation(req, res, next) {
             INSERT INTO Reservations (user_id, experience_id)
             VALUES(?, ?)
         `,
-                [user_id, experience_id],
+                [id, experience_id],
             );
 
             console.log(insertInfo);
@@ -29,7 +34,7 @@ async function experienceReservation(req, res, next) {
             WHERE user_id = '?' AND experience_id = '?';
 
         `,
-                [user_id, experience_id],
+                [id, experience_id],
             );
 
             console.log(insertInfo);
