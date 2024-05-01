@@ -1,4 +1,6 @@
 import { getPool } from '../../db/poolQuery.js';
+import { listExperiencesSchema } from '../../schemas/experiences/listExperiencesSchema.js';
+import validateSchema from '../../utilities/validateSchema.js';
 
 async function listExperiences(req, res, next) {
     const experienceReq = req.body;
@@ -6,6 +8,8 @@ async function listExperiences(req, res, next) {
         experienceReq;
 
     try {
+        //Validamos el body con joi
+        await validateSchema(listExperiencesSchema, req.body);
         const pool = await getPool();
 
         let reqInfo = 'SELECT * FROM Experiences WHERE 1=1';
