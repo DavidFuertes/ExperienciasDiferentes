@@ -13,9 +13,9 @@ function userAuth(req, res, next) {
             invalidToken();
         }
         const userInfo = jwt.verify(auth, secret);
-        const { role } = userInfo;
+        const { id, role } = userInfo;
 
-        req.user = role;
+        req.user = { id, role };
         next();
     } catch (error) {
         next(error);
