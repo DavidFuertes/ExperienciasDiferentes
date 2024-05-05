@@ -7,10 +7,10 @@ async function insertSampleData(connection) {
     try {
         // Metemos datos en la tabla Users
         await connection.query(`
-            INSERT INTO Users (name, email, password, date, avatar)
+            INSERT INTO Users (name, email, password, date, avatar, role)
             VALUES
-                ('Juan Pérez', 'juanperez@example.com', 'contraseña123', '1990-01-01', 'avatar1.jpg'  ),
-                ('María García', 'mariagarcia@example.com', 'contraseña456', '1995-03-15', 'avatar2.jpg' )
+                ('Juan Pérez', 'juanperez@example.com', 'contraseña123', '1990-01-01', 'avatar1.jpg', 'admin' ),
+                ('María García', 'mariagarcia@example.com', 'contraseña456', '1995-03-15', 'avatar2.jpg', 'public')
         `);
 
         //  Metemos datos en la tabla Experiences
