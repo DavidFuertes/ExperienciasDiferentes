@@ -8,7 +8,7 @@ import 'dotenv/config.js';
 import morgan from 'morgan';
 
 // Importamos cors para evitar problemas con las CORS
-//import cors from 'cors';
+import cors from 'cors';
 
 // Importamos las rutas
 //import { routes } from './src/routes/index.js';
@@ -26,6 +26,8 @@ import {
 
 //const db = getPool();
 const app = express(); // crea servidor
+
+app.use(cors()); // Milddeware de cors
 
 const port = process.env.PORT ?? 3000;
 

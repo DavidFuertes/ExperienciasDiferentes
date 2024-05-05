@@ -94,3 +94,11 @@ export const experienceNotExistError = () => {
         message: 'La experiencia no existe o ha sido eliminada',
     };
 };
+
+export const invalidRecoveryCodeError = () => {
+    throw {
+        httpStatus: 400, // Bad Request
+        code: 'INVALID_RECOVERY_CODE',
+        message: 'El código de recuperación de contraseña es inválido',
+    };
+};

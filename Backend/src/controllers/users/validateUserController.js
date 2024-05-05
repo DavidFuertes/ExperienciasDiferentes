@@ -3,18 +3,18 @@ import { updateActiveUserModel } from '../../models/users/updateActiveUserModel.
 
 // Función controladora final que valida a un usuario recién registrado.
 export const validateUserController = async (req, res, next) => {
-  try {
-    // Obtenemos el código de registro.
-    const { registrationCode } = req.body;
+    try {
+        // Obtenemos el código de registro.
+        const { registrationCode } = req.params;
 
-    // Activamos el usuario.
-    await updateActiveUserModel(registrationCode);
+        // Activamos el usuario.
+        await updateActiveUserModel(registrationCode);
 
-    res.send({
-      status: 'ok',
-      message: 'Usuario activado',
-    });
-  } catch (err) {
-    next(err);
-  }
+        res.send({
+            status: 'ok',
+            message: 'Usuario activado',
+        });
+    } catch (err) {
+        next(err);
+    }
 };

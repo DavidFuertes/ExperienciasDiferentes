@@ -2,47 +2,47 @@
 import bcrypt from 'bcrypt';
 
 // Importamos la función que devuelve una conexión con la base de datos.
-import  { getPool } from '../../db/poolQuery.js';
+import { getPool } from '../../db/poolQuery.js';
 
 // Importamos los errores.
 import {
-  userAlreadyRegisteredError,
-  emailAlreadyRegisteredError,
+    userAlreadyRegisteredError,
+    emailAlreadyRegisteredError,
 } from '../../services/errorService.js';
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 export const insertUserModel = async (
-  username,
-  email,
-  password,
-  registrationCode
-) => {
-  const pool = await getPool();
-
-  // Buscamos en la base de datos algún usuario con ese nombre.
-  let [users] = await pool.query(`SELECT id FROM Users WHERE name = ?`, [
     username,
-  ]);
+    email,
+    password,
+    registrationCode,
+) => {
+    const pool = await getPool();
 
-  // Si existe algún usuario con ese nombre lanzamos un error.
-  if (users.length > 0) {
-    userAlreadyRegisteredError();
-  }
+    // Buscamos en la base de datos algún usuario con ese nombre.
+    let [users] = await pool.query(`SELECT id FROM Users WHERE name = ?`, [
+        username,
+    ]);
 
-  // Buscamos en la base de datos algún usuario con ese email.
-  [users] = await pool.query(`SELECT id FROM Users WHERE email = ?`, [email]);
+    // Si existe algún usuario con ese nombre lanzamos un error.
+    if (users.length > 0) {
+        userAlreadyRegisteredError();
+    }
 
-  // Si existe algún usuario con ese email lanzamos un error.
-  if (users.length > 0) {
-    emailAlreadyRegisteredError();
-  }
+    // Buscamos en la base de datos algún usuario con ese email.
+    [users] = await pool.query(`SELECT id FROM Users WHERE email = ?`, [email]);
 
-  // Encriptamos la contraseña.
-  const hashedPass = await bcrypt.hash(password, 10);
+    // Si existe algún usuario con ese email lanzamos un error.
+    if (users.length > 0) {
+        emailAlreadyRegisteredError();
+    }
 
-  // Insertamos el usuario.
-  await pool.query(
-    `INSERT INTO Users (name, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
-    [username, email, hashedPass, registrationCode]
-  );
+    // Encriptamos la contraseña.
+    const hashedPass = await bcrypt.hash(password, 10);
+
+    // Insertamos el usuario.
+    await pool.query(
+        `INSERT INTO Users (name, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
+        [username, email, hashedPass, registrationCode],
+    );
 };

@@ -15,6 +15,7 @@ import { CreateExperience } from "./pages/experiencePages/CreateExperience.jsx";
 import { AdminRoute } from "./components/AdminRoute.jsx";
 import { NotFound } from "./pages/NotFound.jsx";
 import { Experience } from "./pages/experiencePages/Experience.jsx";
+import { AuthContextProvider } from "./context/auth-context.jsx";
 
 function App() {
   return (
