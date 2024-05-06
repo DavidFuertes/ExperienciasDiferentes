@@ -17,7 +17,6 @@ import { newUserSchema } from '../../schemas/users/newUserSchema.js';
 import 'dotenv/config.js';
 
 const { VALIDATE_USER_URL } = process.env;
-console.log(VALIDATE_USER_URL);
 
 // Función controladora final que crea un nuevo usuario.
 export const newUserController = async (req, res, next) => {

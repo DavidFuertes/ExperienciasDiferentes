@@ -1,10 +1,14 @@
-import db from '../database'; // Suponiendo que tienes un módulo para la interacción con la base de datos
+// Importamos la función que devuelve una conexión con la base de datos.
+import { getPool } from '../../db/poolQuery.js';
 
 const selectUserByRecoverCodeModel = async (recoverPassCode) => {
+    const pool = await getPool();
     try {
-        const query = 'SELECT * FROM users WHERE recover_code = ?';
-        const [rows] = await db.query(query, [recoverPassCode]);
-        return rows[0]; // Devolvemos el primer usuario encontrado, si existe
+        const [users] = await pool.query(
+            `SELECT * FROM Users WHERE recoverPassCode = ?`,
+            [recoverPassCode],
+        );
+        return users[0]; // Devolvemos el primer usuario encontrado, si existe
     } catch (error) {
         console.error(
             'Error al buscar usuario por código de recuperación:',

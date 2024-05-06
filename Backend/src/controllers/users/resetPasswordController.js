@@ -9,10 +9,7 @@ import validateSchema from '../../utilities/validateSchema.js';
 import resetPasswordSchema from '../../schemas/users/resetPasswordSchema.js';
 
 // Importa los errores.
-import {
-    invalidRecoveryCodeError,
-    userNotExistError,
-} from '../../services/errorService.js';
+import { invalidRecoveryCodeError } from '../../services/errorService.js';
 
 // Controlador para restablecer la contraseña utilizando el código de recuperación.
 const resetPasswordController = async (req, res, next) => {
@@ -21,10 +18,10 @@ const resetPasswordController = async (req, res, next) => {
         await validateSchema(resetPasswordSchema, req.body);
 
         // Obtener los datos del cuerpo de la solicitud.
-        const { recoverPassCode, newPassword } = req.body;
+        const { recoverCode, password } = req.body;
 
         // Comprobar si existe un usuario con el código de recuperación.
-        const user = await selectUserByRecoverCodeModel(recoverPassCode);
+        const user = await selectUserByRecoverCodeModel(recoverCode);
 
         // Si no existe un usuario con ese código de recuperación, lanzar un error.
         if (!user) {
@@ -32,7 +29,7 @@ const resetPasswordController = async (req, res, next) => {
         }
 
         // Actualizar la contraseña del usuario en la base de datos.
-        await updatePasswordModel(user.id, newPassword);
+        await updatePasswordModel(user.id, password);
 
         // Devolver una respuesta de éxito.
         res.send({
