@@ -33,7 +33,6 @@ export const sendEmailError = () => {
 export const userNotExistError = () => {
     throw {
         httpStatus: 409, // Conflict
-        status: 'error',
         code: 'USERNAME_NOT_EXIST',
         message: 'El usuario no existe',
     };
@@ -84,5 +83,14 @@ export const notAuthUser = () => {
         httpStatus: 403,
         code: 'USER_NOT_AUTHORIZED',
         message: 'Este usuario no tiene los permisos necesarios',
+    };
+};
+
+export const experienceNotExistError = () => {
+    throw {
+        httpStatus: 409,
+        status: 'error',
+        code: 'EXPERIENCE_NOT_EXIST',
+        message: 'La experiencia no existe o ha sido eliminada',
     };
 };
