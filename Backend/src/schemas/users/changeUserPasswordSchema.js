@@ -6,7 +6,6 @@ import joiErrorMessages from '../joiErrorMessages.js';
 
 // Esquema para validar el body de la petición. y mensaje de error con joi
 export const changeUserPasswordSchema = joi.object({
-    username: joi.string().min(3).max(30).required().messages(joiErrorMessages),
     currentPassword: joi
         .string()
         .min(4)

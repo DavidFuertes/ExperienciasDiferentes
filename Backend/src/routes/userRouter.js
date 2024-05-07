@@ -12,8 +12,8 @@ import loginUserController from '../controllers/users/loginUserController.js';
 import { changeUserPasswordController } from '../controllers/users/changeUserPasswordController.js';
 
 import sendRecoverPassController from '../controllers/users/sendRecoverPassController.js';
-
-
+import { updateUserController } from '../controllers/users/updateUserController.js';
+import { userAuth } from '../middlewares/userAuth.js';
 
 // Aquí se importan las funciones controladoras intermedias.
 
@@ -27,15 +27,15 @@ userRouter.post('/register', newUserController);
 // Validar a un usuario.
 userRouter.get('/validate/:registrationCode', validateUserController);
 
-
 // Middleware de login de usuario.
 userRouter.post('/login', loginUserController);
 
-
 // Cambio de contraseña
-userRouter.put('/changePassword', changeUserPasswordController);
+userRouter.put('/changePassword', userAuth, changeUserPasswordController);
 
 // Enviar email de recuperación de contraseña.
 userRouter.post('/password/recover', sendRecoverPassController);
+
+userRouter.patch('/updateProfile', userAuth, updateUserController);
 
 export { userRouter };

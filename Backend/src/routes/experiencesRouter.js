@@ -8,12 +8,18 @@ import { experienceRating } from '../controllers/experiences/experienceRating.js
 import { getExperience } from '../controllers/experiences/getExperience.js';
 import { userAuth } from '../middlewares/userAuth.js';
 import { addNewComment } from '../controllers/experiences/addNewComment.js';
+import { adminMiddleware } from '../middlewares/adminMiddleware.js';
 
 const experiencesRouter = express.Router();
 
-experiencesRouter.get('/detail/', userAuth, getExperience);
+experiencesRouter.get('/detail', userAuth, getExperience);
 experiencesRouter.get('/', userAuth, listExperiences);
-experiencesRouter.post('/newexperience', userAuth, addNewExperience);
+experiencesRouter.post(
+    '/newexperience',
+    userAuth,
+    adminMiddleware,
+    addNewExperience,
+);
 experiencesRouter.post('/', userAuth, addNewComment);
 experiencesRouter.patch('/', userAuth, changeExperienceStatus);
 experiencesRouter.post('/reservation', userAuth, experienceReservation);
