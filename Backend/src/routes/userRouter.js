@@ -14,6 +14,8 @@ import { changeUserPasswordController } from '../controllers/users/changeUserPas
 import sendRecoverPassController from '../controllers/users/sendRecoverPassController.js';
 import { updateUserController } from '../controllers/users/updateUserController.js';
 import { userAuth } from '../middlewares/userAuth.js';
+import { userInscribed } from '../controllers/users/userInscribed.js';
+import { adminMiddleware } from '../middlewares/adminMiddleware.js';
 
 // Aquí se importan las funciones controladoras intermedias.
 
@@ -27,6 +29,7 @@ userRouter.post('/register', newUserController);
 // Validar a un usuario.
 userRouter.get('/validate/:registrationCode', validateUserController);
 
+userRouter.get('/userInscribed', userAuth, adminMiddleware, userInscribed);
 // Middleware de login de usuario.
 userRouter.post('/login', loginUserController);
 
