@@ -29,7 +29,11 @@ const app = express(); // crea servidor
 
 const port = process.env.PORT ?? 3000;
 
-app.use(cors());
+
+app.use(cors({
+    origin: "*"
+  }));
+
 
 app.use(express.json()); // Milddeware para parsear el body
 app.use(fileUpload({ useTempFiles: true }));

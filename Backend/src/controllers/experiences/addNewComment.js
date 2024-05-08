@@ -8,9 +8,10 @@ async function addNewComment(req, res, next) {
     const newExperience = req.body;
     const { content, rate } = newExperience;
     const { id } = req.query;
-    const user_id = req.headers.user_id;
+    const user_id = req.user.id;
 
     try {
+        console.log(user_id)
         //Validamos el body con joi
         await validateSchema(addNewComentSchema, req.body);
 

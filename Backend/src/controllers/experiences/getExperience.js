@@ -15,7 +15,7 @@ async function getExperience(req, res, next) {
 
         const [data] = await pool.query(
             `
-        SELECT title, description, city, image, date, price, min_places, total_places FROM Experiences WHERE id = ?
+        SELECT id, title, description, type, city, image, date, price, min_places, total_places, active FROM Experiences WHERE id = ?
         `,
             [id],
         );
@@ -31,7 +31,7 @@ async function getExperience(req, res, next) {
 
         const [inscribed] = await pool.query(
             `
-            SELECT name, email, avatar FROM Users   
+            SELECT Users.id, name, email, avatar FROM Users   
             INNER JOIN Reservations ON Users.id = Reservations.user_id WHERE Reservations.experience_id = ?
         `,
             [id],
@@ -39,7 +39,7 @@ async function getExperience(req, res, next) {
 
         const [comments] = await pool.query(
             `
-            SELECT content From Comments WHERE experience_id = ?
+            SELECT id, content From Comments WHERE experience_id = ?
         `,
             [id],
         );
