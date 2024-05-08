@@ -17,4 +17,5 @@ export const newUserSchema = joi.object({
         // )
         .required()
         .messages(joiErrorMessages),
+    role: joi.string().valid('admin', 'public').messages(joiErrorMessages),
 });

@@ -3,9 +3,7 @@ import { listExperiencesSchema } from '../../schemas/experiences/listExperiences
 import validateSchema from '../../utilities/validateSchema.js';
 
 async function listExperiences(req, res, next) {
-    const experienceReq = req.body;
-    const { title, city, isActive, isConfirmed, sortBy, sortOrder } =
-        experienceReq;
+    const { title, city, isActive, isConfirmed, sortBy, sortOrder } = req.body;
 
     try {
         //Validamos el body con joi

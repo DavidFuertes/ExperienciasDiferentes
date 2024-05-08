@@ -96,6 +96,35 @@ export const experienceNotExistError = () => {
 };
 
 
+export const alreadyVoted = () => {
+    throw {
+        httpStatus: 409,
+        status: 'error',
+        code: 'EXPERIENCE_ALREADY_VOTED',
+        message:
+            'Ya has votado por esta experiencia, no puedes hacerlo nuevamente',
+    };
+};
+
+export const alreadyReserved = () => {
+    throw {
+        httpStatus: 409,
+        status: 'error',
+        code: 'EXPERIENCE_ALREADY_RESERVED',
+        message:
+            'Ya te has registrado a esta experiencia, no puedes hacerlo nuevamente',
+    };
+};
+
+export const notReserved = () => {
+    throw {
+        httpStatus: 409,
+        status: 'error',
+        code: 'EXPERIENCE_NOT_RESERVED',
+        message:
+            'No tienes una reserva para esta experiencia, por lo que no puedes realizar una cancelación',
+
+
 export const invalidRecoveryCodeError = () => {
     throw {
         httpStatus: 400, // Bad Request
@@ -115,6 +144,7 @@ export const failedAvatarError = () => {
         httpStatus: 500,
         code: 'UPDATE_USER_AVATAR_ERROR',
         message: 'No se ha podido actualizar el avatar',
+
 
     };
 };
