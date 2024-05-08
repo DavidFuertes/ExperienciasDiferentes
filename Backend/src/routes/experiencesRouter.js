@@ -8,9 +8,11 @@ import { experienceRating } from '../controllers/experiences/experienceRating.js
 import { getExperience } from '../controllers/experiences/getExperience.js';
 import { userAuth } from '../middlewares/userAuth.js';
 import { addNewComment } from '../controllers/experiences/addNewComment.js';
+import { editExperience } from '../controllers/experiences/editExperience.js';
 
 const experiencesRouter = express.Router();
 
+experiencesRouter.patch('/edit/', editExperience)
 experiencesRouter.get('/detail/', userAuth, getExperience);
 experiencesRouter.get('/', userAuth, listExperiences);
 experiencesRouter.post('/newexperience', userAuth, addNewExperience);

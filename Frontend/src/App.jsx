@@ -15,6 +15,9 @@ import { CreateExperience } from "./pages/experiencePages/CreateExperience.jsx";
 import { AdminRoute } from "./components/AdminRoute.jsx";
 import { NotFound } from "./pages/NotFound.jsx";
 import { Experience } from "./pages/experiencePages/Experience.jsx";
+import ExperienceAdministration from "./pages/experiencePages/ExperienceAdministration.jsx";
+
+
 
 function App() {
   return (
@@ -24,10 +27,12 @@ function App() {
         <Routes>
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
+          <Route path="/experienceadministration" element={<ExperienceAdministration />} />
 
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
             <Route path="/create_experience" element={<CreateExperience />} />
+            
           </Route>
 
           {/* Rutas privadas */}
