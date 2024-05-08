@@ -123,14 +123,16 @@ export const notReserved = () => {
         code: 'EXPERIENCE_NOT_RESERVED',
         message:
             'No tienes una reserva para esta experiencia, por lo que no puedes realizar una cancelación',
-
+    };
+};
 
 export const invalidRecoveryCodeError = () => {
     throw {
         httpStatus: 400, // Bad Request
         code: 'INVALID_RECOVERY_CODE',
         message: 'El código de recuperación de contraseña es inválido',
-
+    };
+};
 export const failedUserUpdate = () => {
     throw {
         httpStatus: 500,
