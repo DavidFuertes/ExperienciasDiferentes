@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cab50f67-4247-4f14-8cbf-7fc13e242623",
+		"_postman_id": "81d1c698-3ecd-45f2-93fa-5397cae9dd39",
 		"name": "experiences",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32722220"
+		"_exporter_id": "32814341"
 	},
 	"item": [
 		{
@@ -13,20 +13,22 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "*/*"
+						"value": "*/*",
+						"disabled": true
 					},
 					{
 						"key": "User-Agent",
-						"value": "Thunder Client (https://www.thunderclient.com)"
+						"value": "Thunder Client (https://www.thunderclient.com)",
+						"disabled": true
 					},
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MTg0OTg3LCJleHAiOjE3MTc3NzY5ODd9.1lKLjKIDCN34eK76PvpOrt18lDzfrnM4C-aWJV-lnoQ"
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0NTE1MTAwLCJleHAiOjE3MTcxMDcxMDB9.RNQcaaxlXSwoTcdDEZrhw-Nx1aC1k2J6Y_CVJBjZz4Y"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"title\": \"Visita de Torremolinos 2, el regreso\",\n  \"description\": \"AJÁ\",\n  \"type\": \"Relajado\",\n  \"city\": \"Ciudad Principal\",\n  \"image\": \"https://ejemplo.com/imagen.jpg\",\n  \"date\": \"2024-05-15\",\n  \"price\": 50,\n  \"min_places\": 5,\n  \"total_places\": 20\n}\n",
+					"raw": "{\n  \"title\": \"Visita de Torremolinos\",\n  \"description\": \"Descubre los encantos de la ciudad antigua con nuestro recorrido guiado.\",\n  \"type\": \"Relajado\",\n  \"city\": \"Ciudad Principal\",\n  \"image\": \"https://ejemplo.com/imagen.jpg\",\n  \"date\": \"2024-05-15\",\n  \"price\": 50,\n  \"min_places\": 5,\n  \"total_places\": 20\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -89,15 +91,10 @@
 			"name": "newReservation",
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MTg0OTg3LCJleHAiOjE3MTc3NzY5ODd9.1lKLjKIDCN34eK76PvpOrt18lDzfrnM4C-aWJV-lnoQ"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"experience_id\": 3,\n  \"cancelation\": 0\n  \n}",
+					"raw": "{\n  \"user_id\": 1,\n  \"experience_id\": 2,\n  \"cancelation\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -147,7 +144,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\": \"Dante\",\n  \"email\": \"dantefuertestwitch@gmail.com\",\n  \"password\": \"12345\"\n  \"role\": \"admin\"\n}",
+					"raw": "{\n  \"username\": \"david\",\n  \"email\": \"david@molinero.com\",\n  \"password\": \"12345\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -177,12 +174,12 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDE0ODAwMiwiZXhwIjoxNzE0MTUxNjAyfQ.7E8Z9GNuL6fqEAhCf8gD4TIO8l6SQ8b-2-RNbndTUu8"
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDI1OTQyMiwiZXhwIjoxNzE2ODUxNDIyfQ.JyZ-xwD840JdjwIWm0DFZ4q2W3umT3TKsJuH9SxBqAs"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 2,\n  \"experience_id\": 1,\n  \"rating\": 4\n}",
+					"raw": "{\n  \"user_id\": 2,\n  \"experience_id\": 1,\n  \"ratin\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -270,7 +267,8 @@
 				"header": [
 					{
 						"key": ":id",
-						"value": "2"
+						"value": "2",
+						"disabled": true
 					}
 				],
 				"url": {
@@ -299,10 +297,16 @@
 			"name": "changePassword",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDI1OTQyMiwiZXhwIjoxNzE2ODUxNDIyfQ.JyZ-xwD840JdjwIWm0DFZ4q2W3umT3TKsJuH9SxBqAs",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\" : \"pepito\",\n  \"currentPassword\": \"12345\",\n  \"newPassword\" : \"67890\"\n}",
+					"raw": "{\n  \"username\": \"dani2\",\n  \"currentPassword\": \"123456!Aa\",\n  \"newPassword\" : \"1234567!Bb\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -332,7 +336,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\" : \"david@molinero.com\",\n  \"password\" : \"12345\"\n}",
+					"raw": "{\n  \"email\" : \"dani@eireos.com\",\n  \"password\" : \"123456!Aa\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -362,12 +366,18 @@
 				"header": [
 					{
 						"key": "user_id",
-						"value": "2"
+						"value": "4"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDE2Mjg3OSwiZXhwIjoxNzE2NzU0ODc5fQ.-xT7FuaCG9fzh8m6WOFXyz6fM0ucnihTYwuPMxEEJQE",
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 2,\n  \"content\": \"Fue la hoostia!\",\n  \"rate\": 5\n}\n",
+					"raw": "{\n  \"content\": \"maravilla como el villa\",\n  \"rate\": 5\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -392,6 +402,95 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateExperience",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "user_id",
+						"value": "4"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDE2Mjg3OSwiZXhwIjoxNzE2NzU0ODc5fQ.-xT7FuaCG9fzh8m6WOFXyz6fM0ucnihTYwuPMxEEJQE",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"content\": \"maravilla como el villa\",\n  \"rate\": 5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/experiences?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfile",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MDE5MDM4LCJleHAiOjE3MTc2MTEwMzh9.BWakuzx-2bQZOLuatvMuZki-YThiXbjKq2F610T4-YQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"dani5@eireos.com\",\r\n    \"date\": \"\",\r\n    \"avatar\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/updateProfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"updateProfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userInscribed",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
