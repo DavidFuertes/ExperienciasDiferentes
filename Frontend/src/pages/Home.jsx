@@ -1,4 +1,4 @@
-import { ExperienceList } from "../components/ExperienceList.jsx";
+import { ListadoExperiencias } from "../components/ListadoExperiencias.jsx";
 import { useExperiences } from "../hooks/useExperiences.js";
 
 export const Home = () => {
@@ -14,7 +14,7 @@ export const Home = () => {
   return (
     <section>
       <h1>Últimas experiencias</h1>
-      <ExperienceList experiences={experiences} />
+      <ListadoExperiencias experiences={experiences} />
     </section>
   );
 };

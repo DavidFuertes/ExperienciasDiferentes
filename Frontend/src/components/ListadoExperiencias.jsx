@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const ExperienceList = ({ experiences }) => {
+export const ListadoExperiencias = ({ experiences }) => {
   return (
     <section>
       <ul>
@@ -15,6 +15,6 @@ export const ExperienceList = ({ experiences }) => {
   );
 };
 
-ExperienceList.propTypes = {
+ListadoExperiencias.propTypes = {
   experiences: PropTypes.array.isRequired,
 };
