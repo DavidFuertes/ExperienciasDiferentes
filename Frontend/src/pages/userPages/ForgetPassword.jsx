@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export const ForgetPassword = () => {
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState({ text: "", type: "" });
 
   const isValidEmail = (email) => {
     // Regular expression for basic email validation
@@ -11,7 +12,7 @@ export const ForgetPassword = () => {
   const handleSumit = async (e) => {
     e.preventDefault();
     if (isValidEmail(email) === false) {
-      alert("El correo electrónico no es válido");
+      setMessage({ text: "El correo electrónico no es válido", type: "error" }); // Mostrar mensaje de error
       return;
     }
 
@@ -29,11 +30,13 @@ export const ForgetPassword = () => {
         fetchOptions
       );
 
-      alert(
-        `Si hay una cuenta asociada a ${email} recibirá un correo electrónico con un enlace para restablecer tu contraseña.`
-      );
+      setMessage({
+        text: `Si hay una cuenta asociada a ${email} recibirá un correo electrónico con un enlace para restablecer tu contraseña.`,
+        type: "success",
+      }); // Mostrar mensaje de éxito
     } catch (err) {
       console.error(err);
+      setMessage({ text: "Ocurrió un error inesperado.", type: "error" }); // Mostrar mensaje de error genérico
     }
   };
 
@@ -53,7 +56,12 @@ export const ForgetPassword = () => {
           id="email"
           name="email"
         />
-        <button type="submit">Obtener codigo</button>
+        <button type="submit">Obtener codigo</button>{" "}
+        {message.text && (
+          <p style={{ color: message.type === "error" ? "red" : "green" }}>
+            {message.text}
+          </p>
+        )}
       </form>
     </div>
   );

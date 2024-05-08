@@ -4,6 +4,7 @@ export const RecoverPassword = () => {
   const [recoverCode, setRecoverCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const [message, setMessage] = useState({ text: "", type: "" });
 
   const handleSumit = async (e) => {
     e.preventDefault();
@@ -25,15 +26,18 @@ export const RecoverPassword = () => {
       const data = await response.json();
 
       if (response.status === 400) {
-        alert(data.message);
+        setMessage({ text: data.message, type: "error" }); // Mostrar mensaje de error
       }
 
       if (response.ok) {
-        alert(data.message);
-        window.location.href = "/login";
+        setMessage({ text: data.message, type: "success" }); // Mostrar mensaje de éxito
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000); // Redirigir después de 2 segundos
       }
     } catch (err) {
       console.error(err);
+      setMessage({ text: "Ocurrió un error inesperado.", type: "error" }); // Mostrar mensaje de error genérico
     }
   };
 
@@ -74,6 +78,11 @@ export const RecoverPassword = () => {
           id="recocerCode"
           name="recoverCode"
         />
+        {message.text && (
+          <p style={{ color: message.type === "error" ? "red" : "green" }}>
+            {message.text}
+          </p>
+        )}
         <br />
         <label htmlFor="email">Nueva contraseña:</label>
         <input
