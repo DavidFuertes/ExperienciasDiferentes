@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { validateRegistrationCode } from "../../services/index.js";
 
 export const UserValidation = () => {
@@ -11,6 +11,11 @@ export const UserValidation = () => {
       const response = await validateRegistrationCode(registrationCode);
 
       response.status === "ok" ? setIsValid(true) : setIsValid(false);
+      if (response.status === "ok") {
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -22,13 +27,6 @@ export const UserValidation = () => {
     await fetchData(registrationCode);
   };
 
-  useEffect(() => {
-    if (isValid) {
-      // Realiza alguna acción cuando isValid cambie a true
-      console.log("El código de registro es válido");
-    }
-  }, [isValid]);
-
   return (
     <div>
       <h1>Validación de usuario</h1>
@@ -39,7 +37,7 @@ export const UserValidation = () => {
       />
       <button onClick={handleSubmit}>Enviar</button>
       {isSubmitted && !isValid && <p>Código de registro inválido</p>}
-      {isValid && <p>Código de registro válido</p>}
+      {isValid && <p>Usuario validado correctamente</p>}
     </div>
   );
 };

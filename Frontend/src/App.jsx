@@ -20,7 +20,6 @@ import { ForgetPassword } from "./pages/userPages/ForgetPassword.jsx";
 
 import ExperienceAdministration from "./pages/experiencePages/ExperienceAdministration.jsx";
 
-
 function App() {
   return (
     <div>
@@ -30,15 +29,16 @@ function App() {
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
 
-          <Route path="/experienceadministration" element={<ExperienceAdministration />} />
+          <Route
+            path="/experienceadministration"
+            element={<ExperienceAdministration />}
+          />
 
           <Route path="/validation" element={<UserValidation />} />
-
 
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
             <Route path="/create_experience" element={<CreateExperience />} />
-            
           </Route>
 
           {/* Rutas privadas */}
