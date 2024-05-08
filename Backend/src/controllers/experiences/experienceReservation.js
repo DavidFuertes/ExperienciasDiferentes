@@ -1,6 +1,7 @@
 import { getPool } from '../../db/poolQuery.js';
 import { experienceReservationSchema } from '../../schemas/experiences/experienceReservationSchema.js';
 import validateSchema from '../../utilities/validateSchema.js';
+import { alreadyReserved, notReserved } from '../../services/errorService.js';
 
 async function experienceReservation(req, res, next) {
     const newReservation = req.body;
@@ -8,45 +9,89 @@ async function experienceReservation(req, res, next) {
     const { id } = req.user;
 
     try {
-        //Validamos el boy con joi
+        // Validamos el body con Joi
         await validateSchema(experienceReservationSchema, req.body);
         const pool = await getPool();
 
-        if (!cancelation) {
-            const [insertInfo] = await pool.query(
-                `
-            INSERT INTO Reservations (user_id, experience_id)
-            VALUES(?, ?)
-        `,
-                [id, experience_id],
+        if (cancelation) {
+            // Si es una solicitud de cancelación, intenta cancelar la reserva
+            const hasReserved = await checkIfUserAlreadyReserved(
+                pool,
+                id,
+                experience_id,
             );
+            if (!hasReserved) {
+                notReserved();
+            }
 
-            console.log(insertInfo);
-
-            res.status(201).send({
-                message: 'RESERVA REALIZADA CORRECTAMENTE',
-                newId: insertInfo.insertId,
+            const cancelResult = await cancelReservation(
+                pool,
+                id,
+                experience_id,
+            );
+            // Si se canceló la reserva, envía un mensaje de éxito
+            return res.status(200).send({
+                message: 'Reserva cancelada correctamente',
             });
         } else {
-            const [insertInfo] = await pool.query(
-                `
-            DELETE FROM Reservations
-            WHERE user_id = '?' AND experience_id = '?';
-
-        `,
-                [id, experience_id],
+            // Si no es una solicitud de cancelación, verifica si ya ha reservado esta experiencia el usuario
+            const hasReserved = await checkIfUserAlreadyReserved(
+                pool,
+                id,
+                experience_id,
             );
+            if (hasReserved) {
+                // Si ya ha reservado esta experiencia, envía un mensaje de error
+                alreadyReserved();
+            }
 
-            console.log(insertInfo);
-
-            res.status(201).send({
-                message: 'RESERVA CANCELADA CORRECTAMENTE',
-                newId: insertInfo.insertId,
+            // Si no ha reservado esta experiencia, realiza la reserva
+            const insertResult = await insertReservation(
+                pool,
+                id,
+                experience_id,
+            );
+            return res.status(201).send({
+                message: 'Reserva realizada correctamente',
+                newId: insertResult.insertId,
             });
         }
     } catch (error) {
         next(error);
     }
+}
+
+async function checkIfUserAlreadyReserved(pool, id, experience_id) {
+    const [existingReserve] = await pool.query(
+        `
+        SELECT id FROM Reservations
+        WHERE user_id = ? AND experience_id = ?
+        `,
+        [id, experience_id],
+    );
+    return existingReserve.length > 0;
+}
+
+async function insertReservation(pool, id, experience_id) {
+    const [insertResult] = await pool.query(
+        `
+        INSERT INTO Reservations (user_id, experience_id)
+        VALUES (?, ?)
+        `,
+        [id, experience_id],
+    );
+    return insertResult;
+}
+
+async function cancelReservation(pool, id, experience_id) {
+    const cancelResult = await pool.query(
+        `
+        DELETE FROM Reservations
+        WHERE user_id = ? AND experience_id = ?
+        `,
+        [id, experience_id],
+    );
+    return cancelResult;
 }
 
 export { experienceReservation };

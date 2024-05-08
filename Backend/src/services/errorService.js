@@ -94,3 +94,33 @@ export const experienceNotExistError = () => {
         message: 'La experiencia no existe o ha sido eliminada',
     };
 };
+
+export const alreadyVoted = () => {
+    throw {
+        httpStatus: 409,
+        status: 'error',
+        code: 'EXPERIENCE_ALREADY_VOTED',
+        message:
+            'Ya has votado por esta experiencia, no puedes hacerlo nuevamente',
+    };
+};
+
+export const alreadyReserved = () => {
+    throw {
+        httpStatus: 409,
+        status: 'error',
+        code: 'EXPERIENCE_ALREADY_RESERVED',
+        message:
+            'Ya te has registrado a esta experiencia, no puedes hacerlo nuevamente',
+    };
+};
+
+export const notReserved = () => {
+    throw {
+        httpStatus: 409,
+        status: 'error',
+        code: 'EXPERIENCE_NOT_RESERVED',
+        message:
+            'No tienes una reserva para esta experiencia, por lo que no puedes realizar una cancelación',
+    };
+};

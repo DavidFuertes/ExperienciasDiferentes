@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "cab50f67-4247-4f14-8cbf-7fc13e242623",
+		"name": "experiences",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32722220"
+	},
+	"item": [
+		{
+			"name": "addNewExperience",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "*/*"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Thunder Client (https://www.thunderclient.com)"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MTg0OTg3LCJleHAiOjE3MTc3NzY5ODd9.1lKLjKIDCN34eK76PvpOrt18lDzfrnM4C-aWJV-lnoQ"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Visita de Torremolinos 2, el regreso\",\n  \"description\": \"AJÁ\",\n  \"type\": \"Relajado\",\n  \"city\": \"Ciudad Principal\",\n  \"image\": \"https://ejemplo.com/imagen.jpg\",\n  \"date\": \"2024-05-15\",\n  \"price\": 50,\n  \"min_places\": 5,\n  \"total_places\": 20\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/experiences/newexperience",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences",
+						"newexperience"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeExperienceStatus",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"is_active\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/experiences",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "newReservation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MTg0OTg3LCJleHAiOjE3MTc3NzY5ODd9.1lKLjKIDCN34eK76PvpOrt18lDzfrnM4C-aWJV-lnoQ"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"experience_id\": 3,\n  \"cancelation\": 0\n  \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/experiences/reservation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences",
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listExperiences",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/experiences",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "newUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"Dante\",\n  \"email\": \"dantefuertestwitch@gmail.com\",\n  \"password\": \"12345\"\n  \"role\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "experienceRating",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDE0ODAwMiwiZXhwIjoxNzE0MTUxNjAyfQ.7E8Z9GNuL6fqEAhCf8gD4TIO8l6SQ8b-2-RNbndTUu8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 2,\n  \"experience_id\": 1,\n  \"rating\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/experiences/rate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences",
+						"rate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recoverPass",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"pepito@pepe.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/password/recover",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"password",
+						"recover"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validateUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/users/validate/:registrationCode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"validate",
+						":registrationCode"
+					],
+					"variable": [
+						{
+							"key": "registrationCode"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getExperience",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": ":id",
+						"value": "2"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/experiences/detail?id=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changePassword",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\" : \"pepito\",\n  \"currentPassword\": \"12345\",\n  \"newPassword\" : \"67890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/changepassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"changepassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\" : \"david@molinero.com\",\n  \"password\" : \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addNewComment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "user_id",
+						"value": "2"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 2,\n  \"content\": \"Fue la hoostia!\",\n  \"rate\": 5\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/experiences?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"experiences"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

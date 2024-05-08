@@ -137,15 +137,16 @@ async function createTables(connection) {
 
         // Creamos la tabla Reservas
         await connection.query(`
-            CREATE TABLE IF NOT EXISTS Reservations (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id INT,
-                experience_id INT,
-                reservation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (user_id) REFERENCES Users(id),
-                FOREIGN KEY (experience_id) REFERENCES Experiences(id)
-            )
-        `);
+                CREATE TABLE IF NOT EXISTS Reservations (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    user_id INT,
+                    experience_id INT,
+                    reservation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES Users(id),
+                    FOREIGN KEY (experience_id) REFERENCES Experiences(id),
+                    UNIQUE(user_id, experience_id)
+                );
+            `);
 
         // Creamos la tabla Comentarios
         await connection.query(`
@@ -162,15 +163,16 @@ async function createTables(connection) {
         `);
 
         await connection.query(`
-        CREATE TABLE IF NOT EXISTS Ratings(
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            user_id INT,
-            experience_id INT,
-            rating INT CHECK(rating >= 1 AND rating <= 5) NOT NULL,
-            FOREIGN KEY (user_id) REFERENCES Users(id),
-            FOREIGN KEY (experience_id) REFERENCES Experiences(id)
-        )
-        `);
+            CREATE TABLE IF NOT EXISTS Ratings(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT,
+                experience_id INT,
+                rating INT CHECK(rating >= 1 AND rating <= 5) NOT NULL,
+                FOREIGN KEY (user_id) REFERENCES Users(id),
+                FOREIGN KEY (experience_id) REFERENCES Experiences(id),
+                UNIQUE(user_id, experience_id)
+            )
+            `);
 
         console.log('Tablas creadas exitosamente.');
     } catch (error) {

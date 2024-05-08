@@ -12,9 +12,10 @@ export const newUserSchema = joi.object({
         .string()
         .min(4)
         .max(200)
-        .pattern(
-            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@¡!$%^&*()_+|~=`{}:";'<>?,.])[a-zA-Z0-9@¡!$%^&*()_+|~=`{}:";'<>?,.]{8,}$/,
-        )
+        // .pattern(
+        //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@¡!$%^&*()_+|~=`{}:";'<>?,.])[a-zA-Z0-9@¡!$%^&*()_+|~=`{}:";'<>?,.]{8,}$/,
+        // )
         .required()
         .messages(joiErrorMessages),
+    role: joi.string().valid('admin', 'public').messages(joiErrorMessages),
 });
