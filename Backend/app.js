@@ -27,6 +27,8 @@ import {
 //const db = getPool();
 const app = express(); // crea servidor
 
+app.use(cors()); // Milddeware de cors
+
 const port = process.env.PORT ?? 3000;
 
 

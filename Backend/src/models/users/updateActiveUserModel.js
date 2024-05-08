@@ -16,7 +16,7 @@ export const updateActiveUserModel = async (registrationCode) => {
 
     // Si no existe ningún usuario con ese código de registro lanzamos un error.
     if (users.length < 1) {
-        userNotExistError();
+        throw userNotExistError();
     }
 
     // Activamos al usuario.

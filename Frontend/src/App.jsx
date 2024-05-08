@@ -15,8 +15,10 @@ import { CreateExperience } from "./pages/experiencePages/CreateExperience.jsx";
 import { AdminRoute } from "./components/AdminRoute.jsx";
 import { NotFound } from "./pages/NotFound.jsx";
 import { Experience } from "./pages/experiencePages/Experience.jsx";
-import ExperienceAdministration from "./pages/experiencePages/ExperienceAdministration.jsx";
+//import { AuthContextProvider } from "./context/auth-context.jsx";
+import { ForgetPassword } from "./pages/userPages/ForgetPassword.jsx";
 
+import ExperienceAdministration from "./pages/experiencePages/ExperienceAdministration.jsx";
 
 
 function App() {
@@ -51,6 +53,8 @@ function App() {
           <Route element={<PublicRoute />}>
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/validateUser" element={<UserValidation />} />
+            <Route path="/forget_password" element={<ForgetPassword />} />
             <Route path="/recover_password" element={<RecoverPassword />} />
           </Route>
 

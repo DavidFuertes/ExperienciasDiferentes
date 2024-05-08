@@ -95,6 +95,13 @@ export const experienceNotExistError = () => {
     };
 };
 
+
+export const invalidRecoveryCodeError = () => {
+    throw {
+        httpStatus: 400, // Bad Request
+        code: 'INVALID_RECOVERY_CODE',
+        message: 'El código de recuperación de contraseña es inválido',
+
 export const failedUserUpdate = () => {
     throw {
         httpStatus: 500,
@@ -108,5 +115,6 @@ export const failedAvatarError = () => {
         httpStatus: 500,
         code: 'UPDATE_USER_AVATAR_ERROR',
         message: 'No se ha podido actualizar el avatar',
+
     };
 };

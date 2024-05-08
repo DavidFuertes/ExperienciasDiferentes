@@ -12,6 +12,8 @@ import loginUserController from '../controllers/users/loginUserController.js';
 import { changeUserPasswordController } from '../controllers/users/changeUserPasswordController.js';
 
 import sendRecoverPassController from '../controllers/users/sendRecoverPassController.js';
+
+import resetPasswordController from '../controllers/users/resetPasswordController.js';
 import { updateUserController } from '../controllers/users/updateUserController.js';
 import { userAuth } from '../middlewares/userAuth.js';
 import { userInscribed } from '../controllers/users/userInscribed.js';
@@ -29,7 +31,9 @@ userRouter.post('/register', newUserController);
 // Validar a un usuario.
 userRouter.get('/validate/:registrationCode', validateUserController);
 
+
 userRouter.get('/userInscribed', userAuth, adminMiddleware, userInscribed);
+
 // Middleware de login de usuario.
 userRouter.post('/login', loginUserController);
 
@@ -37,7 +41,8 @@ userRouter.post('/login', loginUserController);
 userRouter.put('/changePassword', userAuth, changeUserPasswordController);
 
 // Enviar email de recuperación de contraseña.
-userRouter.post('/password/recover', sendRecoverPassController);
+userRouter.post('/password/forget', sendRecoverPassController);
+userRouter.post('/password/recover', resetPasswordController);
 
 userRouter.patch('/updateProfile', userAuth, updateUserController);
 
