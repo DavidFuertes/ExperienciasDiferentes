@@ -6,12 +6,11 @@ const selectUserByEmailModel = async (email) => {
     const pool = await getPool();
 
     // Comprobamos si hay algún usuario con el email proporcionado.
+
     const [users] = await pool.query(
         `SELECT id, password, role, active FROM Users WHERE email = ?`,
         [email],
     );
-
-    console.log(users);
 
     // Como solo puede haber un usuario con un mismo email, se retorna
     // el usuario con la posición 0, así retornamos el objeto en lugar

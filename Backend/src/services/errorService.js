@@ -95,6 +95,7 @@ export const experienceNotExistError = () => {
     };
 };
 
+
 export const alreadyVoted = () => {
     throw {
         httpStatus: 409,
@@ -122,5 +123,28 @@ export const notReserved = () => {
         code: 'EXPERIENCE_NOT_RESERVED',
         message:
             'No tienes una reserva para esta experiencia, por lo que no puedes realizar una cancelación',
+
+
+export const invalidRecoveryCodeError = () => {
+    throw {
+        httpStatus: 400, // Bad Request
+        code: 'INVALID_RECOVERY_CODE',
+        message: 'El código de recuperación de contraseña es inválido',
+
+export const failedUserUpdate = () => {
+    throw {
+        httpStatus: 500,
+        code: 'UPDATE_USER_ERROR',
+        message: 'No se ha podido actualizar el perfil',
+    };
+};
+
+export const failedAvatarError = () => {
+    throw {
+        httpStatus: 500,
+        code: 'UPDATE_USER_AVATAR_ERROR',
+        message: 'No se ha podido actualizar el avatar',
+
+
     };
 };
