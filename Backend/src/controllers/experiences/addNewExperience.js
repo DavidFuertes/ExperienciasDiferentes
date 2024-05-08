@@ -17,15 +17,11 @@ async function addNewExperience(req, res, next) {
         min_places,
         total_places,
     } = newExperience;
-    const { role } = req.user;
 
     try {
         //Validamos el body con joi
         await validateSchema(addNewExperienceSchema, req.body);
 
-        if (role !== 'admin') {
-            notAuthUser();
-        }
         const pool = await getPool();
 
         const [insertInfo] = await pool.query(

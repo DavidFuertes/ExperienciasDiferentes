@@ -18,6 +18,9 @@ import { Experience } from "./pages/experiencePages/Experience.jsx";
 //import { AuthContextProvider } from "./context/auth-context.jsx";
 import { ForgetPassword } from "./pages/userPages/ForgetPassword.jsx";
 
+import ExperienceAdministration from "./pages/experiencePages/ExperienceAdministration.jsx";
+
+
 function App() {
   return (
     <div>
@@ -27,9 +30,15 @@ function App() {
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
 
+          <Route path="/experienceadministration" element={<ExperienceAdministration />} />
+
+          <Route path="/validation" element={<UserValidation />} />
+
+
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
             <Route path="/create_experience" element={<CreateExperience />} />
+            
           </Route>
 
           {/* Rutas privadas */}
@@ -37,7 +46,6 @@ function App() {
             <Route path="/reservations" element={<MyReservations />} />
             <Route path="/bookmarks" element={<BookMarks />} />
             <Route path="/account" element={<MyAccount />} />
-            <Route path="/validation" element={<UserValidation />} />
             <Route path="/experience" element={<Experience />} />
           </Route>
 

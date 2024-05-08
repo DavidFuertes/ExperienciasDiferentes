@@ -31,6 +31,12 @@ app.use(cors()); // Milddeware de cors
 
 const port = process.env.PORT ?? 3000;
 
+
+app.use(cors({
+    origin: "*"
+  }));
+
+
 app.use(express.json()); // Milddeware para parsear el body
 app.use(fileUpload({ useTempFiles: true }));
 

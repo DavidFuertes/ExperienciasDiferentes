@@ -1,8 +1,20 @@
+import { ListadoExperiencias } from "../components/ListadoExperiencias.jsx";
+import { useExperiences } from "../hooks/useExperiences.js";
+
 export const Home = () => {
+  const { experiences, loading, error } = useExperiences();
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
   return (
-    <div>
-      <h1>Home</h1>
-      <p>Esta es la pagina de inicio</p>
-    </div>
+    <section>
+      <h1>Últimas experiencias</h1>
+      <ListadoExperiencias experiences={experiences} />
+    </section>
   );
 };

@@ -12,16 +12,16 @@ import {
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 export const changeUserPasswordModel = async (
-    username,
+    id,
     currentPassword,
     newPassword,
 ) => {
     const pool = await getPool();
 
-    // Buscamos en la base de datos algún usuario con ese nombre y sacamos su password.
+    // Buscamos en la base de datos algún usuario con ese id y sacamos su password.
     const [users] = await pool.query(
-        `SELECT id,password FROM Users WHERE name = ?`,
-        [username],
+        `SELECT password FROM Users WHERE id = ?`,
+        [id],
     );
 
     // Si no existe algún usuario con ese nombre lanzamos un error.
@@ -45,7 +45,7 @@ export const changeUserPasswordModel = async (
     const newPassHash = await bcrypt.hash(newPassword, 10);
 
     await pool.query(
-        `UPDATE Users SET password = "${newPassHash}" WHERE name = ?`,
-        [username],
+        `UPDATE Users SET password = "${newPassHash}" WHERE id = ?`,
+        [id],
     );
 };
