@@ -132,7 +132,6 @@ export const invalidRecoveryCodeError = () => {
         message: 'El código de recuperación de contraseña es inválido',
     };
 };
-
 export const failedUserUpdate = () => {
     throw {
         httpStatus: 500,
