@@ -8,7 +8,7 @@ import 'dotenv/config.js';
 import morgan from 'morgan';
 
 // Importamos cors para evitar problemas con las CORS
-//import cors from 'cors';
+import cors from 'cors';
 
 // Importamos las rutas
 //import { routes } from './src/routes/index.js';
@@ -28,6 +28,8 @@ import {
 const app = express(); // crea servidor
 
 const port = process.env.PORT ?? 3000;
+
+app.use(cors());
 
 app.use(express.json()); // Milddeware para parsear el body
 app.use(fileUpload({ useTempFiles: true }));
