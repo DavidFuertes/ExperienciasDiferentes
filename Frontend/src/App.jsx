@@ -27,7 +27,11 @@ function App() {
         <Routes>
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
+
           <Route path="/experienceadministration" element={<ExperienceAdministration />} />
+
+          <Route path="/validation" element={<UserValidation />} />
+
 
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
@@ -40,7 +44,6 @@ function App() {
             <Route path="/reservations" element={<MyReservations />} />
             <Route path="/bookmarks" element={<BookMarks />} />
             <Route path="/account" element={<MyAccount />} />
-            <Route path="/validation" element={<UserValidation />} />
             <Route path="/experience" element={<Experience />} />
           </Route>
 

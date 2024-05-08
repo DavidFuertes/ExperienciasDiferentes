@@ -94,3 +94,19 @@ export const experienceNotExistError = () => {
         message: 'La experiencia no existe o ha sido eliminada',
     };
 };
+
+export const failedUserUpdate = () => {
+    throw {
+        httpStatus: 500,
+        code: 'UPDATE_USER_ERROR',
+        message: 'No se ha podido actualizar el perfil',
+    };
+};
+
+export const failedAvatarError = () => {
+    throw {
+        httpStatus: 500,
+        code: 'UPDATE_USER_AVATAR_ERROR',
+        message: 'No se ha podido actualizar el avatar',
+    };
+};
