@@ -10,8 +10,8 @@ export const updateUserController = async (req, res, next) => {
         const user = await updateProfileService(userId, req.body);
 
         res.send({
-            status: 'Épico',
-            message: 'Perfil actualizado épicamente',
+            status: 'ok',
+            message: 'Perfil actualizado correctamente',
             data: { user },
         });
     } catch (error) {
