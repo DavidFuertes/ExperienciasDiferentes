@@ -4,7 +4,6 @@ import { experienceNotExistError } from '../../services/errorService.js';
 
 async function getExperience(req, res, next) {
     const { id } = req.query;
-    console.log(`${id} eeel id`);
 
     try {
         if (!id) {

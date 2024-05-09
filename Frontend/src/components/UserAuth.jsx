@@ -7,7 +7,12 @@ export const UserAuth = () => {
 
   return user ? (
     <section>
-      Logged in as <Link to={`/user/${user.user.id}`}>{user.user.email}</Link>{" "}
+      Logged in as <Link to={`/account`}>{user.user.name}</Link>{" "}
+      {user.user.role === "admin" && (
+        <Link to={`/experienceadministration`}>
+          <button>Control Panel</button>
+        </Link>
+      )}
       <button onClick={() => logout()}>Logout</button>
     </section>
   ) : (

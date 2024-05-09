@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext.jsx";
 
 export const PrivateRoute = () => {
   //TODO: Comprobar si el usuario está logueado
-  return localStorage.getItem("token") ? <Outlet /> : <Navigate to="/login" />;
+  const { user } = useContext(UserContext);
+  return user ? <Outlet /> : <Navigate to="/login" />;
 };

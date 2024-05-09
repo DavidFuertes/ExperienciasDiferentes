@@ -13,10 +13,8 @@ import { editExperience } from '../controllers/experiences/editExperience.js';
 
 const experiencesRouter = express.Router();
 
-experiencesRouter.patch('/edit/', editExperience)
+experiencesRouter.patch('/edit/', userAuth, editExperience);
 experiencesRouter.get('/detail/', userAuth, getExperience);
-
-
 
 experiencesRouter.get('/', userAuth, listExperiences);
 experiencesRouter.post(

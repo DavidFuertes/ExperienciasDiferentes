@@ -1,25 +1,24 @@
 //Importamos las variables de entorno
 const { VITE_BACKEND_URL } = import.meta.env;
 
-export const getAllExperiencesService = async () => {
+export const getAllExperiencesService = async (token) => {
   try {
     //Hacemos la petición a la API
     const resp = await fetch(`${VITE_BACKEND_URL}/experiences`, {
       method: "GET",
       headers: {
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNTA5MTM5MCwiZXhwIjoxNzE3NjgzMzkwfQ.NXYnGkGvgfdKGoqxtASpieT7T_UcKNkB8ckWYVXk4ow",
+        token,
       },
     });
 
     //Extraemos los datos JSON de la respuesta
-    const json = await resp.json();
+    const data = await resp.json();
 
     //Si la respuesta no fue exitosa, se lanza un error
     if (!resp.ok) {
-      throw new Error(json.message);
+      throw new Error(data.message);
     }
-    return json;
+    return data;
   } catch (error) {
     console.error("Error en la petición: ", error);
     throw error;
@@ -65,4 +64,24 @@ export const getUserDataService = async (token) => {
   }
 
   return json.data;
+};
+
+export const obtainExperienceService = async (experienceId, token) => {
+  fetch(`${VITE_BACKEND_URL}/experiences/detail/?id=${experienceId}`, {
+    method: "GET",
+    headers: {
+      token,
+    },
+  })
+    .then((resp) => {
+      if (resp.status === 200) {
+        return resp.json(); // Parsea la respuesta JSON
+      } else {
+        throw new Error("Error al obtener la experiencia");
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la petición: ", error);
+      throw error;
+    });
 };

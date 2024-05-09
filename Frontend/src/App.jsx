@@ -29,16 +29,15 @@ function App() {
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
 
-          <Route
-            path="/experienceadministration"
-            element={<ExperienceAdministration />}
-          />
-
           <Route path="/validation" element={<UserValidation />} />
 
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
             <Route path="/create_experience" element={<CreateExperience />} />
+            <Route
+              path="/experienceadministration"
+              element={<ExperienceAdministration />}
+            />
           </Route>
 
           {/* Rutas privadas */}

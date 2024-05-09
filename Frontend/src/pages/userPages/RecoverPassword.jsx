@@ -67,7 +67,7 @@ export const RecoverPassword = () => {
   };
 
   return (
-    <div>
+    <section className="formSection">
       <h1>Página de creación de una nueva contraseña</h1>
       <form onSubmit={handleSumit}>
         <label htmlFor="email">Código de recuperación:</label>
@@ -105,6 +105,6 @@ export const RecoverPassword = () => {
         <p id="message-error"></p>
         <button type="submit">Crea una nueva contraseña</button>
       </form>
-    </div>
+    </section>
   );
 };
