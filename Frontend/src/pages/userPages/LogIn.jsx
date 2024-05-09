@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext.jsx";
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -53,8 +54,8 @@ export const LogIn = () => {
 
   return (
     <div>
-      <h1>Página de Log In</h1>
       <section className="formSection">
+        <h1>Página de Log In</h1>
         <form onSubmit={handleSubmit}>
           <fieldset>
             <label>Correo electrónico:</label>
@@ -77,6 +78,7 @@ export const LogIn = () => {
             />
           </fieldset>
           <button type="submit">Iniciar sesión</button>
+          <Link to="/forget_password">Olvidé mi contraseña</Link>
           {error && <div style={{ color: "red" }}>{error}</div>}
         </form>
       </section>

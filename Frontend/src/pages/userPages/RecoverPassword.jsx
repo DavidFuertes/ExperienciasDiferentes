@@ -70,39 +70,45 @@ export const RecoverPassword = () => {
     <section className="formSection">
       <h1>Página de creación de una nueva contraseña</h1>
       <form onSubmit={handleSumit}>
-        <label htmlFor="email">Código de recuperación:</label>
-        <input
-          onChange={handleOnChangeCode}
-          value={recoverCode}
-          type="text"
-          id="recocerCode"
-          name="recoverCode"
-        />
-        {message.text && (
-          <p style={{ color: message.type === "error" ? "red" : "green" }}>
-            {message.text}
-          </p>
-        )}
-        <br />
-        <label htmlFor="email">Nueva contraseña:</label>
-        <input
-          onChange={handleOnChangePassword}
-          value={password}
-          type="password"
-          id="password"
-          name="password"
-        />
-        <p id="message-error-password"></p>
-        <br />
-        <label htmlFor="email">Repita la contraseña:</label>
-        <input
-          onChange={handleOnChangeConfirmPass}
-          value={confirmPass}
-          type="password"
-          id="connfirmPass"
-          name="confirmPass"
-        />
-        <p id="message-error"></p>
+        <fieldset>
+          <label htmlFor="email">Código de recuperación:</label>
+          <input
+            onChange={handleOnChangeCode}
+            value={recoverCode}
+            type="text"
+            id="recocerCode"
+            name="recoverCode"
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="email">Nueva contraseña:</label>
+          <input
+            onChange={handleOnChangePassword}
+            value={password}
+            type="password"
+            id="password"
+            name="password"
+          />
+          <p id="message-error-password"></p>
+        </fieldset>
+        <fieldset>
+          <label htmlFor="email">Repita la contraseña:</label>
+          <input
+            onChange={handleOnChangeConfirmPass}
+            value={confirmPass}
+            type="password"
+            id="connfirmPass"
+            name="confirmPass"
+          />
+          <p id="message-error"></p>
+        </fieldset>
+        <fieldset>
+          {message.text && (
+            <p style={{ color: message.type === "error" ? "red" : "white" }}>
+              {message.text}
+            </p>
+          )}
+        </fieldset>
         <button type="submit">Crea una nueva contraseña</button>
       </form>
     </section>

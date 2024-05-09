@@ -56,8 +56,8 @@ export const SignUp = () => {
 
   return (
     <div>
-      <h1>Página de Registro</h1>
       <section className="formSection">
+        <h1>Página de Registro</h1>
         <form onSubmit={handleSubmit}>
           <fieldset>
             <label>Nombre de usuario:</label>

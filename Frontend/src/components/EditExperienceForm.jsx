@@ -74,135 +74,138 @@ function EditExperienceForm({ experienceInfo }) {
 
   return (
     <>
-      <br></br>
-      <form onSubmit={handleSubmit}>
-        <h2>Editar Experiencia</h2>
-        <div>
-          <p>ID: {id}</p>
-          <label>
-            TÍTULO:
-            <input
-              type="text"
-              placeholder={titleValue}
-              value={titleValue}
-              minLength={10}
-              maxLength={50}
-              onChange={(event) => {
-                setTitleValue(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            DESCRIPCIÓN:
-            <input
-              type="text"
-              placeholder={descriptionValue}
-              value={descriptionValue}
-              minLength={10}
-              maxLength={200}
-              onChange={(event) => {
-                setDescriptionValue(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            TIPO:
-            <input
-              type="text"
-              placeholder={typeValue}
-              value={typeValue}
-              minLength={3}
-              maxLength={20}
-              onChange={(event) => {
-                setTypeValue(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            LUGAR:
-            <input
-              type="text"
-              placeholder={cityValue}
-              value={cityValue}
-              minLength={3}
-              maxLength={30}
-              onChange={(event) => {
-                setCityValue(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            IMAGEN:
-            <input
-              type="text"
-              placeholder={imageValue}
-              value={imageValue}
-              minLength={3}
-              maxLength={50}
-              onChange={(event) => {
-                setImageValue(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            FECHA: {dateValue}
-            <input
-              type="date"
-              value={dateValue}
-              onChange={(event) => {
-                setDateValue(event.target.value);
-              }}
-            />
-          </label>
-          <label>
-            PRECIO:
-            <input
-              type="number"
-              placeholder={priceValue.toString()}
-              value={priceValue.toString()}
-              min={0}
-              onChange={(event) => {
-                setPriceValue(parseInt(event.target.value));
-              }}
-            />
-          </label>
-          <label>
-            PLAZAS MÍNIMAS:
-            <input
-              type="number"
-              placeholder={minPlacesValue.toString()}
-              value={minPlacesValue.toString()}
-              min={1}
-              onChange={(event) => {
-                setMinPlacesValue(parseInt(event.target.value));
-              }}
-            />
-          </label>
-          <label>
-            PLAZAS TOTALES:
-            <input
-              type="number"
-              placeholder={totalPlacesValue.toString()}
-              value={totalPlacesValue.toString()}
-              min={1}
-              onChange={(event) => {
-                setTotalPlacesValue(parseInt(event.target.value));
-              }}
-            />
-          </label>
-          <label>
-            ACTIVO:
-            <input
-              type="checkbox"
-              checked={activeValue}
-              onChange={(event) => {
-                setActiveValue(event.target.checked);
-              }}
-            />
-          </label>
-        </div>
-        <button type="submit">Visualizar cambios</button>
-      </form>
+      <div>
+        <section className="formsection">
+          <form onSubmit={handleSubmit}>
+            <h2>Editar Experiencia</h2>
+            <div>
+              <p>ID: {id}</p>
+              <fieldset>
+                <label>TÍTULO:</label>
+                <input
+                  type="text"
+                  placeholder={titleValue}
+                  value={titleValue}
+                  minLength={10}
+                  maxLength={50}
+                  onChange={(event) => {
+                    setTitleValue(event.target.value);
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>DESCRIPCIÓN:</label>
+                <input
+                  type="text"
+                  placeholder={descriptionValue}
+                  value={descriptionValue}
+                  minLength={10}
+                  maxLength={200}
+                  onChange={(event) => {
+                    setDescriptionValue(event.target.value);
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>TIPO:</label>
+                <input
+                  type="text"
+                  placeholder={typeValue}
+                  value={typeValue}
+                  minLength={3}
+                  maxLength={20}
+                  onChange={(event) => {
+                    setTypeValue(event.target.value);
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>LUGAR:</label>
+                <input
+                  type="text"
+                  placeholder={cityValue}
+                  value={cityValue}
+                  minLength={3}
+                  maxLength={30}
+                  onChange={(event) => {
+                    setCityValue(event.target.value);
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>IMAGEN:</label>
+                <input
+                  type="text"
+                  placeholder={imageValue}
+                  value={imageValue}
+                  minLength={3}
+                  maxLength={50}
+                  onChange={(event) => {
+                    setImageValue(event.target.value);
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>FECHA: {dateValue}</label>
+                <input
+                  type="date"
+                  value={dateValue}
+                  onChange={(event) => {
+                    setDateValue(event.target.value);
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>PRECIO:</label>
+                <input
+                  type="number"
+                  placeholder={priceValue.toString()}
+                  value={priceValue.toString()}
+                  min={0}
+                  onChange={(event) => {
+                    setPriceValue(parseInt(event.target.value));
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>PLAZAS MÍNIMAS:</label>
+                <input
+                  type="number"
+                  placeholder={minPlacesValue.toString()}
+                  value={minPlacesValue.toString()}
+                  min={1}
+                  onChange={(event) => {
+                    setMinPlacesValue(parseInt(event.target.value));
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>PLAZAS TOTALES:</label>
+                <input
+                  type="number"
+                  placeholder={totalPlacesValue.toString()}
+                  value={totalPlacesValue.toString()}
+                  min={1}
+                  onChange={(event) => {
+                    setTotalPlacesValue(parseInt(event.target.value));
+                  }}
+                />
+              </fieldset>
+              <fieldset>
+                <label>ACTIVO:</label>
+                <input
+                  type="checkbox"
+                  checked={activeValue}
+                  onChange={(event) => {
+                    setActiveValue(event.target.checked);
+                  }}
+                />
+              </fieldset>
+            </div>
+            <button type="submit">Visualizar cambios</button>
+          </form>
+        </section>
+      </div>
 
       <HandleAddDuplicateExperience
         data={modifiedExperience}

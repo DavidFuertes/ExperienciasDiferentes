@@ -40,8 +40,8 @@ function ExperienceAdministration() {
 
   return (
     <>
-      <h1>Administración de Experiencias</h1>
       <section className="formSection">
+        <h1>Administración de Experiencias</h1>
         <ExperienceList
           experiences={experiences}
           onSelectExperience={handleExperienceSelect}

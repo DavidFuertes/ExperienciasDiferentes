@@ -46,23 +46,27 @@ export const ForgetPassword = () => {
 
   return (
     <div>
-      <h1>Página olvidé mi contraseña</h1>
-      <form onSubmit={handleSumit}>
-        <label htmlFor="email">Correo electrónico:</label>
-        <input
-          onChange={handleOnChange}
-          value={email}
-          type="email"
-          id="email"
-          name="email"
-        />
-        <button type="submit">Obtener codigo</button>{" "}
-        {message.text && (
-          <p style={{ color: message.type === "error" ? "red" : "green" }}>
-            {message.text}
-          </p>
-        )}
-      </form>
+      <section className="formSection">
+        <h1>Página olvidé mi contraseña</h1>
+        <form onSubmit={handleSumit}>
+          <fieldset>
+            <label htmlFor="email">Correo electrónico:</label>
+            <input
+              onChange={handleOnChange}
+              value={email}
+              type="email"
+              id="email"
+              name="email"
+            />
+          </fieldset>
+          <button type="submit">Obtener codigo</button>{" "}
+          {message.text && (
+            <p style={{ color: message.type === "error" ? "red" : "white" }}>
+              {message.text}
+            </p>
+          )}
+        </form>
+      </section>
     </div>
   );
 };

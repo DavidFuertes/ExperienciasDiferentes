@@ -13,7 +13,9 @@ export const UserAuth = () => {
           <button>Control Panel</button>
         </Link>
       )}
-      <button onClick={() => logout()}>Logout</button>
+      <Link to={`/`}>
+        <button onClick={() => logout()}>Logout</button>
+      </Link>
     </section>
   ) : (
     <ul>

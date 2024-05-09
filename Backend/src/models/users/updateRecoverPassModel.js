@@ -22,12 +22,12 @@ const updateRecoverPassModel = async (email, recoverPassCode) => {
 
     // Creamos el contenido del email
     const emailBody = `
-            Has solicitado la recuperación de contraseña para este email en Experiencias Diferentes. 
-                
-            Utiliza el siguiente código para crear una nueva contraseña: ${recoverPassCode}
-            
-            Reiniciala <a href="${RECOVERPASS_URL}">aquí</a>  
-
+            <p>Has solicitado la recuperación de contraseña para este email en Experiencias Diferentes.</p>
+            <br>  
+            <p>Utiliza el siguiente código para crear una nueva contraseña: ${recoverPassCode}</p>
+            <br>
+            Reiniciala <a href="${RECOVERPASS_URL}">aquí</a>
+            <br>  
             Si no has sido tú ignora este email.
         `;
 
