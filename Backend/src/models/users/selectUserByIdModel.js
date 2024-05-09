@@ -1,4 +1,5 @@
 import { getPool } from '../../db/poolQuery.js';
+import { userNotExistError } from '../../services/errorService.js';
 
 export const selectUserByIdModel = async (userId) => {
     const pool = await getPool();
@@ -9,9 +10,9 @@ export const selectUserByIdModel = async (userId) => {
     ]);
 
     // Si no se encuentra el usuario, lanzar un error.
-    /* if (users.length === 0) {
-    notFoundError('usuario');
-  } */
+    if (users.length === 0) {
+        userNotExistError();
+    }
 
     // El array de usuarios solo podrá contener un único usuario dado que el email
     // no puede repetirse. Retornamos al usuario que se encuentra en la posición 0,

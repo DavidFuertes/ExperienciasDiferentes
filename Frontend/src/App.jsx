@@ -22,7 +22,7 @@ import ExperienceAdministration from "./pages/experiencePages/ExperienceAdminist
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Header />
       <main>
         <Routes>

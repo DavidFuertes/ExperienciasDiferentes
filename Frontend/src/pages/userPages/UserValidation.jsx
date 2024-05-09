@@ -30,14 +30,21 @@ export const UserValidation = () => {
   return (
     <div>
       <h1>Validación de usuario</h1>
-      <input
-        type="text"
-        value={registrationCode}
-        onChange={(event) => setRegistrationCode(event.target.value)}
-      />
-      <button onClick={handleSubmit}>Enviar</button>
-      {isSubmitted && !isValid && <p>Código de registro inválido</p>}
-      {isValid && <p>Usuario validado correctamente</p>}
+      <section className="formSection">
+        <form>
+          <fieldset>
+            <label htmlFor="registrationCode">Código de registro:</label>
+            <input
+              type="text"
+              value={registrationCode}
+              onChange={(event) => setRegistrationCode(event.target.value)}
+            />
+          </fieldset>
+          <button onClick={handleSubmit}>Enviar</button>
+          {isSubmitted && !isValid && <p>Código de registro inválido</p>}
+          {isValid && <p>Usuario validado correctamente</p>}
+        </form>
+      </section>
     </div>
   );
 };

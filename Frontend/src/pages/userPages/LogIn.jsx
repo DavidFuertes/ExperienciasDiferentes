@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/UserContext.jsx";
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const LogIn = () => {
@@ -10,6 +11,8 @@ export const LogIn = () => {
 
   // Estado para manejar los mensajes de error
   const [error, setError] = useState("");
+
+  const { login } = useContext(UserContext);
 
   // Maneja el cambio en los campos del formulario
   const handleChange = (event) => {
@@ -38,9 +41,10 @@ export const LogIn = () => {
       }
 
       // Procesar respuesta exitosa
-      const data = await response.json();
-      console.log("¡LogIn con éxito! :):", data);
-
+      const processedResp = await response.json();
+      // console.log("¡LogIn con éxito! :):", data);
+      const token = processedResp.data.token;
+      login(token);
       window.location.href = "/";
     } catch (error) {
       setError(error.message);
@@ -49,33 +53,33 @@ export const LogIn = () => {
 
   return (
     <div>
-      <h1>Página de LogIn</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Correo electrónico:
-          <input
-            type="email"
-            name="email"
-            value={credentials.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Contraseña:
-          <input
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit">Iniciar sesión</button>
-        {error && <div style={{ color: "red" }}>{error}</div>}
-      </form>
+      <h1>Página de Log In</h1>
+      <section className="formSection">
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            <label>Correo electrónico:</label>
+            <input
+              type="email"
+              name="email"
+              value={credentials.email}
+              onChange={handleChange}
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <label>Contraseña:</label>
+            <input
+              type="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              required
+            />
+          </fieldset>
+          <button type="submit">Iniciar sesión</button>
+          {error && <div style={{ color: "red" }}>{error}</div>}
+        </form>
+      </section>
     </div>
   );
 };

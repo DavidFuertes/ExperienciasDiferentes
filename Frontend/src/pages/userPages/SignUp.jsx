@@ -57,44 +57,43 @@ export const SignUp = () => {
   return (
     <div>
       <h1>Página de Registro</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Nombre de usuario:
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Correo electrónico:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Contraseña:
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <br />
-        <button type="submit">Registrarse</button>
-        {error && <div style={{ color: "red" }}>{error}</div>}
-        {success && <div style={{ color: "blue" }}>{success}</div>}
-      </form>
+      <section className="formSection">
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            <label>Nombre de usuario:</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <label>Correo electrónico:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <label>Contraseña:</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </fieldset>
+          <button type="submit">Registrarse</button>
+          {error && <div style={{ color: "red" }}>{error}</div>}
+          {success && <div>{success}</div>}
+        </form>
+      </section>
     </div>
   );
 };

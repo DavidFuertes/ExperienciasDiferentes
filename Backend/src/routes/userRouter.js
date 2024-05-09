@@ -18,6 +18,7 @@ import { updateUserController } from '../controllers/users/updateUserController.
 import { userAuth } from '../middlewares/userAuth.js';
 import { userInscribed } from '../controllers/users/userInscribed.js';
 import { adminMiddleware } from '../middlewares/adminMiddleware.js';
+import { getUserByIdController } from '../controllers/users/getUserByIdController.js';
 
 // Aquí se importan las funciones controladoras intermedias.
 
@@ -31,6 +32,8 @@ userRouter.post('/register', newUserController);
 // Validar a un usuario.
 userRouter.get('/validate/:registrationCode', validateUserController);
 
+//Obtener datos de un usuario
+userRouter.get('/profile', userAuth, getUserByIdController);
 
 userRouter.get('/userInscribed', userAuth, adminMiddleware, userInscribed);
 

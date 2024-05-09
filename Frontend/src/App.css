@@ -1,42 +1,102 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app header {
+  background-color: rgba(28, 28, 28, 1);
   padding: 2rem;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app header h1 a {
+  font-weight: 500;
+  color: rgba(210, 129, 0, 1);
+  text-decoration: inherit;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app header h1 a:hover {
+  color: rgba(238, 168, 57, 1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.app header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
 }
 
-.card {
-  padding: 2em;
+.app header nav ul li a {
+  color: rgba(210, 129, 0, 1);
+  text-decoration: inherit;
 }
 
-.read-the-docs {
-  color: #888;
-} */
+.app header nav ul li a:hover {
+  color: rgba(238, 168, 57, 1);
+  text-decoration: inherit;
+}
+
+.app header nav section {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.app header nav section a {
+  color: rgba(210, 129, 0, 1);
+  text-decoration: inherit;
+}
+
+.app header nav section a:hover {
+  color: rgba(238, 168, 57, 1);
+  text-decoration: inherit;
+}
+
+.app header nav section button {
+  background-color: rgba(74, 74, 74, 0.5);
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.formSection {
+  width: 100%;
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+form fieldset {
+  border: none;
+  margin-bottom: 1rem;
+}
+
+form label {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  border: none;
+}
+
+.app main div section form button {
+  background-color: rgba(74, 74, 74, 0.5);
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.app main div section form button:hover {
+  background-color: rgba(210, 129, 0, 1);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}

@@ -49,3 +49,20 @@ export const validateRegistrationCode = async (registrationCode) => {
     throw error;
   }
 };
+
+export const getUserDataService = async (token) => {
+  const resp = await fetch(`${VITE_BACKEND_URL}/users/profile`, {
+    method: "GET",
+    headers: {
+      token,
+    },
+  });
+
+  const json = await resp.json();
+
+  if (!resp.ok) {
+    throw new Error(json.message);
+  }
+
+  return json.data;
+};
