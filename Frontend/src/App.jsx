@@ -31,13 +31,13 @@ function App() {
 
           <Route path="/validation" element={<UserValidation />} />
 
+          <Route
+            path="/experienceadministration"
+            element={<ExperienceAdministration />}
+          />
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
             <Route path="/create_experience" element={<CreateExperience />} />
-            <Route
-              path="/experienceadministration"
-              element={<ExperienceAdministration />}
-            />
           </Route>
 
           {/* Rutas privadas */}

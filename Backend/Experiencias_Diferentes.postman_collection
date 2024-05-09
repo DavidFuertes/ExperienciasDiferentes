@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "81d1c698-3ecd-45f2-93fa-5397cae9dd39",
+		"_postman_id": "55a0ccf9-25cf-450c-a92b-cfe605447b2d",
 		"name": "experiences",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32814341"
+		"_exporter_id": "32722220"
 	},
 	"item": [
 		{
@@ -13,22 +13,20 @@
 				"header": [
 					{
 						"key": "Accept",
-						"value": "*/*",
-						"disabled": true
+						"value": "*/*"
 					},
 					{
 						"key": "User-Agent",
-						"value": "Thunder Client (https://www.thunderclient.com)",
-						"disabled": true
+						"value": "Thunder Client (https://www.thunderclient.com)"
 					},
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0NTE1MTAwLCJleHAiOjE3MTcxMDcxMDB9.RNQcaaxlXSwoTcdDEZrhw-Nx1aC1k2J6Y_CVJBjZz4Y"
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDkzMTU5NCwiZXhwIjoxNzE3NTIzNTk0fQ.iQ9GUaWwOy0cZZc6MeEp3WgSj8OY5Xi8cGayqKe-y98"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"title\": \"Visita de Torremolinos\",\n  \"description\": \"Descubre los encantos de la ciudad antigua con nuestro recorrido guiado.\",\n  \"type\": \"Relajado\",\n  \"city\": \"Ciudad Principal\",\n  \"image\": \"https://ejemplo.com/imagen.jpg\",\n  \"date\": \"2024-05-15\",\n  \"price\": 50,\n  \"min_places\": 5,\n  \"total_places\": 20\n}\n",
+					"raw": "{\n  \"title\": \"Visita de Torremolinosss\",\n  \"description\": \"Descubre los encantos de la ciudad antigua con nuestro recorrido guiado.\",\n  \"type\": \"Relajado\",\n  \"city\": \"Ciudad Principal\",\n  \"image\": \"https://ejemplo.com/imagen.jpg\",\n  \"date\": \"2024-05-17\",\n  \"price\": 50,\n  \"min_places\": 5,\n  \"total_places\": 20\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -55,10 +53,15 @@
 			"name": "changeExperienceStatus",
 			"request": {
 				"method": "PATCH",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MDE5MDM4LCJleHAiOjE3MTc2MTEwMzh9.BWakuzx-2bQZOLuatvMuZki-YThiXbjKq2F610T4-YQ"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"is_active\": 1\n}",
+					"raw": "{\n  \"is_active\": 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,7 +69,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/experiences",
+					"raw": "http://localhost:3000/api/experiences?id=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -79,7 +82,11 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "2",
+							"value": "2"
+						},
+						{
+							"key": "",
+							"value": "",
 							"disabled": true
 						}
 					]
@@ -91,10 +98,15 @@
 			"name": "newReservation",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxNTE4NDk2NywiZXhwIjoxNzE3Nzc2OTY3fQ.jnBg9bCgrt4-GDuTExuXEb4m4blgWr9luuR69uiZ6dQ"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 1,\n  \"experience_id\": 2,\n  \"cancelation\": 1\n}",
+					"raw": "{\n  \"experience_id\": 1,\n  \"cancelation\": 0\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -119,9 +131,26 @@
 		},
 		{
 			"name": "listExperiences",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0NTY2OTcxLCJleHAiOjE3MTcxNTg5NzF9.-3K1zKp8Z9D64VE3a1v-iNMMmRYFF58SeTG3yaC-3kk"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:3000/api/experiences",
 					"protocol": "http",
@@ -144,7 +173,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\": \"david\",\n  \"email\": \"david@molinero.com\",\n  \"password\": \"12345\"\n}",
+					"raw": "{\n  \"username\": \"dani\",\n  \"email\": \"dani@eireos.com\",\n  \"password\": \"123456!Aa\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -174,12 +203,12 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDI1OTQyMiwiZXhwIjoxNzE2ODUxNDIyfQ.JyZ-xwD840JdjwIWm0DFZ4q2W3umT3TKsJuH9SxBqAs"
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0NTY2OTcxLCJleHAiOjE3MTcxNTg5NzF9.-3K1zKp8Z9D64VE3a1v-iNMMmRYFF58SeTG3yaC-3kk"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"user_id\": 2,\n  \"experience_id\": 1,\n  \"ratin\n}",
+					"raw": "{\n  \"experience_id\": 1,\n  \"rating\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -209,7 +238,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"pepito@pepe.com\"\n}",
+					"raw": "{\n  \"email\": \"dani2@eireos.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -235,9 +264,26 @@
 		},
 		{
 			"name": "validateUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:3000/api/users/validate/:registrationCode",
 					"protocol": "http",
@@ -251,9 +297,17 @@
 						"validate",
 						":registrationCode"
 					],
+					"query": [
+						{
+							"key": "registrationCode",
+							"value": "",
+							"disabled": true
+						}
+					],
 					"variable": [
 						{
-							"key": "registrationCode"
+							"key": "registrationCode",
+							"value": "263765d95b1be41ce33750c2d54430"
 						}
 					]
 				}
@@ -266,13 +320,16 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": ":id",
-						"value": "2",
-						"disabled": true
+						"key": "id",
+						"value": "2"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDI1OTQyMiwiZXhwIjoxNzE2ODUxNDIyfQ.JyZ-xwD840JdjwIWm0DFZ4q2W3umT3TKsJuH9SxBqAs"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3000/api/experiences/detail?id=3",
+					"raw": "http://localhost:3000/api/experiences/detail/?id=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -281,12 +338,13 @@
 					"path": [
 						"api",
 						"experiences",
-						"detail"
+						"detail",
+						""
 					],
 					"query": [
 						{
 							"key": "id",
-							"value": "3"
+							"value": "2"
 						}
 					]
 				}
@@ -300,13 +358,12 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDI1OTQyMiwiZXhwIjoxNzE2ODUxNDIyfQ.JyZ-xwD840JdjwIWm0DFZ4q2W3umT3TKsJuH9SxBqAs",
-						"type": "text"
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjcsInJvbGUiOiJwdWJsaWMiLCJpYXQiOjE3MTUxMTc0MTUsImV4cCI6MTcxNzcwOTQxNX0.Ci9oJppEUQpVDLLQyGLfbZ0bxjC4Z-QVkqMyX3lWqhY"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\": \"dani2\",\n  \"currentPassword\": \"123456!Aa\",\n  \"newPassword\" : \"1234567!Bb\"\n}",
+					"raw": "{\n  \"currentPassword\": \"1234567!Bb\",\n  \"newPassword\" : \"123456!Aa\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -336,7 +393,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\" : \"dani@eireos.com\",\n  \"password\" : \"123456!Aa\"\n}",
+					"raw": "{\n  \"email\" : \"juanperez@example.com\",\n  \"password\" : \"contraseña123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -370,14 +427,12 @@
 					},
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDE2Mjg3OSwiZXhwIjoxNzE2NzU0ODc5fQ.-xT7FuaCG9fzh8m6WOFXyz6fM0ucnihTYwuPMxEEJQE",
-						"type": "text",
-						"disabled": true
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDE2Mjg3OSwiZXhwIjoxNzE2NzU0ODc5fQ.-xT7FuaCG9fzh8m6WOFXyz6fM0ucnihTYwuPMxEEJQE"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"content\": \"maravilla como el villa\",\n  \"rate\": 5\n}\n",
+					"raw": "{\n  \"content\": \"de lujo me lo pasé q flipas repetiría\",\n  \"rate\": 5\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -408,22 +463,27 @@
 		{
 			"name": "updateExperience",
 			"request": {
+				"auth": {
+					"type": "bearer"
+				},
 				"method": "PATCH",
 				"header": [
 					{
 						"key": "user_id",
-						"value": "4"
+						"value": "3"
 					},
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6InB1YmxpYyIsImlhdCI6MTcxNDE2Mjg3OSwiZXhwIjoxNzE2NzU0ODc5fQ.-xT7FuaCG9fzh8m6WOFXyz6fM0ucnihTYwuPMxEEJQE",
-						"type": "text",
-						"disabled": true
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0NTE1MTAwLCJleHAiOjE3MTcxMDcxMDB9.RNQcaaxlXSwoTcdDEZrhw-Nx1aC1k2J6Y_CVJBjZz4Y"
+					},
+					{
+						"key": "query",
+						"value": "2"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"content\": \"maravilla como el villa\",\n  \"rate\": 5\n}\n",
+					"raw": "{\n  \"title\": \"Visita de Torremolinos\",\n  \"description\": \"Descubre los encantos de la ciudad antigua con nuestro recorrido guiadísimo.\",\n  \"type\": \"Relajado\",\n  \"city\": \"Ciudad Principal\",\n  \"image\": \"https://ejemplo.com/imagen.jpg\",\n  \"date\": \"2024-05-15\",\n  \"price\": 50,\n  \"min_places\": 5,\n  \"total_places\": 19\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -431,7 +491,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/experiences?id=2",
+					"raw": "http://localhost:3000/api/experiences/update?id=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -439,7 +499,8 @@
 					"port": "3000",
 					"path": [
 						"api",
-						"experiences"
+						"experiences",
+						"update"
 					],
 					"query": [
 						{
@@ -458,13 +519,12 @@
 				"header": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MDE5MDM4LCJleHAiOjE3MTc2MTEwMzh9.BWakuzx-2bQZOLuatvMuZki-YThiXbjKq2F610T4-YQ",
-						"type": "text"
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE1MDE5MDM4LCJleHAiOjE3MTc2MTEwMzh9.BWakuzx-2bQZOLuatvMuZki-YThiXbjKq2F610T4-YQ"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"dani5@eireos.com\",\r\n    \"date\": \"\",\r\n    \"avatar\": \"\"\r\n}",
+					"raw": "{\r\n    \"name\": \"María Gaa\",\r\n    \"email\": \"mariagarciaaaa@example.com\",\r\n    \"date\": \"2015-03-23\",\r\n    \"avatar\": \"https://i.pinimg.com/564x/a6/5f/dd/a65fdda8b5ea967edd8101a56aba5e48.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -472,7 +532,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/updateProfile",
+					"raw": "http://localhost:3000/api/users/updateProfile",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -480,6 +540,7 @@
 					"port": "3000",
 					"path": [
 						"api",
+						"users",
 						"updateProfile"
 					]
 				}
@@ -490,7 +551,118 @@
 			"name": "userInscribed",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxNTE4NDk2NywiZXhwIjoxNzE3Nzc2OTY3fQ.jnBg9bCgrt4-GDuTExuXEb4m4blgWr9luuR69uiZ6dQ"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/users/userInscribed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"userInscribed"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "29",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recursoEstático",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtainUserData",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDEsInJvbGUiOiJwdWJsaWMiLCJpYXQiOjE3MTUyMDY4MTMsImV4cCI6MTcxNzc5ODgxM30.UujYOIVdeawyceqEMy5TsYRkcDiivxCeyBvyL58Ht6o"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/users/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "staticResource",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/static/Logo.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"static",
+						"Logo.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NotFound",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/invented/invent.jp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"invented",
+						"invent.jp"
+					]
+				}
 			},
 			"response": []
 		}
