@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { RedirectButton } from "./RedirectButton.jsx";
 
 export const ListadoExperiencias = ({ experiences }) => {
   return (
@@ -14,10 +15,10 @@ export const ListadoExperiencias = ({ experiences }) => {
               <article className="expCard">
                 <h2>{experience.title}</h2>
                 <p>Ciudad: {experience.city}</p>
-                <p>Descripción: {experience.description}</p>
                 <p>Intensidad: {experience.type}</p>
                 <p>Fecha: {formattedDate}</p>
                 <p>precio: {experience.price}</p>
+                <RedirectButton text="Detalles" />
               </article>
             </li>
           );

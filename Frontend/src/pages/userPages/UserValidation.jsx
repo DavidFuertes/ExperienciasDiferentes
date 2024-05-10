@@ -29,8 +29,8 @@ export const UserValidation = () => {
 
   return (
     <div>
-      <h1>Validación de usuario</h1>
       <section className="formSection">
+        <h1>Validación de usuario</h1>
         <form>
           <fieldset>
             <label htmlFor="registrationCode">Código de registro:</label>
