@@ -11,7 +11,6 @@ function ExperienceAdministration() {
   const handleExperienceSelect = (experienceId) => {
     setSelectedExperienceId(experienceId);
   };
-  console.log(selectedExperienceId);
 
   useEffect(() => {
     // fetch("http://localhost:3000/api/experiences/", {

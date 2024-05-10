@@ -7,7 +7,7 @@ export const UserAuth = () => {
 
   return user ? (
     <section>
-      Logged in as <Link to={`/account`}>{user.user.name}</Link>{" "}
+      Bienvenido <Link to={`/account`}>{user.user.name}</Link>{" "}
       {user.user.role === "admin" && (
         <Link to={`/experienceadministration`}>
           <button>Control Panel</button>

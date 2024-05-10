@@ -1,18 +1,16 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { getAllExperiencesService } from "../services/index.js";
-import { UserContext } from "../context/UserContext.jsx";
 
 export const useExperiences = () => {
   const [experiences, setExperiences] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { token } = useContext(UserContext);
 
   useEffect(() => {
-    const loadExperiences = async (token) => {
+    const loadExperiences = async () => {
       try {
         setLoading(true);
-        const data = await getAllExperiencesService(token);
+        const data = await getAllExperiencesService();
         setExperiences(data);
       } catch (error) {
         setError(error.message);
@@ -21,8 +19,8 @@ export const useExperiences = () => {
       }
     };
 
-    loadExperiences(token);
-  }, [token]);
+    loadExperiences();
+  }, []);
 
   return { experiences, loading, error };
 };

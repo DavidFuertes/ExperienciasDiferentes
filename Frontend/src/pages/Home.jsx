@@ -12,7 +12,7 @@ export const Home = () => {
     return <p>Error: {error}</p>;
   }
   return (
-    <section>
+    <section className="listSection">
       <h1>Últimas experiencias</h1>
       <ListadoExperiencias experiences={experiences} />
     </section>

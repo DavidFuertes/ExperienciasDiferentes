@@ -1,14 +1,11 @@
 //Importamos las variables de entorno
 const { VITE_BACKEND_URL } = import.meta.env;
 
-export const getAllExperiencesService = async (token) => {
+export const getAllExperiencesService = async () => {
   try {
     //Hacemos la petición a la API
     const resp = await fetch(`${VITE_BACKEND_URL}/experiences`, {
       method: "GET",
-      headers: {
-        token,
-      },
     });
 
     //Extraemos los datos JSON de la respuesta

@@ -29,14 +29,12 @@ function App() {
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
 
-          <Route path="/validation" element={<UserValidation />} />
-
-          <Route
-            path="/experienceadministration"
-            element={<ExperienceAdministration />}
-          />
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
+            <Route
+              path="/experienceadministration"
+              element={<ExperienceAdministration />}
+            />
             <Route path="/create_experience" element={<CreateExperience />} />
           </Route>
 
@@ -50,9 +48,9 @@ function App() {
 
           {/* Rutas publicas */}
           <Route element={<PublicRoute />}>
+            <Route path="/validation" element={<UserValidation />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/validateUser" element={<UserValidation />} />
             <Route path="/forget_password" element={<ForgetPassword />} />
             <Route path="/recover_password" element={<RecoverPassword />} />
           </Route>
