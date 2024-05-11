@@ -17,8 +17,11 @@ export const ListadoExperiencias = ({ experiences }) => {
                 <p>Ciudad: {experience.city}</p>
                 <p>Intensidad: {experience.type}</p>
                 <p>Fecha: {formattedDate}</p>
-                <p>precio: {experience.price}</p>
-                <RedirectButton text="Detalles" />
+                <p>Precio: {experience.price}</p>
+                <RedirectButton
+                  text="Detalles"
+                  redirectUrl={`/experience/${experience.id}`}
+                />
               </article>
             </li>
           );

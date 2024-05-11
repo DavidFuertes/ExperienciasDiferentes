@@ -43,12 +43,15 @@ function App() {
             <Route path="/reservations" element={<MyReservations />} />
             <Route path="/bookmarks" element={<BookMarks />} />
             <Route path="/account" element={<MyAccount />} />
-            <Route path="/experience" element={<Experience />} />
+            <Route path="/experience/:experienceId" element={<Experience />} />
           </Route>
 
           {/* Rutas publicas */}
           <Route element={<PublicRoute />}>
-            <Route path="/validation" element={<UserValidation />} />
+            <Route
+              path="/validate/:registrationCode"
+              element={<UserValidation />}
+            />
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forget_password" element={<ForgetPassword />} />

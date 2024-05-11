@@ -42,10 +42,10 @@ export const newUserController = async (req, res, next) => {
 
 
             <p>Gracias por registrarte en XP EXPERIENCIAS DIFERENTES. Para activar tu cuenta, haz clic en el siguiente enlace:</p>
-            <p>Tu código de registro es: ${registrationCode}</p><br>
+            <br>
 
 
-            <p><strong><a href="${VALIDATE_USER_URL}">¡Activar mi cuenta!</a></p>
+            <p><strong><a href="${VALIDATE_USER_URL}${registrationCode}">¡Activar mi cuenta!</a></p>
         `;
 
         // Enviamos el email de verificación al usuario.

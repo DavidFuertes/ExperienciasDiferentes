@@ -5,11 +5,21 @@ export const Home = () => {
   const { experiences, loading, error } = useExperiences();
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <section className="listSection">
+        <h1>Últimas experiencias</h1>
+        <p>Loading...</p>
+      </section>
+    );
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <section className="listSection">
+        <h1>Últimas experiencias</h1>
+        <p>Error: {error}</p>
+      </section>
+    );
   }
   return (
     <section className="listSection">

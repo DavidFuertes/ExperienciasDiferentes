@@ -17,33 +17,26 @@ export const getAllExperiencesService = async () => {
     }
     return data;
   } catch (error) {
-    console.error("Error en la petición: ", error);
-    throw error;
+    console.error("Error en la petición: ", error.message);
   }
 };
 
 export const validateRegistrationCode = async (registrationCode) => {
-  try {
-    //Hacemos la petición a la API
-    console.log(registrationCode);
-    const resp = await fetch(
-      `${VITE_BACKEND_URL}/users/validate/${registrationCode}`,
-      {
-        method: "GET",
-      }
-    );
-
-    if (!resp.ok) {
-      throw new Error("El código de registro no es válido");
+  //Hacemos la petición a la API
+  const resp = await fetch(
+    `${VITE_BACKEND_URL}/users/validate/${registrationCode}`,
+    {
+      method: "GET",
     }
+  );
 
-    const json = await resp.json();
-
-    return json;
-  } catch (error) {
-    console.error("Error en la petición: ", error);
-    throw error;
+  if (!resp.ok) {
+    throw new Error("El código de registro no es válido");
   }
+
+  const json = await resp.json();
+
+  return json;
 };
 
 export const getUserDataService = async (token) => {
