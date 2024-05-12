@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 const { VITE_BACKEND_URL } = import.meta.env;
 import { UserContext } from "../../context/UserContext.jsx";
 

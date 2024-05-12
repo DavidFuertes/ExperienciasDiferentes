@@ -10,8 +10,8 @@ export const newUserSchema = joi.object({
     email: joi.string().email().required().messages(joiErrorMessages),
     password: joi
         .string()
-        .min(4)
-        .max(200)
+        .min(8)
+        .max(16)
         .pattern(
             /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@¡!$%^&*()_+|~=`{}:";'<>?,.])[a-zA-Z0-9@¡!$%^&*()_+|~=`{}:";'<>?,.]{8,}$/,
         )
