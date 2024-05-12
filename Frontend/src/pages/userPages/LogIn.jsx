@@ -1,85 +1,82 @@
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext.jsx";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { loginUserSchema } from "../../schemas/loginUserSchema.js";
+import { Slide, ToastContainer, toast } from "react-toastify";
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const LogIn = () => {
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
   // Estado para las credenciales del usuario
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onTouched",
+    resolver: joiResolver(loginUserSchema),
   });
 
-  // Estado para manejar los mensajes de error
-  const [error, setError] = useState("");
-
-  const { login } = useContext(UserContext);
-
-  // Maneja el cambio en los campos del formulario
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setCredentials((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  // Maneja el envío del formulario
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(""); // Limpiar errores anteriores
-
+  const onSubmit = async (data) => {
     try {
       const response = await fetch(`${VITE_BACKEND_URL}/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
+        body: JSON.stringify(data),
       });
+      console.log("response", response);
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || "Usuario o contraseña incorrectos :(.");
+      if (response.ok === true) {
+        const processedResp = await response.json();
+        const token = processedResp.data.token;
+        login(token);
+        navigate("/");
+        return;
+      } else {
+        throw new Error("El correo y/o la contraseña no son correctos🧐");
       }
-
-      // Procesar respuesta exitosa
-      const processedResp = await response.json();
-      // console.log("¡LogIn con éxito! :):", data);
-      const token = processedResp.data.token;
-      login(token);
-      window.location.href = "/";
     } catch (error) {
-      setError(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
     }
   };
 
   return (
     <div>
+      <ToastContainer />
       <section className="formSection">
         <h1>Página de Log In</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
             <label>Correo electrónico:</label>
-            <input
-              type="email"
-              name="email"
-              value={credentials.email}
-              onChange={handleChange}
-              required
-            />
+            <input type="email" placeholder="Email..." {...register("email")} />
+            <p>{errors.email?.message}</p>
           </fieldset>
           <fieldset>
             <label>Contraseña:</label>
             <input
               type="password"
-              name="password"
-              value={credentials.password}
-              onChange={handleChange}
-              required
+              placeholder="Contraseña..."
+              {...register("password")}
             />
+            <div>{errors.password?.message}</div>
           </fieldset>
-          <button type="submit">Iniciar sesión</button>
+          <button disabled={!isValid} type="submit">
+            Iniciar sesión
+          </button>
           <Link to="/forget_password">Olvidé mi contraseña</Link>
-          {error && <div style={{ color: "red" }}>{error}</div>}
         </form>
       </section>
     </div>

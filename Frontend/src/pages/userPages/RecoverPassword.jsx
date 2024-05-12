@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const RecoverPassword = () => {
+  const navigate = useNavigate();
   const [recoverCode, setRecoverCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
@@ -38,7 +40,7 @@ export const RecoverPassword = () => {
       if (response.ok) {
         setMessage({ text: data.message, type: "success" }); // Mostrar mensaje de éxito
         setTimeout(() => {
-          window.location.href = "/login";
+          navigate("/login");
         }, 2000); // Redirigir después de 2 segundos
       }
     } catch (err) {

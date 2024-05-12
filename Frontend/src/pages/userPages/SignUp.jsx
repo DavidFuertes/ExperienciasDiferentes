@@ -1,97 +1,95 @@
-import { useState } from "react";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { useForm } from "react-hook-form";
+import { newUserSchema } from "../../schemas/newUserSchema.js";
+import { Slide, ToastContainer, toast } from "react-toastify";
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const SignUp = () => {
-  // Estado del formulario
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+  } = useForm({
+    mode: "onTouched",
+    resolver: joiResolver(newUserSchema),
   });
 
-  // Estado para manejar los mensajes de error
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  // Maneja el cambio en los campos del formulario
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  // Maneja el envío del formulario
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(""); // Limpiar errores anteriores
-
+  const onSubmit = async (data) => {
     try {
       const response = await fetch(`${VITE_BACKEND_URL}/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(
-          data.message || "Algo salió mal :( . Inténtelo de nuevo."
+      if (response.ok === true) {
+        toast.success(
+          "¡Usuario registrado! Te hemos enviado un correo para confirmar tu cuenta",
+          {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Slide,
+          }
         );
-      }
 
-      // Procesar respuesta exitosa
-      const data = await response.json();
-      console.log("¡Registro con éxito!", data);
-
-      if (data.status === "ok") {
-        setSuccess(data.message);
+        reset();
+        return;
+      } else {
+        throw new Error("El email y/o el usuario ya existen😔");
       }
-      // Aquí podrías redirigir al usuario o limpiar el formulario
     } catch (error) {
-      setError(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
     }
   };
 
   return (
     <div>
+      <ToastContainer />
       <section className="formSection">
         <h1>Página de Registro</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
             <label>Nombre de usuario:</label>
             <input
               type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              required
+              placeholder="Nombre de usuario..."
+              {...register("username")}
             />
+            <p>{errors.username?.message}</p>
           </fieldset>
           <fieldset>
             <label>Correo electrónico:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
+            <input type="email" placeholder="Email..." {...register("email")} />
+            <p>{errors.email?.message}</p>
           </fieldset>
           <fieldset>
             <label>Contraseña:</label>
             <input
               type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
+              placeholder="Contraseña..."
+              {...register("password")}
             />
+            <p>{errors.password?.message}</p>
           </fieldset>
-          <button type="submit">Registrarse</button>
-          {error && <div style={{ color: "red" }}>{error}</div>}
-          {success && <div>{success}</div>}
+          <button disabled={!isValid} type="submit">
+            Registrarse
+          </button>
         </form>
       </section>
     </div>
