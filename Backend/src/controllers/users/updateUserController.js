@@ -5,8 +5,7 @@ import validateSchema from '../../utilities/validateSchema.js';
 export const updateUserController = async (req, res, next) => {
     const userId = req.user.id;
     try {
-        await validateSchema(updateUserSchema, req.body);
-
+        console.log(req.body);
         const user = await updateProfileService(userId, req.body);
 
         res.send({
