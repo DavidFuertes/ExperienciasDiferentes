@@ -23,6 +23,9 @@ export const MyAccount = () => {
     avatar: null, // Ahora se espera una URL del avatar en lugar de un archivo
   });
 
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
   // Estado para almacenar los valores predeterminados
   const [defaultValues, setDefaultValues] = useState({
     name: currentName || "", // Si hay un nombre actual, úsalo; de lo contrario, deja el campo en blanco
@@ -91,9 +94,19 @@ export const MyAccount = () => {
       if (!response.ok) {
         throw new Error("Error al actualizar los datos");
       }
+      setModalMessage(
+        "Información actualizada correctamente. ¿Quieres recargar la página?"
+      );
+      setShowModal(true);
       console.log("Datos actualizados:", userData);
     } catch (error) {
       console.error("Error al actualizar los datos: ", error);
+    }
+  };
+  const closeModal = (reloadPage) => {
+    setShowModal(false);
+    if (reloadPage) {
+      window.location.reload();
     }
   };
 
@@ -167,6 +180,35 @@ export const MyAccount = () => {
 
         <button type="submit">Guardar Cambios</button>
       </form>
+      {/* Modal */}
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <p style={{ color: "black" }}>{modalMessage}</p>
+            <button onClick={() => closeModal(true)}> Sí</button>
+            <button onClick={() => closeModal(false)}> No</button>
+          </div>
+        </div>
+      )}
+      <style jsx>{`
+        .modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .modal-content {
+          background-color: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+      `}</style>
     </div>
   );
 };
