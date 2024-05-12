@@ -9,7 +9,7 @@ import {
 } from '../services/errorService.js';
 
 export const updateProfileService = async (userId, body) => {
-    const { name, email, date } = body;
+    const { name, email, date, residence, languages, avatar } = body;
     let existUser = await selectUserByNameModel(name);
     if (existUser && existUser.id !== userId) {
         userAlreadyRegisteredError();
@@ -20,7 +20,15 @@ export const updateProfileService = async (userId, body) => {
         emailAlreadyRegisteredError();
     }
 
-    await updateUserProfileModel(userId, name, email, date);
+    await updateUserProfileModel(
+        userId,
+        name,
+        email,
+        date,
+        avatar,
+        residence,
+        languages,
+    );
 
     const user = await selectUserByIdModel(userId);
 

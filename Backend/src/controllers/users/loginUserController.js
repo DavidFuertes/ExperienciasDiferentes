@@ -61,7 +61,7 @@ const loginUserController = async (req, res, next) => {
             role: user.role,
         };
 
-        // Creamos el token y expirará en 1 hora
+        // Creamos el token y expirará en 30 días
         const token = jwt.sign(tokenInfo, SECRET, {
             expiresIn: '30d',
         });
