@@ -6,7 +6,7 @@ import updatePasswordModel from '../../models/users/updatePasswordModel.js';
 import validateSchema from '../../utilities/validateSchema.js';
 
 // Importa el esquema de Joi.
-import resetPasswordSchema from '../../schemas/users/resetPasswordSchema.js';
+import { resetPasswordSchema } from '../../schemas/users/resetPasswordSchema.js';
 
 // Importa los errores.
 import { invalidRecoveryCodeError } from '../../services/errorService.js';
