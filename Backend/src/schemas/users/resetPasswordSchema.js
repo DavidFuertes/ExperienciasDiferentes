@@ -1,10 +1,28 @@
-import Joi from 'joi';
+import joi from 'joi';
+
+import joiErrorMessages from '../joiErrorMessages.js';
 
 // Esquema para validar la solicitud de restablecimiento de contraseña.
-const resetPasswordSchema = Joi.object({
-    recoverCode: Joi.string().required(),
-    password: Joi.string().min(8).required(),
-    //.pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
-});
+export const resetPasswordSchema = joi.object({
+    recoverCode: joi.string().required(),
+    password: joi
 
-export default resetPasswordSchema;
+        .string()
+        .min(8)
+        .max(200)
+        .pattern(
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@¡!$%^&*()_+|~=`{}:";'<>?,.])[a-zA-Z0-9@¡!$%^&*()_+|~=`{}:";'<>?,.]{8,}$/,
+        )
+        .required()
+        .messages(joiErrorMessages),
+    newPassword: joi
+
+        .string()
+        .min(8)
+        .max(200)
+        .pattern(
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@¡!$%^&*()_+|~=`{}:";'<>?,.])[a-zA-Z0-9@¡!$%^&*()_+|~=`{}:";'<>?,.]{8,}$/,
+        )
+        .required()
+        .messages(joiErrorMessages),
+});

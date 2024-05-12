@@ -9,6 +9,12 @@ export const RecoverPassword = () => {
   const handleSumit = async (e) => {
     e.preventDefault();
 
+    // Validar que las contraseñas sean iguales
+    if (password !== confirmPass) {
+      setMessage({ text: "Las contraseñas no coinciden", type: "error" });
+      return; // Detener el flujo si las contraseñas no son iguales
+    }
+
     const fetchOptions = {
       method: "POST",
       headers: {
