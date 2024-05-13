@@ -10,6 +10,7 @@ function ExperienceAdministration() {
   const { token } = useContext(UserContext);
   const handleExperienceSelect = (experienceId) => {
     setSelectedExperienceId(experienceId);
+    console.log("Selected experience ID:", experienceId);
   };
 
   useEffect(() => {

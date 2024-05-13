@@ -27,11 +27,13 @@ function EditExperience({ experienceId, token }) {
           }
         })
         .then((data) => {
+          console.log("Llegó la data", data);
           setExperience(data); // Actualiza el estado con los datos
         })
         .catch((error) => console.log(error.message));
     }
   }, [experienceId, token]);
+  console.log("experience", experience);
 
   if (experienceId === null) {
     return (
@@ -46,8 +48,8 @@ function EditExperience({ experienceId, token }) {
       </>
     );
   } else {
-    //const experienceObject = experience;
-    //const experienceArray = Object.values(experienceObject);
+    // const experienceObject = experience;
+    // const experienceArray = Object.values(experienceObject);
 
     const commentsObject = experience.comments;
     const commentsArray = Object.values(commentsObject);
@@ -56,6 +58,9 @@ function EditExperience({ experienceId, token }) {
 
     const inscribedObject = experience.inscribed;
     const inscribedArray = Object.values(inscribedObject);
+    {
+      console.log("inscribedArray", inscribedArray);
+    }
 
     return (
       <>
@@ -90,7 +95,10 @@ function EditExperience({ experienceId, token }) {
             </thead>
             <tbody>
               {inscribedArray.map((inscribed) => (
-                <InscribedItems key={inscribed.name} inscribed={inscribed} />
+                <InscribedItems
+                  key={inscribed.name}
+                  inscribed={{ inscribed }}
+                />
               ))}
             </tbody>
           </table>
