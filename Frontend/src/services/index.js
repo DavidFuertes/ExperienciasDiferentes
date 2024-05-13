@@ -29,14 +29,13 @@ export const validateRegistrationCode = async (registrationCode) => {
       method: "GET",
     }
   );
+  const respData = await resp.json();
 
   if (!resp.ok) {
-    throw new Error("El código de registro no es válido");
+    throw new Error(respData.message);
   }
 
-  const json = await resp.json();
-
-  return json;
+  return respData;
 };
 
 export const getUserDataService = async (token) => {
