@@ -14,7 +14,7 @@ export const UserValidation = () => {
       try {
         const response = await validateRegistrationCode(registrationCode);
         response?.status === "ok" &&
-          toast.success("¡Usuario validado!", {
+          toast.success(response.message, {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: false,
