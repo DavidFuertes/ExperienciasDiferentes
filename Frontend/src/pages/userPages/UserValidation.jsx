@@ -16,7 +16,7 @@ export const UserValidation = () => {
         response?.status === "ok" &&
           toast.success("¡Usuario validado!", {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -28,7 +28,7 @@ export const UserValidation = () => {
       } catch (error) {
         toast.error(error.message, {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

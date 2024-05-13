@@ -27,7 +27,7 @@ export const LogIn = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      console.log("response", response);
+      const respData = await response.json();
 
       if (response.ok === true) {
         const processedResp = await response.json();
@@ -36,12 +36,12 @@ export const LogIn = () => {
         navigate("/");
         return;
       } else {
-        throw new Error("El correo y/o la contraseña no son correctos🧐");
+        throw new Error(respData.message);
       }
     } catch (error) {
       toast.error(error.message, {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

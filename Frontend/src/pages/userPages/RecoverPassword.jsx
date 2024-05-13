@@ -1,123 +1,108 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import { recoverPasswordSchema } from "../../schemas/recoverPasswordSchema.js";
+const { VITE_BACKEND_URL } = import.meta.env;
 
 export const RecoverPassword = () => {
+  const { recoverCode } = useParams();
   const navigate = useNavigate();
-  const [recoverCode, setRecoverCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
-  const [message, setMessage] = useState({ text: "", type: "" });
+  // Estado para las credenciales del usuario
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onTouched",
+    resolver: joiResolver(recoverPasswordSchema),
+  });
+  console.log(isValid);
 
-  const handleSumit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
+    if (data.password === data.confirmPassword) {
+      delete data.confirmPassword;
+      const confirmedData = {
+        ...data,
+        recoverCode,
+      };
+      console.log(confirmedData);
+      try {
+        const response = await fetch(
+          `${VITE_BACKEND_URL}/users/password/recover`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(confirmedData),
+          }
+        );
 
-    // Validar que las contraseñas sean iguales
-    if (password !== confirmPass) {
-      setMessage({ text: "Las contraseñas no coinciden", type: "error" });
-      return; // Detener el flujo si las contraseñas no son iguales
-    }
+        const respData = await response.json();
 
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ recoverCode, password }),
-    };
-
-    try {
-      const response = await fetch(
-        "http://127.0.0.1:3000/api/users/password/recover",
-        fetchOptions
-      );
-
-      const data = await response.json();
-
-      if (response.status === 400) {
-        setMessage({ text: data.message, type: "error" }); // Mostrar mensaje de error
+        if (response.ok === true) {
+          toast.success(respData.message, {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Slide,
+          });
+          setTimeout(() => {
+            navigate("/login");
+            return;
+          }, 2000);
+        } else {
+          throw new Error(respData.message);
+        }
+      } catch (error) {
+        toast.error(error.message, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
       }
-
-      if (response.ok) {
-        setMessage({ text: data.message, type: "success" }); // Mostrar mensaje de éxito
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000); // Redirigir después de 2 segundos
-      }
-    } catch (err) {
-      console.error(err);
-      setMessage({ text: "Ocurrió un error inesperado.", type: "error" }); // Mostrar mensaje de error genérico
     }
-  };
-
-  const handleOnChangeCode = (e) => {
-    setRecoverCode(e.target.value);
-  };
-
-  const handleOnChangePassword = (e) => {
-    //Validate password pattern
-    if (e.target.value.length < 8) {
-      document.getElementById("message-error-password").innerHTML =
-        "La contraseña debe tener al menos 8 caracteres";
-    } else {
-      document.getElementById("message-error-password").innerHTML = "";
-    }
-    setPassword(e.target.value);
-  };
-
-  const handleOnChangeConfirmPass = (e) => {
-    if (e.target.value !== password) {
-      document.getElementById("message-error").innerHTML =
-        "Las contraseñas no coinciden";
-    } else {
-      document.getElementById("message-error").innerHTML = "";
-    }
-    setConfirmPass(e.target.value);
   };
 
   return (
     <section className="formSection">
+      <ToastContainer />
       <h1>Página de creación de una nueva contraseña</h1>
-      <form onSubmit={handleSumit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          <label htmlFor="email">Código de recuperación:</label>
+          <label>Nueva contraseña:</label>
           <input
-            onChange={handleOnChangeCode}
-            value={recoverCode}
-            type="text"
-            id="recocerCode"
-            name="recoverCode"
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="email">Nueva contraseña:</label>
-          <input
-            onChange={handleOnChangePassword}
-            value={password}
             type="password"
-            id="password"
-            name="password"
+            placeholder="Contraseña..."
+            {...register("password")}
           />
+          <div>{errors.password?.message}</div>
           <p id="message-error-password"></p>
         </fieldset>
         <fieldset>
-          <label htmlFor="email">Repita la contraseña:</label>
+          <label>Repita la contraseña:</label>
           <input
-            onChange={handleOnChangeConfirmPass}
-            value={confirmPass}
             type="password"
-            id="connfirmPass"
-            name="confirmPass"
+            placeholder="Contraseña..."
+            {...register("confirmPassword")}
           />
-          <p id="message-error"></p>
+          <div>{errors.confirmPassword?.message}</div>
         </fieldset>
-        <fieldset>
-          {message.text && (
-            <p style={{ color: message.type === "error" ? "red" : "white" }}>
-              {message.text}
-            </p>
-          )}
-        </fieldset>
-        <button type="submit">Crea una nueva contraseña</button>
+        <button disabled={!isValid} type="submit">
+          Crea una nueva contraseña
+        </button>
       </form>
     </section>
   );

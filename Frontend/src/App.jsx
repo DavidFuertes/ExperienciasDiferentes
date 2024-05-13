@@ -55,7 +55,10 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forget_password" element={<ForgetPassword />} />
-            <Route path="/recover_password" element={<RecoverPassword />} />
+            <Route
+              path="/recover_password/:recoverCode"
+              element={<RecoverPassword />}
+            />
           </Route>
 
           {/* Ruta de error 404 */}

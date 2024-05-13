@@ -6,7 +6,6 @@ export const joiErrorMessages = {
   "number.max": 'El valor de "{#key}" no debe exceder {#limit}',
   "number.min": 'El valor de "{#key}" no puede ser inferior a {#limit}',
   "object.base": 'El valor de "{#key}" debe ser un objeto',
-  "any.only": "Solo se permiten fotos con formato jpeg o png",
   "string.email":
     'Debe proporcionar un correo electrónico válido para "{#key}"',
   "string.pattern.base":
@@ -14,6 +13,5 @@ export const joiErrorMessages = {
   "string.min": 'El campo "{#key}" debe tener al menos {#limit} caracteres',
   "string.max": 'El campo "{#key}" no debe exceder los {#limit} caracteres',
   "object.unknown": "No se permiten campos adicionales en este objeto",
-  // 'any.only':
-  //     'El valor debe ser uno de los siguientes: {#valids} para {#key}',
+  "any.only": "Las contraseñas deben coincidir",
 };
