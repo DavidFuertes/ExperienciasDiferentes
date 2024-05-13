@@ -1,70 +1,77 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import { forgetPasswordSchema } from "../../schemas/forgetPasswordSchema.js";
+const { VITE_BACKEND_URL } = import.meta.env;
 
 export const ForgetPassword = () => {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState({ text: "", type: "" });
-
-  const isValidEmail = (email) => {
-    // Regular expression for basic email validation
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-  const handleSumit = async (e) => {
-    e.preventDefault();
-    if (isValidEmail(email) === false) {
-      setMessage({ text: "El correo electrónico no es válido", type: "error" }); // Mostrar mensaje de error
-      return;
-    }
-
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    };
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    reset,
+  } = useForm({
+    mode: "onTouched",
+    resolver: joiResolver(forgetPasswordSchema),
+  });
+  const onSubmit = async (data) => {
     try {
-      await fetch(
-        "http://127.0.0.1:3000/api/users/password/forget",
-        fetchOptions
+      const response = await fetch(
+        `${VITE_BACKEND_URL}/users/password/forget`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
       );
+      const respData = await response.json();
+      if (response.ok === true) {
+        toast.success(respData.message, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
 
-      setMessage({
-        text: `Si hay una cuenta asociada a ${email} recibirá un correo electrónico con un enlace para restablecer tu contraseña.`,
-        type: "success",
-      }); // Mostrar mensaje de éxito
-    } catch (err) {
-      console.error(err);
-      setMessage({ text: "Ocurrió un error inesperado.", type: "error" }); // Mostrar mensaje de error genérico
+        reset();
+        return;
+      } else {
+        throw new Error(respData.message);
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
     }
-  };
-
-  const handleOnChange = (e) => {
-    setEmail(e.target.value);
   };
 
   return (
     <div>
+      <ToastContainer />
       <section className="formSection">
         <h1>Página olvidé mi contraseña</h1>
-        <form onSubmit={handleSumit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
             <label htmlFor="email">Correo electrónico:</label>
-            <input
-              onChange={handleOnChange}
-              value={email}
-              type="email"
-              id="email"
-              name="email"
-            />
+            <input type="email" placeholder="Email..." {...register("email")} />
+            <p>{errors.email?.message}</p>
           </fieldset>
-          <button type="submit">Obtener codigo</button>{" "}
-          {message.text && (
-            <p style={{ color: message.type === "error" ? "red" : "white" }}>
-              {message.text}
-            </p>
-          )}
+          <button disabled={!isValid} type="submit">
+            Recuperar contraseña
+          </button>
         </form>
       </section>
     </div>

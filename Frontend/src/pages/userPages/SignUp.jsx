@@ -22,31 +22,30 @@ export const SignUp = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+
+      const respData = await response.json();
       if (response.ok === true) {
-        toast.success(
-          "¡Usuario registrado! Te hemos enviado un correo para confirmar tu cuenta",
-          {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            transition: Slide,
-          }
-        );
+        toast.success(respData.message, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
 
         reset();
         return;
       } else {
-        throw new Error("El email y/o el usuario ya existen😔");
+        throw new Error(respData.message);
       }
     } catch (error) {
       toast.error(error.message, {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
