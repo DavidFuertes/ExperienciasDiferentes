@@ -30,8 +30,7 @@ export const LogIn = () => {
       const respData = await response.json();
 
       if (response.ok === true) {
-        const processedResp = await response.json();
-        const token = processedResp.data.token;
+        const token = respData.data.token;
         login(token);
         navigate("/");
         return;
