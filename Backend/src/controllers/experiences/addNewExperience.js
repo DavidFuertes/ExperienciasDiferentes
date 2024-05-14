@@ -5,6 +5,8 @@ import validateSchema from '../../utilities/validateSchema.js';
 import { notAuthUser } from '../../services/errorService.js';
 
 async function addNewExperience(req, res, next) {
+    const { id } = req.user;
+    console.log('id', id);
     const newExperience = req.body;
     const {
         title,
@@ -26,11 +28,12 @@ async function addNewExperience(req, res, next) {
 
         const [insertInfo] = await pool.query(
             `
-            INSERT INTO Experiences (title, description, type, city, image, date, price, min_places, total_places)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO Experiences (title, creator_id, description, type, city, image, date, price, min_places, total_places)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `,
             [
                 title,
+                id,
                 description,
                 type,
                 city,
