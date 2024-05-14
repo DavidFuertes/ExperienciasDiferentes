@@ -31,7 +31,6 @@ export const LogIn = () => {
 
       if (response.ok === true) {
         const token = respData.data.token;
-        console.log(token)
         login(token);
         navigate("/");
         return;
