@@ -6,6 +6,9 @@ export const getAllExperiencesService = async () => {
     //Hacemos la petición a la API
     const resp = await fetch(`${VITE_BACKEND_URL}/experiences`, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     //Extraemos los datos JSON de la respuesta
