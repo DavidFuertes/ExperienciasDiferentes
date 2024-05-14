@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./SearchBar.module.css";
 export const SearchBar = ({ experiences }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -24,11 +25,17 @@ export const SearchBar = ({ experiences }) => {
   }
 
   return (
-    <div>
-      <input type="text" value={search} onChange={searcher} />
+    <div className={styles.searchBar}>
+      <input
+        type="text"
+        value={search}
+        placeholder="Search..."
+        onChange={searcher}
+      />
       {results.map((result) => {
         return (
           <div
+            className={styles.searchResults}
             onClick={() => navigate(`/experience/${result.id}`)}
             key={result.id}
           >
