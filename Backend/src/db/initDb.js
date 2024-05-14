@@ -10,15 +10,18 @@ async function insertSampleData(connection) {
             INSERT INTO Users (name, email, password, date, avatar, role)
             VALUES
                 ('Juan Pérez', 'juanperez@example.com', 'contraseña123', '1990-01-01', 'avatar1.jpg', 'admin' ),
-                ('María García', 'mariagarcia@example.com', 'contraseña456', '1995-03-15', 'avatar2.jpg', 'public')
+                ('María García', 'mariagarcia@example.com', 'contraseña456', '1995-03-15', 'avatar2.jpg', 'public'),
+                ('Admin', 'admin@admin.com', '$2b$10$SjwISvd9ZG6UT.d9X451x.xjO.08bPsEd/Na1qCUf1EkNZKlYwEx2', '1995-03-15','avatar3.jpg', 'admin');
         `);
 
         //  Metemos datos en la tabla Experiences
         await connection.query(`
-            INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places, active)
+            INSERT INTO Experiences (creator_id, title, description, type, city, image, price, min_places, total_places, active)
             VALUES
-                (1, 'Aventura en las Montañas', 'Experimenta la emoción de hacer senderismo en las montañas.', 'Adrenalina pura', 'Mountainville', 'montaña.jpg', '2024-05-01', 50.00, 5, 10, true),
-                (2, 'Tour por la Ciudad', 'Explora la ciudad y sus puntos de referencia.', 'Relajado', 'Cityville', 'ciudad.jpg', '2024-06-15', 30.00, 3, 8, true)
+                (1, 'Aventura en las Montañas', 'Experimenta la emoción de hacer senderismo en las montañas.', 'Adrenalina pura', 'Mountainville', 'montaña.jpg', 50.00, 5, 10, true),
+                (2, 'Tour por la Ciudad', 'Explora la ciudad y sus puntos de referencia.', 'Relajado', 'Cityville', 'ciudad.jpg', 30.00, 3, 8, true),
+                (3, 'Visita de Torremolinosss', 'Descubre los encantos de la ciudad antigua con nuestro recorrido guiado.', 'Relajado', 'Ciudad Principal', 'https://ejemplo.com/imagen.jpg', 50.00, 5, 20, true),
+                (3, 'Excursión a la playa','Disfruta de un día soleado en la playa con nuestra excursión guiada.','Relajado','Playa Paraíso','https://ejemplo.com/playa.jpg', 65.00, 7, 25, true)
         `);
 
         // Insert sample data into the Reservations table
@@ -127,7 +130,6 @@ async function createTables(connection) {
                 type ENUM('Relajado', 'Medio', 'Adrenalina pura') NOT NULL,
                 city VARCHAR(255),
                 image VARCHAR(255),
-                date DATE,
                 price DECIMAL(10, 2),
                 min_places INT,
                 total_places INT,
@@ -173,6 +175,14 @@ async function createTables(connection) {
                 FOREIGN KEY (user_id) REFERENCES Users(id),
                 FOREIGN KEY (experience_id) REFERENCES Experiences(id),
                 UNIQUE(user_id, experience_id)
+            )
+            `);
+        
+            await connection.query(`
+            CREATE TABLE IF NOT EXISTS Dates(
+                experience_id INT,
+                date DATE,
+                FOREIGN KEY (experience_id) REFERENCES Experiences(id)
             )
             `);
 
