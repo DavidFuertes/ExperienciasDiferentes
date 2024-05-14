@@ -1,6 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 const { VITE_BACKEND_URL } = import.meta.env;
 import { UserContext } from "../../context/UserContext.jsx";
+import { RecoverPassword } from "../../components/ChangePasswordForm.jsx";
 
 export const MyAccount = () => {
   const { token, user } = useContext(UserContext);
@@ -25,6 +26,8 @@ export const MyAccount = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [reloadPage, setReloadPage] = useState(false); // Nuevo estado para indicar si se debe recargar la página
+  const [imagePreview, setImagePreview] = useState(null); // Estado para previsualización de imagen
 
   // Estado para almacenar los valores predeterminados
   const [defaultValues, setDefaultValues] = useState({
@@ -48,9 +51,26 @@ export const MyAccount = () => {
     }));
   };
 
+  // Manejar cambios en el archivo de imagen
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        avatar: file,
+      }));
+    }
+  };
+
   // Manejar la presentación del formulario
   const handleSubmit = async (e) => {
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+
     e.preventDefault();
     try {
       // Crear un FormData para enviar datos multipart/form-data, incluida la imagen
@@ -61,8 +81,9 @@ export const MyAccount = () => {
         .replace(/[/.,]/g, "-");
 
       console.log(defaultValuesCorrected);
+
       const [day, month, year] = defaultValuesCorrected.split("-");
-      const invertedDateString = `${year}-${month}-${day} LALALA`;
+      const invertedDateString = `${year}-${month}-${day} `;
 
       console.log(invertedDateString);
       // Agregar los datos de usuario al FormData
@@ -79,10 +100,16 @@ export const MyAccount = () => {
         formData.append("languages", userData.languages);
       }
 
+      // Verificar si hay una imagen en el campo avatar
       if (userData.avatar) {
-        formData.append("avatar", userData.avatar || defaultValues.date);
+        // Si hay una imagen, agregarla al FormData
+        formData.append("avatar", userData.avatar);
+        console.log("Imagen encontrada en avatar:", userData.avatar);
+      } else {
+        console.log("No se encontró ninguna imagen en avatar");
       }
 
+      console.log(formData);
       // Realizar una solicitud PATCH al backend con los datos actualizados del usuario
       const response = await fetch(`${VITE_BACKEND_URL}/users/updateProfile`, {
         method: "PATCH",
@@ -103,12 +130,21 @@ export const MyAccount = () => {
       console.error("Error al actualizar los datos: ", error);
     }
   };
+
+  // Función para cerrar el modal y posiblemente recargar la página
   const closeModal = (reloadPage) => {
     setShowModal(false);
     if (reloadPage) {
-      window.location.reload();
+      setReloadPage(true); // Establecer el estado para recargar la página
     }
   };
+
+  // Efecto para recargar la página si se establece el estado reloadPage a true
+  useEffect(() => {
+    if (reloadPage) {
+      window.location.reload(); // Recargar la página
+    }
+  }, [reloadPage]);
 
   return (
     <div>
@@ -167,15 +203,22 @@ export const MyAccount = () => {
         </div>
 
         <div>
-          <label htmlFor="avatar">Avatar:</label>{" "}
-          {/* Campo de entrada de tipo "file" para seleccionar la imagen del avatar */}
-          <input
-            type="file"
-            id="avatar"
-            name="avatar"
-            accept="image/*" // Aceptar cualquier tipo de imagen
-            onChange={handleInputChange}
-          />
+          <label>
+            <span>Imagen:</span>
+            <input
+              className="image-picker"
+              name="avatar"
+              type="file"
+              onChange={handleFile}
+            />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="preview"
+                style={{ maxWidth: "200px", maxHeight: "200px" }}
+              />
+            )}
+          </label>
         </div>
 
         <button type="submit">Guardar Cambios</button>
@@ -190,6 +233,8 @@ export const MyAccount = () => {
           </div>
         </div>
       )}
+      {/*Componente de recuperación de contraseña*/}
+      <RecoverPassword />
       <style jsx>{`
         .modal {
           position: fixed;
