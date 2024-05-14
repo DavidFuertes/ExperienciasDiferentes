@@ -6,7 +6,6 @@ import { notAuthUser } from '../../services/errorService.js';
 
 async function addNewExperience(req, res, next) {
     const { id } = req.user;
-    console.log('id', id);
     const newExperience = req.body;
     const {
         title,
@@ -28,8 +27,8 @@ async function addNewExperience(req, res, next) {
 
         const [insertInfo] = await pool.query(
             `
-            INSERT INTO Experiences (title, creator_id, description, type, city, image, date, price, min_places, total_places)
-            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO Experiences (title, creator_id, description, type, city, image, price, min_places, total_places)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
         `,
             [
                 title,
@@ -38,7 +37,6 @@ async function addNewExperience(req, res, next) {
                 type,
                 city,
                 image,
-                date,
                 price,
                 min_places,
                 total_places,
@@ -47,12 +45,29 @@ async function addNewExperience(req, res, next) {
 
         console.log(insertInfo);
 
+        const [insertDate] = await pool.query(
+            `
+            INSERT INTO Dates (experience_id, date)
+            VALUES(?, ?)
+        `,
+            [
+                insertInfo.insertId,
+                date,
+            ],
+        );
+
+        console.log(insertDate)
+
         const [postedData] = await pool.query(
             `
-            SELECT * FROM Experiences WHERE id = ?
-        `,
-            [insertInfo.insertId],
+            SELECT Experiences.*, Dates.date 
+            FROM Experiences 
+            LEFT JOIN Dates ON Experiences.id = Dates.experience_id
+            WHERE Experiences.id = ?
+            `,
+            [insertInfo.insertId] // Aquí pasas la ID como parámetro
         );
+        
 
         const resInfo = [
             {

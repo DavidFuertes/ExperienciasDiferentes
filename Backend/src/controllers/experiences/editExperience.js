@@ -25,22 +25,11 @@ async function editExperience(req, res, next) {
 
         const pool = await getPool();
 
-        await pool.query(
+        const [updateInfo] = await pool.query(
             `
             UPDATE Experiences
-            SET 
-            title = ?,
-            description = ?,
-            type = ?,
-            city = ?,
-            image = ?,
-            date = ?,
-            price = ?,
-            min_places = ?,
-            total_places = ?,
-            active = ?
-            WHERE
-            id = ?;
+            SET title = ?, description = ?, type = ?, city = ?, image = ?, price = ?, min_places = ?, total_places = ?
+            WHERE id = ?
         `,
             [
                 title,
@@ -48,16 +37,42 @@ async function editExperience(req, res, next) {
                 type,
                 city,
                 image,
-                date,
                 price,
                 min_places,
                 total_places,
-                is_active,
-                id,
+                id
             ],
         );
 
-        res.status(200).send({ message: 'OK' });
+        if (updateInfo.affectedRows === 0) {
+            throw new Error('No se encontró la experiencia con ese ID');
+        }
+
+        const [insertDate] = await pool.query(
+            `
+            INSERT INTO Dates (experience_id, date)
+            VALUES(?, ?)
+        `,
+            [
+                id,
+                date,
+            ],
+        );
+
+        const [updatedData] = await pool.query(
+            `
+            SELECT Experiences.*, Dates.date 
+            FROM Experiences 
+            LEFT JOIN Dates ON Experiences.id = Dates.experience_id
+            WHERE Experiences.id = ?
+            `,
+            [id]
+        );
+
+        res.status(200).json({
+            message: 'Experience updated successfully',
+            updatedData
+        });
     } catch (error) {
         next(error);
     }

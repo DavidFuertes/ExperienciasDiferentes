@@ -43,6 +43,7 @@ export const UserProvider = ({ children }) => {
 
   const login = (token) => {
     setToken(token);
+    console.log(token)
   };
 
   return (

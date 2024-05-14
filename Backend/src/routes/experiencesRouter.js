@@ -10,13 +10,14 @@ import { userAuth } from '../middlewares/userAuth.js';
 import { addNewComment } from '../controllers/experiences/addNewComment.js';
 import { adminMiddleware } from '../middlewares/adminMiddleware.js';
 import { editExperience } from '../controllers/experiences/editExperience.js';
+import { listExperiences1 } from '../controllers/experiences/listExperiences1.js';
 
 const experiencesRouter = express.Router();
 
 experiencesRouter.patch('/edit/', userAuth, editExperience);
 experiencesRouter.get('/detail/', userAuth, getExperience);
 
-experiencesRouter.get('/', listExperiences);
+experiencesRouter.get('/', listExperiences1);
 experiencesRouter.post(
     '/newexperience',
     userAuth,
