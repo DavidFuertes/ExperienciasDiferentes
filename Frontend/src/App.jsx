@@ -19,6 +19,7 @@ import { Experience } from "./pages/experiencePages/Experience.jsx";
 import { ForgetPassword } from "./pages/userPages/ForgetPassword.jsx";
 
 import ExperienceAdministration from "./pages/experiencePages/ExperienceAdministration.jsx";
+import { ChangePassword } from "./pages/userPages/changePassword.jsx";
 
 function App() {
   return (
@@ -44,6 +45,10 @@ function App() {
             <Route path="/bookmarks" element={<BookMarks />} />
             <Route path="/account" element={<MyAccount />} />
             <Route path="/experience/:experienceId" element={<Experience />} />
+            <Route
+              path="/account/changePassword"
+              element={<ChangePassword />}
+            />
           </Route>
 
           {/* Rutas publicas */}

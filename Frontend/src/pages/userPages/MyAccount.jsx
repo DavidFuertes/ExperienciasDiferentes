@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 const { VITE_BACKEND_URL } = import.meta.env;
 import { UserContext } from "../../context/UserContext.jsx";
-import { RecoverPassword } from "../../components/ChangePasswordForm.jsx";
-
+import { Link, useNavigate } from "react-router-dom";
 export const MyAccount = () => {
   const { token, user } = useContext(UserContext);
   const {
@@ -233,8 +232,7 @@ export const MyAccount = () => {
           </div>
         </div>
       )}
-      {/*Componente de recuperación de contraseña*/}
-      <RecoverPassword />
+
       <style jsx>{`
         .modal {
           position: fixed;
@@ -254,6 +252,7 @@ export const MyAccount = () => {
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
       `}</style>
+      <Link to="/account/ChangePassword">Quiero cambiar mi contraseña</Link>
     </div>
   );
 };
