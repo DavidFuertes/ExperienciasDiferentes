@@ -40,7 +40,7 @@ app.use(
 );
 
 app.use(express.json()); // Milddeware para parsear el body
-app.use(fileUpload({ useTempFiles: true }));
+app.use(fileUpload());
 
 app.use(morgan('dev')); // Milddeware de morgan
 
