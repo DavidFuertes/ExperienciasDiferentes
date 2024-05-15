@@ -3,6 +3,8 @@ import { RedirectButton } from "./RedirectButton.jsx";
 
 export const ListadoExperiencias = ({ experiences, filters }) => {
   const experiencesOrdenadas = [...experiences];
+  console.log("experiences", experiences);
+  console.log("filters", filters);
 
   if (filters.sortBy === "price") {
     if (filters.sortOrder === "asc") {
@@ -22,13 +24,24 @@ export const ListadoExperiencias = ({ experiences, filters }) => {
     } else {
       experiencesOrdenadas.sort((a, b) => b.average_rating - a.average_rating);
     }
+  } else if (filters.sortBy === "total_places") {
+    if (filters.sortOrder === "asc") {
+      experiencesOrdenadas.sort((a, b) => a.total_places - b.total_places);
+    } else {
+      experiencesOrdenadas.sort((a, b) => b.total_places - a.total_places);
+    }
   }
+  console.log("experiencesOrdenadas", experiencesOrdenadas);
 
   return (
     <section>
       <ul>
         {experiencesOrdenadas
-          .filter((experience) => experience.active === 1)
+          .filter(
+            (experience) =>
+              experience.active === 1 &&
+              (!filters.filterType || filters.filterType === experience.type)
+          )
           .map((experience) => {
             const date = new Date(experience.date);
             const options = { year: "numeric", month: "long", day: "numeric" };
@@ -43,7 +56,12 @@ export const ListadoExperiencias = ({ experiences, filters }) => {
                   <p>Ciudad: {experience.city}</p>
                   <p>Intensidad: {experience.type}</p>
                   <p>Fecha: {formattedDate}</p>
-                  <p>Precio: {experience.price}</p>
+                  <p>Plazas Totales: {experience.total_places}</p>
+                  <p>
+                    Plazas Disponibles:{" "}
+                    {experience.total_places - experience.num_reservations}
+                  </p>
+                  <p>Precio: {experience.price} €</p>
                   <p>
                     {!isNaN(roundedRating)
                       ? `${roundedRating}⭐`

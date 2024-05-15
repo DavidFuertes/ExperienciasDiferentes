@@ -11,10 +11,16 @@ async function listExperiences(req, res, next) {
         const pool = await getPool();
 
         let reqInfo = `
-        SELECT Experiences.*, AVG(Ratings.rating) AS average_rating
-        FROM Experiences
-        LEFT JOIN Ratings ON Experiences.id = Ratings.experience_id
-        WHERE 1=1
+        SELECT 
+            Experiences.*,
+            AVG(Ratings.rating) AS average_rating,
+            (SELECT COUNT(*) FROM Reservations WHERE Experiences.id = Reservations.experience_id) AS num_reservations
+          FROM 
+            Experiences
+          LEFT JOIN 
+            Ratings ON Experiences.id = Ratings.experience_id
+          WHERE 
+            1=1
     `;
 
         if (title) {

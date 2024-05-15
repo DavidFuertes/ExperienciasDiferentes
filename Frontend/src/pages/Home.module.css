@@ -1,6 +1,6 @@
 .searchForm {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   max-width: 100%;
   grid-auto-rows: auto;
   grid-auto-flow: dense;

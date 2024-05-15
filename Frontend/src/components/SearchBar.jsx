@@ -32,17 +32,20 @@ export const SearchBar = ({ experiences }) => {
         placeholder="Search..."
         onChange={searcher}
       />
-      {results.map((result) => {
-        return (
-          <div
-            className={styles.searchResults}
-            onClick={() => navigate(`/experience/${result.id}`)}
-            key={result.id}
-          >
-            {result.title}
-          </div>
-        );
-      })}
+      {results.length > 0 && (
+        <ul>
+          {results.map((result, index) => (
+            <li
+              className={styles.searchResults}
+              onClick={() => navigate(`/experience/${result.id}`)}
+              key={result.id}
+              style={{ top: `calc(1.6rem * ${index + 1})` }}
+            >
+              {result.title}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

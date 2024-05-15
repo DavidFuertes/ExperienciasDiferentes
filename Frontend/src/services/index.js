@@ -29,7 +29,7 @@ export const validateRegistrationCode = async (registrationCode) => {
   const resp = await fetch(
     `${VITE_BACKEND_URL}/users/validate/${registrationCode}`,
     {
-      method: "GET",
+      method: "PATCH",
     }
   );
   const respData = await resp.json();
