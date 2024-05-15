@@ -30,20 +30,8 @@ export const updateUserProfileModel = async (
     }
 
     if (avatar) {
-        console.log('Ha llegao');
-        // Si se proporciona un avatar, moverlo a la carpeta uploads
-        console.log('Avatar proporcionado:', avatar);
-        const avatarFileName = `avatar_${userId}_${Date.now()}${path.extname(avatar)}`;
-        const avatarPath = path.join(uploadsDir, avatarFileName);
-        try {
-            await fs.copyFile(avatar.path, avatarPath); // Copiar la imagen al directorio de uploads
-            console.log('Avatar copiado exitosamente a:', avatarPath);
-            query += ', avatar = ?';
-            values.push(avatarFileName); // Guardar el nombre del archivo en la base de datos
-        } catch (error) {
-            console.error('Error al mover el avatar:', error);
-            throw error; // Lanzar el error para que se maneje en la capa superior
-        }
+        query += ', avatar = ?';
+        values.push(avatar); // Guardar el nombre del archivo en la base de datos
     }
 
     if (residence) {
