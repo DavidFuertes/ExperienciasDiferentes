@@ -9,21 +9,33 @@ export const updateUserController = async (req, res, next) => {
     // Obtenemos el ID del usuario de la solicitud
     const userId = req.user.id;
     console.log('req.files', req.files);
-    const img = req.files.avatar;
     try {
         // Si hay un archivo de avatar en la solicitud, guardamos la foto primero
+        if (req.files && req.files.avatar) {
+            const photoName = await savePhotoService(req.files.avatar, 200);
 
-        const photoName = await savePhotoService(img, 200);
+            const user = await updateProfileService(
+                userId,
+                req.body,
+                photoName,
+            );
+
+            res.send({
+                status: 'ok',
+                message: 'Perfil actualizado correctamente',
+                data: { user },
+            });
+        } else {
+            const user = await updateProfileService(userId, req.body);
+
+            res.send({
+                status: 'ok',
+                message: 'Perfil actualizado correctamente',
+                data: { user },
+            });
+        }
 
         // Llamamos al servicio de actualización de perfil, pasando el ID del usuario, el cuerpo de la solicitud y el nombre de la foto (si existe)
-        const user = await updateProfileService(userId, req.body, photoName);
-
-        // Enviamos una respuesta con el usuario actualizado
-        res.send({
-            status: 'ok',
-            message: 'Perfil actualizado correctamente',
-            data: { user },
-        });
     } catch (error) {
         console.error('Error en el controlador updateUserController:', error); // Agregar console.log para imprimir el error
         next(error); // En caso de error, pasamos el control al siguiente middleware de manejo de errores
