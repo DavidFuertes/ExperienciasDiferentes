@@ -16,7 +16,7 @@ import { newUserSchema } from '../../schemas/users/newUserSchema.js';
 // Importamos las variables de entorno.
 import 'dotenv/config.js';
 
-const { VALIDATE_USER_URL } = process.env;
+const { VALIDATE_USER_URL, ASSETS_PATH } = process.env;
 
 // Función controladora final que crea un nuevo usuario.
 export const newUserController = async (req, res, next) => {
@@ -38,14 +38,21 @@ export const newUserController = async (req, res, next) => {
 
         // Cuerpo del email de verificación.
         const emailBody = `
-            <p>¡Bienvenid@ <strong>${username}!</strong></p><br>
-
-
-            <p>Gracias por registrarte en XP EXPERIENCIAS DIFERENTES. Para activar tu cuenta, haz clic en el siguiente enlace:</p>
-            <br>
-
-
-            <p><strong><a href="${VALIDATE_USER_URL}${registrationCode}">¡Activar mi cuenta!</a></p>
+              <body style="font-family: Arial, sans-serif; text-align: center; background-color: #333; padding: 20px;">
+        <img src="https://i.postimg.cc/9F62RMj7/XP.png" alt="Icono de XP EXPERIENCIAS DIFERENTES" style="width: px; height: 75px;">
+        <br>
+        <p style="font-size: 18px; color: #FFD700; display: inline-block;">¡Bienvenid@ <strong>${username}!</strong></p>
+        <br>
+        <p style="font-size: 16px; color: #FFD700;">Gracias por registrarte en:</p> 
+        <br> 
+        <p style="font-size: 16px; color: #FFD700;"> <strong>XP EXPERIENCIAS DIFERENTES</strong></p>
+        <br>
+        <p style="font-size: 16px; color: #FFD700;"> Para activar tu cuenta, haz clic en el siguiente enlace:</p>
+        <br>
+        <p>
+            <a href="${VALIDATE_USER_URL}${registrationCode}" style="font-family: Arial, sans-serif; display: inline-block; background-color: #FFD700; color: #333; text-decoration: none; padding: 10px 20px; border-radius: 5px;">¡Activar mi cuenta!</a>
+        </p>
+    </body>
         `;
 
         // Enviamos el email de verificación al usuario.

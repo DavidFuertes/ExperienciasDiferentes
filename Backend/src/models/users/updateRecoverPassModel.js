@@ -15,22 +15,6 @@ const updateRecoverPassModel = async (email, recoverPassCode) => {
         recoverPassCode,
         email,
     ]);
-
-    // Creamos el asunto del email de recuperación de contraseña.
-    const emailSubject =
-        'Recuperación de contraseña en Experiencias Diferentes:)';
-
-    // Creamos el contenido del email
-    const emailBody = `
-            <p>Has solicitado la recuperación de contraseña para este email en Experiencias Diferentes.</p>
-            <br>
-            Reiniciala <a href="${RECOVERPASS_URL}${recoverPassCode}">aquí</a>
-            <br>  
-            Si no has sido tú ignora este email.
-        `;
-
-    // Enviamos el email de verificación al usuario.
-    await sendMail(email, emailSubject, emailBody);
 };
 
 export default updateRecoverPassModel;
