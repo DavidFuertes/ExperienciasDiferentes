@@ -1,47 +1,12 @@
 import PropTypes from "prop-types";
 import { RedirectButton } from "./RedirectButton.jsx";
 
-export const ListadoExperiencias = ({ experiences, filters }) => {
-  const experiencesOrdenadas = [...experiences];
-  console.log("experiences", experiences);
-  console.log("filters", filters);
-
-  if (filters.sortBy === "price") {
-    if (filters.sortOrder === "asc") {
-      experiencesOrdenadas.sort((a, b) => a.price - b.price);
-    } else {
-      experiencesOrdenadas.sort((a, b) => b.price - a.price);
-    }
-  } else if (filters.sortBy === "date") {
-    if (filters.sortOrder === "asc") {
-      experiencesOrdenadas.sort((a, b) => new Date(a.date) - new Date(b.date));
-    } else {
-      experiencesOrdenadas.sort((a, b) => new Date(b.date) - new Date(a.date));
-    }
-  } else if (filters.sortBy === "average_rating") {
-    if (filters.sortOrder === "asc") {
-      experiencesOrdenadas.sort((a, b) => a.average_rating - b.average_rating);
-    } else {
-      experiencesOrdenadas.sort((a, b) => b.average_rating - a.average_rating);
-    }
-  } else if (filters.sortBy === "total_places") {
-    if (filters.sortOrder === "asc") {
-      experiencesOrdenadas.sort((a, b) => a.total_places - b.total_places);
-    } else {
-      experiencesOrdenadas.sort((a, b) => b.total_places - a.total_places);
-    }
-  }
-  console.log("experiencesOrdenadas", experiencesOrdenadas);
-
+export const ListadoExperiencias = ({ experiences }) => {
   return (
     <section>
       <ul>
-        {experiencesOrdenadas
-          .filter(
-            (experience) =>
-              experience.active === 1 &&
-              (!filters.filterType || filters.filterType === experience.type)
-          )
+        {experiences
+          .filter((experience) => experience.active === 1)
           .map((experience) => {
             const date = new Date(experience.date);
             const options = { year: "numeric", month: "long", day: "numeric" };

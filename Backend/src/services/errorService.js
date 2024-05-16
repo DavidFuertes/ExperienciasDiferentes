@@ -147,3 +147,11 @@ export const failedAvatarError = () => {
         message: 'No se ha podido actualizar el avatar',
     };
 };
+
+export const notMatchingQuery = () => {
+    throw {
+        httpStatus: 400,
+        code: 'NOT_MATCHING_QUERY',
+        message: 'No existe ninguna experiencia que coincida con tu consulta',
+    };
+};

@@ -5,13 +5,12 @@
   justify-content: center;
   margin-left: 20.625rem;
   margin-right: 20.625rem;
-  margin-top: 2rem;
-  min-height: 2rem;
 }
 
 .searchBar input {
   min-width: 40%;
-
+  background-color: rgb(241, 241, 241);
+  color: rgb(39, 39, 39);
   border-radius: 1rem;
   border: none;
   padding: 0.5rem;

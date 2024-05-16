@@ -18,8 +18,9 @@ export const SearchBar = ({ experiences }) => {
   } else {
     results = experiences.filter((experience) => {
       return (
-        experience.title.toLowerCase().startsWith(search.toLowerCase()) &&
-        experience.active !== 0
+        experience.title.toLowerCase().startsWith(search.toLowerCase()) ||
+        (experience.city.toLowerCase().startsWith(search.toLowerCase()) &&
+          experience.active !== 0)
       );
     });
   }
@@ -39,9 +40,10 @@ export const SearchBar = ({ experiences }) => {
               className={styles.searchResults}
               onClick={() => navigate(`/experience/${result.id}`)}
               key={result.id}
-              style={{ top: `calc(1.6rem * ${index + 1})` }}
+              style={{ top: `calc(2rem * ${index + 1})` }}
             >
-              {result.title}
+              <p>{result.title}</p>
+              <p>{result.city}</p>
             </li>
           ))}
         </ul>

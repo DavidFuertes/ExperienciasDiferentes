@@ -1,10 +1,10 @@
 import { getPool } from '../../db/poolQuery.js';
 import { listExperiencesSchema } from '../../schemas/experiences/listExperiencesSchema.js';
+import { notMatchingQuery } from '../../services/errorService.js';
 import validateSchema from '../../utilities/validateSchema.js';
 
 async function listExperiences(req, res, next) {
-    const { title, city, isActive, isConfirmed, sortBy, sortOrder } = req.body;
-
+    const { search, type, sortBy, sortOrder } = req.query;
     try {
         //Validamos el body con joi
         await validateSchema(listExperiencesSchema, req.body);
@@ -23,29 +23,37 @@ async function listExperiences(req, res, next) {
             1=1
     `;
 
-        if (title) {
-            reqInfo += ` AND title LIKE '%${title}%'`;
+        if (!search && !type) {
+        } else {
+            if (search && type) {
+                reqInfo += ` AND (city LIKE '%${search}%' AND type LIKE '%${type}%')`;
+            } else {
+                if (search) {
+                    reqInfo += ` AND city LIKE '%${search}%'`;
+                }
+                if (type) {
+                    reqInfo += ` AND type LIKE '%${type}%'`;
+                }
+            }
         }
-        if (city) {
-            reqInfo += ` AND city LIKE '%${city}%'`;
-        }
-        if (isActive !== undefined) {
-            reqInfo += ` AND active = ${isActive}`;
-        }
-        if (isConfirmed !== undefined) {
-            reqInfo += ` AND isConfirmed = ${isConfirmed === 'true' ? 1 : 0}`;
-        }
+
+        reqInfo += ` GROUP BY Experiences.id, Experiences.creator_id, Experiences.title, Experiences.description, Experiences.type, Experiences.city, Experiences.image, Experiences.date, Experiences.price, Experiences.min_places, Experiences.total_places, Experiences.active`;
 
         // Aplica la ordenación si se proporcionan parámetros de orden
         if (sortBy && sortOrder) {
             reqInfo += ` ORDER BY ${sortBy} ${sortOrder === 'asc' ? 'ASC' : 'DESC'}`;
         }
 
-        reqInfo += ` GROUP BY Experiences.id, Experiences.creator_id, Experiences.title, Experiences.description, Experiences.type, Experiences.city, Experiences.image, Experiences.date, Experiences.price, Experiences.min_places, Experiences.total_places, Experiences.active`;
-
         const [listedExperiences] = await pool.query(reqInfo);
 
-        res.json(listedExperiences);
+        if (listedExperiences.length === 0) {
+            notMatchingQuery();
+        }
+
+        return res.status(200).json({
+            message: 'Experiencias obtenidas correctamente',
+            experiences: listedExperiences,
+        });
     } catch (error) {
         next(error);
     }
