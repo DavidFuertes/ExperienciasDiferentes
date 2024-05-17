@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import styles from "./Home.module.css";
 
 export const Home = () => {
-  const { experiences, loading, error, setFilters, setError } =
+  const { experiences, loading, error, filters, setFilters, setError } =
     useExperiences();
 
   const { handleSubmit, register, reset, setValue, watch } = useForm({
@@ -150,10 +150,7 @@ export const Home = () => {
           <button
             type="button"
             onClick={handleResetFilters}
-            disabled={
-              Object.values(watch()).every((value) => !value) &&
-              Object.values(watch()).every((value) => value === "")
-            }
+            disabled={Object.keys(filters).length === 0}
           >
             Reiniciar filtros
           </button>
@@ -259,10 +256,7 @@ export const Home = () => {
           <button
             type="button"
             onClick={handleResetFilters}
-            disabled={
-              Object.values(watch()).every((value) => !value) &&
-              Object.values(watch()).every((value) => value === "")
-            }
+            disabled={Object.keys(filters).length === 0}
           >
             Reiniciar filtros
           </button>

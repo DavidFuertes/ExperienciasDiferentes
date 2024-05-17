@@ -23,5 +23,5 @@ export const useExperiences = () => {
     loadExperiences();
   }, [filters]);
 
-  return { experiences, loading, error, setFilters, setError };
+  return { experiences, loading, error, filters, setFilters, setError };
 };
