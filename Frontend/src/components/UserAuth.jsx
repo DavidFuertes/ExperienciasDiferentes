@@ -4,31 +4,29 @@ import { UserContext } from "../context/UserContext.jsx";
 
 export const UserAuth = () => {
   const { user, logout } = useContext(UserContext);
-  console.log("user", user);
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-  const renderAvatar = () => {
+  useEffect(() => {
     if (user && user.user.avatar.data) {
       const byteArray = user.user.avatar.data;
       const base64String = btoa(
         String.fromCharCode(...new Uint8Array(byteArray))
       );
-      const avatarUrl = `data:image/jpeg;base64,${base64String}`;
-      console.log("avatarUrl", avatarUrl);
-      return (
-        <img
-          src={avatarUrl}
-          alt="avatar"
-          style={{ maxWidth: "200px", maxHeight: "200px" }}
-        />
-      );
+      const url = `data:image/jpg;base64,${base64String}`;
+      setAvatarUrl(url);
     }
-    return null;
-  };
+  }, [user]);
 
   return user ? (
     <section>
       Bienvenido <Link to={`/account`}>{user.user.name}</Link>
-      {renderAvatar()}
+      {avatarUrl && (
+        <img
+          src={avatarUrl}
+          alt="avatar"
+          // style={{ maxWidth: "200px", maxHeight: "200px" }}
+        />
+      )}
       {user.user.role === "admin" && (
         <Link to={`/experienceadministration`}>
           <button>Control Panel</button>

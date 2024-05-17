@@ -25,6 +25,10 @@ export const SearchBar = ({ experiences }) => {
     });
   }
 
+  const clearInput = () => {
+    setSearch("");
+  };
+
   return (
     <div className={styles.searchBar}>
       <input
@@ -34,11 +38,13 @@ export const SearchBar = ({ experiences }) => {
         onChange={searcher}
       />
       {results.length > 0 && (
-        <ul>
+        <ul className={styles.searchResults}>
           {results.map((result, index) => (
             <li
-              className={styles.searchResults}
-              onClick={() => navigate(`/experience/${result.id}`)}
+              onClick={() => {
+                navigate(`/experience/${result.id}`);
+                clearInput();
+              }}
               key={result.id}
               style={{ top: `calc(2rem * ${index + 1})` }}
             >
