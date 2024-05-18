@@ -34,22 +34,35 @@ export const SearchBar = ({ experiences }) => {
       <input
         type="text"
         value={search}
-        placeholder="Search..."
+        placeholder="Busca una experiencia o lugar..."
         onChange={searcher}
       />
       {results.length > 0 && (
         <ul className={styles.searchResults}>
-          {results.map((result, index) => (
+          {results.map((result) => (
             <li
               onClick={() => {
                 navigate(`/experience/${result.id}`);
                 clearInput();
               }}
               key={result.id}
-              style={{ top: `calc(2rem * ${index + 1})` }}
             >
-              <p>{result.title}</p>
-              <p>{result.city}</p>
+              <p>
+                {result.title}
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    fill="currentColor"
+                    className="bi bi-geo-alt-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                  </svg>
+                  {result.city}
+                </span>
+              </p>
             </li>
           ))}
         </ul>
