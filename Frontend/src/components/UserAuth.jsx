@@ -6,17 +6,6 @@ export const UserAuth = () => {
   const { user, logout } = useContext(UserContext);
   const [avatarUrl, setAvatarUrl] = useState("");
 
-  useEffect(() => {
-    if (user && user.user.avatar.data) {
-      const byteArray = user.user.avatar.data;
-      const base64String = btoa(
-        String.fromCharCode(...new Uint8Array(byteArray))
-      );
-      const url = `data:image/jpg;base64,${base64String}`;
-      setAvatarUrl(url);
-    }
-  }, [user]);
-
   return user ? (
     <section>
       Bienvenido <Link to={`/account`}>{user.user.name}</Link>

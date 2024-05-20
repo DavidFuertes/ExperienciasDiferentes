@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SearchBar.module.css";
+
 export const SearchBar = ({ experiences }) => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
-  //función de búsqueda
+  // Función de búsqueda
   const searcher = (e) => {
     e.preventDefault();
     setSearch(e.target.value);
   };
 
-  //método de filtrado
+  // Método de filtrado
   let results = [];
-  if (!search) {
-    results;
-  } else {
+  if (search) {
     results = experiences.filter((experience) => {
       return (
         experience.title.toLowerCase().startsWith(search.toLowerCase()) ||
@@ -24,6 +23,11 @@ export const SearchBar = ({ experiences }) => {
       );
     });
   }
+
+  const handleSelect = (id) => {
+    navigate(`/experience/${id}`);
+    clearInput();
+  };
 
   const clearInput = () => {
     setSearch("");
@@ -36,16 +40,12 @@ export const SearchBar = ({ experiences }) => {
         value={search}
         placeholder="Busca una experiencia o lugar..."
         onChange={searcher}
-        onBlur={clearInput}
       />
       {results.length > 0 && (
         <ul className={styles.searchResults}>
           {results.map((result) => (
             <li
-              onClick={() => {
-                navigate(`/experience/${result.id}`);
-                clearInput();
-              }}
+              onMouseDown={() => handleSelect(result.id)} // Use onMouseDown instead of onClick
               key={result.id}
             >
               <p>
@@ -71,3 +71,5 @@ export const SearchBar = ({ experiences }) => {
     </div>
   );
 };
+
+export default SearchBar;

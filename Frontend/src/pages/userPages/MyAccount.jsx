@@ -20,7 +20,7 @@ export const MyAccount = () => {
     date: "", // Campo para la fecha de nacimiento
     residence: "",
     languages: "",
-    avatar: null, // Ahora se espera una URL del avatar en lugar de un archivo
+    avatar: null,
   });
 
   const [showModal, setShowModal] = useState(false);

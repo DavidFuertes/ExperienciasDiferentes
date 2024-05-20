@@ -46,13 +46,10 @@ function App() {
             <Route path="/bookmarks" element={<BookMarks />} />
             <Route path="/account" element={<MyAccount />} />
 
-            
-
             <Route
               path="/account/changePassword"
               element={<ChangePassword />}
             />
-
           </Route>
 
           {/* Rutas publicas */}
