@@ -15,11 +15,11 @@ async function insertSampleData(connection) {
 
         //  Metemos datos en la tabla Experiences
         await connection.query(`
-            INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places, active)
+   INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places, active)
             VALUES
                 (1, 'Aventura en las Montañas', 'Experimenta la emoción de hacer senderismo en las montañas.', 'Adrenalina pura', 'Mountainville', 'montaña.jpg', '2024-05-01', 50.00, 5, 10, true),
                 (2, 'Tour por la Ciudad', 'Explora la ciudad y sus puntos de referencia.', 'Relajado', 'Cityville', 'ciudad.jpg', '2024-06-15', 30.00, 3, 8, true)
-        `);
+   `);
 
         // Insert sample data into the Reservations table
         await connection.query(`
@@ -126,7 +126,7 @@ async function createTables(connection) {
                 description TEXT,
                 type ENUM('Relajado', 'Medio', 'Adrenalina pura') NOT NULL,
                 city VARCHAR(255),
-                image VARCHAR(255),
+                image BLOB,
                 date DATE,
                 price DECIMAL(10, 2),
                 min_places INT,

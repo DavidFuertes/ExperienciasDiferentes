@@ -6,7 +6,20 @@ import morgan from 'morgan'; // Importamos morgan para mostrar información de l
 import cors from 'cors'; // Importamos cors para evitar problemas con las CORS
 import { experiencesRouter } from './src/routes/experiencesRouter.js'; // Importamos las rutas de experiencias
 import { userRouter } from './src/routes/userRouter.js'; // Importamos las rutas de usuarios
-import { errorController } from './src/controllers/errors/index.js';
+
+import {
+    notFoundController,
+    errorController,
+} from './src/controllers/errors/index.js';
+// Importamos el controlador de errores
+
+
+
+
+
+app.use(fileUpload()); // Middleware de express-fileupload
+
+
 // Importamos el controlador de errores
 
 const app = express(); // Crea servidor
@@ -25,6 +38,7 @@ app.use(express.static(process.env.UPLOADS_DIR)); // Ruta de archivos estáticos
 
 
 
+
 app.use(
     cors({
         origin: '*',
@@ -37,6 +51,7 @@ app.use(
 
 app.use('/api/users', userRouter);
 app.use('/api/experiences', experiencesRouter);
+app.use(notFoundController);
 
 // Middleware para manejar errores
 app.use(errorController);
