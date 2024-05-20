@@ -1,9 +1,6 @@
 // Importamos el servicio de actualización de perfil
 import { updateProfileService } from '../../services/updateProfileService.js';
 
-// Importamos el servicio para guardar la foto
-import { savePhotoService } from '../../middlewares/staticMiddleware.js';
-
 // Controlador para actualizar el usuario
 export const updateUserController = async (req, res, next) => {
     const userId = req.user.id; // Obtenemos el ID del usuario de la solicitud

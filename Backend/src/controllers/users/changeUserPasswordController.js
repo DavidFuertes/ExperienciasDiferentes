@@ -7,6 +7,7 @@ import { changeUserPasswordModel } from '../../models/users/changeUserPasswordMo
 // Función controladora final que crea un nuevo usuario.
 export const changeUserPasswordController = async (req, res, next) => {
     const { id } = req.user;
+    console.log(req.body);
     try {
         //Todo: Cambiar el mensaje de credenciales incorrectas.
         // Validamos los datos con Joi.
