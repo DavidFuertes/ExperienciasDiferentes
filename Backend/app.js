@@ -11,7 +11,7 @@ import { errorController } from './src/controllers/errors/index.js';
 
 const app = express(); // Crea servidor
 
-app.use(cors()); // Middleware de cors
+
 app.use(express.json()); // Middleware para parsear el body
 app.use(fileUpload()); // Middleware de express-fileupload
 
@@ -21,7 +21,20 @@ app.use(morgan('dev'));
 // Middleware para servir archivos estáticos
 app.use(express.static(process.env.UPLOADS_DIR)); // Ruta de archivos estáticos
 
-// Rutas de la API
+
+
+
+
+app.use(
+    cors({
+        origin: '*',
+    }),
+);
+
+
+
+//app.use(routes); // Milddeware que indica a express donde estan las rutas cuando esten hechas
+
 app.use('/api/users', userRouter);
 app.use('/api/experiences', experiencesRouter);
 

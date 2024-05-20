@@ -28,6 +28,7 @@ function App() {
         <Routes>
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
+          <Route path="/experience/:experienceId" element={<Experience />} />
 
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
@@ -43,7 +44,6 @@ function App() {
             <Route path="/reservations" element={<MyReservations />} />
             <Route path="/bookmarks" element={<BookMarks />} />
             <Route path="/account" element={<MyAccount />} />
-            <Route path="/experience/:experienceId" element={<Experience />} />
           </Route>
 
           {/* Rutas publicas */}

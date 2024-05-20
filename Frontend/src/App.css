@@ -61,6 +61,7 @@
   border: none;
   border-radius: 0.2rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .app header nav section button:hover {
@@ -186,6 +187,7 @@ ul {
   border: none;
   border-radius: 0.2rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .app main button:hover {
@@ -193,6 +195,14 @@ ul {
   padding: 0.5rem;
   border-radius: 0.2rem;
   cursor: pointer;
+}
+
+.app main button:disabled {
+  transition: background-color 0.3s ease;
+}
+
+.app main button:disabled:hover {
+  background-color: rgba(74, 74, 74, 0.719);
 }
 
 .app main a {
