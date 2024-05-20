@@ -5,13 +5,14 @@ export const useExperiences = () => {
   const [experiences, setExperiences] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
     const loadExperiences = async () => {
       try {
         setLoading(true);
-        const data = await getAllExperiencesService();
-        setExperiences(data);
+        const data = await getAllExperiencesService(filters);
+        setExperiences(data.experiences);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -20,7 +21,7 @@ export const useExperiences = () => {
     };
 
     loadExperiences();
-  }, []);
+  }, [filters]);
 
-  return { experiences, loading, error };
+  return { experiences, loading, error, filters, setFilters, setError };
 };

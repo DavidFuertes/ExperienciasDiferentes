@@ -32,11 +32,13 @@ function ExperienceAdministration() {
     //   })
     //   .catch((error) => console.log(error.message));
     try {
-      getAllExperiencesService(token).then((data) => setExperiences(data));
+      getAllExperiencesService().then((data) =>
+        setExperiences(data.experiences)
+      );
     } catch (error) {
       console.error("Error en la petición: ", error);
     }
-  }, [token]); // Se pasa un arreglo vacío como dependencia para que se ejecute solo una vez al montar el componente
+  }, []); // Se pasa un arreglo vacío como dependencia para que se ejecute solo una vez al montar el componente
 
   return (
     <>

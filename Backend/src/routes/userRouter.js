@@ -30,7 +30,7 @@ const userRouter = express.Router();
 userRouter.post('/register', newUserController);
 
 // Validar a un usuario.
-userRouter.get('/validate/:registrationCode', validateUserController);
+userRouter.patch('/validate/:registrationCode', validateUserController);
 
 //Obtener datos de un usuario
 userRouter.get('/profile', userAuth, getUserByIdController);
