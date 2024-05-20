@@ -1,6 +1,7 @@
 // Importamos el servicio de actualización de perfil
 import { updateProfileService } from '../../services/updateProfileService.js';
-
+import validateSchema from '../../utilities/validateSchema.js';
+import { updateUserSchema } from '../../schemas/users/updateUserSchema.js';
 
 // Importamos el servicio para guardar la foto
 import { savePhotoService } from '../../services/savePhotoService.js';
@@ -10,9 +11,10 @@ export const updateUserController = async (req, res, next) => {
     // Obtenemos el ID del usuario de la solicitud
     const userId = req.user.id;
     console.log('req.files', req.files);
+    console.log(req.body);
     try {
+        await validateSchema(updateUserSchema, req.body);
 
-         await validateSchema(updateUserSchema, req.body);
         // Si hay un archivo de avatar en la solicitud, guardamos la foto primero
         if (req.files && req.files.avatar) {
             const photoName = await savePhotoService(req.files.avatar, 200);

@@ -59,7 +59,7 @@ const sendRecoverPassController = async (req, res, next) => {
             <br>
             <p style="font-size: 16px; color: #FFD700;">Para crear la nueva contraseña pincha:</p> 
             <br> 
-            <a href="${RECOVERPASS_URL}" style="font-family: Arial, sans-serif; display: inline-block; background-color: #FFD700; color: #333; text-decoration: none; padding: 10px 20px; border-radius: 5px;">aquí</a></p>
+            <a href="${RECOVERPASS_URL}${recoverPassCode}" style="font-family: Arial, sans-serif; display: inline-block; background-color: #FFD700; color: #333; text-decoration: none; padding: 10px 20px; border-radius: 5px;">aquí</a></p>
             <br>  
             <p style="font-size: 16px; color: #FFD700;">Si no has sido tú ignora este email.</p>
         `;

@@ -13,39 +13,24 @@ import {
 } from './src/controllers/errors/index.js';
 // Importamos el controlador de errores
 
-
-
-
+const app = express(); // Crea servidor
 
 app.use(fileUpload()); // Middleware de express-fileupload
-
+app.use(
+    cors({
+        // origin: '*',
+    }),
+);
 
 // Importamos el controlador de errores
 
-const app = express(); // Crea servidor
-
-
 app.use(express.json()); // Middleware para parsear el body
-app.use(fileUpload()); // Middleware de express-fileupload
 
 // Configuración de morgan
 app.use(morgan('dev'));
 
 // Middleware para servir archivos estáticos
 app.use(express.static(process.env.UPLOADS_DIR)); // Ruta de archivos estáticos
-
-
-
-
-
-
-app.use(
-    cors({
-        origin: '*',
-    }),
-);
-
-
 
 //app.use(routes); // Milddeware que indica a express donde estan las rutas cuando esten hechas
 
