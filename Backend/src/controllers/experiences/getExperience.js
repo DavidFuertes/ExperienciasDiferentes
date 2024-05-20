@@ -38,7 +38,10 @@ async function getExperience(req, res, next) {
 
         const [comments] = await pool.query(
             `
-            SELECT id, content From Comments WHERE experience_id = ?
+            SELECT Comments.id, Comments.content, Users.name AS commenter_name
+            FROM Comments
+            INNER JOIN Users ON Comments.user_id = Users.id
+            WHERE Comments.experience_id = ?
         `,
             [id],
         );
