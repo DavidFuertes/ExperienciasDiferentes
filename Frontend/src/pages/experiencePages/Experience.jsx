@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { obtainExperienceService } from "../../services/index.js";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { ExperienceData } from "../../components/ExperienceData.jsx";
-import { ExperienceComments } from "../../components/ExperienceComments.jsx";
+import { ExperienceComment } from "../../components/ExperienceComment.jsx";
 
 export const Experience = () => {
   const { experienceId } = useParams();
@@ -47,13 +47,26 @@ export const Experience = () => {
   ) : (
     <>
       <ToastContainer />
-      <ExperienceData
-        experience={data.experience}
-        experienceId={experienceId}
-        inscribed={data.inscribed}
-        rate={data.rate}
-      />
-      <ExperienceComments comments={data.comments} />
+      <section className="listSection">
+        <ExperienceData
+          experience={data.experience}
+          experienceId={experienceId}
+          inscribed={data.inscribed}
+          rate={data.rate}
+        />
+      </section>
+      <section className="listSection">
+        <h1>Comentarios</h1>
+        <div>
+          {data.comments.map((comment) => (
+            <ExperienceComment
+              key={comment.id}
+              commenter_name={comment.commenter_name}
+              comment={comment.content}
+            />
+          ))}
+        </div>
+      </section>
     </>
   );
 };

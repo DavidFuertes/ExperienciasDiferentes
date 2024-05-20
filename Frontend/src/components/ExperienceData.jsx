@@ -80,7 +80,7 @@ export const ExperienceData = ({
   if (experience)
     return (
       <div className={styles.experiencePanel}>
-        <h1>{experience.title}</h1>
+        <h2>{experience.title}</h2>
         <p>{experience.description}</p>
         <p>Ciudad: {experience.city}</p>
         <p>Estilo: {experience.type}</p>

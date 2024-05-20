@@ -40,14 +40,12 @@ export const SearchBar = ({ experiences }) => {
         value={search}
         placeholder="Busca una experiencia o lugar..."
         onChange={searcher}
+        onBlur={clearInput}
       />
       {results.length > 0 && (
         <ul className={styles.searchResults}>
           {results.map((result) => (
-            <li
-              onMouseDown={() => handleSelect(result.id)} // Use onMouseDown instead of onClick
-              key={result.id}
-            >
+            <li onMouseDown={() => handleSelect(result.id)} key={result.id}>
               <p>
                 {result.title}
                 <span>
