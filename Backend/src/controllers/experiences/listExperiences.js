@@ -10,7 +10,12 @@ async function listExperiences(req, res, next) {
         await validateSchema(listExperiencesSchema, req.body);
         const pool = await getPool();
 
-        let reqInfo = 'SELECT * FROM Experiences WHERE 1=1';
+        let reqInfo = `
+        SELECT Experiences.*, AVG(Ratings.rating) AS average_rating
+        FROM Experiences
+        LEFT JOIN Ratings ON Experiences.id = Ratings.experience_id
+        WHERE 1=1
+    `;
 
         if (title) {
             reqInfo += ` AND title LIKE '%${title}%'`;
@@ -29,6 +34,8 @@ async function listExperiences(req, res, next) {
         if (sortBy && sortOrder) {
             reqInfo += ` ORDER BY ${sortBy} ${sortOrder === 'asc' ? 'ASC' : 'DESC'}`;
         }
+
+        reqInfo += ` GROUP BY Experiences.id, Experiences.creator_id, Experiences.title, Experiences.description, Experiences.type, Experiences.city, Experiences.image, Experiences.date, Experiences.price, Experiences.min_places, Experiences.total_places, Experiences.active`;
 
         const [listedExperiences] = await pool.query(reqInfo);
 

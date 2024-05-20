@@ -10,6 +10,8 @@ export const updateUserController = async (req, res, next) => {
     const userId = req.user.id;
     console.log('req.files', req.files);
     try {
+
+         await validateSchema(updateUserSchema, req.body);
         // Si hay un archivo de avatar en la solicitud, guardamos la foto primero
         if (req.files && req.files.avatar) {
             const photoName = await savePhotoService(req.files.avatar, 200);
