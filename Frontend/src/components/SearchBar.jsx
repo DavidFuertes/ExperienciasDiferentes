@@ -36,6 +36,7 @@ export const SearchBar = ({ experiences }) => {
         value={search}
         placeholder="Busca una experiencia o lugar..."
         onChange={searcher}
+        onBlur={clearInput}
       />
       {results.length > 0 && (
         <ul className={styles.searchResults}>
