@@ -38,19 +38,19 @@ export const newUserController = async (req, res, next) => {
 
         // Cuerpo del email de verificación.
         const emailBody = `
-              <body style="font-family: Arial, sans-serif; text-align: center; background-color: #333; padding: 20px;">
+              <body style="font-family:  karma, sans-serif; text-align: center; background-color: #F4CBA4; padding: 20px;">
         <img src="https://i.postimg.cc/9F62RMj7/XP.png" alt="Icono de XP EXPERIENCIAS DIFERENTES" style="width: px; height: 75px;">
         <br>
-        <p style="font-size: 18px; color: #FFD700; display: inline-block;">¡Bienvenid@ <strong>${username}!</strong></p>
+        <p style="font-size: 18px; color: #000; display: inline-block;">¡Bienvenid@ <strong>${username}!</strong></p>
         <br>
-        <p style="font-size: 16px; color: #FFD700;">Gracias por registrarte en:</p> 
+        <p style="font-size: 16px; color: #000;">Gracias por registrarte en:</p> 
         <br> 
-        <p style="font-size: 16px; color: #FFD700;"> <strong>XP EXPERIENCIAS DIFERENTES</strong></p>
+        <p style="font-size: 16px; color: #000;"> <strong>XP EXPERIENCIAS DIFERENTES</strong></p>
         <br>
-        <p style="font-size: 16px; color: #FFD700;"> Para activar tu cuenta, haz clic en el siguiente enlace:</p>
+        <p style="font-size: 16px; color: #000;"> Para activar tu cuenta, haz clic en el siguiente enlace:</p>
         <br>
         <p>
-            <a href="${VALIDATE_USER_URL}${registrationCode}" style="font-family: Arial, sans-serif; display: inline-block; background-color: #FFD700; color: #333; text-decoration: none; padding: 10px 20px; border-radius: 5px;">¡Activar mi cuenta!</a>
+            <a href="${VALIDATE_USER_URL}${registrationCode}" style="font-family: karma, sans-serif; display: inline-block; background-color: #000; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">¡Activar mi cuenta!</a>
         </p>
     </body>
         `;
