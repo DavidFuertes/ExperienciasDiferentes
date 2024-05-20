@@ -1,22 +1,45 @@
-import { updateUserSchema } from '../../schemas/users/updateUserSchema.js';
+// Importamos el servicio de actualización de perfil
 import { updateProfileService } from '../../services/updateProfileService.js';
-import validateSchema from '../../utilities/validateSchema.js';
 
+// Importamos el servicio para guardar la foto
+import { savePhotoService } from '../../services/savePhotoService.js';
+
+// Controlador para actualizar el usuario
 export const updateUserController = async (req, res, next) => {
+    // Obtenemos el ID del usuario de la solicitud
     const userId = req.user.id;
+    console.log('req.files', req.files);
     try {
-        // Validamos los datos con Joi.
-        await validateSchema(updateUserSchema, req.body);
 
-        console.log(req.body);
-        const user = await updateProfileService(userId, req.body);
+         await validateSchema(updateUserSchema, req.body);
+        // Si hay un archivo de avatar en la solicitud, guardamos la foto primero
+        if (req.files && req.files.avatar) {
+            const photoName = await savePhotoService(req.files.avatar, 200);
 
-        res.send({
-            status: 'ok',
-            message: 'Perfil actualizado correctamente',
-            data: { user },
-        });
+            const user = await updateProfileService(
+                userId,
+                req.body,
+                photoName,
+            );
+
+            res.send({
+                status: 'ok',
+                message: 'Perfil actualizado correctamente',
+                data: { user },
+            });
+        } else {
+            const user = await updateProfileService(userId, req.body);
+
+            res.send({
+                status: 'ok',
+                message: 'Perfil actualizado correctamente',
+                data: { user },
+            });
+        }
+
+        // Llamamos al servicio de actualización de perfil, pasando el ID del usuario, el cuerpo de la solicitud y el nombre de la foto (si existe)
     } catch (error) {
-        next(error);
+        console.error('Error en el controlador updateUserController:', error); // Agregar console.log para imprimir el error
+        next(error); // En caso de error, pasamos el control al siguiente middleware de manejo de errores
     }
 };

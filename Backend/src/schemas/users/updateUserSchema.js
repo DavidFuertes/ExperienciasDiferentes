@@ -12,6 +12,13 @@ export const updateUserSchema = joi.object({
     avatar: joi.string().messages(joiErrorMessages),
     residence: joi.string().messages(joiErrorMessages),
     languages: joi.string().messages(joiErrorMessages),
-
-    //ToDo: validar correctamente el avatar
+    password: joi
+        .string()
+        .min(8)
+        .max(200)
+        .pattern(
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@¡!$%^&*()_+|~=`{}:";'<>?,.])[a-zA-Z0-9@¡!$%^&*()_+|~=`{}:";'<>?,.]{8,}$/,
+        )
+        .required()
+        .messages(joiErrorMessages),
 });
