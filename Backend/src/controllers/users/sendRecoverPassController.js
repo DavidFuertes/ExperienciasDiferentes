@@ -5,6 +5,11 @@ import randomstring from 'randomstring';
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
 
+// Importamos los servicios.
+import { sendMail } from '../../utilities/sendMail.js';
+
+const { RECOVERPASS_URL } = process.env;
+
 //Importamos la función que valida esquemas.
 import validateSchema from '../../utilities/validateSchema.js';
 
@@ -37,6 +42,30 @@ const sendRecoverPassController = async (req, res, next) => {
 
         // Insertamos el código de recuperación de contraseña.
         await updateRecoverPassModel(email, recoverPassCode);
+
+        // Creamos el asunto del email de recuperación de contraseña.
+        const emailSubject =
+            'Recuperación de contraseña en Experiencias Diferentes:)';
+
+        // Creamos el contenido del email
+        const emailBody = `
+     <body style="font-family: Arial, sans-serif; text-align: center; background-color: #333; padding: 20px;">
+      <img src="https://i.postimg.cc/9F62RMj7/XP.png" alt="Icono de XP EXPERIENCIAS DIFERENTES" style="width: 150px; height: 150px;">
+        <br>
+
+            <p style="font-size: 18px; color: #FFD700; display: inline-block;">Has solicitado la recuperación de contraseña para este email en Experiencias Diferentes.</p>
+            <br>  
+            <p style="font-size: 16px; color: #FFD700;"> El siguiente código para crear una nueva contraseña: <strong>${recoverPassCode}</strong></p>
+            <br>
+            <p style="font-size: 16px; color: #FFD700;">Para crear la nueva contraseña pincha:</p> 
+            <br> 
+            <a href="${RECOVERPASS_URL}" style="font-family: Arial, sans-serif; display: inline-block; background-color: #FFD700; color: #333; text-decoration: none; padding: 10px 20px; border-radius: 5px;">aquí</a></p>
+            <br>  
+            <p style="font-size: 16px; color: #FFD700;">Si no has sido tú ignora este email.</p>
+        `;
+
+        // Enviamos el email de verificación al usuario.
+        await sendMail(email, emailSubject, emailBody);
 
         res.send({
             status: 'ok',
