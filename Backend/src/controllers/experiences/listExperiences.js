@@ -8,6 +8,7 @@ async function listExperiences(req, res, next) {
     try {
         //Validamos el body con joi
         await validateSchema(listExperiencesSchema, req.body);
+        await validateSchema(listExperiencesSchema, req.query);
         const pool = await getPool();
 
         let reqInfo = `
