@@ -1,8 +1,6 @@
-// Importamos joi.
-import joi from 'joi';
-
 // Importamos joiErrorMessages.
 import joiErrorMessages from '../joiErrorMessages.js';
+import joi from 'joi';
 
 // Esquema para validar el body de la petición. y mensaje de error con joi
 export const changeUserPasswordSchema = joi.object({

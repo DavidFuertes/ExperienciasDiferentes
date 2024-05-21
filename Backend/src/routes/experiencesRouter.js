@@ -15,8 +15,10 @@ import { getMyExperiences } from '../controllers/experiences/getMyExperiences.js
 const experiencesRouter = express.Router();
 
 experiencesRouter.patch('/edit/', userAuth, editExperience);
+
 experiencesRouter.get('/detail/', userAuth, getExperience);
 experiencesRouter.get('/myexperiences/',userAuth, getMyExperiences);
+
 
 experiencesRouter.get('/', listExperiences);
 experiencesRouter.post(

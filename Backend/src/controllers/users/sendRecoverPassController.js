@@ -5,6 +5,11 @@ import randomstring from 'randomstring';
 import selectUserByEmailModel from '../../models/users/selectUserByEmailModel.js';
 import updateRecoverPassModel from '../../models/users/updateRecoverPassModel.js';
 
+// Importamos los servicios.
+import { sendMail } from '../../utilities/sendMail.js';
+
+const { RECOVERPASS_URL } = process.env;
+
 //Importamos la función que valida esquemas.
 import validateSchema from '../../utilities/validateSchema.js';
 
@@ -37,6 +42,28 @@ const sendRecoverPassController = async (req, res, next) => {
 
         // Insertamos el código de recuperación de contraseña.
         await updateRecoverPassModel(email, recoverPassCode);
+
+        // Creamos el asunto del email de recuperación de contraseña.
+        const emailSubject =
+            'Recuperación de contraseña en Experiencias Diferentes:)';
+
+        // Creamos el contenido del email
+        const emailBody = `
+     <body style="font-family: karma, sans-serif; text-align: center; background-color: #F4CBA4; padding: 20px;">
+      <img src="https://i.postimg.cc/9F62RMj7/XP.png" alt="Icono de XP EXPERIENCIAS DIFERENTES" style="width: 150px; height: 150px;">
+        <br>
+
+            <p style="font-size: 16px; color: #000; display: inline-block;">Has solicitado la recuperación de contraseña para este email en: <strong>Experiencias Diferentes</strong>.</p>
+            <br>  
+            <p style="font-size: 16px; color: #000;">Para crear la nueva contraseña pincha:</p> 
+            <br> 
+            <a href="${RECOVERPASS_URL}${recoverPassCode}" style="font-family: karma, sans-serif; display: inline-block; background-color: #000; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">AQUÍ</a></p>
+            <br>  
+            <p style="font-size: 16px; color: ##000;">Si no has sido tú ignora este email.</p>
+        `;
+
+        // Enviamos el email de verificación al usuario.
+        await sendMail(email, emailSubject, emailBody);
 
         res.send({
             status: 'ok',

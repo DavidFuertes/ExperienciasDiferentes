@@ -8,6 +8,24 @@ export const listExperiencesSchema = joi.object({
     city: joi.string().messages(joiErrorMessages),
     isActive: joi.number().valid(0, 1).messages(joiErrorMessages),
     isConfirmed: joi.number().valid(0, 1).messages(joiErrorMessages),
-    sortBy: joi.string().messages(joiErrorMessages),
-    sortOrder: joi.string().valid('asc', 'desc').messages(joiErrorMessages),
+    search: joi
+        .string()
+        .pattern(/^[a-zA-Z0-9\s]+$/)
+        .allow(null, '')
+        .messages(joiErrorMessages),
+    type: joi
+        .string()
+        .allow(null, '')
+        .valid('Relajado', 'Medio', 'Adrenalina pura')
+        .messages(joiErrorMessages),
+    sortBy: joi
+        .string()
+        .allow(null, '')
+        .valid('average_rating', 'date', 'price', 'total_places')
+        .messages(joiErrorMessages),
+    sortOrder: joi
+        .string()
+        .allow(null, '')
+        .valid('asc', 'desc')
+        .messages(joiErrorMessages),
 });

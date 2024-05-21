@@ -12,6 +12,4 @@ export const updateUserSchema = joi.object({
     avatar: joi.string().messages(joiErrorMessages),
     residence: joi.string().messages(joiErrorMessages),
     languages: joi.string().messages(joiErrorMessages),
-
-    //ToDo: validar correctamente el avatar
 });

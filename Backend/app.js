@@ -1,56 +1,50 @@
-// importamos express para crear el servidor
+import 'dotenv/config.js';
 import express from 'express';
 import fileUpload from 'express-fileupload';
+import 'dotenv/config.js'; // Importamos dotenv para cargar variables de entorno desde un archivo .env
+import morgan from 'morgan'; // Importamos morgan para mostrar información de las peticiones
+import cors from 'cors'; // Importamos cors para evitar problemas con las CORS
+import { experiencesRouter } from './src/routes/experiencesRouter.js'; // Importamos las rutas de experiencias
+import { userRouter } from './src/routes/userRouter.js'; // Importamos las rutas de usuarios
 
-import 'dotenv/config.js';
-
-// Importamos morgan para mostrar información de las peticiones
-import morgan from 'morgan';
-
-// Importamos cors para evitar problemas con las CORS
-import cors from 'cors';
-
-// Importamos las rutas
-//import { routes } from './src/routes/index.js';
-import { experiencesRouter } from './src/routes/experiencesRouter.js';
-import { userRouter } from './src/routes/userRouter.js';
-
-// Importamos los controladores de errores
 import {
     notFoundController,
     errorController,
 } from './src/controllers/errors/index.js';
+// Importamos el controlador de errores
 
-// Obtenemos las variables de entorno
-//import { PORT } from './env.js';
+const app = express(); // Crea servidor
 
-//const db = getPool();
-const app = express(); // crea servidor
-
-app.use(cors()); // Milddeware de cors
-
-const port = process.env.PORT ?? 3000;
-
-app.use(express.static(process.env.UPLOADS_DIR));
-
+app.use(fileUpload()); // Middleware de express-fileupload
 app.use(
     cors({
-        origin: '*',
+        // origin: '*',
     }),
 );
 
-app.use(express.json()); // Milddeware para parsear el body
-app.use(fileUpload({ useTempFiles: true }));
+// Importamos el controlador de errores
 
-app.use(morgan('dev')); // Milddeware de morgan
+app.use(express.json()); // Middleware para parsear el body
+
+// Configuración de morgan
+app.use(morgan('dev'));
+
+// Middleware para servir archivos estáticos
+app.use(express.static(process.env.UPLOADS_DIR)); // Ruta de archivos estáticos
 
 //app.use(routes); // Milddeware que indica a express donde estan las rutas cuando esten hechas
+
 app.use('/api/users', userRouter);
 app.use('/api/experiences', experiencesRouter);
-app.use(notFoundController); // Milddeware de ruta no encontrada
+app.use(notFoundController);
 
-app.use(errorController); //Milddeware de Error
+// Middleware para manejar errores
+app.use(errorController);
+
+const port = process.env.PORT || 3000; // Obtener el puerto del entorno o utilizar el puerto 3000 por defecto
 
 app.listen(port, () => {
     console.log(`🚀 Servidor escuchando en http://localhost:${port}`);
 });
+
+export default app;

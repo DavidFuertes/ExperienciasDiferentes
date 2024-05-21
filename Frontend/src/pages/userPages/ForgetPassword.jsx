@@ -62,7 +62,7 @@ export const ForgetPassword = () => {
     <div>
       <ToastContainer />
       <section className="formSection">
-        <h1>Página olvidé mi contraseña</h1>
+        <h1>Quiero cambiar mi contraseña</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
             <label htmlFor="email">Correo electrónico:</label>

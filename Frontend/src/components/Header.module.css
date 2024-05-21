@@ -1,0 +1,7 @@
+.headerEd h1 {
+  width: fit-content;
+}
+
+.headerEd a {
+  text-wrap: nowrap;
+}
