@@ -42,8 +42,7 @@ export const ListadoExperiencias = ({ experiences }) => {
                 </p>
                 <p>Precio: {experience.price} €</p>
                 <p>
-                  {experience.average_rating &&
-                  !isNaN(experience.average_rating)
+                  {experience.average_rating
                     ? `${parseFloat(experience.average_rating).toFixed(1)}⭐`
                     : "Sin valoración"}
                 </p>
