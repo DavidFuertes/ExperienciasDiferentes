@@ -1,0 +1,28 @@
+.globalErrorComponent {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.globalErrorComponent > * {
+  margin: 0.3rem;
+}
+
+.globalErrorComponent button {
+  background-color: rgba(74, 74, 74, 0.5);
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.globalErrorComponent button:hover {
+  background-color: rgba(210, 129, 0, 1);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
