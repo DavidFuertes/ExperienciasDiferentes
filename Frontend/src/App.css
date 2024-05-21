@@ -228,7 +228,7 @@ ul {
 }
 
 .myExperience {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -273,4 +273,3 @@ ul {
 .experience-card .comments p {
   margin-bottom: 8px;
 }
-

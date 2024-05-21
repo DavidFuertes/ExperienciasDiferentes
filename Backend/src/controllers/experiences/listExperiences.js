@@ -14,12 +14,12 @@ async function listExperiences(req, res, next) {
         let reqInfo = `
         SELECT 
             Experiences.*,
-            AVG(Ratings.rating) AS average_rating,
+            AVG(Comments.rate) AS average_rating,
             (SELECT COUNT(*) FROM Reservations WHERE Experiences.id = Reservations.experience_id) AS num_reservations
           FROM 
             Experiences
           LEFT JOIN 
-            Ratings ON Experiences.id = Ratings.experience_id
+            Comments ON Experiences.id = Comments.experience_id
           WHERE 
             1=1
     `;

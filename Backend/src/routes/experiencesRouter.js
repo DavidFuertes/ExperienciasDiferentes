@@ -16,9 +16,8 @@ const experiencesRouter = express.Router();
 
 experiencesRouter.patch('/edit/', userAuth, editExperience);
 
-experiencesRouter.get('/detail/', userAuth, getExperience);
-experiencesRouter.get('/myexperiences/',userAuth, getMyExperiences);
-
+experiencesRouter.get('/detail/', getExperience);
+experiencesRouter.get('/myexperiences/', userAuth, getMyExperiences);
 
 experiencesRouter.get('/', listExperiences);
 experiencesRouter.post(
