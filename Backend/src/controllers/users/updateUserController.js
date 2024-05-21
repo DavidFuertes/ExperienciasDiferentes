@@ -4,39 +4,58 @@ import validateSchema from '../../utilities/validateSchema.js';
 import { updateUserSchema } from '../../schemas/users/updateUserSchema.js';
 
 // Importamos el servicio para guardar la foto
-import { savePhotoService } from '../../services/savePhotoService.js';
+import {
+    deleteImageFromCloudinary,
+    saveAvatarToCloudinary,
+} from '../../utilities/cloudinaryImages.js';
+import { getPool } from '../../db/poolQuery.js';
 
 // Controlador para actualizar el usuario
 export const updateUserController = async (req, res, next) => {
     // Obtenemos el ID del usuario de la solicitud
     const userId = req.user.id;
-    console.log('req.files', req.files);
-    console.log(req.body);
+
     try {
         await validateSchema(updateUserSchema, req.body);
 
-        // Si hay un archivo de avatar en la solicitud, guardamos la foto primero
-        if (req.files && req.files.avatar) {
-            const photoName = await savePhotoService(req.files.avatar, 200);
+        const pool = await getPool();
 
-            const user = await updateProfileService(
+        // Si hay un archivo de avatar en la solicitud procesamos la imagen
+        if (req.files?.avatar) {
+            // Primero eliminamos la imagen anterior si la hay
+            const [avatar] = await pool.query(
+                `SELECT avatar FROM users WHERE id = ?;`,
+                [userId],
+            );
+
+            if (avatar) {
+                await deleteImageFromCloudinary(avatar);
+                console.log('foto borrada de cloudinary');
+            }
+
+            // Luego guardamos la nueva
+            const secure_url = await saveAvatarToCloudinary(
+                req.files.avatar.tempFilePath,
+            );
+
+            const updatedUser = await updateProfileService(
                 userId,
                 req.body,
-                photoName,
+                secure_url,
             );
 
             res.send({
                 status: 'ok',
                 message: 'Perfil actualizado correctamente',
-                data: { user },
+                data: { updatedUser },
             });
         } else {
-            const user = await updateProfileService(userId, req.body);
+            const updatedUser = await updateProfileService(userId, req.body);
 
             res.send({
                 status: 'ok',
                 message: 'Perfil actualizado correctamente',
-                data: { user },
+                data: { updatedUser },
             });
         }
 

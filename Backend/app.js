@@ -15,7 +15,7 @@ import {
 
 const app = express(); // Crea servidor
 
-app.use(fileUpload()); // Middleware de express-fileupload
+app.use(fileUpload({ useTempFiles: true })); // Middleware de express-fileupload
 app.use(
     cors({
         // origin: '*',
