@@ -49,11 +49,68 @@ const sendRecoverPassController = async (req, res, next) => {
 
         // Creamos el contenido del email
         const emailBody = `
-     <body style="font-family: karma, sans-serif; text-align: center; background-color: #F4CBA4; padding: 20px;">
-      <img src="https://i.postimg.cc/9F62RMj7/XP.png" alt="Icono de XP EXPERIENCIAS DIFERENTES" style="width: 150px; height: 150px;">
-        <br>
+             <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Karma:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Karma', sans-serif;
+            text-align: center;
+            background-color: #F4CBA4;
+            padding: 20px;
+            margin: 0;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+          
+        }
+        header img {
+            height: 75px;
+           
+        }
+        header h1 {
+        font-size: 24px;
+        margin: 0;
+        color: #F4CBA4;
+        }
 
-            <p style="font-size: 16px; color: #000; display: inline-block;">Has solicitado la recuperación de contraseña para este email en: <strong>Experiencias Diferentes</strong>.</p>
+        header h2 {
+        font-size: 24px;
+        margin: 0;
+        color: #F4CBA4;
+        margin-left: 10px; /* Agrega un margen superior al h2 */
+        }
+
+        p {
+            color: #000;
+        }
+        a {
+            font-family: 'Karma', sans-serif;
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+    </head>
+      <header>
+        <img src="https://i.postimg.cc/9F62RMj7/XP.png" alt="Icono de XP EXPERIENCIAS DIFERENTES">
+        <h1>XP</h1><h2>EXPERIENCIAS DIFERENTES</h2>
+        </header>
+    <main>
+
+            <p style="font-size: 16px; color: #000; display: inline-block;">Has solicitado la recuperación de contraseña para este email en: <strong>XP EXPERIENCIAS DIFERENTES</strong>.</p>
             <br>  
             <p style="font-size: 16px; color: #000;">Para crear la nueva contraseña pincha:</p> 
             <br> 
