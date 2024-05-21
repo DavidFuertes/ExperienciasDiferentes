@@ -62,11 +62,23 @@ npm install
 3- Configura las variables de entorno
 
 - Crea un archivo `.env`en la raíz del proyecto y añade las siguientes variables:
-  PORT=3000
-  DB_HOST=localhost
-  DB_USER=root
-  DB_PASSWORD=Pass1234
-  DB_NAME=experiencias_db
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASS=123456
+MYSQL_DB=experiencias_db
+PORT=3000
+SECRET=123456
+UPLOADS_DIR=uploads
+SMTP_HOST=el tuyo
+SMTP_PORT=587
+SMTP_USER=el tuyo
+SMTP_PASS=el tuyo
+
+
+VALIDATE_USER_URL=http://localhost:5173/validate/
+RECOVERPASS_URL=http://localhost:5173/recover_password/
+
 
 4- Inicia el servidor y el cliente:
 npm run initDb (para arrancar la base de datos)
