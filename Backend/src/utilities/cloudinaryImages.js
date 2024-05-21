@@ -17,23 +17,6 @@ cloudinary.config({
     api_secret: CLOUDINARY_API_SECRET,
 });
 
-export const resizeImage = async (img, width) => {
-    return sharp(img.data).resize({ width });
-};
-
-export const saveImageToFolder = async (img) => {
-    try {
-        const uploadsDir = path.join(process.cwd(), UPLOADS_DIR);
-        const newImageName = crypto.randomUUID();
-        const newImagePath = path.join(uploadsDir, `${newImageName}.jpg`);
-        await img.toFile(newImagePath);
-
-        return newImageName + '.jpg';
-    } catch (error) {
-        throw new Error(error.message);
-    }
-};
-
 export const saveAvatarToCloudinary = async (img) => {
     try {
         const { secure_url } = await cloudinary.uploader.upload(img, {
@@ -55,19 +38,6 @@ export const savePhotoExpToCloudinary = async (img) => {
         return secure_url;
     } catch (error) {
         throw new Error(error.message);
-    }
-};
-
-export const deleteImageFromFolder = async (img) => {
-    const uploadsDir = path.join(process.cwd(), UPLOADS_DIR);
-    const imgPath = path.join(uploadsDir, img);
-    try {
-        await fs.access(imgPath);
-        await fs.unlink(imgPath);
-    } catch {
-        console.log(
-            'No se ha podido borrar la foto del servidor por algún motivo.',
-        );
     }
 };
 

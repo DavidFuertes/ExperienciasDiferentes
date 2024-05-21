@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { RedirectButton } from "./RedirectButton.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -32,6 +32,7 @@ export const ListadoExperiencias = ({ experiences }) => {
             <li key={experience.id}>
               <article className="expCard">
                 <h2>{experience.title}</h2>
+                <img src={experience.image}></img>
                 <p>Ciudad: {experience.city}</p>
                 <p>Intensidad: {experience.type}</p>
                 <p>Fecha: {experience.date}</p>

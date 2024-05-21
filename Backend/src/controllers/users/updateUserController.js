@@ -9,6 +9,8 @@ import {
     saveAvatarToCloudinary,
 } from '../../utilities/cloudinaryImages.js';
 import { getPool } from '../../db/poolQuery.js';
+import 'dotenv/config.js';
+const { DEFAULT_AVATAR_URL } = process.env;
 
 // Controlador para actualizar el usuario
 export const updateUserController = async (req, res, next) => {
@@ -28,9 +30,10 @@ export const updateUserController = async (req, res, next) => {
                 [userId],
             );
 
-            if (avatar) {
-                await deleteImageFromCloudinary(avatar);
-                console.log('foto borrada de cloudinary');
+            const oldAvatar = avatar[0].avatar;
+
+            if (avatar && oldAvatar !== DEFAULT_AVATAR_URL) {
+                await deleteImageFromCloudinary(oldAvatar);
             }
 
             // Luego guardamos la nueva
