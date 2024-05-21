@@ -3,9 +3,10 @@ function EditComments({ comment }) {
   return (
     <li>
       <p>ID: {id}</p>
-      <label></label>
+      <label>
       <input type="radio" name="comment" />
       {content}
+      </label>
     </li>
   );
 }
