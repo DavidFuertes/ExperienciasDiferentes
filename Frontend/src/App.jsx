@@ -19,6 +19,7 @@ import { Experience } from "./pages/experiencePages/Experience.jsx";
 import { ForgetPassword } from "./pages/userPages/ForgetPassword.jsx";
 
 import ExperienceAdministration from "./pages/experiencePages/ExperienceAdministration.jsx";
+import MyExperiences from "./pages/experiencePages/MyExperiences.jsx";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Routes>
           {/* Rutas abiertas */}
           <Route path="/" element={<Home />} />
+          <Route path="/myexperiences" element={<MyExperiences />} />
+
 
           {/* Rutas para administradores */}
           <Route element={<AdminRoute />}>
