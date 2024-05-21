@@ -85,7 +85,7 @@ npm run initDb (para arrancar la base de datos)
 npm run dev
 
 5- Accede a la app desde el navegador:
-http://localhost:3000
+http://localhost:5173/
 
 Autores
 
