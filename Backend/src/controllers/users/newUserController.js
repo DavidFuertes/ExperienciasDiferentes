@@ -16,8 +16,10 @@ import { newUserSchema } from '../../schemas/users/newUserSchema.js';
 // Importamos las variables de entorno.
 import 'dotenv/config.js';
 
-const { VALIDATE_USER_URL, ASSETS_PATH } = process.env;
+const { VALIDATE_USER_URL, ASSETS_PATH, DEFAULT_AVATAR_URL } = process.env;
 
+console.log(VALIDATE_USER_URL);
+console.log(DEFAULT_AVATAR_URL);
 // Función controladora final que crea un nuevo usuario.
 export const newUserController = async (req, res, next) => {
     try {

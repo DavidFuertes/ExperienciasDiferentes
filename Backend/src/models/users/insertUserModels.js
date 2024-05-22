@@ -9,6 +9,8 @@ import {
     userAlreadyRegisteredError,
     emailAlreadyRegisteredError,
 } from '../../services/errorService.js';
+import 'dotenv/config.js';
+const { DEFAULT_AVATAR_URL } = process.env;
 
 // Función que realiza una consulta a la base de datos para crear un nuevo usuario.
 export const insertUserModel = async (
@@ -42,7 +44,7 @@ export const insertUserModel = async (
 
     // Insertamos el usuario.
     await pool.query(
-        `INSERT INTO Users (name, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
-        [username, email, hashedPass, registrationCode],
+        `INSERT INTO Users (name, email, password, avatar, registrationCode) VALUES (?, ?, ?, ?, ?)`,
+        [username, email, hashedPass, DEFAULT_AVATAR_URL, registrationCode],
     );
 };
