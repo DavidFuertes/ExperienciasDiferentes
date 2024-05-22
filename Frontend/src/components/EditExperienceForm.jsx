@@ -26,8 +26,10 @@ function EditExperienceForm({ experienceInfo }) {
   const [minPlacesValue, setMinPlacesValue] = useState(min_places);
   const [totalPlacesValue, setTotalPlacesValue] = useState(total_places);
   const [activeValue, setActiveValue] = useState(active);
-  const [modalIsOpen, setModalIsOpen] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modifiedExperience, setModifiedExperience] = useState(null);
+  const [imagePreview, setImagePreview] = useState(imageValue);
+  const [fileValue, setFileValue] = useState(null);
 
   useEffect(() => {
     setTitleValue(title);
@@ -53,6 +55,14 @@ function EditExperienceForm({ experienceInfo }) {
     active,
   ]);
 
+  function handleImageChange(event) {
+    const file = event.target.files[0];
+    const rutaTemporalImagen = URL.createObjectURL(file);
+
+    setImagePreview(rutaTemporalImagen);
+    setFileValue(file);
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     const modifiedExp = {
@@ -61,15 +71,21 @@ function EditExperienceForm({ experienceInfo }) {
       description: descriptionValue,
       type: typeValue,
       city: cityValue,
-      image: imageValue,
+      image: imagePreview,
+      file: fileValue,
       date: dateValue,
       price: priceValue,
       min_places: minPlacesValue,
       total_places: totalPlacesValue,
       active: activeValue,
     };
-    setModalIsOpen(1);
+
+    //const formData = new FormData(modifiedExp);
     setModifiedExperience(modifiedExp);
+    setModalIsOpen(true);
+    
+    
+
   }
 
   return (
@@ -134,15 +150,11 @@ function EditExperienceForm({ experienceInfo }) {
               </fieldset>
               <fieldset>
                 <label>IMAGEN:</label>
+                {imagePreview && <img src={imagePreview} width="300" />}
                 <input
-                  type="text"
-                  placeholder={imageValue}
-                  value={imageValue}
-                  minLength={3}
-                  maxLength={50}
-                  onChange={(event) => {
-                    setImageValue(event.target.value);
-                  }}
+                  className="input"
+                  type="file"
+                  onChange={handleImageChange}
                 />
               </fieldset>
               <fieldset>
@@ -209,7 +221,8 @@ function EditExperienceForm({ experienceInfo }) {
 
       <HandleAddDuplicateExperience
         data={modifiedExperience}
-        isOpen={modalIsOpen}
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
       />
     </>
   );

@@ -32,7 +32,7 @@ export const saveAvatarToCloudinary = async (img) => {
 export const savePhotoExpToCloudinary = async (img) => {
     try {
         const { secure_url } = await cloudinary.uploader.upload(img, {
-            transformation: [{ width: 1000, height: 1000, crop: 'fill' }],
+            transformation: [{ width: 1000, crop: 'fill' }],
         });
 
         return secure_url;

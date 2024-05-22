@@ -4,6 +4,7 @@ function InactiveExperiencesItem({ inactiveExperience }) {
         description,
         type,
         city,
+        image,
         formatted_date,
         price,
         average_rate,
@@ -34,6 +35,7 @@ function InactiveExperiencesItem({ inactiveExperience }) {
         <li>
             <div className="experience-card">
                 <h3>{title}</h3>
+                <img src={image} width="300" />
                 <p className="description">{description}</p>
                 <div className="details">
                     <p><strong>Tipo:</strong> {type}</p>

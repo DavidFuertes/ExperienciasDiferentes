@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext.jsx";
 
-function HandleAddDuplicateExperience({ data, isOpen }) {
+
+function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen}) {
   const { token } = useContext(UserContext);
+
 
   if (!data) {
     return <></>;
@@ -15,6 +17,7 @@ function HandleAddDuplicateExperience({ data, isOpen }) {
     type,
     city,
     image,
+    file,
     date,
     price,
     min_places,
@@ -24,48 +27,45 @@ function HandleAddDuplicateExperience({ data, isOpen }) {
 
   let activo = "";
 
-  if (active === 1) {
+  if (active === true) {
     activo = "ACTIVO";
   } else {
     activo = "INACTIVO";
   }
 
-  console.log(id);
+  console.log(file);
 
   async function submitEditExperience(event) {
     event.preventDefault();
     try {
-      const resp = await fetch(
-        `http://localhost:3000/api/experiences/edit/?id=${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-            // token:
-            //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0Nzg0MTQ1LCJleHAiOjE3MTczNzYxNDV9.Sswfd_QoDVCHyUbcvEYnsHcfIMfMPw_gBpMLLyGCwlU",
-            token,
-          },
-          body: JSON.stringify({
-            title: title,
-            description: description,
-            type: type,
-            city: city,
-            image: image,
-            date: date,
-            price: price,
-            min_places: min_places,
-            total_places: total_places,
-            is_active: active,
-          }),
-        }
-      );
+      const formData = new FormData();
+      formData.append('id', id);
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('type', type);
+      formData.append('city', city);
+      formData.append('image', image);
+      formData.append('file', file);
+      formData.append('date', date);
+      formData.append('price', price);
+      formData.append('min_places', min_places);
+      formData.append('total_places', total_places);
+      formData.append('is_active', active);
+
+      const resp = await fetch(`http://localhost:3000/api/experiences/edit/?id=${id}`, {
+        method: 'PATCH',
+        headers: {
+          'token': token, // No es necesario 'Content-Type' cuando se usa FormData
+        },
+        body: formData,
+      });
 
       if (resp.status === 200) {
         const respuesta = await resp.json();
         console.log(respuesta);
         return respuesta;
       } else {
-        throw new Error("Error al obtener las experiencias");
+        throw new Error('Error al editar la experiencia');
       }
     } catch (error) {
       console.log(error.message);
@@ -75,48 +75,44 @@ function HandleAddDuplicateExperience({ data, isOpen }) {
   async function submitDuplicateExperience(event) {
     event.preventDefault();
     try {
-      const resp = await fetch(
-        "http://localhost:3000/api/experiences/newexperience/",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            // token:
-            //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNzE0Nzg0MTQ1LCJleHAiOjE3MTczNzYxNDV9.Sswfd_QoDVCHyUbcvEYnsHcfIMfMPw_gBpMLLyGCwlU",
-            token,
-          },
-          body: JSON.stringify({
-            title: title,
-            description: description,
-            type: type,
-            city: city,
-            image: image,
-            date: date,
-            price: price,
-            min_places: min_places,
-            total_places: total_places,
-          }),
-        }
-      );
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('type', type);
+      formData.append('city', city);
+      formData.append('image', image); // Si es un archivo, usa formData.append('image', file)
+      formData.append('date', date);
+      formData.append('price', price);
+      formData.append('min_places', min_places);
+      formData.append('total_places', total_places);
 
-      if (resp.status === 201) {
+      const resp = await fetch('http://localhost:3000/api/experiences/newexperience/', {
+        method: 'POST',
+        headers: {
+          'token': token, // No es necesario 'Content-Type' cuando se usa FormData
+        },
+        body: formData,
+      });
+
+      if (resp.status === 200) {
         const respuesta = await resp.json();
         console.log(respuesta);
+        setModalIsOpen(false);
         return respuesta;
       } else {
-        throw new Error("Error al obtener las experiencias");
+        throw new Error('Error al duplicar la experiencia');
       }
     } catch (error) {
       console.log(error.message);
     }
   }
 
-  if (isOpen) {
+  if (modalIsOpen) {
     return (
       <div>
         <form onSubmit={submitEditExperience}>
           <h4>{title}</h4>
-          <p>{image}</p>
+          <img src={image} width="100"></img>
           <p>{description}</p>
           <strong>{type}</strong>
           <br></br>
@@ -140,6 +136,8 @@ function HandleAddDuplicateExperience({ data, isOpen }) {
       </div>
     );
   }
+
+  return null;
 }
 
 export default HandleAddDuplicateExperience;

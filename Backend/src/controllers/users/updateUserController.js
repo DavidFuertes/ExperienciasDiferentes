@@ -26,7 +26,7 @@ export const updateUserController = async (req, res, next) => {
         if (req.files?.avatar) {
             // Primero eliminamos la imagen anterior si la hay
             const [avatar] = await pool.query(
-                `SELECT avatar FROM users WHERE id = ?;`,
+                `SELECT avatar FROM Users WHERE id = ?;`,
                 [userId],
             );
 
