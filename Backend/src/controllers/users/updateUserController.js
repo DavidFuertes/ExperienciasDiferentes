@@ -33,7 +33,7 @@ export const updateUserController = async (req, res, next) => {
             const oldAvatar = avatar[0].avatar;
 
             if (avatar && oldAvatar !== DEFAULT_AVATAR_URL) {
-                await deleteImageFromCloudinary(oldAvatar);
+                console.log(oldAvatar);
             }
 
             // Luego guardamos la nueva
