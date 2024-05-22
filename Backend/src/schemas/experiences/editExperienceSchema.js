@@ -13,11 +13,22 @@ export const editExperienceSchema = joi.object({
         .messages(joiErrorMessages),
     type: joi
         .string()
-        .valid('Relajado', 'Medio', 'Adrenalina Pura')
+        .valid('Relajado', 'Medio', 'Adrenalina pura')
         .required()
         .messages(joiErrorMessages),
     city: joi.string().required().min(3).max(50).messages(joiErrorMessages),
-    image: joi.string().required().messages(joiErrorMessages),
+    newImage: joi
+        .any()
+        .meta({
+            type: 'file',
+        })
+        .when('file.mimetype', {
+            is: joi.string().valid('image/jpg', 'image/jpeg', 'image/png'),
+            then: joi.any().meta({
+                mimeType: 'image/jpg,image/jpeg,image/png',
+            }),
+            otherwise: joi.any().invalid().messages(joiErrorMessages),
+        }),
     date: joi.date().iso().required().messages(joiErrorMessages),
     price: joi
         .number()

@@ -40,8 +40,7 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
       formData.append("description", description);
       formData.append("type", type);
       formData.append("city", city);
-      formData.append("image", image);
-      formData.append("file", file);
+      formData.append("newImage", file);
       formData.append("date", date);
       formData.append("price", price);
       formData.append("min_places", min_places);
@@ -96,11 +95,12 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
     event.preventDefault();
     try {
       const formData = new FormData();
+      formData.append("id", id);
       formData.append("title", title);
       formData.append("description", description);
       formData.append("type", type);
       formData.append("city", city);
-      formData.append("image", file); // Si es un archivo, usa formData.append('image', file)
+      formData.append("newImage", file); // Si es un archivo, usa formData.append('image', file)
       formData.append("date", date);
       formData.append("price", price);
       formData.append("min_places", min_places);
@@ -117,9 +117,10 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
         }
       );
 
-      if (resp.status === 200) {
-        const respuesta = await resp.json();
-        toast.success(respuesta.message, {
+      const data = await resp.json();
+
+      if (resp?.ok === true) {
+        toast.success(data[0].message, {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -132,7 +133,7 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
         });
         setModalIsOpen(false);
       } else {
-        throw new Error("Error al duplicar la experiencia");
+        throw new Error(data.message);
       }
     } catch (error) {
       toast.error(error.message, {

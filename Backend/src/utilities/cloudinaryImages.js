@@ -1,8 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import 'dotenv/config.js';
-import fs from 'fs/promises';
+import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
-import sharp from 'sharp';
 
 const {
     CLOUDINARY_NAME,
@@ -48,5 +47,53 @@ export const deleteImageFromCloudinary = async (img) => {
         await cloudinary.uploader.destroy(public_id);
     } catch (error) {
         throw new Error(error.message);
+    }
+};
+
+//!ESTA FUNCIÓN NO DUPLICA LA IMAGEN, LO QUE HACE ES CREAR UNA NUEVA URL QUE APUNTA A LA MISMA IMAGEN ASÍ PODEMOS EVITAR DUPLICADOS
+//!ESTA URL SEGUIRÁ FUNCIONANDO AUNQUE SE BORRE LA IMAGEN PREVIA DE CLOUDINARY PERO ES UN ENLACE TEMPORAL QUE DURA TAN SOLO 30 DIAS
+export const duplicateImgCloudinary = async (url) => {
+    try {
+        const durationInMilliseconds = 30 * 24 * 60 * 60 * 1000;
+        const timestamp =
+            Math.floor(Date.now() / 1000) + durationInMilliseconds / 1000;
+        const fileName = path.basename(url);
+        const publicId = path.parse(fileName).name;
+
+        const newUrl = cloudinary
+            .url(publicId, {
+                type: 'upload',
+                timestamp,
+                sign_url: true,
+                secure: true,
+            })
+            .toString();
+
+        return newUrl;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Error al duplicar la imagen');
+    }
+};
+
+export const generateNewImgCloudinary = async (url) => {
+    try {
+        const newFilename = uuidv4();
+        const response = await cloudinary.uploader.upload(url, {
+            public_id: newFilename,
+            transformation: [
+                {
+                    width: 400,
+                    height: 400,
+                    crop: 'fill',
+                },
+            ],
+            use_filename: true,
+        });
+
+        return response.secure_url;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Error al generar la imagen');
     }
 };

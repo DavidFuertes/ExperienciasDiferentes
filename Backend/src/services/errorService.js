@@ -155,3 +155,11 @@ export const notMatchingQuery = () => {
         message: 'No existe ninguna experiencia que coincida con tu consulta',
     };
 };
+
+export const imageNeeded = () => {
+    throw {
+        httpStatus: 400,
+        code: 'IMAGE_NEEDED',
+        message: 'Debes subir una imagen',
+    };
+};

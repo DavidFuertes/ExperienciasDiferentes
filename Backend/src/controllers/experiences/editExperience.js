@@ -1,14 +1,13 @@
 import { getPool } from '../../db/poolQuery.js';
 import { changeExperienceStatusSchema } from '../../schemas/experiences/changeExperienceStatusSchema.js';
 import { editExperienceSchema } from '../../schemas/experiences/editExperienceSchema.js';
-import { notAuthUser } from '../../services/errorService.js';
+import { imageNeeded } from '../../services/errorService.js';
 import validateSchema from '../../utilities/validateSchema.js';
 import {
     deleteImageFromCloudinary,
     savePhotoExpToCloudinary,
 } from '../../utilities/cloudinaryImages.js';
 import 'dotenv/config.js';
-
 const { DEFAULT_RELAJADO_URL, DEFAULT_MEDIO_URL, DEFAULT_ADRENALINA_URL } =
     process.env;
 
@@ -22,7 +21,6 @@ async function editExperience(req, res, next) {
         description,
         type,
         city,
-        image,
         date,
         price,
         min_places,
@@ -35,7 +33,7 @@ async function editExperience(req, res, next) {
 
         const pool = await getPool();
 
-        if (req.files?.file) {
+        if (req.files?.newImage) {
             // Primero eliminamos la imagen anterior si la hay
             const [image] = await pool.query(
                 `SELECT image FROM Experiences WHERE id = ?;`,
@@ -44,19 +42,22 @@ async function editExperience(req, res, next) {
 
             const oldImage = image[0].image;
 
+            if (!req.files.newImage && !oldImage) {
+                imageNeeded();
+            }
+
             if (
-                image &&
                 oldImage !==
-                    (DEFAULT_RELAJADO_URL ||
-                        DEFAULT_MEDIO_URL ||
-                        DEFAULT_ADRENALINA_URL)
+                (DEFAULT_RELAJADO_URL ||
+                    DEFAULT_MEDIO_URL ||
+                    DEFAULT_ADRENALINA_URL)
             ) {
                 await deleteImageFromCloudinary(oldImage);
             }
 
             // Luego guardamos la nueva
             const secure_url = await savePhotoExpToCloudinary(
-                req.files.file.tempFilePath,
+                req.files.newImage.tempFilePath,
             );
 
             await pool.query(
