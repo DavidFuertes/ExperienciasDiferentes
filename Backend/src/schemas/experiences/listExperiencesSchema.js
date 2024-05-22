@@ -28,4 +28,5 @@ export const listExperiencesSchema = joi.object({
         .allow(null, '')
         .valid('asc', 'desc')
         .messages(joiErrorMessages),
+    name: joi.string().allow(null, '').messages(joiErrorMessages),
 });
