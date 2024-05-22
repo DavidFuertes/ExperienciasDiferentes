@@ -14,7 +14,7 @@ import { getMyExperiences } from '../controllers/experiences/getMyExperiences.js
 
 const experiencesRouter = express.Router();
 
-experiencesRouter.patch('/edit/', userAuth, editExperience);
+experiencesRouter.patch('/edit/', userAuth, adminMiddleware, editExperience);
 
 experiencesRouter.get('/detail/', getExperience);
 experiencesRouter.get('/myexperiences/', userAuth, getMyExperiences);

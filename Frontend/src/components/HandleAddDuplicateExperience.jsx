@@ -1,10 +1,9 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext.jsx";
+import { Slide, toast } from "react-toastify";
 
-
-function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen}) {
+function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
   const { token } = useContext(UserContext);
-
 
   if (!data) {
     return <></>;
@@ -27,48 +26,69 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen}) {
 
   let activo = "";
 
-  if (active === true) {
+  if (active === 1) {
     activo = "ACTIVO";
   } else {
     activo = "INACTIVO";
   }
 
-  console.log(file);
-
   async function submitEditExperience(event) {
     event.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('id', id);
-      formData.append('title', title);
-      formData.append('description', description);
-      formData.append('type', type);
-      formData.append('city', city);
-      formData.append('image', image);
-      formData.append('file', file);
-      formData.append('date', date);
-      formData.append('price', price);
-      formData.append('min_places', min_places);
-      formData.append('total_places', total_places);
-      formData.append('is_active', active);
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("type", type);
+      formData.append("city", city);
+      formData.append("image", image);
+      formData.append("file", file);
+      formData.append("date", date);
+      formData.append("price", price);
+      formData.append("min_places", min_places);
+      formData.append("total_places", total_places);
+      formData.append("is_active", active);
 
-      const resp = await fetch(`http://localhost:3000/api/experiences/edit/?id=${id}`, {
-        method: 'PATCH',
-        headers: {
-          'token': token, // No es necesario 'Content-Type' cuando se usa FormData
-        },
-        body: formData,
-      });
+      const resp = await fetch(
+        `http://localhost:3000/api/experiences/edit/?id=${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            token: token, // No es necesario 'Content-Type' cuando se usa FormData
+          },
+          body: formData,
+        }
+      );
 
-      if (resp.status === 200) {
+      if (resp?.ok === true) {
         const respuesta = await resp.json();
-        console.log(respuesta);
-        return respuesta;
+
+        toast.success(respuesta.message, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
+        setModalIsOpen(false);
       } else {
-        throw new Error('Error al editar la experiencia');
+        throw new Error("Error al editar la experiencia");
       }
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
     }
   }
 
@@ -76,34 +96,56 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen}) {
     event.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('title', title);
-      formData.append('description', description);
-      formData.append('type', type);
-      formData.append('city', city);
-      formData.append('image', image); // Si es un archivo, usa formData.append('image', file)
-      formData.append('date', date);
-      formData.append('price', price);
-      formData.append('min_places', min_places);
-      formData.append('total_places', total_places);
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("type", type);
+      formData.append("city", city);
+      formData.append("image", file); // Si es un archivo, usa formData.append('image', file)
+      formData.append("date", date);
+      formData.append("price", price);
+      formData.append("min_places", min_places);
+      formData.append("total_places", total_places);
 
-      const resp = await fetch('http://localhost:3000/api/experiences/newexperience/', {
-        method: 'POST',
-        headers: {
-          'token': token, // No es necesario 'Content-Type' cuando se usa FormData
-        },
-        body: formData,
-      });
+      const resp = await fetch(
+        "http://localhost:3000/api/experiences/newexperience/",
+        {
+          method: "POST",
+          headers: {
+            token: token, // No es necesario 'Content-Type' cuando se usa FormData
+          },
+          body: formData,
+        }
+      );
 
       if (resp.status === 200) {
         const respuesta = await resp.json();
-        console.log(respuesta);
+        toast.success(respuesta.message, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        });
         setModalIsOpen(false);
-        return respuesta;
       } else {
-        throw new Error('Error al duplicar la experiencia');
+        throw new Error("Error al duplicar la experiencia");
       }
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
     }
   }
 

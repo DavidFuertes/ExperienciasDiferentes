@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import HandleAddDuplicateExperience from "./HandleAddDuplicateExperience";
+import { ToastContainer } from "react-toastify";
 
 function EditExperienceForm({ experienceInfo }) {
   const {
@@ -55,6 +56,14 @@ function EditExperienceForm({ experienceInfo }) {
     active,
   ]);
 
+  useEffect(() => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    const formattedDate = new Date(date).toLocaleDateString("es-ES", options);
+    const [day, month, year] = formattedDate.split("/");
+    const dateWithDashes = `${year}-${month}-${day}`;
+    setDateValue(dateWithDashes);
+  }, [date]);
+
   function handleImageChange(event) {
     const file = event.target.files[0];
     const rutaTemporalImagen = URL.createObjectURL(file);
@@ -83,13 +92,11 @@ function EditExperienceForm({ experienceInfo }) {
     //const formData = new FormData(modifiedExp);
     setModifiedExperience(modifiedExp);
     setModalIsOpen(true);
-    
-    
-
   }
 
   return (
     <>
+      <ToastContainer />
       <div>
         <section className="formsection">
           <form onSubmit={handleSubmit}>
@@ -209,7 +216,7 @@ function EditExperienceForm({ experienceInfo }) {
                   type="checkbox"
                   checked={activeValue}
                   onChange={(event) => {
-                    setActiveValue(event.target.checked);
+                    setActiveValue(event.target.checked ? 1 : 0);
                   }}
                 />
               </fieldset>

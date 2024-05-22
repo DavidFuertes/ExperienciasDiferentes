@@ -9,9 +9,8 @@ import {
 } from '../../utilities/cloudinaryImages.js';
 import 'dotenv/config.js';
 
-const { DEFAULT_RELAJADO_URL,
-        DEFAULT_MEDIO_URL,
-        DEFAULT_ADRENALINA_URL} = process.env;
+const { DEFAULT_RELAJADO_URL, DEFAULT_MEDIO_URL, DEFAULT_ADRENALINA_URL } =
+    process.env;
 
 async function editExperience(req, res, next) {
     const { id } = req.query;
@@ -31,10 +30,8 @@ async function editExperience(req, res, next) {
         is_active,
     } = newExperience;
 
-    console.log(req.files.file)
-
     try {
-        //await validateSchema(editExperienceSchema, req.body);
+        await validateSchema(editExperienceSchema, req.body);
 
         const pool = await getPool();
 
@@ -47,15 +44,21 @@ async function editExperience(req, res, next) {
 
             const oldImage = image[0].image;
 
-            if (image && oldImage !== (DEFAULT_RELAJADO_URL || DEFAULT_MEDIO_URL || DEFAULT_ADRENALINA_URL)) {
+            if (
+                image &&
+                oldImage !==
+                    (DEFAULT_RELAJADO_URL ||
+                        DEFAULT_MEDIO_URL ||
+                        DEFAULT_ADRENALINA_URL)
+            ) {
                 await deleteImageFromCloudinary(oldImage);
             }
 
             // Luego guardamos la nueva
             const secure_url = await savePhotoExpToCloudinary(
-                req.files.file.tempFilePath
+                req.files.file.tempFilePath,
             );
-        
+
             await pool.query(
                 `
                 UPDATE Experiences
@@ -87,8 +90,8 @@ async function editExperience(req, res, next) {
                     id,
                 ],
             );
-    
-            res.status(200).send({ message: 'OK' });
+
+            res.status(200).send({ message: 'Experiencia actualizada' });
         } else {
             await pool.query(
                 `
@@ -121,15 +124,9 @@ async function editExperience(req, res, next) {
                     id,
                 ],
             );
-    
-            res.status(200).send({ message: 'OK' });
-            
+
+            res.status(200).send({ message: 'Experiencia actualizada' });
         }
-
-
-        
-
-
     } catch (error) {
         next(error);
     }
