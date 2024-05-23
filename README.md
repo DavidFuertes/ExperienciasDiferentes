@@ -1,3 +1,5 @@
+🚧 Proyecto en construcción 🚧 
+
 # ExperienciasDiferentes
 
 Proyecto integrador para la boost academy de Hackaboss.
