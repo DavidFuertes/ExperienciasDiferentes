@@ -139,3 +139,24 @@ export const deleteCommentFromExperienceService = async (commentId, token) => {
   }
   return data;
 };
+
+export const deleteUserFromReservation = async (reservation_id, token) => {
+  let url = new URL(`${VITE_BACKEND_URL}/experiences/reservation`);
+  url.searchParams.append("reservation_id", reservation_id);
+
+  const resp = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      token,
+    },
+  });
+
+  const data = await resp.json();
+
+  if (!resp.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+};
