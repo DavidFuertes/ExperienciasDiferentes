@@ -32,7 +32,7 @@ export const ListadoExperiencias = ({ experiences }) => {
             <li key={experience.id}>
               <article className="expCard">
                 <h2>{experience.title}</h2>
-                <img src={experience.image}></img>
+                <img src={experience.image} style={{ width: "250px" }}></img>
                 <p>Ciudad: {experience.city}</p>
                 <p>Intensidad: {experience.type}</p>
                 <p>Fecha: {experience.date}</p>
