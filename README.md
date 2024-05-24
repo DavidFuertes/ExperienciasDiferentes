@@ -12,10 +12,9 @@ USUARIO NO REGISTRADO
 ● Visualizar la landing con el listado de experiencias
 ● Búsqueda / filtro por:
 ○ palabra (en título, descripción o localidad)
-○ activa/inactiva
 ○ rango de precio
 ○ rango de fechas
-● Ordenación experiencias (fecha, rating, precio, …)
+● Ordenación experiencias (fecha, rating, precio, número de plazas)
 ● Registro (con envío e-mail de validación)
 ○ e-mail
 ○ username
@@ -31,17 +30,25 @@ USUARIO REGISTRADO / CLIENTE
 ○ username
 ○ contraseña
 ○ nombre y apellidos
-○ biografía
+○ ciudad de residencia
+○ lenguajes hablados
 ○ avatar
-● Reservar la experiencia y ver los demás inscritos
-● Listado experiencias reservadas
-● Cancelar una reserva hasta el día anterior
-● Rating de la experiencia después de disfrutarla (1-5)
+● Reservar la experiencia.
+● Listado experiencias reservadas, divididas entre pendientes y ya disfrutadas.
+● Cancelar una reserva hasta el día anterior.
+● Rating de la experiencia después de disfrutarla (1-5).
+● Añadir comentarios a una experiencia ya disfrutada o no.
 
 USUARIO ADMINISTRADOR
 ● Visualizar la landing con el listado de experiencias
 ● Búsqueda, filtro y ordenación como un usuario no registrado
 ● Acceder a la ficha de una experiencia con todos los detalles
+● Gestionar una experiencia, puediendo modificar:
+○ Datos de la experiencia
+○ Moderar los comentarios de la experiencia
+○ Cancelar una experiencia
+● Crear una nueva experiencia desde cero.
+● Duplicar una experiencia, modificando información de la misma.
 
 Tecnologías Utilizadas
 
@@ -57,34 +64,46 @@ Instalación y Uso
 1- Clona el repositorio desde GitHub
 git clone git@github.com:DavidFuertes/ExperienciasDiferentes.git
 
-2- Instala las dependencias del servidor y del cliente:
-cd ExperienciasDiferentes
+2- Instala las dependencias del servidor tanto en el backend como en el frontend:
+cd Backend
+npm install
+cd ../frontend
 npm install
 
 3- Configura las variables de entorno
 
-- Crea un archivo `.env`en la raíz del proyecto y añade las siguientes variables:
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASS=123456
-MYSQL_DB=experiencias_db
-PORT=3000
-SECRET=123456
-UPLOADS_DIR=uploads
-SMTP_HOST=el tuyo
-SMTP_PORT=587
-SMTP_USER=el tuyo
-SMTP_PASS=el tuyo
+- Crea un archivo `.env`en el backend y añade las siguientes variables:
+  MYSQL_HOST=localhost
+  MYSQL_PORT=3306
+  MYSQL_USER=user
+  MYSQL_PASS=pass
+  MYSQL_DB=experiencias_db
+  PORT=3000
+  SECRET=
+  UPLOADS_DIR=uploads
+  SMTP_HOST=host
+  SMTP_PORT=port
+  SMTP_USER=user
+  SMTP_PASS=pass
+  VALIDATE_USER_URL=http://localhost:5173/validate/
+  RECOVERPASS_URL=http://localhost:5173/recover_password/
+  CLOUDINARY_NAME=user
+  CLOUDINARY_API_KEY=pass
+  CLOUDINARY_API_SECRET=pass
+  DEAFULT_AVATAR_URL=https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png
+  DEFAULT_RELAJADO_URL=https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg
+  DEFAULT_MEDIO_URL=https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/m9ktxaxugoinupjicahc.jpg
+  DEFAULT_ADRENALINA_URL=https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg
 
+- Crea un archivo `.env`en el frontend y añade la siguiente variable:
 
-VALIDATE_USER_URL=http://localhost:5173/validate/
-RECOVERPASS_URL=http://localhost:5173/recover_password/
-
+VITE_BACKEND_URL=http://localhost:8080
 
 4- Inicia el servidor y el cliente:
+-En el backend:
 npm run initDb (para arrancar la base de datos)
 npm run dev
+-En el frontend:
 
 5- Accede a la app desde el navegador:
 http://localhost:5173/
