@@ -38,6 +38,7 @@ function EditExperienceForm({ experienceInfo }) {
     setTypeValue(type);
     setCityValue(city);
     setImageValue(image);
+    setImagePreview(image);
     setDateValue(date);
     setPriceValue(price);
     setMinPlacesValue(min_places);

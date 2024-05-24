@@ -2,9 +2,15 @@ import { useState, useEffect } from "react";
 import EditComments from "./EditComments.jsx";
 import InscribedItems from "./InscribedItems.jsx";
 import EditExperienceForm from "./EditExperienceForm.jsx";
+import { deleteCommentFromExperienceService } from "../services/index.js";
+import { Slide, toast } from "react-toastify";
 
 function EditExperience({ experienceId, token }) {
   const [experience, setExperience] = useState(null);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [inscribed, setInscribed] = useState([]);
+  const [averageRate, setAverageRate] = useState(null);
 
   useEffect(() => {
     if (experienceId !== null) {
@@ -29,11 +35,52 @@ function EditExperience({ experienceId, token }) {
         .then((data) => {
           console.log("Llegó la data", data);
           setExperience(data); // Actualiza el estado con los datos
+          const commentsObject = data.comments;
+          const commentsArray = Object.values(commentsObject);
+          setComments(commentsArray);
+          const inscribedObject = data.inscribed;
+          const inscribedArray = Object.values(inscribedObject);
+          setInscribed(inscribedArray);
+          const averageRate = data.rate[0].average_rate;
+          setAverageRate(averageRate);
         })
         .catch((error) => console.log(error.message));
     }
   }, [experienceId, token]);
-  console.log("experience", experience);
+
+  const handleDeleteComment = async (id, token) => {
+    try {
+      const data = await deleteCommentFromExperienceService(id, token);
+
+      const filteredComments = comments.filter((comment) => comment.id !== id);
+
+      setComments(filteredComments);
+
+      toast.success(data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Slide,
+      });
+    }
+  };
 
   if (experienceId === null) {
     return (
@@ -50,18 +97,6 @@ function EditExperience({ experienceId, token }) {
   } else {
     // const experienceObject = experience;
     // const experienceArray = Object.values(experienceObject);
-
-    const commentsObject = experience.comments;
-    const commentsArray = Object.values(commentsObject);
-
-    const { average_rate } = experience.rate[0];
-
-    const inscribedObject = experience.inscribed;
-    const inscribedArray = Object.values(inscribedObject);
-    {
-      console.log("inscribedArray", inscribedArray);
-    }
-
     return (
       <>
         <section>
@@ -69,18 +104,28 @@ function EditExperience({ experienceId, token }) {
         </section>
 
         <section>
-          <form>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              handleDeleteComment(selectedCommentId, token);
+            }}
+          >
             <h2>Comentarios</h2>
             <ul>
-              {commentsArray.map((comment) => (
-                <EditComments key={comment.id} comment={comment} />
+              {comments.map((comment) => (
+                <EditComments
+                  key={comment.id}
+                  comment={comment}
+                  selectedCommentId={selectedCommentId}
+                  onCommentSelect={setSelectedCommentId}
+                />
               ))}
             </ul>
+            <button type="submit">Eliminar Comentario</button>
           </form>
-          <button type="submit">Eliminar Comentario</button>
         </section>
         <section>
-          <h4>Puntuación: {average_rate}</h4>
+          <h4>Puntuación: {averageRate}</h4>
         </section>
         <section>
           <h2>Inscritos</h2>
@@ -94,7 +139,7 @@ function EditExperience({ experienceId, token }) {
               </tr>
             </thead>
             <tbody>
-              {inscribedArray.map((inscribed) => (
+              {inscribed.map((inscribed) => (
                 <InscribedItems
                   key={inscribed.name}
                   inscribed={{ inscribed }}

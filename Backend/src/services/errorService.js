@@ -163,3 +163,11 @@ export const imageNeeded = () => {
         message: 'Debes subir una imagen',
     };
 };
+
+export const deleteCommentFailed = () => {
+    throw {
+        httpStatus: 500,
+        code: 'DELETE_COMMENT_FAILED',
+        message: 'No se ha podido borrar el comentario',
+    };
+};
