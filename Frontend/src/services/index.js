@@ -120,3 +120,22 @@ export const bookExperienceService = async (
 
   return json;
 };
+
+export const deleteCommentFromExperienceService = async (commentId, token) => {
+  let url = new URL(`${VITE_BACKEND_URL}/experiences/comments`);
+  url.searchParams.append("commentId", commentId);
+
+  const resp = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      token,
+    },
+  });
+
+  const data = await resp.json();
+  if (!resp.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+};

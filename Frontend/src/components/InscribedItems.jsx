@@ -1,7 +1,6 @@
 function InscribedItems({ inscribed }) {
   const { id, name, email, avatar } = inscribed.inscribed;
 
-  console.log(inscribed);
   return (
     <tr>
       {/* <td>{avatar}</td> */}
