@@ -81,6 +81,11 @@ export const ExperienceData = ({
     return (
       <div className={styles.experiencePanel}>
         <h2>{experience.title}</h2>
+        <img
+          src={experience.image}
+          alt={experience.title}
+          style={{ width: "350px" }}
+        />
         <p>{experience.description}</p>
         <p>Ciudad: {experience.city}</p>
         <p>Estilo: {experience.type}</p>
