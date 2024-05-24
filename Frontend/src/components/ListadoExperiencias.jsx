@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { RedirectButton } from "./RedirectButton.jsx";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Loading from "./Loading.jsx";
 
 export const ListadoExperiencias = ({ experiences }) => {
   const [visibleExperiences, setVisibleExperiences] = useState(4);
@@ -23,7 +24,7 @@ export const ListadoExperiencias = ({ experiences }) => {
         dataLength={visibleExperiences}
         next={loadMoreExperiences}
         hasMore={visibleExperiences < experiences.length}
-        loader={<h4>Loading...</h4>}
+        loader={<Loading />}
         endMessage={<p>No hay más experiencias por el momento.</p>}
         height={500} // Establece la altura del componente InfiniteScroll
       >

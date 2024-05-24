@@ -4,6 +4,7 @@ import { obtainExperienceService } from "../../services/index.js";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { ExperienceData } from "../../components/ExperienceData.jsx";
 import { ExperienceComment } from "../../components/ExperienceComment.jsx";
+import Loading from "../../components/Loading.jsx";
 
 export const Experience = () => {
   const { experienceId } = useParams();
@@ -43,7 +44,7 @@ export const Experience = () => {
   }, [experienceId]);
 
   return !data.experience ? (
-    <div>Loading...</div>
+    <Loading />
   ) : (
     <>
       <ToastContainer />

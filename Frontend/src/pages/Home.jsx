@@ -2,6 +2,7 @@ import { ListadoExperiencias } from "../components/ListadoExperiencias.jsx";
 import { useExperiences } from "../hooks/useExperiences.js";
 import { useForm } from "react-hook-form";
 import styles from "./Home.module.css";
+import Loading from "../components/Loading.jsx";
 
 export const Home = () => {
   const { experiences, loading, error, filters, setFilters, setError } =
@@ -47,7 +48,7 @@ export const Home = () => {
     return (
       <section className="listSection">
         <h1>Últimas experiencias</h1>
-        <p>Loading...</p>
+        <Loading />
       </section>
     );
   }
