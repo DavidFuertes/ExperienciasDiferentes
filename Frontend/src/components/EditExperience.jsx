@@ -33,7 +33,6 @@ function EditExperience({ experienceId, token }) {
           }
         })
         .then((data) => {
-          console.log("Llegó la data", data);
           setExperience(data); // Actualiza el estado con los datos
           const commentsObject = data.comments;
           const commentsArray = Object.values(commentsObject);
@@ -80,6 +79,12 @@ function EditExperience({ experienceId, token }) {
         transition: Slide,
       });
     }
+  };
+
+  const filterInscribed = (id) => {
+    setInscribed((prevInscribed) =>
+      prevInscribed.filter((insc) => insc.id !== id)
+    );
   };
 
   if (experienceId === null) {
@@ -143,6 +148,7 @@ function EditExperience({ experienceId, token }) {
                 <InscribedItems
                   key={inscribed.name}
                   inscribed={{ inscribed }}
+                  filterInscribed={filterInscribed}
                 />
               ))}
             </tbody>

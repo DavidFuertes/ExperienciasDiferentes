@@ -74,7 +74,8 @@ export const userNotActive = () => {
     throw {
         httpStatus: 403,
         code: 'USER_NOT_ACTIVE',
-        message: 'Debes confirmar tu cuenta antes de iniciar sesión',
+        message:
+            'Esta cuenta no está activa o ha sido eliminada. Si deseas acceder, debes registrarte con un nuevo correo electrónico.',
     };
 };
 
@@ -169,5 +170,21 @@ export const deleteCommentFailed = () => {
         httpStatus: 500,
         code: 'DELETE_COMMENT_FAILED',
         message: 'No se ha podido borrar el comentario',
+    };
+};
+
+export const deleteUserFromReservationFailed = () => {
+    throw {
+        httpStatus: 500,
+        code: 'DELETE_USER_FROM_RESERVATION_FAILED',
+        message: 'No se ha podido borrar el usuario de la reserva',
+    };
+};
+
+export const invalidExperienceType = () => {
+    throw {
+        httpStatus: 500,
+        code: 'INVALID_EXPERIENCE_TYPE',
+        message: 'Este tipo de experiencia no existe',
     };
 };

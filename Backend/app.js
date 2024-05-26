@@ -6,6 +6,7 @@ import morgan from 'morgan'; // Importamos morgan para mostrar información de l
 import cors from 'cors'; // Importamos cors para evitar problemas con las CORS
 import { experiencesRouter } from './src/routes/experiencesRouter.js'; // Importamos las rutas de experiencias
 import { userRouter } from './src/routes/userRouter.js'; // Importamos las rutas de usuarios
+import bodyParser from 'body-parser';
 
 import {
     notFoundController,
@@ -15,6 +16,11 @@ import {
 
 const app = express(); // Crea servidor
 
+// Parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Parse application/json
+app.use(bodyParser.json());
 app.use(fileUpload({ useTempFiles: true })); // Middleware de express-fileupload
 app.use(
     cors({

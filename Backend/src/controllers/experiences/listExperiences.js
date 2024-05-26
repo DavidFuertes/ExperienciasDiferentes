@@ -51,6 +51,12 @@ async function listExperiences(req, res, next) {
             notMatchingQuery();
         }
 
+        listedExperiences.forEach((experience) => {
+            const date = new Date(experience.date);
+            const formattedDate = `${date.getDate()} de ${date.toLocaleString('default', { month: 'long' })} de ${date.getFullYear()}`;
+            experience.date = formattedDate;
+        });
+
         return res.status(200).json({
             message: 'Experiencias obtenidas correctamente',
             experiences: listedExperiences,

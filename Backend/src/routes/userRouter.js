@@ -19,6 +19,8 @@ import { userAuth } from '../middlewares/userAuth.js';
 import { userInscribed } from '../controllers/users/userInscribed.js';
 import { adminMiddleware } from '../middlewares/adminMiddleware.js';
 import { getUserByIdController } from '../controllers/users/getUserByIdController.js';
+import { deleteUserAccount } from '../controllers/users/deleteUserAccount.js';
+import { reactivateUserController } from '../controllers/users/reactivateUserController.js';
 
 // Aquí se importan las funciones controladoras intermedias.
 
@@ -48,5 +50,13 @@ userRouter.post('/password/forget', sendRecoverPassController);
 userRouter.post('/password/recover', resetPasswordController);
 
 userRouter.patch('/updateProfile', userAuth, updateUserController);
+
+// Enviar email de reactivación de cuenta
+
+userRouter.post('/reactivate', reactivateUserController);
+
+//Borrado de cuenta
+
+userRouter.patch('/deleteAccount', userAuth, deleteUserAccount);
 
 export { userRouter };

@@ -4,7 +4,7 @@ import joi from 'joi';
 import joiErrorMessages from '../joiErrorMessages.js';
 
 export const addNewExperienceSchema = joi.object({
-    id: joi.number().required().messages(joiErrorMessages),
+    id: joi.number().messages(joiErrorMessages),
     title: joi.string().required().min(10).max(50).messages(joiErrorMessages),
     description: joi
         .string()
