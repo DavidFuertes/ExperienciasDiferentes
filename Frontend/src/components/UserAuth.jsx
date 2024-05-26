@@ -18,17 +18,17 @@ export const UserAuth = () => {
       )}
       {user.user.role === "admin" && (
         <Link to={`/experienceadministration`}>
-          <button>Control Panel</button>
+          <button>Panel de Control</button>
         </Link>
       )}
       <Link to={`/`}>
-        <button onClick={() => logout()}>Logout</button>
+        <button onClick={() => logout()}>Deslogarse</button>
       </Link>
     </section>
   ) : (
     <ul>
       <li>
-        <Link to={"/signup"}>Register</Link>
+        <Link to={"/signup"}>Registrarse</Link>
       </li>
       <li>
         <Link to={"/login"}>Login</Link>
