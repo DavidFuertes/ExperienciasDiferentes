@@ -7,7 +7,10 @@ import {
     savePhotoExpToCloudinary,
 } from '../../utilities/cloudinaryImages.js';
 import 'dotenv/config.js';
-import { imageNeeded } from '../../services/errorService.js';
+import {
+    imageNeeded,
+    invalidExperienceType,
+} from '../../services/errorService.js';
 
 const { DEFAULT_RELAJADO_URL, DEFAULT_MEDIO_URL, DEFAULT_ADRENALINA_URL } =
     process.env;
@@ -17,7 +20,7 @@ async function addNewExperience(req, res, next) {
 
     const newExperience = req.body;
     const {
-        id, //Este es el id de la experiencia que vamos a duplicar
+        id, //Este es el id de la experiencia que vamos a duplicar// si este id no existe, le decimos a javascript que va a crear una experiencia nueva desde cero
         title,
         description,
         type,
@@ -31,120 +34,228 @@ async function addNewExperience(req, res, next) {
 
     try {
         //Validamos el body con joi
-        const pool = await getPool();
+        if (id) {
+            const pool = await getPool();
 
-        await validateSchema(addNewExperienceSchema, req.body);
+            await validateSchema(addNewExperienceSchema, req.body);
 
-        if (req.files?.newImage) {
-            const secure_url = await savePhotoExpToCloudinary(
-                req.files.newImage.tempFilePath,
-            );
+            if (req.files?.newImage) {
+                const secure_url = await savePhotoExpToCloudinary(
+                    req.files.newImage.tempFilePath,
+                );
 
-            const [insertInfo] = await pool.query(
-                `
-                INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            `,
-                [
-                    user_id,
-                    title,
-                    description,
-                    type,
-                    city,
-                    secure_url,
-                    date,
-                    price,
-                    min_places,
-                    total_places,
-                ],
-            );
-
-            console.log(insertInfo);
-
-            const [postedData] = await pool.query(
-                `
-                SELECT * FROM Experiences WHERE id = ?
-            `,
-                [insertInfo.insertId],
-            );
-
-            const resInfo = [
-                {
-                    message: 'Experiencia duplicada correctamente',
-                    newId: insertInfo.insertId,
-                },
-                {
-                    postedData,
-                },
-            ];
-
-            res.status(201).json(resInfo);
-        } else {
-            //Si no hay nueva imagen obtenemos la imagen anterior
-            const [image] = await pool.query(
-                `SELECT image FROM Experiences WHERE id = ?;`,
-                [id],
-            );
-
-            const oldImage = image[0].image;
-
-            if (!oldImage) {
-                imageNeeded();
-            }
-
-            //Creamos una variable que almacene la url de la imagen antigua
-            let imageToSave = oldImage;
-
-            //Si la imagen anterior no es la por defecto, la duplicamos creando una nueva url pero que apunta a la misma imagen!!!
-            if (
-                image &&
-                oldImage !==
-                    (DEFAULT_RELAJADO_URL ||
-                        DEFAULT_MEDIO_URL ||
-                        DEFAULT_ADRENALINA_URL)
-            ) {
-                imageToSave = await duplicateImgCloudinary(oldImage);
-            }
-
-            const [insertInfo] = await pool.query(
-                `
+                const [insertInfo] = await pool.query(
+                    `
                     INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places)
                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 `,
-                [
-                    user_id,
-                    title,
-                    description,
-                    type,
-                    city,
-                    imageToSave,
-                    date,
-                    price,
-                    min_places,
-                    total_places,
-                ],
-            );
+                    [
+                        user_id,
+                        title,
+                        description,
+                        type,
+                        city,
+                        secure_url,
+                        date,
+                        price,
+                        min_places,
+                        total_places,
+                    ],
+                );
 
-            console.log(insertInfo);
+                console.log(insertInfo);
 
-            const [postedData] = await pool.query(
-                `
+                const [postedData] = await pool.query(
+                    `
                     SELECT * FROM Experiences WHERE id = ?
                 `,
-                [insertInfo.insertId],
-            );
+                    [insertInfo.insertId],
+                );
 
-            const resInfo = [
-                {
-                    message: 'Experiencia duplicada correctamente',
-                    newId: insertInfo.insertId,
-                },
-                {
-                    postedData,
-                },
-            ];
+                const resInfo = [
+                    {
+                        message: 'Experiencia duplicada correctamente',
+                        newId: insertInfo.insertId,
+                    },
+                    {
+                        postedData,
+                    },
+                ];
 
-            res.status(201).json(resInfo);
+                res.status(201).json(resInfo);
+            } else {
+                //Si no hay nueva imagen obtenemos la imagen anterior
+                const [image] = await pool.query(
+                    `SELECT image FROM Experiences WHERE id = ?;`,
+                    [id],
+                );
+
+                let oldImage = image[0].image;
+
+                if (!oldImage) {
+                    imageNeeded();
+                }
+
+                //Creamos una variable que almacene la url de la imagen antigua
+                let imageToSave = oldImage;
+
+                //Si la imagen anterior no es la por defecto, la duplicamos creando una nueva url pero que apunta a la misma imagen!!!
+                if (
+                    image &&
+                    oldImage !==
+                        (DEFAULT_RELAJADO_URL ||
+                            DEFAULT_MEDIO_URL ||
+                            DEFAULT_ADRENALINA_URL)
+                ) {
+                    imageToSave = await duplicateImgCloudinary(oldImage);
+                }
+
+                const [insertInfo] = await pool.query(
+                    `
+                        INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places)
+                        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    `,
+                    [
+                        user_id,
+                        title,
+                        description,
+                        type,
+                        city,
+                        imageToSave,
+                        date,
+                        price,
+                        min_places,
+                        total_places,
+                    ],
+                );
+
+                console.log(insertInfo);
+
+                const [postedData] = await pool.query(
+                    `
+                        SELECT * FROM Experiences WHERE id = ?
+                    `,
+                    [insertInfo.insertId],
+                );
+
+                const resInfo = [
+                    {
+                        message: 'Experiencia duplicada correctamente',
+                        newId: insertInfo.insertId,
+                    },
+                    {
+                        postedData,
+                    },
+                ];
+
+                res.status(201).json(resInfo);
+            }
+        } else {
+            const pool = await getPool();
+
+            await validateSchema(addNewExperienceSchema, req.body);
+
+            if (req.files?.newImage) {
+                const secure_url = await savePhotoExpToCloudinary(
+                    req.files.newImage.tempFilePath,
+                );
+
+                const [insertInfo] = await pool.query(
+                    `
+                    INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                `,
+                    [
+                        user_id,
+                        title,
+                        description,
+                        type,
+                        city,
+                        secure_url,
+                        date,
+                        price,
+                        min_places,
+                        total_places,
+                    ],
+                );
+
+                console.log(insertInfo);
+
+                const [postedData] = await pool.query(
+                    `
+                    SELECT * FROM Experiences WHERE id = ?
+                `,
+                    [insertInfo.insertId],
+                );
+
+                const resInfo = [
+                    {
+                        message: 'Experiencia duplicada correctamente',
+                        newId: insertInfo.insertId,
+                    },
+                    {
+                        postedData,
+                    },
+                ];
+
+                res.status(201).json(resInfo);
+            } else {
+                let secure_url;
+
+                switch (type) {
+                    case 'Relajado':
+                        secure_url = DEFAULT_RELAJADO_URL;
+                        break;
+                    case 'Medio':
+                        secure_url = DEFAULT_MEDIO_URL;
+                        break;
+                    case 'Adrenalina pura':
+                        secure_url = DEFAULT_ADRENALINA_URL;
+                        break;
+                    default:
+                        invalidExperienceType();
+                }
+
+                const [insertInfo] = await pool.query(
+                    `
+                    INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                `,
+                    [
+                        user_id,
+                        title,
+                        description,
+                        type,
+                        city,
+                        secure_url,
+                        date,
+                        price,
+                        min_places,
+                        total_places,
+                    ],
+                );
+
+                console.log(insertInfo);
+
+                const [postedData] = await pool.query(
+                    `
+                    SELECT * FROM Experiences WHERE id = ?
+                `,
+                    [insertInfo.insertId],
+                );
+
+                const resInfo = [
+                    {
+                        message: 'Experiencia duplicada correctamente',
+                        newId: insertInfo.insertId,
+                    },
+                    {
+                        postedData,
+                    },
+                ];
+
+                res.status(201).json(resInfo);
+            }
         }
     } catch (error) {
         next(error);

@@ -33,7 +33,6 @@ function EditExperience({ experienceId, token }) {
           }
         })
         .then((data) => {
-          console.log("Llegó la data", data);
           setExperience(data); // Actualiza el estado con los datos
           const commentsObject = data.comments;
           const commentsArray = Object.values(commentsObject);
