@@ -26,6 +26,7 @@ USUARIO REGISTRADO / CLIENTE
 ● Búsqueda, filtro y ordenación como un usuario no registrado
 ● Acceder a la ficha de una experiencia con todos los detalles
 ● Gestión del perfil (edición de datos)
+
     ○ e-mail
     ○ username
     ○ contraseña
@@ -33,6 +34,7 @@ USUARIO REGISTRADO / CLIENTE
     ○ ciudad de residencia
     ○ lenguajes hablados
     ○ avatar
+
 ● Reservar experiencias.
 ● Listado de experiencias reservadas, divididas entre pendientes y ya disfrutadas.
 ● Cancelar una reserva hasta el día anterior.
