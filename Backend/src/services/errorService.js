@@ -179,3 +179,11 @@ export const deleteUserFromReservationFailed = () => {
         message: 'No se ha podido borrar el usuario de la reserva',
     };
 };
+
+export const invalidExperienceType = () => {
+    throw {
+        httpStatus: 500,
+        code: 'INVALID_EXPERIENCE_TYPE',
+        message: 'Este tipo de experiencia no existe',
+    };
+};

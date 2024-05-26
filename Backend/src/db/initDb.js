@@ -3,72 +3,77 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const {
+    DEFAULT_AVATAR_URL,
+    DEFAULT_RELAJADO_URL,
+    DEFAULT_MEDIO_URL,
+    DEFAULT_ADRENALINA_URL,
+} = process.env;
+
 async function insertSampleData(connection) {
     try {
         // Metemos datos en la tabla Users
         await connection.query(`
-           INSERT INTO Users (name, email, password, date, avatar, active, role)
-VALUES
-    ('Admin', 'admin@admin.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1990-01-01', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'admin'),
-    ('Juan Pérez', 'juanperez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1990-01-01', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('María García', 'mariagarcia@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1995-03-15', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Pedro Rodríguez', 'pedrorodriguez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1992-12-10', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Laura Martínez', 'lauramartinez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1985-05-03', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Carlos López', 'carloslopez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1987-09-28', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Sofía Hernández', 'sofiahernandez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1998-02-14', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Diego García', 'diegogarcia@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1983-11-30', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Elena Martín', 'elenamartin@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1991-04-25', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Mario Sánchez', 'mariosanchez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1984-08-17', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Carmen Pérez', 'carmenperez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1993-06-05', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Alejandro Gutiérrez', 'alejandrogutierrez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1989-10-12', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Ana Rosa Fernández', 'anarosafernandez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1986-01-08', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Javier Ruiz', 'javierruiz@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1997-07-23', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Lucía Díaz', 'luciadiaz@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1982-04-16', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Marcos Castro', 'marcoscastro@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1990-12-03', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Raquel Navarro', 'raquelnvarro@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1987-09-18', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Manuel Serrano', 'manuelserrano@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1985-03-09', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Silvia Ramos', 'silviaramos@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1992-06-21', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Óscar Morales', 'oscarmorales@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1988-11-13', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public'),
-    ('Ana Gómez', 'anagomez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1988-07-20', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716326293/xpysvk4rojtzoejtawjg.png', 1, 'public');
-
-            `);
+        INSERT INTO Users (name, email, password, date, avatar, active, role) VALUES
+        ('Admin', 'admin@admin.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1990-01-01', '${DEFAULT_AVATAR_URL}', 1, 'admin'),
+        ('Juan Pérez', 'juanperez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1990-01-01', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('María García', 'mariagarcia@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1995-03-15', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Pedro Rodríguez', 'pedrorodriguez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1992-12-10', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Laura Martínez', 'lauramartinez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1985-05-03', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Carlos López', 'carloslopez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1987-09-28', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Sofía Hernández', 'sofiahernandez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1998-02-14', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Diego García', 'diegogarcia@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1983-11-30', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Elena Martín', 'elenamartin@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1991-04-25', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Mario Sánchez', 'mariosanchez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1984-08-17', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Carmen Pérez', 'carmenperez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1993-06-05', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Alejandro Gutiérrez', 'alejandrogutierrez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1989-10-12', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Ana Rosa Fernández', 'anarosafernandez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1986-01-08', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Javier Ruiz', 'javierruiz@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1997-07-23', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Lucía Díaz', 'luciadiaz@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1982-04-16', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Marcos Castro', 'marcoscastro@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1990-12-03', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Raquel Navarro', 'raquelnvarro@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1987-09-18', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Manuel Serrano', 'manuelserrano@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1985-03-09', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Silvia Ramos', 'silviaramos@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1992-06-21', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Óscar Morales', 'oscarmorales@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1988-11-13', '${DEFAULT_AVATAR_URL}', 1, 'public'),
+        ('Ana Gómez', 'anagomez@example.com', '$2b$10$wO.Qo9wEw47JhJ9t9HmK4e7qUfqxu8UqRKU0Xd/D0FWYhF/CA01zu', '1988-07-20', '${DEFAULT_AVATAR_URL}', 1, 'public');
+    `);
 
         //  Metemos datos en la tabla Experiences
         await connection.query(`
    INSERT INTO Experiences (creator_id, title, description, type, city, image, date, price, min_places, total_places, active)
             VALUES
-            (1, 'Exploración Submarina', 'Descubre la vida marina en una emocionante exploración submarina.', 'Adrenalina pura', 'Oceanview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-08-25', 70.00, 3, 8, false),
-            (1, 'Tour en Helicóptero', 'Disfruta de una vista panorámica desde un helicóptero.', 'Adrenalina pura', 'Skyline', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-08-28', 120.00, 2, 6, false),
-            (1, 'Bungee Jumping', 'Salta desde un puente en esta experiencia de bungee jumping.', 'Adrenalina pura', 'Bridgeview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-08-30', 90.00, 1, 4, false),
-            (1, 'Recorrido en Moto de Nieve', 'Atraviesa la nieve en una emocionante excursión en moto de nieve.', 'Adrenalina pura', 'Snowland', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-09-02', 80.00, 2, 6, false),
-            (1, 'Espeleología', 'Explora cuevas subterráneas en esta aventura de espeleología.', 'Adrenalina pura', 'Caveview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-09-05', 60.00, 3, 8, false),
-            (1, 'Rappel en Cascada', 'Desciende por una cascada en una experiencia de rappel.', 'Adrenalina pura', 'Waterfall', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-09-08', 75.00, 2, 6, false),
-            (1, 'Tour en Globo Aerostático al Amanecer', 'Observa el amanecer desde un globo aerostático.', 'Relajado', 'Sunrise', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2024-09-10', 100.00, 2, 6, false),
-            (1, 'Pesca en Alta Mar', 'Disfruta de una emocionante jornada de pesca en alta mar.', 'Adrenalina pura', 'Deepsea', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-09-12', 45.00, 4, 10, false),
-            (1, 'Paseo en Tren Escénico', 'Recorre paisajes impresionantes en un pintoresco tren escénico.', 'Relajado', 'Scenicview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2024-09-15', 30.00, 3, 8, false),
-            (1, 'Tour en Autogiro', 'Descubre la ciudad desde las alturas en un autogiro.', 'Adrenalina pura', 'Skyview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-09-18', 85.00, 2, 6, false),
-            (1, 'Aventura en las Montañas', 'Experimenta la emoción de hacer senderismo en las montañas.', 'Adrenalina pura', 'Mountainville', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-08-01', 50.00, 5, 10, true),
-            (1, 'Tour por la Ciudad', 'Explora la ciudad y sus puntos de referencia.', 'Relajado', 'Cityville', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2024-07-15', 30.00, 3, 8, true),
-            (1, 'Ruta en Kayak por el Río', 'Disfruta de un emocionante paseo en kayak por el río.', 'Adrenalina pura', 'Riverdale', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-07-30', 40.00, 4, 12, true),
-            (1, 'Escalada en Roca', 'Experimenta la emoción de escalar montañas.', 'Adrenalina pura', 'Rockville', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-08-10', 60.00, 2, 6, true),
-            (1, 'Paseo en Velero al Atardecer', 'Relájate mientras navegas en un velero al atardecer.', 'Relajado', 'Seaside', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2025-06-25', 80.00, 2, 4, true),
-            (1, 'Tour de Cata de Vinos', 'Descubre la variedad de vinos en una cata organizada.', 'Relajado', 'Wineville', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2025-07-10', 25.00, 4, 10, true),
-            (1, 'Excursión a la Cascada', 'Explora la belleza natural de una cascada escondida.', 'Medio', 'Fallsburg', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/m9ktxaxugoinupjicahc.jpg', '2024-08-05', 35.00, 3, 8, true),
-            (1, 'Paseo en Globo Aerostático', 'Observa la vista panorámica desde un globo aerostático.', 'Relajado', 'Skyview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2024-07-28', 100.00, 2, 6, true),
-            (1, 'Barranquismo en el Cañón', 'Desafía la naturaleza con descensos de barrancos en el cañón.', 'Adrenalina pura', 'Canyonland', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2025-08-15', 70.00, 2, 6, true),
-            (1, 'Senderismo en el Bosque', 'Embárcate en una tranquila caminata por el bosque.', 'Relajado', 'Woodland', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2025-07-22', 20.00, 5, 15, true),
-            (1, 'Tour en Bicicleta por la Montaña', 'Recorre las montañas en bicicleta en este emocionante tour.', 'Medio', 'Mountainview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/m9ktxaxugoinupjicahc.jpg', '2024-08-03', 45.00, 3, 10, true),
-            (1, 'Curso de Surf', 'Aprende a surfear las olas en este emocionante curso.', 'Adrenalina pura', 'Surftown', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2025-08-20', 55.00, 4, 12, true),
-            (1, 'Recorrido en Segway por la Ciudad', 'Descubre la ciudad en un recorrido en segway.', 'Relajado', 'Segwayville', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2024-07-18', 35.00, 2, 6, true),
-            (1, 'Excursión en 4x4 por el Desierto', 'Embárcate en una emocionante aventura en el desierto en un vehículo 4x4.', 'Adrenalina pura', 'Desertland', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2025-08-08', 75.00, 3, 8, true),
-            (1, 'Avistamiento de Ballenas', 'Disfruta de la majestuosidad de las ballenas en alta mar.', 'Medio', 'Whalewatch', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/m9ktxaxugoinupjicahc.jpg', '2024-08-12', 65.00, 2, 6, true),
-            (1, 'Ruta en Quad por la Montaña', 'Explora las montañas en un emocionante recorrido en quad.', 'Adrenalina pura', 'Quadville', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2025-08-17', 70.00, 4, 10, true),
-            (1, 'Excursión en Canoa por el Lago', 'Navega tranquilamente en una canoa por el lago.', 'Relajado', 'Lakeview', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2024-07-26', 30.00, 3, 8, true),
-            (1, 'Camping bajo las Estrellas', 'Acampa y disfruta de la naturaleza bajo un cielo estrellado.', 'Relajado', 'Starrynight', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2025-08-31', 40.00, 4, 10, true),
-            (1, 'Visita a una Plantación de Té', 'Descubre el proceso de producción del té en una plantación.', 'Relajado', 'Teaville', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/cacitbknylfaq7d7ylaw.jpg', '2024-07-29', 25.00, 2, 6, true),
-            (1, 'Curso de Equitación', 'Aprende a montar a caballo con este curso de equitación.', 'Medio', 'Horsetown', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/m9ktxaxugoinupjicahc.jpg', '2025-08-06', 50.00, 2, 6, true),
-            (1, 'Trekking en Glaciar', 'Explora un glaciar en una emocionante excursión de trekking.', 'Adrenalina pura', 'Glacierland', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/xtqfpzw8wvk1sayghqqp.jpg', '2024-08-11', 85.00, 3, 8, true),
-            (1, 'Observación de Aves', 'Embárcate en una emocionante aventura para avistar aves.', 'Medio', 'Birdwatch', 'https://res.cloudinary.com/dgokuinpf/image/upload/v1716327208/m9ktxaxugoinupjicahc.jpg', '2025-08-14', 30.00, 3, 10, true)
+            (1, 'Exploración Submarina', 'Descubre la vida marina en una emocionante exploración submarina.', 'Adrenalina pura', 'Oceanview', '${DEFAULT_ADRENALINA_URL}', '2024-08-25', 70.00, 3, 8, false),
+            (1, 'Tour en Helicóptero', 'Disfruta de una vista panorámica desde un helicóptero.', 'Adrenalina pura', 'Skyline', '${DEFAULT_ADRENALINA_URL}', '2024-08-28', 120.00, 2, 6, false),
+            (1, 'Bungee Jumping', 'Salta desde un puente en esta experiencia de bungee jumping.', 'Adrenalina pura', 'Bridgeview', '${DEFAULT_ADRENALINA_URL}', '2024-08-30', 90.00, 1, 4, false),
+            (1, 'Recorrido en Moto de Nieve', 'Atraviesa la nieve en una emocionante excursión en moto de nieve.', 'Adrenalina pura', 'Snowland', '${DEFAULT_ADRENALINA_URL}', '2024-09-02', 80.00, 2, 6, false),
+            (1, 'Espeleología', 'Explora cuevas subterráneas en esta aventura de espeleología.', 'Adrenalina pura', 'Caveview', '${DEFAULT_ADRENALINA_URL}', '2024-09-05', 60.00, 3, 8, false),
+            (1, 'Rappel en Cascada', 'Desciende por una cascada en una experiencia de rappel.', 'Adrenalina pura', 'Waterfall', '${DEFAULT_ADRENALINA_URL}', '2024-09-08', 75.00, 2, 6, false),
+            (1, 'Tour en Globo Aerostático al Amanecer', 'Observa el amanecer desde un globo aerostático.', 'Relajado', 'Sunrise', '${DEFAULT_RELAJADO_URL}', '2024-09-10', 100.00, 2, 6, false),
+            (1, 'Pesca en Alta Mar', 'Disfruta de una emocionante jornada de pesca en alta mar.', 'Adrenalina pura', 'Deepsea', '${DEFAULT_ADRENALINA_URL}', '2024-09-12', 45.00, 4, 10, false),
+            (1, 'Paseo en Tren Escénico', 'Recorre paisajes impresionantes en un pintoresco tren escénico.', 'Relajado', 'Scenicview', '${DEFAULT_RELAJADO_URL}', '2024-09-15', 30.00, 3, 8, false),
+            (1, 'Tour en Autogiro', 'Descubre la ciudad desde las alturas en un autogiro.', 'Adrenalina pura', 'Skyview', '${DEFAULT_ADRENALINA_URL}', '2024-09-18', 85.00, 2, 6, false),
+            (1, 'Aventura en las Montañas', 'Experimenta la emoción de hacer senderismo en las montañas.', 'Adrenalina pura', 'Mountainville', '${DEFAULT_ADRENALINA_URL}', '2024-08-01', 50.00, 5, 10, true),
+            (1, 'Tour por la Ciudad', 'Explora la ciudad y sus puntos de referencia.', 'Relajado', 'Cityville', '${DEFAULT_RELAJADO_URL}', '2024-07-15', 30.00, 3, 8, true),
+            (1, 'Ruta en Kayak por el Río', 'Disfruta de un emocionante paseo en kayak por el río.', 'Adrenalina pura', 'Riverdale', '${DEFAULT_ADRENALINA_URL}', '2024-07-30', 40.00, 4, 12, true),
+            (1, 'Escalada en Roca', 'Experimenta la emoción de escalar montañas.', 'Adrenalina pura', 'Rockville', '${DEFAULT_ADRENALINA_URL}', '2024-08-10', 60.00, 2, 6, true),
+            (1, 'Paseo en Velero al Atardecer', 'Relájate mientras navegas en un velero al atardecer.', 'Relajado', 'Seaside', '${DEFAULT_RELAJADO_URL}', '2025-06-25', 80.00, 2, 4, true),
+            (1, 'Tour de Cata de Vinos', 'Descubre la variedad de vinos en una cata organizada.', 'Relajado', 'Wineville', '${DEFAULT_RELAJADO_URL}', '2025-07-10', 25.00, 4, 10, true),
+            (1, 'Excursión a la Cascada', 'Explora la belleza natural de una cascada escondida.', 'Medio', 'Fallsburg', '${DEFAULT_MEDIO_URL}', '2024-08-05', 35.00, 3, 8, true),
+            (1, 'Paseo en Globo Aerostático', 'Observa la vista panorámica desde un globo aerostático.', 'Relajado', 'Skyview', '${DEFAULT_RELAJADO_URL}', '2024-07-28', 100.00, 2, 6, true),
+            (1, 'Barranquismo en el Cañón', 'Desafía la naturaleza con descensos de barrancos en el cañón.', 'Adrenalina pura', 'Canyonland', '${DEFAULT_ADRENALINA_URL}', '2025-08-15', 70.00, 2, 6, true),
+            (1, 'Senderismo en el Bosque', 'Embárcate en una tranquila caminata por el bosque.', 'Relajado', 'Woodland', '${DEFAULT_RELAJADO_URL}', '2025-07-22', 20.00, 5, 15, true),
+            (1, 'Tour en Bicicleta por la Montaña', 'Recorre las montañas en bicicleta en este emocionante tour.', 'Medio', 'Mountainview', '${DEFAULT_MEDIO_URL}', '2024-08-03', 45.00, 3, 10, true),
+            (1, 'Curso de Surf', 'Aprende a surfear las olas en este emocionante curso.', 'Adrenalina pura', 'Surftown', '${DEFAULT_ADRENALINA_URL}', '2025-08-20', 55.00, 4, 12, true),
+            (1, 'Recorrido en Segway por la Ciudad', 'Descubre la ciudad en un recorrido en segway.', 'Relajado', 'Segwayville', '${DEFAULT_RELAJADO_URL}', '2024-07-18', 35.00, 2, 6, true),
+            (1, 'Excursión en 4x4 por el Desierto', 'Embárcate en una emocionante aventura en el desierto en un vehículo 4x4.', 'Adrenalina pura', 'Desertland', '${DEFAULT_ADRENALINA_URL}', '2025-08-08', 75.00, 3, 8, true),
+            (1, 'Avistamiento de Ballenas', 'Disfruta de la majestuosidad de las ballenas en alta mar.', 'Medio', 'Whalewatch', '${DEFAULT_MEDIO_URL}', '2024-08-12', 65.00, 2, 6, true),
+            (1, 'Ruta en Quad por la Montaña', 'Explora las montañas en un emocionante recorrido en quad.', 'Adrenalina pura', 'Quadville', '${DEFAULT_ADRENALINA_URL}', '2025-08-17', 70.00, 4, 10, true),
+            (1, 'Excursión en Canoa por el Lago', 'Navega tranquilamente en una canoa por el lago.', 'Relajado', 'Lakeview', '${DEFAULT_RELAJADO_URL}', '2024-07-26', 30.00, 3, 8, true),
+            (1, 'Camping bajo las Estrellas', 'Acampa y disfruta de la naturaleza bajo un cielo estrellado.', 'Relajado', 'Starrynight', '${DEFAULT_RELAJADO_URL}', '2025-08-31', 40.00, 4, 10, true),
+            (1, 'Visita a una Plantación de Té', 'Descubre el proceso de producción del té en una plantación.', 'Relajado', 'Teaville', '${DEFAULT_RELAJADO_URL}', '2024-07-29', 25.00, 2, 6, true),
+            (1, 'Curso de Equitación', 'Aprende a montar a caballo con este curso de equitación.', 'Medio', 'Horsetown', '${DEFAULT_MEDIO_URL}', '2025-08-06', 50.00, 2, 6, true),
+            (1, 'Trekking en Glaciar', 'Explora un glaciar en una emocionante excursión de trekking.', 'Adrenalina pura', 'Glacierland', '${DEFAULT_ADRENALINA_URL}', '2024-08-11', 85.00, 3, 8, true),
+            (1, 'Observación de Aves', 'Embárcate en una emocionante aventura para avistar aves.', 'Medio', 'Birdwatch', '${DEFAULT_MEDIO_URL}', '2025-08-14', 30.00, 3, 10, true);
             
                 
         `);

@@ -64,7 +64,7 @@ function InscribedItems({ inscribed, filterInscribed }) {
       </tr>
 
       {showModal && (
-        <div className={styles.modal}>
+        <div className={`${styles.modal} ${showModal ? styles.active : ""}`}>
           <div className={styles.modalContent}>
             <span className={styles.close} onClick={handleCloseModal}>
               &times;
@@ -75,10 +75,15 @@ function InscribedItems({ inscribed, filterInscribed }) {
               {selectedUser?.reservation_id} del usuario {selectedUser?.name}?
             </p>
             <div>
-              <button onClick={() => handleDeleteUser(reservation_id, token)}>
+              <button
+                className={styles.modalButton}
+                onClick={() => handleDeleteUser(reservation_id, token)}
+              >
                 Sí
               </button>
-              <button onClick={handleCloseModal}>No</button>
+              <button className={styles.modalButton} onClick={handleCloseModal}>
+                No
+              </button>
             </div>
           </div>
         </div>
