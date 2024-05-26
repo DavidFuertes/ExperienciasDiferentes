@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { insertUserModel } from '../../models/users/insertUserModels.js';
+import reactivateUserModel from '../../models/users/reactivateUserModel.js';
 import { sendMail } from '../../utilities/sendMail.js';
 import 'dotenv/config.js';
 import { errorController } from '../errors/errorController.js';
@@ -15,7 +15,7 @@ export const reactivateUserController = async (req, res, next) => {
         const reactivationCode = crypto.randomBytes(15).toString('hex');
 
         // Inserta el nuevo código de reactivación en la base de datos
-        await insertUserModel(email, reactivationCode);
+        await reactivateUserModel(email, reactivationCode);
 
         // Construye el cuerpo del correo electrónico de reactivación
         const emailSubject = 'Reactiva tu cuenta en Experiencias Diferentes :)';

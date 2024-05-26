@@ -60,7 +60,7 @@ export const CreateExperience = () => {
 
       const respData = await response.json();
       if (response.ok === true) {
-        toast.success(respData.message, {
+        toast.success("La experiencia se ha creado correctamente", {
           position: "top-center",
           autoClose: 3000,
           hideProgressBar: false,
