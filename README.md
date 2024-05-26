@@ -1,4 +1,4 @@
-🚧 Proyecto en construcción 🚧 
+🚧 Proyecto en construcción 🚧
 
 # ExperienciasDiferentes
 
@@ -33,8 +33,8 @@ USUARIO REGISTRADO / CLIENTE
 ○ ciudad de residencia
 ○ lenguajes hablados
 ○ avatar
-● Reservar la experiencia.
-● Listado experiencias reservadas, divididas entre pendientes y ya disfrutadas.
+● Reservar experiencias.
+● Listado de experiencias reservadas, divididas entre pendientes y ya disfrutadas.
 ● Cancelar una reserva hasta el día anterior.
 ● Rating de la experiencia después de disfrutarla (1-5).
 ● Añadir comentarios a una experiencia ya disfrutada o no.
@@ -49,14 +49,15 @@ USUARIO ADMINISTRADOR
 ○ Cancelar una experiencia
 ● Crear una nueva experiencia desde cero.
 ● Duplicar una experiencia, modificando información de la misma.
+● Gestión de usuarios de la base de datos, pudiendo eliminarlos.
 
 Tecnologías Utilizadas
 
-    Backend: Node.js, Express.js, MySQL para la base de datos.
-    Frontend: HTML, CSS, JavaScript, (*)
-    Autenticación y Seguridad: (*)
+    Backend: Node.js, Express.js, cloudinary.
+    Frontend: HTML, CSS, JavaScript, React.
+    Autenticación y Seguridad: Crypto, Joi, Jwebtoken, uuid, randomString.
     Gestión de Base de Datos: MySQL2
-    Envío de Emails: (*)
+    Envío de Emails: mailtrap, nodemailer.
     Otros: Git para control de versiones, GitHub para el repositorio del proyecto.
 
 Instalación y Uso
@@ -104,6 +105,7 @@ VITE_BACKEND_URL=http://localhost:8080
 npm run initDb (para arrancar la base de datos)
 npm run dev
 -En el frontend:
+npm run dev
 
 5- Accede a la app desde el navegador:
 http://localhost:5173/
@@ -111,10 +113,8 @@ http://localhost:5173/
 Autores
 
 Developers:
-Daniel Moreno Acedo
 David Fuertes Rojas
 Daniel Eireos Fernández
 David Molinero Muñoz
 Jorge Ortega Guedes
 Xevi Arenas Rafael
-Pol Gil Soto
