@@ -14,23 +14,26 @@ export const UserAuth = () => {
         style={{ borderRadius: "50%", maxWidth: "40px", maxHeight: "40px" }}
       />
       {user.user.role === "admin" && (
-        <>
-          <Link to={`/experienceadministration`}>
-            <button>Control Panel</button>
-          </Link>
+
+        <Link to={`/experienceadministration`}>
+          <button>Panel de Control</button>
+        </Link>
+
+
           <Link to={`/create_experience`}>
             <button>New Experience</button>
           </Link>
         </>
+
       )}
       <Link to={`/`}>
-        <button onClick={() => logout()}>Logout</button>
+        <button onClick={() => logout()}>Deslogarse</button>
       </Link>
     </section>
   ) : (
     <ul>
       <li>
-        <Link to={"/signup"}>Register</Link>
+        <Link to={"/signup"}>Registrarse</Link>
       </li>
       <li>
         <Link to={"/login"}>Login</Link>
