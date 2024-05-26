@@ -8,6 +8,11 @@ export const UserAuth = () => {
   return user ? (
     <section>
       Bienvenido <Link to={`/account`}>{user.user.name}</Link>
+      <img
+        src={user.user.avatar}
+        alt="avatar"
+        style={{ borderRadius: "50%", maxWidth: "40px", maxHeight: "40px" }}
+      />
       {user.user.role === "admin" && (
         <>
           <Link to={`/experienceadministration`}>

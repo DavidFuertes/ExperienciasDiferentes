@@ -74,7 +74,8 @@ export const userNotActive = () => {
     throw {
         httpStatus: 403,
         code: 'USER_NOT_ACTIVE',
-        message: 'Debes confirmar tu cuenta antes de iniciar sesión',
+        message:
+            'Esta cuenta no está activa o ha sido eliminada. Si deseas acceder, debes registrarte con un nuevo correo electrónico.',
     };
 };
 

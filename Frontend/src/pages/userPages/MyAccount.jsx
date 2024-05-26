@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 const { VITE_BACKEND_URL } = import.meta.env;
 import { UserContext } from "../../context/UserContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
+
 export const MyAccount = () => {
-  const { token, user } = useContext(UserContext);
+  const { token, setToken, user } = useContext(UserContext);
   const {
     name: currentName,
     email: currentEmail,
@@ -13,11 +14,24 @@ export const MyAccount = () => {
     avatar: currentAvatar,
   } = user.user;
 
+  // Función para deslogar
+  const logout = () => {
+    console.log("Haciendo logout...");
+    if (typeof setToken === "function") {
+      setToken("");
+    }
+    if (typeof setUser === "function") {
+      setUser(null);
+    }
+  };
+
+  const [refreshPage, setRefreshPage] = useState(false);
+
   // Estado inicial para almacenar los datos del usuario
   const [userData, setUserData] = useState({
     name: "",
     email: "",
-    date: "", // Campo para la fecha de nacimiento
+    date: "",
     residence: "",
     languages: "",
     avatar: null,
@@ -35,6 +49,10 @@ export const MyAccount = () => {
     date: currentDate || "",
     avatar: currentAvatar || null,
   });
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false); // Estado para confirmar la eliminación de la cuenta
+  const navigate = useNavigate();
 
   // Efecto secundario para imprimir el token en la consola al cargar la página
   useEffect(() => {
@@ -134,16 +152,40 @@ export const MyAccount = () => {
   const closeModal = (reloadPage) => {
     setShowModal(false);
     if (reloadPage) {
-      setReloadPage(true); // Establecer el estado para recargar la página
+      setRefreshPage(true); // Establecer el estado para recargar la página
     }
   };
 
-  // Efecto para recargar la página si se establece el estado reloadPage a true
+  // Efecto para recargar la página si se establece el estado refreshPage a true
   useEffect(() => {
-    if (reloadPage) {
-      window.location.reload(); // Recargar la página
+    if (refreshPage) {
+      // Realizar el logout
+      logout();
+      // Forzar la recarga de la página
+      window.location.reload();
+      // Restablecer el estado de refreshPage
+      setRefreshPage(false);
     }
-  }, [reloadPage]);
+  }, [refreshPage]);
+
+  // Manejar la eliminación de la cuenta
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await fetch(`${VITE_BACKEND_URL}/users/deleteAccount`, {
+        method: "PATCH",
+        headers: {
+          token,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Error al eliminar la cuenta");
+      }
+      // Redirigir al usuario fuera de la cuenta después de eliminarla
+      setRefreshPage(true);
+    } catch (error) {
+      console.error("Error al eliminar la cuenta: ", error);
+    }
+  };
 
   return (
     <div>
@@ -222,13 +264,42 @@ export const MyAccount = () => {
 
         <button type="submit">Guardar Cambios</button>
       </form>
-      {/* Modal */}
+
+      <button onClick={() => setShowDeleteModal(true)}>Eliminar Cuenta</button>
+
+      {/* Modal para confirmación de eliminación de cuenta */}
+      {showDeleteModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <p style={{ color: "black" }}>
+              ¿Estás seguro de que deseas eliminar tu cuenta?
+            </p>
+            <button onClick={() => setConfirmDelete(true)}>Sí</button>
+            <button onClick={() => setShowDeleteModal(false)}>No</button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de despedida */}
+      {showDeleteModal && confirmDelete && (
+        <div className="modal">
+          <div className="modal-content">
+            <p style={{ color: "black" }}>
+              ¡Es una lástima que hayas decidido abandonarnos! Esperamos
+              volverte a ver :D.
+            </p>
+            <button onClick={handleDeleteAccount}>¡Hasta la próxima!</button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal para confirmación de cambios guardados */}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
             <p style={{ color: "black" }}>{modalMessage}</p>
-            <button onClick={() => closeModal(true)}> Sí</button>
-            <button onClick={() => closeModal(false)}> No</button>
+            <button onClick={() => closeModal(true)}>Sí</button>
+            <button onClick={() => closeModal(false)}>No</button>
           </div>
         </div>
       )}
