@@ -1,4 +1,4 @@
-🚧 Proyecto en construcción 🚧 
+🚧 Proyecto en construcción 🚧
 
 # ExperienciasDiferentes
 
@@ -11,14 +11,14 @@ Detallamos ahora qué puede hacer cada tipo de usuario:
 USUARIO NO REGISTRADO
 ● Visualizar la landing con el listado de experiencias
 ● Búsqueda / filtro por:
-○ palabra (en título, descripción o localidad)
-○ rango de precio
-○ rango de fechas
+    ○ palabra (en título, descripción o localidad)
+    ○ rango de precio
+    ○ rango de fechas
 ● Ordenación experiencias (fecha, rating, precio, número de plazas)
 ● Registro (con envío e-mail de validación)
-○ e-mail
-○ username
-○ Contraseña
+    ○ e-mail
+    ○ username
+    ○ Contraseña
 ● Login con enlace de recuperación contraseña
 
 USUARIO REGISTRADO / CLIENTE
@@ -26,15 +26,15 @@ USUARIO REGISTRADO / CLIENTE
 ● Búsqueda, filtro y ordenación como un usuario no registrado
 ● Acceder a la ficha de una experiencia con todos los detalles
 ● Gestión del perfil (edición de datos)
-○ e-mail
-○ username
-○ contraseña
-○ nombre y apellidos
-○ ciudad de residencia
-○ lenguajes hablados
-○ avatar
-● Reservar la experiencia.
-● Listado experiencias reservadas, divididas entre pendientes y ya disfrutadas.
+    ○ e-mail
+    ○ username
+    ○ contraseña
+    ○ nombre y apellidos
+    ○ ciudad de residencia
+    ○ lenguajes hablados
+    ○ avatar
+● Reservar experiencias.
+● Listado de experiencias reservadas, divididas entre pendientes y ya disfrutadas.
 ● Cancelar una reserva hasta el día anterior.
 ● Rating de la experiencia después de disfrutarla (1-5).
 ● Añadir comentarios a una experiencia ya disfrutada o no.
@@ -44,19 +44,20 @@ USUARIO ADMINISTRADOR
 ● Búsqueda, filtro y ordenación como un usuario no registrado
 ● Acceder a la ficha de una experiencia con todos los detalles
 ● Gestionar una experiencia, puediendo modificar:
-○ Datos de la experiencia
-○ Moderar los comentarios de la experiencia
-○ Cancelar una experiencia
+    ○ Datos de la experiencia
+    ○ Moderar los comentarios de la experiencia
+    ○ Cancelar una experiencia
 ● Crear una nueva experiencia desde cero.
 ● Duplicar una experiencia, modificando información de la misma.
+● Gestión de usuarios de la base de datos, pudiendo eliminarlos.
 
 Tecnologías Utilizadas
 
-    Backend: Node.js, Express.js, MySQL para la base de datos.
-    Frontend: HTML, CSS, JavaScript, (*)
-    Autenticación y Seguridad: (*)
+    Backend: Node.js, Express.js, cloudinary.
+    Frontend: HTML, CSS, JavaScript, React.
+    Autenticación y Seguridad: Crypto, Joi, Jwebtoken, uuid, randomString.
     Gestión de Base de Datos: MySQL2
-    Envío de Emails: (*)
+    Envío de Emails: mailtrap, nodemailer.
     Otros: Git para control de versiones, GitHub para el repositorio del proyecto.
 
 Instalación y Uso
@@ -104,6 +105,7 @@ VITE_BACKEND_URL=http://localhost:8080
 npm run initDb (para arrancar la base de datos)
 npm run dev
 -En el frontend:
+npm run dev
 
 5- Accede a la app desde el navegador:
 http://localhost:5173/
@@ -111,10 +113,8 @@ http://localhost:5173/
 Autores
 
 Developers:
-Daniel Moreno Acedo
 David Fuertes Rojas
 Daniel Eireos Fernández
 David Molinero Muñoz
 Jorge Ortega Guedes
 Xevi Arenas Rafael
-Pol Gil Soto
