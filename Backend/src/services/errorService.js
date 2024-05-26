@@ -172,3 +172,11 @@ export const deleteCommentFailed = () => {
         message: 'No se ha podido borrar el comentario',
     };
 };
+
+export const deleteUserFromReservationFailed = () => {
+    throw {
+        httpStatus: 500,
+        code: 'DELETE_USER_FROM_RESERVATION_FAILED',
+        message: 'No se ha podido borrar el usuario de la reserva',
+    };
+};

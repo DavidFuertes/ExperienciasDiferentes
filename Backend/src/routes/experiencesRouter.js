@@ -12,6 +12,7 @@ import { adminMiddleware } from '../middlewares/adminMiddleware.js';
 import { editExperience } from '../controllers/experiences/editExperience.js';
 import { getMyExperiences } from '../controllers/experiences/getMyExperiences.js';
 import { deleteCommentFromExperience } from '../controllers/experiences/deleteCommentFromExperience.js';
+import { deleteUserFromReservation } from '../controllers/experiences/deleteUserFromReservation.js';
 
 const experiencesRouter = express.Router();
 
@@ -36,6 +37,12 @@ experiencesRouter.delete(
     userAuth,
     adminMiddleware,
     deleteCommentFromExperience,
+);
+experiencesRouter.delete(
+    '/reservation',
+    userAuth,
+    adminMiddleware,
+    deleteUserFromReservation,
 );
 
 export { experiencesRouter };

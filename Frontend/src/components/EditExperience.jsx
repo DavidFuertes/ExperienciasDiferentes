@@ -82,6 +82,12 @@ function EditExperience({ experienceId, token }) {
     }
   };
 
+  const filterInscribed = (id) => {
+    setInscribed((prevInscribed) =>
+      prevInscribed.filter((insc) => insc.id !== id)
+    );
+  };
+
   if (experienceId === null) {
     return (
       <>
@@ -143,6 +149,7 @@ function EditExperience({ experienceId, token }) {
                 <InscribedItems
                   key={inscribed.name}
                   inscribed={{ inscribed }}
+                  filterInscribed={filterInscribed}
                 />
               ))}
             </tbody>

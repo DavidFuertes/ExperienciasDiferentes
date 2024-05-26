@@ -30,7 +30,7 @@ async function getExperience(req, res, next) {
 
         const [inscribed] = await pool.query(
             `
-            SELECT Users.id, name, email, avatar FROM Users   
+            SELECT Users.id, Reservations.id as reservation_id, name, email, avatar FROM Users   
             INNER JOIN Reservations ON Users.id = Reservations.user_id WHERE Reservations.experience_id = ?
         `,
             [id],
