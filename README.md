@@ -11,14 +11,14 @@ Detallamos ahora qué puede hacer cada tipo de usuario:
 USUARIO NO REGISTRADO
 ● Visualizar la landing con el listado de experiencias
 ● Búsqueda / filtro por:
-○ palabra (en título, descripción o localidad)
-○ rango de precio
-○ rango de fechas
+    ○ palabra (en título, descripción o localidad)
+    ○ rango de precio
+    ○ rango de fechas
 ● Ordenación experiencias (fecha, rating, precio, número de plazas)
 ● Registro (con envío e-mail de validación)
-○ e-mail
-○ username
-○ Contraseña
+    ○ e-mail
+    ○ username
+    ○ Contraseña
 ● Login con enlace de recuperación contraseña
 
 USUARIO REGISTRADO / CLIENTE
@@ -26,13 +26,15 @@ USUARIO REGISTRADO / CLIENTE
 ● Búsqueda, filtro y ordenación como un usuario no registrado
 ● Acceder a la ficha de una experiencia con todos los detalles
 ● Gestión del perfil (edición de datos)
-○ e-mail
-○ username
-○ contraseña
-○ nombre y apellidos
-○ ciudad de residencia
-○ lenguajes hablados
-○ avatar
+
+    ○ e-mail
+    ○ username
+    ○ contraseña
+    ○ nombre y apellidos
+    ○ ciudad de residencia
+    ○ lenguajes hablados
+    ○ avatar
+
 ● Reservar experiencias.
 ● Listado de experiencias reservadas, divididas entre pendientes y ya disfrutadas.
 ● Cancelar una reserva hasta el día anterior.
@@ -44,9 +46,9 @@ USUARIO ADMINISTRADOR
 ● Búsqueda, filtro y ordenación como un usuario no registrado
 ● Acceder a la ficha de una experiencia con todos los detalles
 ● Gestionar una experiencia, puediendo modificar:
-○ Datos de la experiencia
-○ Moderar los comentarios de la experiencia
-○ Cancelar una experiencia
+    ○ Datos de la experiencia
+    ○ Moderar los comentarios de la experiencia
+    ○ Cancelar una experiencia
 ● Crear una nueva experiencia desde cero.
 ● Duplicar una experiencia, modificando información de la misma.
 ● Gestión de usuarios de la base de datos, pudiendo eliminarlos.
