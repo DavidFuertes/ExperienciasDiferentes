@@ -63,7 +63,7 @@ export const ExperienceData = ({
         transition: Slide,
       });
     } catch (error) {
-      toast.error(error.message, {
+      toast.error("Para reservar la experiencia debes estar registrado.", {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: false,
