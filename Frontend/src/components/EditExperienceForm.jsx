@@ -132,16 +132,16 @@ function EditExperienceForm({ experienceInfo }) {
               </fieldset>
               <fieldset>
                 <label>TIPO:</label>
-                <input
-                  type="text"
-                  placeholder={typeValue}
+                <select
                   value={typeValue}
-                  minLength={3}
-                  maxLength={20}
                   onChange={(event) => {
                     setTypeValue(event.target.value);
                   }}
-                />
+                >
+                  <option value="Adrenalina pura">Adrenalina pura</option>
+                  <option value="Medio">Medio</option>
+                  <option value="Relajado">Relajado</option>
+                </select>
               </fieldset>
               <fieldset>
                 <label>LUGAR:</label>
