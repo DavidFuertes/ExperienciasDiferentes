@@ -43,11 +43,19 @@ function MyExperiences() {
       <section className="myExperiences">
         <section className="activeExperiences">
           <h1>Experiencias por vivir</h1>
-          <ActiveExperienceList activeExperiences={activeExperiences} />
+          {activeExperiences.length > 0 ? (
+            <ActiveExperienceList activeExperiences={activeExperiences} />
+          ) : (
+            <p>No hay ninguna experiencia que mostrar aquí aún</p>
+          )}
         </section>
         <section className="inactiveExperiences">
           <h1>Experiencias vividas</h1>
-          <InactiveExperienceList inactiveExperiences={inactiveExperiences} />
+          {inactiveExperiences.length > 0 ? (
+            <InactiveExperienceList inactiveExperiences={inactiveExperiences} />
+          ) : (
+            <p>No hay ninguna experiencia que mostrar aquí aún</p>
+          )}
         </section>
       </section>
     </>

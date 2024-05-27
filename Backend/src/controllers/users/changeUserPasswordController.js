@@ -14,9 +14,14 @@ export const changeUserPasswordController = async (req, res, next) => {
         await validateSchema(changeUserPasswordSchema, req.body);
 
         // Obtener los parametros / datos del  body
-        const { currentPassword, newPassword } = req.body;
+        const { currentPassword, newPassword, confirmNewPassword } = req.body;
 
-        await changeUserPasswordModel(id, currentPassword, newPassword);
+        await changeUserPasswordModel(
+            id,
+            currentPassword,
+            newPassword,
+            confirmNewPassword,
+        );
 
         res.status(201).send({
             status: 'ok',

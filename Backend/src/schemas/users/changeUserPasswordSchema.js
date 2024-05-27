@@ -1,8 +1,7 @@
-// Importamos joiErrorMessages.
 import joiErrorMessages from '../joiErrorMessages.js';
 import joi from 'joi';
 
-// Esquema para validar el body de la petición. y mensaje de error con joi
+// Esquema para validar el body de la petición y mensaje de error con joi
 export const changeUserPasswordSchema = joi.object({
     currentPassword: joi
         .string()
@@ -22,4 +21,13 @@ export const changeUserPasswordSchema = joi.object({
         )
         .required()
         .messages(joiErrorMessages),
+    confirmNewPassword: joi
+        .string()
+        .valid(joi.ref('newPassword'))
+        .required()
+        .messages({
+            'any.only': 'Las contraseñas no coinciden',
+            'string.empty': 'Debes confirmar tu nueva contraseña',
+            'any.required': 'Debes confirmar tu nueva contraseña',
+        }),
 });

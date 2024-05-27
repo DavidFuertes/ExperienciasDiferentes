@@ -7,6 +7,10 @@ async function getMyExperiences(req, res, next) {
     console.log(user_id);
 
     try {
+        //if (!id) {
+        //    experienceNotExistError();
+        //}
+
         const pool = await getPool();
 
         const [data] = await pool.query(

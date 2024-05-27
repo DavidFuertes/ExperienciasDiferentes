@@ -56,7 +56,6 @@ export const MyAccount = () => {
       const data = await getUserDataService(token);
       setUser(data);
     } catch (error) {
-      np;
       setToken("");
       setUser(null);
     }
