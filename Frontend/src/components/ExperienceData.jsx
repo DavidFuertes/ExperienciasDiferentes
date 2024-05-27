@@ -63,17 +63,20 @@ export const ExperienceData = ({
         transition: Slide,
       });
     } catch (error) {
-      toast.error("Para reservar la experiencia debes estar registrado.", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Slide,
-      });
+      toast.error(
+        "Para reservar la experiencia debes iniciar sesión o registrarte.",
+        {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Slide,
+        }
+      );
     }
   };
 
