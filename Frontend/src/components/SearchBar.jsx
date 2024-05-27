@@ -17,8 +17,8 @@ export const SearchBar = ({ experiences }) => {
   if (search) {
     results = experiences.filter((experience) => {
       return (
-        experience.title.toLowerCase().startsWith(search.toLowerCase()) ||
-        (experience.city.toLowerCase().startsWith(search.toLowerCase()) &&
+        experience.title.toLowerCase().includes(search.toLowerCase()) ||
+        (experience.city.toLowerCase().includes(search.toLowerCase()) &&
           experience.active !== 0)
       );
     });

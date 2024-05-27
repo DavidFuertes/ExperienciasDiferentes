@@ -41,6 +41,9 @@ export const UserAuth = () => {
                     <Link to={`/create_experience`}>Nueva experiencia</Link>
                   </li>
                   <li>
+                    <Link to={`/myexperiences`}>Mis Experiencias</Link>
+                  </li>
+                  <li>
                     <Link to={`/account`}>Mi cuenta</Link>
                   </li>
                 </>
@@ -49,7 +52,6 @@ export const UserAuth = () => {
                 <button
                   onClick={() => {
                     logout();
-                    window.location.href = "/";
                   }}
                 >
                   Deslogarse
