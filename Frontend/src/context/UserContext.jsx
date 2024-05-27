@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { getUserDataService } from "../services/index.js";
+import { useNavigate, useLocation } from "react-router-dom"; // Importa los hooks useNavigate y useLocation
 
 export const UserContext = createContext(null);
 
@@ -24,6 +25,8 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [reloadPage, setReloadPage] = useState(false);
+  const navigate = useNavigate(); // Usar el hook useNavigate para la navegación
+  const location = useLocation(); // Usar el hook useLocation para obtener la ruta actual
 
   //Este useEffect actualizará siempre el valor del token según su estado
   useEffect(() => {
@@ -54,12 +57,12 @@ export const UserProvider = ({ children }) => {
     if (token) getUserData();
   }, [token, setToken]);
 
-  // Efecto para recargar la página si se establece el estado reloadPage a true
+  // Efecto para redireccionar a la ruta actual si se establece el estado reloadPage a true
   useEffect(() => {
     if (reloadPage) {
-      window.location.reload();
+      navigate(location.pathname); // Navegar a la misma ruta
     }
-  }, [reloadPage]);
+  }, [reloadPage, navigate, location]);
 
   const logout = () => {
     setToken("");
@@ -91,6 +94,3 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
-
-// export const useUser = () => useContext(UserContext)[0];
-// export const useSetUser = () => useContext(UserContext)[1];

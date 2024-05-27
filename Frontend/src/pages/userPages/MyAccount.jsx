@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 const { VITE_BACKEND_URL } = import.meta.env;
 import { UserContext } from "../../context/UserContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
+import { getUserDataService } from "../../services/index.js";
 
 export const MyAccount = () => {
   const { token, setToken, user, setUser, login } = useContext(UserContext);
@@ -49,6 +50,17 @@ export const MyAccount = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const navigate = useNavigate();
+
+  const getUserData = async () => {
+    try {
+      const data = await getUserDataService(token);
+      setUser(data);
+    } catch (error) {
+      np;
+      setToken("");
+      setUser(null);
+    }
+  };
 
   useEffect(() => {
     console.log("Token cargado:", localStorage.getItem("token"));
@@ -148,6 +160,7 @@ export const MyAccount = () => {
         navigate("/");
       } else {
         navigate("/");
+        getUserData();
       }
       setRefreshPage(false);
     }
