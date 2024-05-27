@@ -30,6 +30,12 @@ export const UserAuth = () => {
           </div>
           {dropdownOpen && (
             <ul>
+              <li>
+                <Link to={`/myexperiences`}>Mis Experiencias</Link>
+              </li>
+              <li>
+                <Link to={`/account`}>Mi cuenta</Link>
+              </li>
               {user.user.role === "admin" && (
                 <>
                   <li>
@@ -39,12 +45,6 @@ export const UserAuth = () => {
                   </li>
                   <li>
                     <Link to={`/create_experience`}>Nueva experiencia</Link>
-                  </li>
-                  <li>
-                    <Link to={`/myexperiences`}>Mis Experiencias</Link>
-                  </li>
-                  <li>
-                    <Link to={`/account`}>Mi cuenta</Link>
                   </li>
                 </>
               )}

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext.jsx";
 import { Slide, toast } from "react-toastify";
+import styles from "./HandleAddDuplicateExperience.module.css";
 
 function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
   const { token } = useContext(UserContext);
@@ -149,33 +150,36 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
       });
     }
   }
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
 
   if (modalIsOpen) {
     return (
-      <div>
-        <form onSubmit={submitEditExperience}>
+      <div className={styles.modal}>
+        <form className={styles.modalContent} onSubmit={submitEditExperience}>
+          <span className={styles.close} onClick={handleCloseModal}>
+            &times;
+          </span>
           <h4>{title}</h4>
           <img src={image} width="100"></img>
+          <p>{type}</p>
           <p>{description}</p>
-          <strong>{type}</strong>
-          <br></br>
-          <small>{date}</small>
+          <p>{date}</p>
           <p>{city}</p>
           <h5>{price}</h5>
           <h5>Plazas mínimas: {min_places}</h5>
           <h5>Plazas totales: {total_places}</h5>
           <strong>ESTADO: {activo}</strong>
-          <br></br>
-          <label>
+          <div className={styles.divCheckBox}>
+            <label>Confirmar Cambios</label>
             <input type="checkbox" required></input>
-            Confirmo que todos los datos están correctos.
-          </label>
-          <br></br>
+          </div>
           <button type="submit">Editar Experiencia</button>
+          <button onClick={submitDuplicateExperience}>
+            Crear nueva experiencia duplicada
+          </button>
         </form>
-        <button onClick={submitDuplicateExperience}>
-          Crear nueva experiencia duplicada
-        </button>
       </div>
     );
   }
