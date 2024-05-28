@@ -1,3 +1,4 @@
+import Comment from "./Comment.jsx";
 function InactiveExperiencesItem({ inactiveExperience }) {
     const {
         title,
@@ -13,6 +14,9 @@ function InactiveExperiencesItem({ inactiveExperience }) {
 
     const rate = parseFloat(average_rate);
     const rating = rate.toFixed(1);
+
+    const active = 0;
+    const experienceId = inactiveExperience.id;
 
     let printRating;
     let printComments;
@@ -46,6 +50,9 @@ function InactiveExperiencesItem({ inactiveExperience }) {
                 </div>
                 <section className="comments">
                     {printComments}
+                </section>
+                <section>
+                    <Comment active = {active} experienceId = {experienceId}/>
                 </section>
             </div>
         </li>

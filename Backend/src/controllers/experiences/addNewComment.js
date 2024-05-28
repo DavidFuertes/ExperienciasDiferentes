@@ -5,10 +5,12 @@ import validateSchema from '../../utilities/validateSchema.js';
 import { addNewComentSchema } from '../../schemas/experiences/addNewComentSchema.js';
 
 async function addNewComment(req, res, next) {
-    const newExperience = req.body;
-    const { content, rate } = newExperience;
+    const newComment = req.body;
+    const { content, rate } = newComment;
     const { id } = req.query;
     const user_id = req.user.id;
+
+    console.log(newComment)
 
     try {
         //Validamos el body con joi
