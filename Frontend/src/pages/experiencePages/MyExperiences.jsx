@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../context/UserContext.jsx";
 import ActiveExperienceList from "../../components/ActiveExperiencesList.jsx";
 import InactiveExperienceList from "../../components/InactiveExperienceList.jsx";
