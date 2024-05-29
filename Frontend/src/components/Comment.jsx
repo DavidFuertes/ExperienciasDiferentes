@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { ToastContainer } from "react-toastify";
 import { Slide, toast } from "react-toastify";
 
 function Comment({ active, experienceId }) {
@@ -34,7 +33,7 @@ function Comment({ active, experienceId }) {
       const respuesta = await resp.json();
 
       if (resp?.ok === true) {
-        toast.success("Expereiencia comentada correctamente", {
+        toast.success(respuesta[0].message, {
           position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
@@ -45,11 +44,11 @@ function Comment({ active, experienceId }) {
           theme: "dark",
           transition: Slide,
         });
-
-        setCommentValue("");
       } else {
-        throw new Error("Error al editar la experiencia");
+        throw new Error("Error al comentar la experiencia");
       }
+
+      setCommentValue("");
     } catch (error) {
       toast.error(error.message, {
         position: "top-center",
@@ -68,11 +67,10 @@ function Comment({ active, experienceId }) {
   if (active) {
     return (
       <>
-        <ToastContainer />
         <form onSubmit={sendComment}>
           <input
             type="text"
-            placeholder="Cuéntanos cómo te fué!"
+            placeholder="¡Añade un comentario!"
             value={commentValue}
             minLength={10}
             maxLength={50}
@@ -87,11 +85,10 @@ function Comment({ active, experienceId }) {
   } else {
     return (
       <>
-        <ToastContainer />
         <form onSubmit={sendComment}>
           <input
             type="text"
-            placeholder="Cuéntanos cómo te fué!"
+            placeholder="¡Cuéntanos cómo te fué!"
             value={commentValue}
             minLength={10}
             maxLength={50}

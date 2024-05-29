@@ -185,128 +185,165 @@ export const MyAccount = () => {
 
   return (
     <section className={styles.sectionUsuario}>
-    <div className={styles.divUsuario}>
-      <h1 className={styles.h1Profile}>Perfil de usuario</h1>
-      <form className={styles.formUser} onSubmit={handleSubmit}>
-        <div className={styles.divInputs} >
-          {/* <label htmlFor="name">Nombre:</label> */}
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={userData.name}
-            placeholder={user.user.name}
-            onChange={handleInputChange}
-            className={styles.inputUser}
-          />
-        </div>
-        <div className={styles.divInputs}>
-          {/* <label htmlFor="email">Email:</label> */}
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={userData.email}
-            placeholder={user.user.email}
-            onChange={handleInputChange}
-            className={styles.inputEmail}
-          />
-        </div>
-        <div className={styles.divInputs}>
-          {/* <label htmlFor="date">Fecha de Nacimiento:</label> */}
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={userData.date}
-            placeholder={user.user.date}
-            onChange={handleInputChange}
-            className={styles.inputDate}
-          />
-        </div>
-        <div className={styles.divInputs}>
-          {/* <label htmlFor="residence">Ciudad de Residencia:</label> */}
-          <input
-            type="text"
-            id="residence"
-            name="residence"
-            value={userData.residence}
-            placeholder={user.user.residence ? user.user.residence : "Residencia"}
-            onChange={handleInputChange}
-            className={styles.inputUser}
-          />
-        </div>
-        <div className={styles.divInputs}>
-          {/* <label htmlFor="languages">Lenguajes hablados:</label> */}
-          <input
-            type="text"
-            id="languages"
-            name="languages"
-            value={userData.languages}
-            onChange={handleInputChange}
-            placeholder={user.user.languages ? user.user.languages : "Idioma/s"}
-            className={styles.inputLanguage}
-          />
-        </div>
-
-        <div className={styles.divInputs}>
-          <label className={styles.imgLabel}>
-            {/* <span>Imagen:</span> */}
+      <div className={styles.divUsuario}>
+        <h1 className={styles.h1Profile}>Perfil de usuario</h1>
+        <form className={styles.formUser} onSubmit={handleSubmit}>
+          <div className={styles.divInputs}>
+            {/* <label htmlFor="name">Nombre:</label> */}
             <input
-              className={styles.imgButton}
-              name="avatar"
-              type="file"
-              onChange={handleFile}
+              type="text"
+              id="name"
+              name="name"
+              value={userData.name}
+              placeholder={user.user.name}
+              onChange={handleInputChange}
+              className={styles.inputUser}
+            />
+          </div>
+          <div className={styles.divInputs}>
+            {/* <label htmlFor="email">Email:</label> */}
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={userData.email}
+              placeholder={user.user.email}
+              onChange={handleInputChange}
+              className={styles.inputEmail}
+            />
+          </div>
+          <div className={styles.divInputs}>
+            {/* <label htmlFor="date">Fecha de Nacimiento:</label> */}
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={userData.date}
+              placeholder={user.user.date}
+              onChange={handleInputChange}
+              className={styles.inputDate}
+            />
+          </div>
+          <div className={styles.divInputs}>
+            {/* <label htmlFor="residence">Ciudad de Residencia:</label> */}
+            <input
+              type="text"
+              id="residence"
+              name="residence"
+              value={userData.residence}
+              placeholder={
+                user.user.residence ? user.user.residence : "Residencia"
+              }
+              onChange={handleInputChange}
+              className={styles.inputUser}
+            />
+          </div>
+          <div className={styles.divInputs}>
+            {/* <label htmlFor="languages">Lenguajes hablados:</label> */}
+            <input
+              type="text"
+              id="languages"
+              name="languages"
+              value={userData.languages}
+              onChange={handleInputChange}
+              placeholder={
+                user.user.languages ? user.user.languages : "Idioma/s"
+              }
+              className={styles.inputLanguage}
+            />
+          </div>
+
+          <div className={styles.divInputs}>
+            <label className={styles.imgButton}>
+              {}
+              <input
+                name="avatar"
+                type="file"
+                onChange={handleFile}
+                style={{ display: "none" }}
               />
-              {imagePreview && (
-                <img className={styles.imgPreview}
-                  src={imagePreview}
-                  alt="preview"
-                />
-              )}
-          </label>
-        </div >
-
-        <button className={styles.saveButton} type="submit">Guardar Cambios</button>
-      </form>
-
-      <button className={styles.deleteButton} onClick={() => setShowDeleteModal(true)}>Eliminar Cuenta</button>
-
-      {showDeleteModal && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <p style={{ color: "#ffffff" }}>
-              ¿Estás seguro de que deseas eliminar tu cuenta?
-            </p>
-            <button className={styles.modalContentButton} onClick={() => setConfirmDelete(true)}>Sí</button>
-            <button className={styles.modalContentButton} onClick={() => setShowDeleteModal(false)}>No</button>
+            </label>
+            {imagePreview && (
+              <img
+                className={styles.imgPreview}
+                src={imagePreview}
+                alt="preview"
+              />
+            )}
           </div>
-        </div>
-      )}
 
-      {showDeleteModal && confirmDelete && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <p style={{ color: "#ffffff" }}>
-              ¡Es una lástima que hayas decidido abandonarnos! Esperamos
-              volverte a ver :D.
-            </p>
-            <button className={styles.modalContentButton} onClick={handleDeleteAccount}>¡Hasta la próxima!</button>
+          <button className={styles.saveButton} type="submit">
+            Guardar Cambios
+          </button>
+        </form>
+
+        <button
+          className={styles.deleteButton}
+          onClick={() => setShowDeleteModal(true)}
+        >
+          Eliminar Cuenta
+        </button>
+
+        {showDeleteModal && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <p style={{ color: "#ffffff" }}>
+                ¿Estás seguro de que deseas eliminar tu cuenta?
+              </p>
+              <button
+                className={styles.modalContentButton}
+                onClick={() => setConfirmDelete(true)}
+              >
+                Sí
+              </button>
+              <button
+                className={styles.modalContentButton}
+                onClick={() => setShowDeleteModal(false)}
+              >
+                No
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {showModal && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <p style={{ color: "#ffffff" }}>{modalMessage}</p>
-            <button className={styles.modalContentButton} onClick={() => closeModal(true)}>Sí</button>
-            <button className={styles.modalContentButton} onClick={() => closeModal(false)}>No</button>
+        {showDeleteModal && confirmDelete && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <p style={{ color: "#ffffff" }}>
+                ¡Es una lástima que hayas decidido abandonarnos! Esperamos
+                volverte a ver :D.
+              </p>
+              <button
+                className={styles.modalContentButton}
+                onClick={handleDeleteAccount}
+              >
+                ¡Hasta la próxima!
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* <style jsx>{`
+        {showModal && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <p style={{ color: "#ffffff" }}>{modalMessage}</p>
+              <button
+                className={styles.modalContentButton}
+                onClick={() => closeModal(true)}
+              >
+                Sí
+              </button>
+              <button
+                className={styles.modalContentButton}
+                onClick={() => closeModal(false)}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* <style jsx>{`
         .modal {
           position: fixed;
           top: 0;
@@ -325,19 +362,12 @@ export const MyAccount = () => {
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
       `}</style> */}
-      <Link to="/account/ChangePassword" className={styles.changePassword}>Cambiar contraseña</Link>
-    </div>
+        <Link to="/account/ChangePassword" className={styles.changePassword}>
+          Cambiar contraseña
+        </Link>
+      </div>
     </section>
   );
 };
 
 export default MyAccount;
-
-
-
-
-
-
-
-
-

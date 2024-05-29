@@ -10,7 +10,7 @@ async function addNewComment(req, res, next) {
     const { id } = req.query;
     const user_id = req.user.id;
 
-    console.log(newComment)
+    console.log(newComment);
 
     try {
         //Validamos el body con joi
@@ -21,34 +21,50 @@ async function addNewComment(req, res, next) {
         }
         const pool = await getPool();
 
-        const [insertInfo] = await pool.query(
-            `
-            INSERT INTO Comments (user_id, experience_id, content, rate)
-            VALUES(?, ?, ?, ?)
-        `,
-            [user_id, id, content, rate],
-        );
-
-        console.log(insertInfo);
-
-        const [postedData] = await pool.query(
-            `
+        if (!rate) {
+            const [insertInfo] = await pool.query(
+                `
+                INSERT INTO Comments (user_id, experience_id, content)
+                VALUES(?, ?, ?)
+            `,
+                [user_id, id, content],
+            );
+            console.log(insertInfo);
+            const resInfo = [
+                {
+                    message: 'Experiencia comentada con éxito',
+                    newId: insertInfo.insertId,
+                },
+            ];
+            const [postedData] = await pool.query(
+                `
             SELECT * FROM Comments WHERE id = ?
         `,
-            [insertInfo.insertId],
-        );
-
-        const resInfo = [
-            {
-                message: 'OK',
-                newId: insertInfo.insertId,
-            },
-            {
-                postedData,
-            },
-        ];
-
-        res.status(201).json(resInfo);
+                [insertInfo.insertId],
+            );
+            res.status(201).json(resInfo);
+        } else {
+            const [insertInfo] = await pool.query(
+                `
+                INSERT INTO Comments (user_id, experience_id, content, rate)
+                VALUES(?, ?, ?, ?)
+            `,
+                [user_id, id, content, rate],
+            );
+            const resInfo = [
+                {
+                    message: 'Experiencia valorada con éxito',
+                    newId: insertInfo.insertId,
+                },
+            ];
+            const [postedData] = await pool.query(
+                `
+                                 SELECT * FROM Comments WHERE id = ?
+                            `,
+                [insertInfo.insertId],
+            );
+            res.status(201).json(resInfo);
+        }
     } catch (error) {
         next(error);
     }
