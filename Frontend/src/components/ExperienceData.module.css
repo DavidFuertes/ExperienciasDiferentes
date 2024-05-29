@@ -1,3 +1,142 @@
-.experiencePanel {
-  border-color: antiquewhite;
+.titleDetails{
+  text-align: center;
+  color: #000000;
+  align-content: center;
+  padding: 1rem;
+}
+
+.divDetails{
+  background-color: #ffffff;
+  display: grid;
+  align-items: center;
+  grid-template-areas: 
+  "image title title"
+  "image description description "
+  "image city date"
+  "image level availablePlaces "
+  "rate price submit";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  border-radius: 0.8rem;
+  margin: 20px;
+  height: auto;
+  cursor: default;
+  /* text-align: center; */
+
+  color: #000000;
+}
+
+.experienceTitleDetails{
+  grid-area: title;
+  text-align: center;
+}
+
+.experienceImgDetails {
+
+  grid-area: image;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.8rem;
+
+}
+
+.experienceDescriptionDetails {
+
+  grid-area: description;
+  margin-left: 0.8rem;
+
+}
+
+.experienceCityDetails {
+
+  grid-area: city;
+  margin-left: 0.8rem;
+}
+
+.experienceCityDetails svg {
+  color: #2d2d2d;
+}
+
+.experienceLevelDetails {
+
+  grid-area: level;
+  margin-left: 0.8rem;
+}
+
+/* .experienceTotalDetails {
+
+  grid-area: totalPlaces;
+} */
+
+.experienceFreeDetails {
+
+  grid-area: availablePlaces;
+  margin-left: 0.8rem;
+}
+
+.experienceDateDetails {
+  grid-area: date;
+  margin-left: 0.8rem;
+}
+
+.experienceRateDetails {
+
+  grid-area: rate;
+  margin-left: 0.8rem;
+  align-self: center;
+  text-align: center;
+}
+
+.experiencePriceDetails {
+
+  grid-area: price;
+  margin-left: 0.8rem;
+  align-self: center;
+}
+
+.bookButton, .cancelButton {
+  background-color: #d9d9d9;
+  color: #000000;
+  border: 1px solid #000000;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  transition: background-color 0.5s ease;
+  width: 12rem;
+  /* align-self: center; */
+  grid-area: submit;
+  justify-self: center;
+}
+
+.bookButton:hover , .cancelButton:hover {
+
+  background-color: #ffffff;
+}
+
+.commentsDiv{
+  background-color: #ffffff;
+  border-radius: 8px;
+  color: #000000;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.userComment {
+  background-color: #f4cba46d;
+  border-radius: 0.8rem;
+  margin: 1rem;
+  padding: 1rem;
+  width: 54vw;
+  border: 1px solid #000000;
+}
+
+.userNameInfo {
+
+  font-weight: bold;
+}
+
+.userCommentInfo {
+
 }

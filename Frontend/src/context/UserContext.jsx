@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { getUserDataService } from "../services/index.js";
+import styles from "../pages/userPages/MyAccount.module.css"
 
 export const UserContext = createContext(null);
 
@@ -7,13 +8,13 @@ const ConfirmLogoutModal = ({ showModal, closeModal }) => {
   if (!showModal) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <p style={{ color: "black" }}>
+    <div className={styles.modal}>
+      <div className={styles.modalContent}>
+        <p style={{ color: "#ffffff" }}>
           ¿Estás seguro de que te quieres deslogar de la web?
         </p>
-        <button onClick={() => closeModal(true)}>Sí</button>
-        <button onClick={() => closeModal(false)}>No</button>
+        <button className={styles.modalContentButton} onClick={() => closeModal(true)}>Sí</button>
+        <button className={styles.modalContentButton} onClick={() => closeModal(false)}>No</button>
       </div>
     </div>
   );

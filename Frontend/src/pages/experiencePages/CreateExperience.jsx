@@ -4,6 +4,7 @@ import { createExperienceSchema } from "../../schemas/createExperienceSchema.js"
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext.jsx";
+import styles from "./CreateExperience.module.css"
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const CreateExperience = () => {
@@ -92,41 +93,43 @@ export const CreateExperience = () => {
   return (
     <div>
       <ToastContainer />
-      <section className="formSection">
-        <h1>Nueva Experiencia</h1>
+      <section className={styles.formSection}>
+        <h1 className={styles.h1Create}>Nueva Experiencia</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
-            <label>Título</label>
-            <input type="text" placeholder="Título..." {...register("title")} />
+            {/* <label>Título</label> */}
+            <input type="text" className={styles.createTitle} placeholder="Título..." {...register("title")} />
             <p>{errors.title?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Descripción</label>
+            {/* <label>Descripción</label> */}
             <input
-              type="text"
+              type="textarea"
+              className={styles.createDescription}
               placeholder="Descripción..."
               {...register("description")}
             />
             <p>{errors.description?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Tipo de experiencia</label>
-            <select {...register("type")}>
-              <option value="">Selecciona una opción</option>
-              <option value="Relajado">Relajado</option>
-              <option value="Medio">Medio</option>
-              <option value="Adrenalina pura">Adrenalina pura</option>
+            {/* <label>Tipo de experiencia</label> */}
+            <select className={styles.createSelect} {...register("type")}>
+              <option className={styles.createSelectOption} value="">Selecciona una opción</option>
+              <option className={styles.createSelectOption} value="Relajado">Relajado</option>
+              <option className={styles.createSelectOption} value="Medio">Medio</option>
+              <option className={styles.createSelectOption} value="Adrenalina pura">Adrenalina pura</option>
             </select>
             <p>{errors.type?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Ciudad</label>
-            <input type="text" placeholder="Ciudad..." {...register("city")} />
+            {/* <label>Ciudad</label> */}
+            <input type="text" className={styles.createCity} placeholder="Ciudad..." {...register("city")} />
             <p>{errors.city?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Imagen</label>
+            {/* <label>Imagen</label> */}
             <input
+              className={styles.imgButton}
               type="file"
               name="newImage"
               {...register("newImage")}
@@ -137,18 +140,19 @@ export const CreateExperience = () => {
               <img
                 src={imagePreview}
                 alt="Imagen previsualizada"
-                style={{ width: "150px", height: "150px" }}
+                className={styles.imgPreview}
               />
             )}
           </fieldset>
           <fieldset>
-            <label>Fecha</label>
-            <input type="date" {...register("date")} />
+            {/* <label>Fecha</label> */}
+            <input type="date" className={styles.createDate} {...register("date")} />
             <p>{errors.date?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Precio</label>
+            {/* <label>Precio</label> */}
             <input
+              className={styles.createPrice}
               type="Number"
               min="0"
               max="500"
@@ -158,29 +162,31 @@ export const CreateExperience = () => {
             <p>{errors.price?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Plazas mínimas</label>
+            {/* <label>Plazas mínimas</label> */}
             <input
+              className={styles.createMinPlaces}
               type="Number"
               min="5"
               max="10"
-              placeholder="0"
+              placeholder="Plazas mínimas"
               {...register("min_places")}
             />
             <p>{errors.min_places?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Plazas máximas</label>
+            {/* <label>Plazas máximas</label> */}
             <input
+              className={styles.createMaxPlaces}
               type="Number"
               min="10"
               max="25"
-              placeholder="0"
+              placeholder="Plazas máximas"
               {...register("total_places")}
             />
             <p>{errors.total_places?.message}</p>
           </fieldset>
 
-          <button disabled={!isValid} type="submit">
+          <button className={styles.createButton} disabled={!isValid} type="submit">
             Crear experiencia
           </button>
         </form>

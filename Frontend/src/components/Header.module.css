@@ -5,3 +5,8 @@
 .headerEd a {
   text-wrap: nowrap;
 }
+
+.logoHeader {
+  height: 70px;
+  width: 78px;
+}

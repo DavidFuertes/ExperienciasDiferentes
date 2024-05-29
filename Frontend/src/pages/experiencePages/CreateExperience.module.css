@@ -1,0 +1,109 @@
+.formSection {
+    padding: 1rem;
+    margin: 3rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    width: 100vh;
+    font-style: Inter, sans-serif;
+}
+
+.h1Create {
+    color: #2d2d2d;
+    text-align: center;
+}
+
+.createTitle, .createDescription,.createDate, .createCity, .createPrice, .createMinPlaces, .createMaxPlaces {
+    margin-top: 1rem;
+    background-color: #ffffff;
+    border: 2px solid black;
+    border-radius: 8px;
+    color: #000000;
+}
+
+
+.createSelect {
+    margin-top: 1rem;
+    background-color: #ffffff;
+    border: 1px solid black;
+    display: flex;
+    color: #000000;
+    border-radius: 8px;
+    width: 30%;
+    height: 1rem;
+    align-items: flex-start;
+    
+}
+
+
+
+.createDate::-webkit-calendar-picker-indicator {
+    filter: invert(1)
+}
+
+.formSection p {
+    color: red;
+}
+
+.imgButton {
+    width: auto;
+    justify-content: center;
+}
+
+.imgButton::-webkit-file-upload-button{
+    visibility: hidden;
+}
+
+.imgButton::before {
+    content: 'Seleccionar imagen';
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    /* -webkit-user-select: none; */
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+.imgPreview {
+    width: 9.375rem;
+    height: 9.375rem;
+    border-radius: 5rem
+    
+}
+
+.createButton {
+    background-color: #d9d9d9;
+    color: #000000;
+    border: 1px solid #000000;
+    margin: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    justify-content: left; 
+    transition: background-color 0.5s ease;
+}
+
+.createButton:hover {
+    background-color: #ffffff;
+
+}
+
+.createButton:disabled {
+    background-color: #d9d9d9;
+    opacity: 30%;
+    cursor: default;
+    
+    color: #000000;
+    border: 1px solid #000000;
+    margin: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    justify-content: left; 
+}
+
+/* @keyframes {(width > 760) */

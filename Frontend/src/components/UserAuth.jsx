@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext.jsx";
+import styles from "./UserAuth.module.css"
 
 export const UserAuth = () => {
   const { user, logout } = useContext(UserContext);
@@ -14,51 +15,50 @@ export const UserAuth = () => {
     <section>
       {user ? (
         <>
-          <div onClick={toggleDropdown} style={{ cursor: "pointer" }}>
+            <span className={styles.spanUserName}>
+               Bienvenido, {user.user.name} {/* <i className="fas fa-caret-down"></i> */}
+            </span>
+          <div onClick={toggleDropdown}>
             <img
+              className={styles.avatarHeader}
               src={user.user.avatar}
               alt="avatar"
-              style={{
-                borderRadius: "50%",
-                maxWidth: "40px",
-                maxHeight: "40px",
-              }}
             />
-            <span>
-              Bienvenido, {user.user.name} <i className="fas fa-caret-down"></i>
-            </span>
-          </div>
           {dropdownOpen && (
-            <ul>
-              <li>
-                <Link to={`/myexperiences`}>Mis Experiencias</Link>
-              </li>
-              <li>
-                <Link to={`/account`}>Mi cuenta</Link>
-              </li>
+
+            <div className = {styles.desplegable}>
+                  <span>
+                    <Link to={`/myexperiences`}>Mis Experiencias</Link>
+                  </span>
+                  <span>
+                    <Link to={`/account`}>Mi cuenta</Link>
+                  </span>
               {user.user.role === "admin" && (
                 <>
-                  <li>
+                  <span>
                     <Link to={`/experienceadministration`}>
                       Panel de Control
                     </Link>
-                  </li>
-                  <li>
+                  </span>
+                  <span>
                     <Link to={`/create_experience`}>Nueva experiencia</Link>
-                  </li>
+
+                  </span>
+
                 </>
               )}
-              <li>
+              <span>
                 <button
                   onClick={() => {
                     logout();
                   }}
-                >
+                  >
                   Deslogarse
                 </button>
-              </li>
-            </ul>
+              </span>
+            </div>
           )}
+          </div>
         </>
       ) : (
         <ul>

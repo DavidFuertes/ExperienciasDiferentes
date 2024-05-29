@@ -1,0 +1,215 @@
+.sectionUsuario {
+    display: flex;
+    justify-content: center;
+    /* position: relative; */
+    /* width: 50%vw; */
+  }
+
+  .formUser {
+    background-color: #ffffff;
+    border-radius: 8px;
+    justify-items: center;
+  }
+  
+  .divUsuario {
+    max-width: 700px;
+    align-content: center;
+    background-color: #f4cba4;
+    align-items: center;
+    font-style: Inter, sans-serif;
+  }
+
+  .divInputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .h1Profile {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    color: #2d2d2d;
+    justify-content: center;
+  }
+  
+
+  .inputUser {
+    background-color: #ffffff;
+    border-radius: 8px;
+    color: #2d2d2d;
+    border: 2px solid #000000;
+    outline: none;
+    max-width: 80%;
+    margin-top: 20px ;
+    align-content: center;
+  }
+
+.inputEmail {
+
+  background-color: #ffffff;
+  color: #2d2d2d;
+  border-radius: 8px;
+  border: 2px solid #000000;
+  outline: none;
+  max-width: 80%;
+  margin-top: 20px ;
+  align-content: center;
+}
+
+.inputDate {
+
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #000000;
+  color: #2d2d2d;
+  outline: none;
+  max-width: 80%;
+  margin-top: 20px ;
+}
+
+.inputResidence {
+
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #000000;
+  color: #2d2d2d;
+  outline: none;
+  max-width: 80%;
+  margin-top: 20px ;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.inputLanguage {
+
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #000000;
+  color: #2d2d2d;
+  outline: none;
+  max-width: 80%;
+  margin-top: 20px ;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.imgLabel {
+  /* display: flex; */
+}
+
+.imgButton {
+  margin-top: 20px;
+  width: auto;
+  justify-content: center;
+}
+
+.imgButton::-webkit-file-upload-button{
+  visibility: hidden;
+}
+
+.imgButton::before {
+  content: 'Seleccionar imagen';
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  /* -webkit-user-select: none; */
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 10pt;
+}
+
+.imgPreview {
+  width: 9.375rem;
+  height: 9.375rem;
+  border-radius: 5rem;
+  margin: 20px;
+
+  
+}
+
+.saveButton {
+  background-color: #d9d9d9;
+  color: #000000;
+  border: 1px solid #000000;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  justify-content: left; 
+}
+
+.deleteButton {
+  background-color: #d9d9d9;
+  color: #000000;
+  border: 1px solid #000000;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px;
+  font-family: Inter, sans-serif;
+}
+
+.changePassword {
+  background-color: #d9d9d9;
+  color: #000000;
+  border: 1px solid #000000;
+  margin-top: 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 6px;
+  text-decoration: none;
+  box-sizing: content-box;
+  font-style: Karma;
+  box-sizing: 32px 100px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: #2d2d2d;
+  opacity: 90%;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalContentButton {
+  margin: 10px 20px 0px 20px;
+  size: 20px 20px;
+  display: inline-block;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 25px;
+  color: #000000;
+  cursor: pointer;
+}

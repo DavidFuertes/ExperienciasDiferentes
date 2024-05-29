@@ -4,6 +4,7 @@ import { obtainExperienceService } from "../../services/index.js";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { ExperienceData } from "../../components/ExperienceData.jsx";
 import { ExperienceComment } from "../../components/ExperienceComment.jsx";
+import styles from "../../components/ExperienceData.module.css"
 import Loading from "../../components/Loading.jsx";
 
 export const Experience = () => {
@@ -57,8 +58,8 @@ export const Experience = () => {
         />
       </section>
       <section className="listSection">
-        <h1>Comentarios</h1>
-        <div>
+        <h1 className={styles.titleDetails}>Comentarios</h1>
+        <div className={styles.commentsDiv}>
           {data.comments.map((comment) => (
             <ExperienceComment
               key={comment.id}
