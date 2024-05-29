@@ -1,4 +1,4 @@
-.expCard {
+/* .expCard {
     background-color: #ffffff;
     display: grid;
     grid-template-areas: 
@@ -121,28 +121,26 @@
 
 }
 
-@media (max-width: 768px) {
-    .expCard {
-        font-size: 10px;
-         grid-template-columns: 1fr; /* Cambiando a una sola columna en pantallas pequeñas */
-         grid-template-rows: auto; /* Asegurándose de que las filas se ajusten al contenido */
-     }
- 
-    .cardImg {
-        height: auto;
-        width: auto;
-    }
-    .cardTitle {
-        font-size: 10px;
-        margin-left: 0;
-    }
-    .cardCity,
-    .cardIntensity,
-    .cardDate,
-    .cardAvailablePlaces,
-    .cardPrice,
-    .cardRate {
-         margin-left: 0; /* Eliminando el margen izquierdo en pantallas pequeñas para un diseño más compacto */
-         max-width: 33%;
-     }
- }
+*/
+
+.listSectionSection {
+  background-color: aquamarine;
+  width: 100vw;
+}
+
+.expCard {
+  background-color: #f8f8f8;
+  color: #2d2d2d;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.cardImg {
+  width: 200px;
+  height: 200px;
+  max-width: 15rem;
+  max-height: 15rem;
+  border-radius: 0.8rem;
+  object-fit: cover;
+  object-position: left;
+}

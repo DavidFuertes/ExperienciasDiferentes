@@ -1,4 +1,4 @@
-.searchForm {
+/* .searchForm {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   max-width: 100%;
@@ -60,4 +60,68 @@
   justify-content: center;
   width: auto;
   text-align: center  ;
+} */
+
+.h1Main {
+  text-align: center;
+  color: #2d2d2d;
+}
+
+.filterSection {
+  display: flex;
+  justify-content: center;
+  min-width: 50%;
+  margin: 10px auto;
+}
+
+.filterForm {
+  width: 75vw;
+  background-color: #f8f8f8;
+  padding: 1rem;
+  color: #2d2d2d;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.8rem;
+}
+
+.filterForm input,
+.filterForm select,
+.filterForm button {
+  background-color: #f8f8f8;
+  width: 100%;
+  margin: 1rem 0;
+  outline: none;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #2d2d2d;
+  color: #2d2d2d;
+  padding: 0.5rem;
+}
+
+.filterForm option {
+  width: auto;
+}
+
+.filterForm button {
+  background-color: #2d2d2d;
+  color: #f8f8f8;
+  border: none;
+  cursor: pointer;
+}
+
+.filterForm button:hover {
+  background-color: #2d2d2d;
+  color: #f08e8e;
+  border: none;
+}
+
+.filterForm button:disabled {
+  background-color: #3d3d3d;
+  color: #a0a0a0;
+  border: none;
+  cursor: default;
+}
+
+.filterForm button:disabled:hover {
+  background-color: #535353;
+  border: none;
 }

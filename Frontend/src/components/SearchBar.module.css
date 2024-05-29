@@ -1,4 +1,4 @@
-.searchBar {
+/* .searchBar {
   position: relative;
   width: 25vw;
   height: 40px;
@@ -29,11 +29,11 @@
 .searchResults {
   background-color: rgb(241, 241, 241);
   margin-top: -10px;
-  /* padding-top: 10px; */
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   z-index: 1;
 }
+
 
 .searchResults li {
   padding: 0.5rem;
@@ -66,4 +66,65 @@
 .searchResults li span svg {
   margin-left: 0.5rem;
   margin-right: 0.25rem;
+} */
+
+.searchBar {
+  position: relative;
+  min-width: 50%;
+  margin: 10px auto;
+  width: 75vw;
+}
+
+.searchBar input {
+  width: 75vw;
+  padding: 10px;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 16px;
+  outline: none;
+  background-color: #f8f8f8;
+  color: #2d2d2d;
+}
+
+.searchResults {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 5px;
+}
+
+.searchResults li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchResults li:hover {
+  background-color: #f1f1f1;
+}
+
+.searchResults p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.searchResults span {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.searchResults svg {
+  margin-right: 5px;
 }

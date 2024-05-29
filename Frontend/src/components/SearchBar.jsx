@@ -38,7 +38,7 @@ export const SearchBar = ({ experiences }) => {
       <input
         type="text"
         value={search}
-        placeholder="Busca una experiencia o lugar..."
+        placeholder="Busca una experiencia..."
         onChange={searcher}
         onBlur={clearInput}
       />
