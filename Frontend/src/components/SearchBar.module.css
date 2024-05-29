@@ -3,28 +3,33 @@
   width: 25vw;
   height: 40px;
   overflow: visible;
+
+}
+
+.searchBar svg {
+  color: black ;
 }
 
 .searchBar input {
   min-width: 40%;
-  background-color: rgb(241, 241, 241);
+  background-color: #ffffff;
   color: rgb(39, 39, 39);
-  border-radius: 0.5rem;
-  border: none;
+  border-radius: 8px;
+  border: 1px solid #000000;
   padding: 0.5rem;
   width: 100%;
   height: 100%;
   outline: none;
 }
 .searchBar input::placeholder {
-  color: gray;
+  color: #828282;
   font-weight: bold;
 }
 
 .searchResults {
   background-color: rgb(241, 241, 241);
   margin-top: -10px;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   z-index: 1;

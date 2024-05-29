@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { recoverPasswordSchema } from "../../schemas/recoverPasswordSchema.js";
+import styles from "./LogIn.module.css"
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const RecoverPassword = () => {
@@ -77,33 +78,39 @@ export const RecoverPassword = () => {
   };
 
   return (
-    <section className="formSection">
+    <>
+      <h1 className={styles.h1LogIn}>Página de creación de una nueva contraseña</h1>
+      <div className={styles.divLogin}>
+      <section className="formSection">
       <ToastContainer />
-      <h1>Página de creación de una nueva contraseña</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          <label>Nueva contraseña:</label>
+          <label className={styles.labelPassword}>Nueva contraseña:</label>
           <input
+            className={styles.inputPassword}
             type="password"
-            placeholder="Contraseña..."
+            placeholder="Contraseña"
             {...register("password")}
           />
           <div>{errors.password?.message}</div>
           <p id="message-error-password"></p>
         </fieldset>
         <fieldset>
-          <label>Repita la contraseña:</label>
+          <label className={styles.labelPassword}>Repita la contraseña:</label>
           <input
+            className={styles.inputPassword}
             type="password"
-            placeholder="Contraseña..."
+            placeholder="Contraseña"
             {...register("confirmPassword")}
           />
           <div>{errors.confirmPassword?.message}</div>
         </fieldset>
-        <button disabled={!isValid} type="submit">
-          Crea una nueva contraseña
+        <button className={styles.createButton} disabled={!isValid} type="submit">
+          Crear contraseña
         </button>
       </form>
     </section>
+    </div>
+    </>
   );
 };

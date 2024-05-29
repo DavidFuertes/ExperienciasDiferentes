@@ -55,10 +55,10 @@ export const Home = () => {
 
   if (error) {
     return (
-      <section className="listSection">
-        <h1>Últimas experiencias</h1>
+      <section className={styles.listSection}>
+        <h1 className={styles.h1Main}>Últimas experiencias</h1>
         <form className={styles.searchForm} onSubmit={handleSubmit(onSubmit)}>
-          <p>Filtros de búsqueda:</p>
+          <p className={styles.pForm} >Filtros de búsqueda:</p>
           <input
             type="text"
             {...register("search")}
@@ -143,6 +143,7 @@ export const Home = () => {
             </option>
           </select>
           <button
+            className={styles.filterButton}
             type="submit"
             disabled={!((sortBy && sortOrder) || type || search)}
           >
@@ -150,9 +151,10 @@ export const Home = () => {
           </button>
           <button
             type="button"
+            className={styles.filterButton}
             onClick={handleResetFilters}
             disabled={Object.keys(filters).length === 0}
-          >
+            >
             Reiniciar filtros
           </button>
         </form>
@@ -161,7 +163,8 @@ export const Home = () => {
     );
   } else
     return (
-      <section className="listSection">
+        <>
+      <section className={styles.listSection}>
         <h1>Últimas experiencias</h1>
         <form className={styles.searchForm} onSubmit={handleSubmit(onSubmit)}>
           <p>Filtros de búsqueda:</p>
@@ -250,19 +253,22 @@ export const Home = () => {
           </select>
           <button
             type="submit"
+            className={styles.filterButton}
             disabled={!((sortBy && sortOrder) || type || search)}
           >
             Aplicar filtros
           </button>
           <button
             type="button"
+            className={styles.filterButton}
             onClick={handleResetFilters}
             disabled={Object.keys(filters).length === 0}
           >
             Reiniciar filtros
           </button>
         </form>
-        <ListadoExperiencias experiences={experiences} />
       </section>
+        <ListadoExperiencias experiences={experiences} />
+        </>
     );
 };

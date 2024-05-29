@@ -1,0 +1,148 @@
+.expCard {
+    background-color: #ffffff;
+    display: grid;
+    grid-template-areas: 
+    "image title title"
+    "image date city "
+    "image availablePlaces cardIntensity"
+    "image rate price" ;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 25% 25% 25% 25% ;
+    border-radius: 8px;
+    margin: 20px;
+    height: auto;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+.listSectionSection {
+    overflow-y: hidden;
+    background-color: #F4CBA4 ;
+    border-radius: 8px;
+    align-self: center;
+    max-width: 50%;
+    border: 2px solid black;
+}
+
+.listScroll::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  .listScroll::-webkit-scrollbar-thumb {
+    background-color: rgb(65, 65, 65);
+    border-radius: 1rem;
+  }
+  
+  .listScroll::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(75, 75, 75);
+  }
+
+.cardTitle {
+    color: #2d2d2d;
+    grid-area: title;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.cardImg {
+    grid-area: image;
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+.cardCity {
+    grid-area: city;
+    color: #000000;
+    opacity: 65%;
+    font-weight: 600;
+    margin-left: 10px;
+    align-content: center;
+    text-align: center;
+}
+
+.cardIntensity {
+    grid-area: cardIntensity;
+    color: #000000;
+    opacity: 65%;
+    font-weight: 600;
+    margin-left: 10px;
+    align-content: center;
+    text-align: center;
+}
+
+
+.cardDate {
+
+    grid-area: date;
+    color: #000000;
+    opacity: 65%;
+    font-weight: 600;
+    margin-left: 10px;
+    align-content: center;
+    text-align: center;
+}
+
+
+.cardAvailablePlaces {
+
+    grid-area: availablePlaces;
+    color: #000000;
+    opacity: 65%;
+    font-weight: 600;
+    margin-left: 10px;
+    align-content: center;
+    text-align: center;
+
+}
+
+.cardPrice {
+
+    grid-area: price;
+    color: #000000;
+    opacity: 65%;
+    font-weight: 600;
+    margin-left: 10px;
+    align-content: center;
+
+}
+
+.cardRate {
+
+    grid-area: rate;
+    color: #000000;
+    opacity: 65%;
+    font-weight: 600;
+    margin-left: 10px;
+    align-content: center;
+
+}
+
+@media (max-width: 768px) {
+    .expCard {
+        font-size: 10px;
+         grid-template-columns: 1fr; /* Cambiando a una sola columna en pantallas pequeñas */
+         grid-template-rows: auto; /* Asegurándose de que las filas se ajusten al contenido */
+     }
+ 
+    .cardImg {
+        height: auto;
+        width: auto;
+    }
+    .cardTitle {
+        font-size: 10px;
+        margin-left: 0;
+    }
+    .cardCity,
+    .cardIntensity,
+    .cardDate,
+    .cardAvailablePlaces,
+    .cardPrice,
+    .cardRate {
+         margin-left: 0; /* Eliminando el margen izquierdo en pantallas pequeñas para un diseño más compacto */
+         max-width: 33%;
+     }
+ }

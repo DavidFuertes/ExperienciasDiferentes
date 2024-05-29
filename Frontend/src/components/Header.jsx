@@ -7,9 +7,9 @@ export const Header = () => {
   const { experiences } = useExperiences();
   return (
     <header className={styles.headerEd}>
-      <h1>
-        <Link to={"/"}>Experiencias Diferentes</Link>
-      </h1>
+      <span>
+        <Link to={"/"}> <img className={styles.logoHeader} src="https://res.cloudinary.com/dgokuinpf/image/upload/v1716744927/jmfblcuarh02e4br5088.png" alt="Logo experiencias diferentes" /> </Link>
+      </span>
 
       <SearchBar experiences={experiences} />
 

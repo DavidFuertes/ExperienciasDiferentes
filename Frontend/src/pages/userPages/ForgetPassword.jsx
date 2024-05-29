@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { forgetPasswordSchema } from "../../schemas/forgetPasswordSchema.js";
+import styles from "./LogIn.module.css"
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const ForgetPassword = () => {
@@ -59,21 +60,23 @@ export const ForgetPassword = () => {
   };
 
   return (
-    <div>
+    <>
+        <h1 className={styles.h1LogIn}>Olvidé mi contraseña</h1>
+    <div className={styles.divLogin}>
       <ToastContainer />
-      <section className="formSection">
-        <h1>Quiero cambiar mi contraseña</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <section>
+        <form className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
-            <label htmlFor="email">Correo electrónico:</label>
-            <input type="email" placeholder="Email..." {...register("email")} />
+            <label className={styles.labelEmail} htmlFor="email">Correo electrónico:</label>
+            <input className={styles.inputEmail} type="email" placeholder="example@example.com" {...register("email")} />
             <p>{errors.email?.message}</p>
           </fieldset>
-          <button disabled={!isValid} type="submit">
+          <button className={styles.createButton} disabled={!isValid} type="submit">
             Recuperar contraseña
           </button>
         </form>
       </section>
     </div>
+    </>
   );
 };

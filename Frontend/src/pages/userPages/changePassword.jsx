@@ -5,6 +5,7 @@ import { Slide, ToastContainer, toast } from "react-toastify";
 import { changeUserPasswordSchema } from "../../schemas/changeUserPasswordSchema.js";
 import { UserContext } from "../../context/UserContext.jsx";
 import { useContext } from "react";
+import styles from "./LogIn.module.css"
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const ChangePassword = () => {
@@ -71,13 +72,16 @@ export const ChangePassword = () => {
   };
 
   return (
-    <section className="formSection">
+    <>
+    <h1 className={styles.h1LogIn} >Cambiar contraseña</h1>
+    <div className={styles.divLogin}>
+    <section>
       <ToastContainer />
-      <h1>Página de creación de una nueva contraseña</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
-          <label>Contraseña actual:</label>
+          <label className={styles.labelPassword}>Contraseña actual:</label>
           <input
+            className={styles.inputPassword}
             type="password"
             placeholder="Contraseña..."
             {...register("currentPassword")}
@@ -86,18 +90,21 @@ export const ChangePassword = () => {
           <p id="message-error-password"></p>
         </fieldset>
         <fieldset>
-          <label>Introduce tu nueva contraseña:</label>
+          <label className={styles.labelPassword}>Introduce tu nueva contraseña:</label>
           <input
+            className={styles.inputPassword}
             type="password"
             placeholder="Contraseña..."
             {...register("newPassword")}
           />
           <div>{errors.confirmPassword?.message}</div>
         </fieldset>
-        <button disabled={!isValid} type="submit">
+        <button className={styles.createButton} disabled={!isValid} type="submit">
           Crea una nueva contraseña
         </button>
       </form>
     </section>
+    </div>
+    </>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 const { VITE_BACKEND_URL } = import.meta.env;
 import { UserContext } from "../../context/UserContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "./MyAccount.module.css"
 
 export const MyAccount = () => {
   const { token, setToken, user } = useContext(UserContext);
@@ -159,14 +160,19 @@ export const MyAccount = () => {
   // Efecto para recargar la página si se establece el estado refreshPage a true
   useEffect(() => {
     if (refreshPage) {
-      // Realizar el logout
-      logout();
-      // Forzar la recarga de la página
-      window.location.reload();
+      if (confirmDelete) {
+        // Realizar el logout
+        logout();
+        window.location.reload();
+      }
+      if (!confirmDelete) {
+        window.location.reload();
+      }
+
       // Restablecer el estado de refreshPage
       setRefreshPage(false);
     }
-  }, [refreshPage]);
+  }, [refreshPage, confirmDelete, logout]);
 
   // Manejar la eliminación de la cuenta
   const handleDeleteAccount = async () => {
@@ -188,123 +194,132 @@ export const MyAccount = () => {
   };
 
   return (
-    <div>
-      <h1>Página de Perfil de usuario</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nombre:</label>
+    <section className={styles.sectionUsuario}>
+    <div className={styles.divUsuario}>
+      <h1 className={styles.h1Profile}>Perfil de usuario</h1>
+      <form className={styles.formUser} onSubmit={handleSubmit}>
+        <div className={styles.divInputs} >
+          {/* <label htmlFor="name">Nombre:</label> */}
           <input
             type="text"
             id="name"
             name="name"
             value={userData.name}
+            placeholder={user.user.name}
             onChange={handleInputChange}
+            className={styles.inputUser}
           />
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className={styles.divInputs}>
+          {/* <label htmlFor="email">Email:</label> */}
           <input
             type="email"
             id="email"
             name="email"
             value={userData.email}
+            placeholder={user.user.email}
             onChange={handleInputChange}
+            className={styles.inputEmail}
           />
         </div>
-        <div>
-          <label htmlFor="date">Fecha de Nacimiento:</label>
+        <div className={styles.divInputs}>
+          {/* <label htmlFor="date">Fecha de Nacimiento:</label> */}
           <input
             type="date" // Campo de tipo Date para la fecha de nacimiento
             id="date"
             name="date"
             value={userData.date}
+            placeholder={user.user.date}
             onChange={handleInputChange}
+            className={styles.inputDate}
           />
         </div>
-        <div>
-          <label htmlFor="residence">Ciudad de Residencia:</label>
+        <div className={styles.divInputs}>
+          {/* <label htmlFor="residence">Ciudad de Residencia:</label> */}
           <input
             type="text"
             id="residence"
             name="residence"
             value={userData.residence}
+            placeholder={user.user.residence ? user.user.residence : "Residencia"}
             onChange={handleInputChange}
+            className={styles.inputUser}
           />
         </div>
-        <div>
-          <label htmlFor="languages">Lenguajes hablados:</label>
+        <div className={styles.divInputs}>
+          {/* <label htmlFor="languages">Lenguajes hablados:</label> */}
           <input
             type="text"
             id="languages"
             name="languages"
             value={userData.languages}
             onChange={handleInputChange}
-            placeholder="Ingrese los idiomas separados por comas"
+            placeholder={user.user.languages ? user.user.languages : "Idioma/s"}
+            className={styles.inputLanguage}
           />
         </div>
 
-        <div>
-          <label>
-            <span>Imagen:</span>
+        <div className={styles.divInputs}>
+          <label className={styles.imgLabel}>
+            {/* <span>Imagen:</span> */}
             <input
-              className="image-picker"
+              className={styles.imgButton}
               name="avatar"
               type="file"
               onChange={handleFile}
-            />
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="preview"
-                style={{ maxWidth: "200px", maxHeight: "200px" }}
               />
-            )}
+              {imagePreview && (
+                <img className={styles.imgPreview}
+                  src={imagePreview}
+                  alt="preview"
+                />
+              )}
           </label>
-        </div>
+        </div >
 
-        <button type="submit">Guardar Cambios</button>
+        <button className={styles.saveButton} type="submit">Guardar Cambios</button>
       </form>
 
-      <button onClick={() => setShowDeleteModal(true)}>Eliminar Cuenta</button>
+      <button className={styles.deleteButton} onClick={() => setShowDeleteModal(true)}>Eliminar Cuenta</button>
 
       {/* Modal para confirmación de eliminación de cuenta */}
       {showDeleteModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <p style={{ color: "black" }}>
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <p style={{ color: "#ffffff" }}>
               ¿Estás seguro de que deseas eliminar tu cuenta?
             </p>
-            <button onClick={() => setConfirmDelete(true)}>Sí</button>
-            <button onClick={() => setShowDeleteModal(false)}>No</button>
+            <button className={styles.modalContentButton} onClick={() => setConfirmDelete(true)}>Sí</button>
+            <button className={styles.modalContentButton} onClick={() => setShowDeleteModal(false)}>No</button>
           </div>
         </div>
       )}
 
       {/* Modal de despedida */}
       {showDeleteModal && confirmDelete && (
-        <div className="modal">
-          <div className="modal-content">
-            <p style={{ color: "black" }}>
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <p style={{ color: "#ffffff" }}>
               ¡Es una lástima que hayas decidido abandonarnos! Esperamos
               volverte a ver :D.
             </p>
-            <button onClick={handleDeleteAccount}>¡Hasta la próxima!</button>
+            <button className={styles.modalContentButton} onClick={handleDeleteAccount}>¡Hasta la próxima!</button>
           </div>
         </div>
       )}
 
       {/* Modal para confirmación de cambios guardados */}
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <p style={{ color: "black" }}>{modalMessage}</p>
-            <button onClick={() => closeModal(true)}>Sí</button>
-            <button onClick={() => closeModal(false)}>No</button>
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <p style={{ color: "#ffffff" }}>{modalMessage}</p>
+            <button className={styles.modalContentButton} onClick={() => closeModal(true)}>Sí</button>
+            <button className={styles.modalContentButton} onClick={() => closeModal(false)}>No</button>
           </div>
         </div>
       )}
 
-      <style jsx>{`
+      {/* <style jsx>{`
         .modal {
           position: fixed;
           top: 0;
@@ -322,10 +337,20 @@ export const MyAccount = () => {
           border-radius: 8px;
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-      `}</style>
-      <Link to="/account/ChangePassword">Quiero cambiar mi contraseña</Link>
+      `}</style> */}
+      <Link to="/account/ChangePassword" className={styles.changePassword}>Cambiar contraseña</Link>
     </div>
+    </section>
   );
 };
 
 export default MyAccount;
+
+
+
+
+
+
+
+
+

@@ -7,6 +7,7 @@ import { loginUserSchema } from "../../schemas/loginUserSchema.js";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Importar estilos de Toastify
 const { VITE_BACKEND_URL } = import.meta.env;
+import styles from "./LogIn.module.css"
 
 export const LogIn = () => {
   const { login } = useContext(UserContext);
@@ -116,38 +117,42 @@ export const LogIn = () => {
   };
 
   return (
-    <div>
+    <>
+      <h1 className={styles.h1LogIn} >Inicio de sesión</h1>
+      <div className={styles.divLogin}>
       <ToastContainer />
-      <section className="formSection">
-        <h1>Página de Log In</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <section>
+        <form  className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
-            <label>Correo electrónico:</label>
-            <input type="email" placeholder="Email..." {...register("email")} />
-            <p>{errors.email?.message}</p>
+            <label className={styles.labelEmail} >Correo electrónico:</label>
+            <input className={styles.inputEmail} type="email" placeholder="example@example.com" {...register("email")} />
+            <p className={styles.errorMsg}>{errors.email?.message}</p>
           </fieldset>
           <fieldset>
-            <label>Contraseña:</label>
+            <label className={styles.labelPassword}>Contraseña:</label>
             <input
+              className={styles.inputPassword}
               type="password"
-              placeholder="Contraseña..."
+              placeholder="Contraseña"
               {...register("password")}
             />
-            <div>{errors.password?.message}</div>
+            <div className={styles.errorMsg} >{errors.password?.message}</div>
           </fieldset>
-          <button disabled={!isValid} type="submit">
+          <button className={styles.createButton} disabled={!isValid} type="submit">
             Iniciar sesión
           </button>
-          <Link to="/forget_password">Olvidé mi contraseña</Link>
           <button
+            className={styles.createButton}
             disabled={!emailValue || reactivateLoading}
             type="button"
             onClick={handleReactivateAccount}
           >
-            {reactivateLoading ? "Enviando..." : "Quiero reactivar mi cuenta"}
+            {reactivateLoading ? "Enviando..." : "Reactivar mi cuenta"}
           </button>
+          <Link className={styles.forgotPassword} to="/forget_password">Olvidé mi contraseña</Link>
         </form>
       </section>
     </div>
+    </>
   );
 };
