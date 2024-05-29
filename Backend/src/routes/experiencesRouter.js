@@ -13,6 +13,7 @@ import { editExperience } from '../controllers/experiences/editExperience.js';
 import { getMyExperiences } from '../controllers/experiences/getMyExperiences.js';
 import { deleteCommentFromExperience } from '../controllers/experiences/deleteCommentFromExperience.js';
 import { deleteUserFromReservation } from '../controllers/experiences/deleteUserFromReservation.js';
+import { getComments } from '../controllers/experiences/getComments.js';
 
 const experiencesRouter = express.Router();
 
@@ -20,7 +21,7 @@ experiencesRouter.patch('/edit/', userAuth, adminMiddleware, editExperience);
 
 experiencesRouter.get('/detail/', getExperience);
 experiencesRouter.get('/myexperiences/', userAuth, getMyExperiences);
-
+experiencesRouter.get('/myexperiences/comments', getComments);
 experiencesRouter.get('/', listExperiences);
 experiencesRouter.post(
     '/newexperience',

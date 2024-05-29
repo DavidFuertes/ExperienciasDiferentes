@@ -51,18 +51,22 @@ async function addNewComment(req, res, next) {
             `,
                 [user_id, id, content, rate],
             );
+
+            const [postedData] = await pool.query(
+                `
+                SELECT * FROM Comments WHERE id = ?
+            `,
+                [insertInfo.insertId],
+            );
             const resInfo = [
                 {
                     message: 'Experiencia valorada con éxito',
                     newId: insertInfo.insertId,
+                    postedData: postedData[0]
                 },
             ];
-            const [postedData] = await pool.query(
-                `
-                                 SELECT * FROM Comments WHERE id = ?
-                            `,
-                [insertInfo.insertId],
-            );
+
+            console.log("este es", resInfo)
             res.status(201).json(resInfo);
         }
     } catch (error) {

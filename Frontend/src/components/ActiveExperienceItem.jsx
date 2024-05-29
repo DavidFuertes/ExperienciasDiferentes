@@ -1,5 +1,11 @@
+
 import Comment from "./Comment.jsx";
+
 function ActiveExperiencesItem({ activeExperience }) {
+
+    
+    
+
     const {
         title,
         description,
@@ -12,16 +18,22 @@ function ActiveExperiencesItem({ activeExperience }) {
         comments
     } = activeExperience;
 
+    
+
     const active = 1;
     const experienceId = activeExperience.id;
+
+
+
 
 
 
     const rate = parseFloat(average_rate);
     const rating = rate.toFixed(1);
 
+
     let printRating;
-    let printComments;
+
 
     if (rating <= 0) {
         printRating = <><strong>Aún no hay valoraciones.</strong></>;
@@ -29,11 +41,7 @@ function ActiveExperiencesItem({ activeExperience }) {
         printRating = <><strong>Valoración:</strong> {rating}<strong>★</strong></>;
     }
 
-    if (comments[0].content === null) {
-        printComments = <><h3>Comentarios</h3><strong>Aún no hay comentarios.</strong></>;
-    } else {
-        printComments = <><h3>Comentarios</h3> {comments.map((comment, index) => (<div key={index}><p>{comment.content}</p><p>Por: {comment.username}</p></div>))}</>;
-    }
+
     
 
 
@@ -50,11 +58,8 @@ function ActiveExperiencesItem({ activeExperience }) {
                     <p><strong>Precio:</strong> {price}<strong>€</strong></p>
                     <p>{printRating}</p>
                 </div>
-                <section className="comments">
-                    {printComments}
-                </section>
                 <section>
-                    <Comment active = {active} experienceId = {experienceId} />
+                    <Comment active = {active} experienceId = {experienceId} comments = {comments}/>
                 </section>
             </div>
         </li>

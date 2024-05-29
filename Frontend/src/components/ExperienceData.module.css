@@ -10,10 +10,11 @@
   display: grid;
   align-items: center;
   grid-template-areas:
-    "image title title"
-    "image description description "
-    "image city date"
-    "image level availablePlaces "
+    "image image image"
+    "title title title"
+    "description description description "
+    "city city date"
+    "level level availablePlaces "
     "rate price submit";
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);

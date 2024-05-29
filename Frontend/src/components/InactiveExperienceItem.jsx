@@ -48,11 +48,8 @@ function InactiveExperiencesItem({ inactiveExperience }) {
                     <p><strong>Precio:</strong> {price}<strong>€</strong></p>
                     <p>{printRating}</p>
                 </div>
-                <section className="comments">
-                    {printComments}
-                </section>
                 <section>
-                    <Comment active = {active} experienceId = {experienceId}/>
+                    <Comment active = {active} experienceId = {experienceId} comments = {comments}/>
                 </section>
             </div>
         </li>
