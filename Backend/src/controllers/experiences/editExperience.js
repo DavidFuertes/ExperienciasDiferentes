@@ -94,6 +94,12 @@ async function editExperience(req, res, next) {
 
             res.status(200).send({ message: 'Experiencia actualizada' });
         } else {
+            const [image] = await pool.query(
+                `SELECT image FROM Experiences WHERE id = ?;`,
+                [id],
+            );
+
+            const oldImage = image[0].image;
             await pool.query(
                 `
                 UPDATE Experiences
@@ -116,7 +122,7 @@ async function editExperience(req, res, next) {
                     description,
                     type,
                     city,
-                    image,
+                    oldImage,
                     date,
                     price,
                     min_places,

@@ -13,23 +13,6 @@ function ExperienceAdministration() {
   };
 
   useEffect(() => {
-    // fetch("http://localhost:3000/api/experiences/", {
-    //   method: "GET",
-    //   headers: {
-    //     token,
-    //   },
-    // })
-    //   .then((resp) => {
-    //     if (resp.status === 200) {
-    //       return resp.json(); // Parsea la respuesta JSON
-    //     } else {
-    //       throw new Error("Error al obtener las experiencias");
-    //     }
-    //   })
-    //   .then((data) => {
-    //     setExperiences(data); // Actualiza el estado con los datos
-    //   })
-    //   .catch((error) => console.log(error.message));
     try {
       getAllExperiencesService().then((data) =>
         setExperiences(data.experiences)

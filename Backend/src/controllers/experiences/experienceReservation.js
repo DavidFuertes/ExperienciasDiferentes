@@ -38,6 +38,15 @@ async function experienceReservation(req, res, next) {
         const formattedDate = `${dia} de ${mes} del ${año}`;
 
         if (cancelation) {
+            const now = new Date();
+            const hoursDifference = (fechaExperiencia - now) / (1000 * 60 * 60);
+
+            if (hoursDifference < 24) {
+                return res.status(400).send({
+                    message:
+                        'No puedes cancelar la experiencia con menos de 24 horas de anticipación.',
+                });
+            }
             // Si es una solicitud de cancelación, intenta cancelar la reserva
             const hasReserved = await checkIfUserAlreadyReserved(
                 pool,

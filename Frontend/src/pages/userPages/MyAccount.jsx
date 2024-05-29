@@ -2,10 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 const { VITE_BACKEND_URL } = import.meta.env;
 import { UserContext } from "../../context/UserContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./MyAccount.module.css"
+import { getUserDataService } from "../../services/index.js";
+import styles from "./MyAccount.module.css";
 
 export const MyAccount = () => {
-  const { token, setToken, user } = useContext(UserContext);
+  const { token, setToken, user, setUser, login } = useContext(UserContext);
   const {
     name: currentName,
     email: currentEmail,
@@ -15,7 +16,6 @@ export const MyAccount = () => {
     avatar: currentAvatar,
   } = user.user;
 
-  // Función para deslogar
   const logout = () => {
     console.log("Haciendo logout...");
     if (typeof setToken === "function") {
@@ -27,8 +27,6 @@ export const MyAccount = () => {
   };
 
   const [refreshPage, setRefreshPage] = useState(false);
-
-  // Estado inicial para almacenar los datos del usuario
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -40,27 +38,34 @@ export const MyAccount = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [reloadPage, setReloadPage] = useState(false); // Nuevo estado para indicar si se debe recargar la página
-  const [imagePreview, setImagePreview] = useState(null); // Estado para previsualización de imagen
+  const [reloadPage, setReloadPage] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
 
-  // Estado para almacenar los valores predeterminados
   const [defaultValues, setDefaultValues] = useState({
-    name: currentName || "", // Si hay un nombre actual, úsalo; de lo contrario, deja el campo en blanco
-    email: currentEmail || "", // Si hay un email actual, úsalo; de lo contrario, deja el campo en blanco
+    name: currentName || "",
+    email: currentEmail || "",
     date: currentDate || "",
     avatar: currentAvatar || null,
   });
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false); // Estado para confirmar la eliminación de la cuenta
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const navigate = useNavigate();
 
-  // Efecto secundario para imprimir el token en la consola al cargar la página
+  const getUserData = async () => {
+    try {
+      const data = await getUserDataService(token);
+      setUser(data);
+    } catch (error) {
+      setToken("");
+      setUser(null);
+    }
+  };
+
   useEffect(() => {
     console.log("Token cargado:", localStorage.getItem("token"));
   }, []);
 
-  // Manejar cambios en los campos del formulario
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevUserData) => ({
@@ -69,7 +74,6 @@ export const MyAccount = () => {
     }));
   };
 
-  // Manejar cambios en el archivo de imagen
   const handleFile = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -85,15 +89,12 @@ export const MyAccount = () => {
     }
   };
 
-  // Manejar la presentación del formulario
   const handleSubmit = async (e) => {
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
 
     e.preventDefault();
     try {
-      // Crear un FormData para enviar datos multipart/form-data, incluida la imagen
       const formData = new FormData();
-
       const defaultValuesCorrected = new Date(currentDate)
         .toLocaleDateString("es-ES", options)
         .replace(/[/.,]/g, "-");
@@ -104,7 +105,6 @@ export const MyAccount = () => {
       const invertedDateString = `${year}-${month}-${day} `;
 
       console.log(invertedDateString);
-      // Agregar los datos de usuario al FormData
       formData.append("name", userData.name || defaultValues.name);
       formData.append("email", userData.email || defaultValues.email);
       if (userData.date) {
@@ -118,9 +118,7 @@ export const MyAccount = () => {
         formData.append("languages", userData.languages);
       }
 
-      // Verificar si hay una imagen en el campo avatar
       if (userData.avatar) {
-        // Si hay una imagen, agregarla al FormData
         formData.append("avatar", userData.avatar);
         console.log("Imagen encontrada en avatar:", userData.avatar);
       } else {
@@ -128,11 +126,10 @@ export const MyAccount = () => {
       }
 
       console.log(formData);
-      // Realizar una solicitud PATCH al backend con los datos actualizados del usuario
       const response = await fetch(`${VITE_BACKEND_URL}/users/updateProfile`, {
         method: "PATCH",
         headers: {
-          token, // Agregar el token de acceso al encabezado de autorización
+          token,
         },
         body: formData,
       });
@@ -149,32 +146,26 @@ export const MyAccount = () => {
     }
   };
 
-  // Función para cerrar el modal y posiblemente recargar la página
   const closeModal = (reloadPage) => {
     setShowModal(false);
     if (reloadPage) {
-      setRefreshPage(true); // Establecer el estado para recargar la página
+      setRefreshPage(true);
     }
   };
 
-  // Efecto para recargar la página si se establece el estado refreshPage a true
   useEffect(() => {
     if (refreshPage) {
       if (confirmDelete) {
-        // Realizar el logout
         logout();
-        window.location.reload();
+        navigate("/");
+      } else {
+        navigate("/");
+        getUserData();
       }
-      if (!confirmDelete) {
-        window.location.reload();
-      }
-
-      // Restablecer el estado de refreshPage
       setRefreshPage(false);
     }
-  }, [refreshPage, confirmDelete, logout]);
+  }, [refreshPage, confirmDelete, logout, navigate]);
 
-  // Manejar la eliminación de la cuenta
   const handleDeleteAccount = async () => {
     try {
       const response = await fetch(`${VITE_BACKEND_URL}/users/deleteAccount`, {
@@ -186,7 +177,6 @@ export const MyAccount = () => {
       if (!response.ok) {
         throw new Error("Error al eliminar la cuenta");
       }
-      // Redirigir al usuario fuera de la cuenta después de eliminarla
       setRefreshPage(true);
     } catch (error) {
       console.error("Error al eliminar la cuenta: ", error);
@@ -225,7 +215,7 @@ export const MyAccount = () => {
         <div className={styles.divInputs}>
           {/* <label htmlFor="date">Fecha de Nacimiento:</label> */}
           <input
-            type="date" // Campo de tipo Date para la fecha de nacimiento
+            type="date"
             id="date"
             name="date"
             value={userData.date}
@@ -282,7 +272,6 @@ export const MyAccount = () => {
 
       <button className={styles.deleteButton} onClick={() => setShowDeleteModal(true)}>Eliminar Cuenta</button>
 
-      {/* Modal para confirmación de eliminación de cuenta */}
       {showDeleteModal && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
@@ -295,7 +284,6 @@ export const MyAccount = () => {
         </div>
       )}
 
-      {/* Modal de despedida */}
       {showDeleteModal && confirmDelete && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
@@ -308,7 +296,6 @@ export const MyAccount = () => {
         </div>
       )}
 
-      {/* Modal para confirmación de cambios guardados */}
       {showModal && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>

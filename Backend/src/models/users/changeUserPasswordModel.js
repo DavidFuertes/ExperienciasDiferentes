@@ -15,6 +15,7 @@ export const changeUserPasswordModel = async (
     id,
     currentPassword,
     newPassword,
+    confirmNewPassword,
 ) => {
     const pool = await getPool();
 

@@ -16,6 +16,7 @@ export const ChangePassword = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    getValues,
   } = useForm({
     mode: "onTouched",
     resolver: joiResolver(changeUserPasswordSchema),
@@ -97,7 +98,20 @@ export const ChangePassword = () => {
             placeholder="Contraseña..."
             {...register("newPassword")}
           />
-          <div>{errors.confirmPassword?.message}</div>
+          <div>{errors.newPassword?.message}</div>
+        </fieldset>
+        <fieldset>
+          <label>Confirma tu nueva contraseña:</label>
+          <input
+            type="password"
+            placeholder="Confirma tu contraseña..."
+            {...register("confirmNewPassword", {
+              validate: (value) =>
+                value === getValues("newPassword") ||
+                "Las contraseñas no coinciden",
+            })}
+          />
+          <div>{errors.confirmNewPassword?.message}</div>
         </fieldset>
         <button className={styles.createButton} disabled={!isValid} type="submit">
           Crea una nueva contraseña

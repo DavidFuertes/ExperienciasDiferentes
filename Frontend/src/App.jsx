@@ -23,7 +23,6 @@ import ExperienceAdministration from "./pages/experiencePages/ExperienceAdminist
 import MyExperiences from "./pages/experiencePages/MyExperiences.jsx";
 import { ChangePassword } from "./pages/userPages/changePassword.jsx";
 
-
 function App() {
   return (
     <div className="app">

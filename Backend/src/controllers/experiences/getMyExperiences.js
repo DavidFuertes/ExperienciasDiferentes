@@ -3,10 +3,8 @@ import { getPool } from '../../db/poolQuery.js';
 import { experienceNotExistError } from '../../services/errorService.js';
 
 async function getMyExperiences(req, res, next) {
-
     const user_id = req.user.id;
-    console.log(user_id)
-
+    console.log(user_id);
 
     try {
         //if (!id) {

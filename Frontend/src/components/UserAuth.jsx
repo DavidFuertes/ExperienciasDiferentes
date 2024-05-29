@@ -25,7 +25,11 @@ export const UserAuth = () => {
               alt="avatar"
             />
           {dropdownOpen && (
+
             <div className = {styles.desplegable}>
+                  <span>
+                    <Link to={`/myexperiences`}>Mis Experiencias</Link>
+                  </span>
                   <span>
                     <Link to={`/account`}>Mi cuenta</Link>
                   </span>
@@ -38,7 +42,9 @@ export const UserAuth = () => {
                   </span>
                   <span>
                     <Link to={`/create_experience`}>Nueva experiencia</Link>
+
                   </span>
+
                 </>
               )}
               <span>

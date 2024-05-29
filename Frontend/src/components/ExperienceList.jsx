@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState, useRef } from "react";
+import styles from "./ExperienceList.module.css";
 
 function ExperienceList({ experiences, onSelectExperience }) {
   const [filter, setFilter] = useState("");
+  const selectRef = useRef(null);
 
   const filteredExperiences = experiences.filter((experience) =>
     experience.title.toLowerCase().includes(filter.toLowerCase())
@@ -9,29 +11,37 @@ function ExperienceList({ experiences, onSelectExperience }) {
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
+    selectRef.current.focus();
   };
 
-  const handleSelectChange = (event) => {
-    onSelectExperience(event.target.value);
+  const handleSelectChange = (expId) => {
+    onSelectExperience(expId);
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Filtrar experiencias"
-        value={filter}
-        onChange={handleFilterChange}
-      />
-      <select onChange={handleSelectChange}>
-        <option value="">Selecciona una experiencia</option>
+    <>
+      <div className={styles.filterDiv}>
+        <input
+          type="text"
+          placeholder="Filtrar experiencias"
+          value={filter}
+          onChange={handleFilterChange}
+          onClick={() => selectRef.current.focus()}
+          ref={selectRef}
+        />
+      </div>
+      <div className={styles.results}>
         {filteredExperiences.map((experience) => (
-          <option key={experience.id} value={experience.id}>
-            {experience.title}
-          </option>
+          <span
+            onClick={() => handleSelectChange(experience.id)}
+            key={experience.id}
+            value={experience.id}
+          >
+            <p>{experience.title}</p>
+          </span>
         ))}
-      </select>
-    </div>
+      </div>
+    </>
   );
 }
 
