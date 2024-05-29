@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../context/UserContext.jsx";
 import ActiveExperienceList from "../../components/ActiveExperiencesList.jsx";
 import InactiveExperienceList from "../../components/InactiveExperienceList.jsx";
-
+import styles from "../../components/ExperienceData.module.css";
+import { ToastContainer } from "react-toastify";
 function MyExperiences() {
   const [myExperiences, setMyExperiences] = useState([]);
   const { token } = useContext(UserContext);
@@ -40,21 +41,26 @@ function MyExperiences() {
 
   return (
     <>
-      <section className="myExperiences">
-        <section className="activeExperiences">
-          <h1>Experiencias por vivir</h1>
+      <ToastContainer />
+      <section className={styles.myExperiencesSection}>
+        <section className={styles.myExperienceInside}>
+          <h1 className={styles.titleDetails}>Experiencias por vivir</h1>
           {activeExperiences.length > 0 ? (
             <ActiveExperienceList activeExperiences={activeExperiences} />
           ) : (
-            <p>No hay ninguna experiencia que mostrar aquí aún</p>
+            <p className="experience-card">
+              No hay ninguna experiencia que mostrar aquí aún
+            </p>
           )}
         </section>
-        <section className="inactiveExperiences">
-          <h1>Experiencias vividas</h1>
+        <section className={styles.myExperienceInside}>
+          <h1 className={styles.titleDetails}>Experiencias pasadas</h1>
           {inactiveExperiences.length > 0 ? (
             <InactiveExperienceList inactiveExperiences={inactiveExperiences} />
           ) : (
-            <p>No hay ninguna experiencia que mostrar aquí aún</p>
+            <p className="experience-card">
+              No hay ninguna experiencia que mostrar aquí aún
+            </p>
           )}
         </section>
       </section>
