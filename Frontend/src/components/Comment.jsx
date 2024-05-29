@@ -1,11 +1,34 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { Slide, toast } from "react-toastify";
 
-function Comment({ active, experienceId }) {
+function Comment({ active, experienceId, comments }) {
   const [rating, setRating] = useState(5);
   const [commentValue, setCommentValue] = useState("");
-  const { token, user } = useContext(UserContext);
+  const { token } = useContext(UserContext);
+  const [newComments, setNewComments] = useState(comments);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/experiences/myexperiences/comments/?id=${experienceId}`, {
+      method: "GET",
+      headers: {
+        token,
+      },
+    })
+      .then((resp) => {
+        if (resp.status === 200) {
+          return resp.json(); // Parsea la respuesta JSON
+        } else {
+          throw new Error("Error al obtener las experiencias");
+        }
+      })
+      .then((comentario) => {
+        setNewComments(comentario);
+      })
+      .catch((error) => console.log(error.message));
+  }, [experienceId, token, commentValue]);
+
+  
 
   async function sendComment(event) {
     event.preventDefault();
@@ -44,6 +67,7 @@ function Comment({ active, experienceId }) {
           theme: "dark",
           transition: Slide,
         });
+
       } else {
         throw new Error("Error al comentar la experiencia");
       }
@@ -64,9 +88,35 @@ function Comment({ active, experienceId }) {
     }
   }
 
+  let printComments;
+
+  if (newComments === undefined) {
+    printComments = (
+        <>
+            <h3>Comentarios</h3>
+            <strong>Aún no hay comentarios.</strong>
+        </>
+    );
+} else {
+    printComments = (
+        <>
+            <h3>Comentarios</h3>{' '}
+            {newComments.map((comment, index) => (
+                <div key={index}>
+                    <p>{comment.content}</p>
+                    <p>Por: {comment.name}</p>
+                </div>
+            ))}
+        </>
+    );
+}
+
   if (active) {
     return (
       <>
+      <section>
+        {printComments}
+      </section>
         <form onSubmit={sendComment}>
           <input
             type="text"
@@ -85,6 +135,9 @@ function Comment({ active, experienceId }) {
   } else {
     return (
       <>
+        <section>
+          {printComments}
+        </section>
         <form onSubmit={sendComment}>
           <input
             type="text"
