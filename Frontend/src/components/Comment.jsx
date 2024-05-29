@@ -55,6 +55,8 @@ function Comment({ active, experienceId, comments }) {
 
       const respuesta = await resp.json();
 
+      console.log("respuesta", respuesta);
+
       if (resp?.ok === true) {
         toast.success(respuesta[0].message, {
           position: "top-center",

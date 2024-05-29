@@ -4,7 +4,7 @@
   box-sizing: border-box;
   /* border: solid 1px white; */
 }
-
+/*
 main {
   display: flex;
   flex-direction: column;
@@ -90,7 +90,7 @@ main {
   margin: 2rem auto;
   background-color: #000000;
   border-radius: 0.3rem;
-} */
+} 
 
 .onboardingSection {
   display: flex;
@@ -157,7 +157,7 @@ main {
 
 .listSection section::-webkit-scrollbar-thumb:hover {
   background-color: rgb(75, 75, 75);
-} */
+} 
 
 form fieldset {
   border: none;
@@ -187,26 +187,26 @@ ul {
   border-radius: 0.2rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-} */
+} 
 
 /* .app main button:hover {
   background-color: rgba(210, 129, 0, 1);
   padding: 0.5rem;
   border-radius: 0.2rem;
   cursor: pointer;
-} */
+} 
 
 
 /* .app main a {
   color: rgba(210, 129, 0, 1);
   text-decoration: inherit;
   margin: 1rem;
-} */
+} 
 
 /* .app main a:hover {
   color: rgba(238, 168, 57, 1);
   text-decoration: inherit;
-} */
+} 
 
 .expCard {
   display: flex;
@@ -269,4 +269,4 @@ ul {
 .experience-card .comments p {
   margin-bottom: 8px;
 }
-
+*/
