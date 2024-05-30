@@ -48,7 +48,6 @@ export const Home = () => {
   if (loading) {
     return (
       <section className="listSection">
-        <h1>Últimas experiencias</h1>
         <Loading />
       </section>
     );

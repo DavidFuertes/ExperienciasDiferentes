@@ -4,7 +4,7 @@ import { createExperienceSchema } from "../../schemas/createExperienceSchema.js"
 import { Slide, ToastContainer, toast } from "react-toastify";
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext.jsx";
-import styles from "./CreateExperience.module.css"
+import styles from "./CreateExperience.module.css";
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export const CreateExperience = () => {
@@ -92,90 +92,113 @@ export const CreateExperience = () => {
   };
   return (
     <>
-        <h1 className={styles.h1Create}>Nueva Experiencia</h1>
+      <h1 className={styles.h1Create}>Nueva Experiencia</h1>
       <ToastContainer />
       <section className={styles.formSection}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-  
-            <input type="text" className={styles.createTitle} placeholder="Título..." {...register("title")} />
-            <p className={styles.errorMsg}>{errors.title?.message}</p>
+          <input
+            type="text"
+            className={styles.createTitle}
+            placeholder="Título..."
+            {...register("title")}
+          />
+          <p className={styles.errorMsg}>{errors.title?.message}</p>
 
+          <input
+            type="textarea"
+            className={styles.createDescription}
+            placeholder="Descripción..."
+            {...register("description")}
+          />
+          <p className={styles.errorMsg}>{errors.description?.message}</p>
 
-            <input
-              type="textarea"
-              className={styles.createDescription}
-              placeholder="Descripción..."
-              {...register("description")}
-            />
-            <p className={styles.errorMsg}>{errors.description?.message}</p>
+          <select className={styles.createSelect} {...register("type")}>
+            <option className={styles.createSelectOption} value="">
+              Selecciona una opción
+            </option>
+            <option className={styles.createSelectOption} value="Relajado">
+              Relajado
+            </option>
+            <option className={styles.createSelectOption} value="Medio">
+              Medio
+            </option>
+            <option
+              className={styles.createSelectOption}
+              value="Adrenalina pura"
+            >
+              Adrenalina pura
+            </option>
+          </select>
+          <p className={styles.errorMsg}>{errors.type?.message}</p>
 
+          <input
+            type="text"
+            className={styles.createCity}
+            placeholder="Ciudad..."
+            {...register("city")}
+          />
+          <p className={styles.errorMsg}>{errors.city?.message}</p>
 
-            <select className={styles.createSelect} {...register("type")}>
-              <option className={styles.createSelectOption} value="">Selecciona una opción</option>
-              <option className={styles.createSelectOption} value="Relajado">Relajado</option>
-              <option className={styles.createSelectOption} value="Medio">Medio</option>
-              <option className={styles.createSelectOption} value="Adrenalina pura">Adrenalina pura</option>
-            </select>
-            <p className={styles.errorMsg}>{errors.type?.message}</p>
-
-
-            <input type="text" className={styles.createCity} placeholder="Ciudad..." {...register("city")} />
-            <p className={styles.errorMsg}>{errors.city?.message}</p>
-
-            <div className={styles.divInputs}>
+          <div className={styles.divInputs}>
             {imagePreview && (
               <img
-              src={imagePreview}
-              alt="Imagen previsualizada"
-              className={styles.imgPreview}
+                src={imagePreview}
+                alt="Imagen previsualizada"
+                className={styles.imgPreview}
               />
             )}
+
             <input
               type="file"
               name="newImage"
               {...register("newImage")}
               onChange={handleImageChange}
             />
-            </div>
-            <p className={styles.errorMsg}>{errors.newImage?.message}</p>
+          </div>
+          <p className={styles.errorMsg}>{errors.newImage?.message}</p>
 
+          <input
+            type="date"
+            className={styles.createDate}
+            {...register("date")}
+          />
+          <p>{errors.date?.message}</p>
 
-            <input type="date" className={styles.createDate} {...register("date")} />
-            <p>{errors.date?.message}</p>
+          <input
+            className={styles.createPrice}
+            type="Number"
+            min="0"
+            max="500"
+            placeholder="Precio..."
+            {...register("price")}
+          />
+          <p>{errors.price?.message}</p>
 
-            <input
-              className={styles.createPrice}
-              type="Number"
-              min="0"
-              max="500"
-              placeholder="Precio..."
-              {...register("price")}
-            />
-            <p>{errors.price?.message}</p>
+          <input
+            className={styles.createMinPlaces}
+            type="Number"
+            min="5"
+            max="10"
+            placeholder="Plazas mínimas..."
+            {...register("min_places")}
+          />
+          <p>{errors.min_places?.message}</p>
 
+          <input
+            className={styles.createMaxPlaces}
+            type="Number"
+            min="10"
+            max="25"
+            placeholder="Plazas máximas..."
+            {...register("total_places")}
+          />
+          <p>{errors.total_places?.message}</p>
 
-            <input
-              className={styles.createMinPlaces}
-              type="Number"
-              min="5"
-              max="10"
-              placeholder="Plazas mínimas..."
-              {...register("min_places")}
-            />
-            <p>{errors.min_places?.message}</p>
-
-            <input
-              className={styles.createMaxPlaces}
-              type="Number"
-              min="10"
-              max="25"
-              placeholder="Plazas máximas..."
-              {...register("total_places")}
-            />
-            <p>{errors.total_places?.message}</p>
-
-
-          <button className={styles.createButton} disabled={!isValid} type="submit">
+          <button
+            className={styles.createButton}
+            disabled={!isValid}
+            type="submit"
+          >
             Crear experiencia
           </button>
         </form>

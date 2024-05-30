@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RedirectButton } from "../../components/RedirectButton.jsx";
+import styles from "./LogIn.module.css";
 
 export const UserValidation = () => {
   //Se recoge el código de registro de la URL
@@ -45,9 +46,9 @@ export const UserValidation = () => {
   return (
     <>
       <ToastContainer />
-      <section className="onboardingSection">
-        <h1>¡Bienvenid@ a Experiencias Diferentes!</h1>
-        <div className="onboardingText">
+      <section className={styles.formSection}>
+        <div className={styles.form}>
+          <h1>¡Bienvenid@ a Experiencias Diferentes!</h1>
           <p>
             Experiencias Diferentes es una plataforma web que ofrece una
             variedad de experiencias grupales para usuarios interesados en
@@ -63,8 +64,8 @@ export const UserValidation = () => {
             Habrá un usuario administrador que es el encargado de añadir las
             experiencias y configurarlas.
           </p>
+          <RedirectButton text="Acceder" redirectUrl="/login" />
         </div>
-        <RedirectButton text="Acceder" redirectUrl="/login" />
       </section>
     </>
   );

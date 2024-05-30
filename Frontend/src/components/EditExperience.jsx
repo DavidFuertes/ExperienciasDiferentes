@@ -5,6 +5,7 @@ import EditExperienceForm from "./EditExperienceForm.jsx";
 import { deleteCommentFromExperienceService } from "../services/index.js";
 import { Slide, toast } from "react-toastify";
 import styles from "./EditExperienceForm.module.css";
+import Loading from "./Loading.jsx";
 
 function EditExperience({ experienceId, token }) {
   const [experience, setExperience] = useState(null);
@@ -89,15 +90,11 @@ function EditExperience({ experienceId, token }) {
   };
 
   if (experienceId === null) {
-    return (
-      <>
-        <h3>Selecciona una experiencia para modificar.</h3>
-      </>
-    );
+    return <></>;
   } else if (!experience) {
     return (
       <>
-        <p>Cargando...</p>
+        <Loading />
       </>
     );
   } else {

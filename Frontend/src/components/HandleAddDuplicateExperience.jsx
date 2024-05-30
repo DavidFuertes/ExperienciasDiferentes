@@ -175,8 +175,13 @@ function HandleAddDuplicateExperience({ data, modalIsOpen, setModalIsOpen }) {
             <label>Confirmar Cambios</label>
             <input type="checkbox" required></input>
           </div>
-          <button type="submit">Editar Experiencia</button>
-          <button onClick={submitDuplicateExperience}>
+          <button className={styles.modalContentButton} type="submit">
+            Editar Experiencia
+          </button>
+          <button
+            className={styles.modalContentButton}
+            onClick={submitDuplicateExperience}
+          >
             Crear nueva experiencia duplicada
           </button>
         </form>
