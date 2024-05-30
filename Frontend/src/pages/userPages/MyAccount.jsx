@@ -6,13 +6,11 @@ import { getUserDataService } from "../../services/index.js";
 import styles from "./MyAccount.module.css";
 
 export const MyAccount = () => {
-  const { token, setToken, user, setUser, login } = useContext(UserContext);
+  const { token, setToken, user, setUser} = useContext(UserContext);
   const {
     name: currentName,
     email: currentEmail,
     date: currentDate,
-    residence: currentResidence,
-    languages: currentLanguages,
     avatar: currentAvatar,
   } = user.user;
 
@@ -295,7 +293,7 @@ export const MyAccount = () => {
         {showDeleteModal && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
-              <p style={{ color: "#2d2d2d" }}>
+              <p className={styles.divP}>
                 ¿Estás seguro de que deseas eliminar tu cuenta?
               </p>
               <button
@@ -334,7 +332,7 @@ export const MyAccount = () => {
         {showModal && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
-              <p style={{ color: "#2d2d2d" }}>{modalMessage}</p>
+              <p className={styles.divPContent}>{modalMessage}</p>
               <button
                 className={styles.modalContentButton}
                 onClick={() => closeModal(true)}

@@ -152,11 +152,10 @@
 }
 
 .modalContent {
-  background: #f8f8f8;
+  background: #2d2d2db3;
   color: #2d2d2d;
   font-weight: bold;
   max-width: 85vw;
-  opacity: 90%;
   padding: 20px;
   border-radius: 0.5rem;
   text-align: center;
@@ -185,5 +184,15 @@
   color: #f8f8f8;
   font-weight: bold;
   cursor: pointer;
+}
+
+.divPContent {
+  color: #f8f8f8
+}
+
+@media (min-width: 600px) {
+  .formUser {
+    max-width: 50vw;
+  }
 }
 
