@@ -91,106 +91,95 @@ export const CreateExperience = () => {
     }
   };
   return (
-    <div>
+    <>
+        <h1 className={styles.h1Create}>Nueva Experiencia</h1>
       <ToastContainer />
       <section className={styles.formSection}>
-        <h1 className={styles.h1Create}>Nueva Experiencia</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <fieldset>
-            {/* <label>Título</label> */}
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+  
             <input type="text" className={styles.createTitle} placeholder="Título..." {...register("title")} />
-            <p>{errors.title?.message}</p>
-          </fieldset>
-          <fieldset>
-            {/* <label>Descripción</label> */}
+            <p className={styles.errorMsg}>{errors.title?.message}</p>
+
+
             <input
               type="textarea"
               className={styles.createDescription}
               placeholder="Descripción..."
               {...register("description")}
             />
-            <p>{errors.description?.message}</p>
-          </fieldset>
-          <fieldset>
-            {/* <label>Tipo de experiencia</label> */}
+            <p className={styles.errorMsg}>{errors.description?.message}</p>
+
+
             <select className={styles.createSelect} {...register("type")}>
               <option className={styles.createSelectOption} value="">Selecciona una opción</option>
               <option className={styles.createSelectOption} value="Relajado">Relajado</option>
               <option className={styles.createSelectOption} value="Medio">Medio</option>
               <option className={styles.createSelectOption} value="Adrenalina pura">Adrenalina pura</option>
             </select>
-            <p>{errors.type?.message}</p>
-          </fieldset>
-          <fieldset>
-            {/* <label>Ciudad</label> */}
+            <p className={styles.errorMsg}>{errors.type?.message}</p>
+
+
             <input type="text" className={styles.createCity} placeholder="Ciudad..." {...register("city")} />
-            <p>{errors.city?.message}</p>
-          </fieldset>
-          <fieldset>
-            {/* <label>Imagen</label> */}
+            <p className={styles.errorMsg}>{errors.city?.message}</p>
+
+            <div className={styles.divInputs}>
+            {imagePreview && (
+              <img
+              src={imagePreview}
+              alt="Imagen previsualizada"
+              className={styles.imgPreview}
+              />
+            )}
             <input
-              className={styles.imgButton}
               type="file"
               name="newImage"
               {...register("newImage")}
               onChange={handleImageChange}
             />
-            <p>{errors.newImage?.message}</p>
-            {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Imagen previsualizada"
-                className={styles.imgPreview}
-              />
-            )}
-          </fieldset>
-          <fieldset>
-            {/* <label>Fecha</label> */}
+            </div>
+            <p className={styles.errorMsg}>{errors.newImage?.message}</p>
+
+
             <input type="date" className={styles.createDate} {...register("date")} />
             <p>{errors.date?.message}</p>
-          </fieldset>
-          <fieldset>
-            {/* <label>Precio</label> */}
+
             <input
               className={styles.createPrice}
               type="Number"
               min="0"
               max="500"
-              placeholder="0"
+              placeholder="Precio..."
               {...register("price")}
             />
             <p>{errors.price?.message}</p>
-          </fieldset>
-          <fieldset>
-            {/* <label>Plazas mínimas</label> */}
+
+
             <input
               className={styles.createMinPlaces}
               type="Number"
               min="5"
               max="10"
-              placeholder="Plazas mínimas"
+              placeholder="Plazas mínimas..."
               {...register("min_places")}
             />
             <p>{errors.min_places?.message}</p>
-          </fieldset>
-          <fieldset>
-            {/* <label>Plazas máximas</label> */}
+
             <input
               className={styles.createMaxPlaces}
               type="Number"
               min="10"
               max="25"
-              placeholder="Plazas máximas"
+              placeholder="Plazas máximas..."
               {...register("total_places")}
             />
             <p>{errors.total_places?.message}</p>
-          </fieldset>
+
 
           <button className={styles.createButton} disabled={!isValid} type="submit">
             Crear experiencia
           </button>
         </form>
       </section>
-    </div>
+    </>
   );
 };

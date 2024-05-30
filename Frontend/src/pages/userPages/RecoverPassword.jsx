@@ -81,30 +81,26 @@ export const RecoverPassword = () => {
     <>
       <h1 className={styles.h1LogIn}>Página de creación de una nueva contraseña</h1>
       <div className={styles.divLogin}>
-      <section className="formSection">
+      <section className={styles.formSection}>
       <ToastContainer />
-      <form className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
-        <fieldset>
-          <label className={styles.labelPassword}>Nueva contraseña:</label>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+  
           <input
             className={styles.inputPassword}
             type="password"
-            placeholder="Contraseña"
+            placeholder="Nueva contraseña"
             {...register("password")}
           />
-          <div>{errors.password?.message}</div>
-          <p id="message-error-password"></p>
-        </fieldset>
-        <fieldset>
-          <label className={styles.labelPassword}>Repita la contraseña:</label>
+          <p  className={styles.errorMsg}>{errors.password?.message}</p>
+
           <input
             className={styles.inputPassword}
             type="password"
-            placeholder="Contraseña"
+            placeholder="Repita la contraseña"
             {...register("confirmPassword")}
           />
-          <div>{errors.confirmPassword?.message}</div>
-        </fieldset>
+          <p  className={styles.errorMsg}>{errors.confirmPassword?.message}</p>
+
         <button className={styles.createButton} disabled={!isValid} type="submit">
           Crear contraseña
         </button>

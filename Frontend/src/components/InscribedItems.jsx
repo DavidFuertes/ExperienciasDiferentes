@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import styles from "./InscribedItems.module.css";
+import styles from "../pages/userPages/MyAccount.module.css";
 import { UserContext } from "../context/UserContext.jsx";
 import { Slide, toast } from "react-toastify";
 import { deleteUserFromReservation } from "../services/index.js";
@@ -68,18 +68,18 @@ function InscribedItems({ inscribed, filterInscribed }) {
               &times;
             </span>
             <h2>Confirm Delete</h2>
-            <p>
+            <p style={{ color: "#2d2d2d" }}>
               ¿Estás seguro de que quieres eliminar la reserva{" "}
               {selectedUser?.reservation_id} del usuario {selectedUser?.name}?
             </p>
             <div>
               <button
-                className={styles.modalButton}
+                className={styles.modalContentButton}
                 onClick={() => handleDeleteUser(reservation_id, token)}
               >
                 Sí
               </button>
-              <button className={styles.modalButton} onClick={handleCloseModal}>
+              <button className={styles.modalContentButton} onClick={handleCloseModal}>
                 No
               </button>
             </div>
