@@ -71,7 +71,7 @@
 .searchBar {
   position: relative;
   min-width: 50%;
-  margin: 10px auto;
+  margin: 2rem auto;
   width: 75vw;
 }
 
@@ -82,7 +82,7 @@
   border-radius: 0.8rem;
   font-size: 16px;
   outline: none;
-  background-color: #f8f8f8;
+  background-color: #ffffff;
   color: #2d2d2d;
 }
 

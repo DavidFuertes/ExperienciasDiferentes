@@ -1,6 +1,7 @@
+/*
 .titleDetails {
   text-align: center;
-  color: #000000;
+  color: #2d2d2d;
   align-content: center;
   padding: 1rem;
 }
@@ -22,7 +23,7 @@
   margin: 20px;
   height: auto;
   cursor: default;
-  /* text-align: center; */
+  /* text-align: center; 
 
   color: #000000;
 }
@@ -62,7 +63,7 @@
 /* .experienceTotalDetails {
 
   grid-area: totalPlaces;
-} */
+} 
 
 .experienceFreeDetails {
   grid-area: availablePlaces;
@@ -98,7 +99,7 @@
   padding: 8px;
   transition: background-color 0.5s ease;
   width: 12rem;
-  /* align-self: center; */
+  /* align-self: center; 
   grid-area: submit;
   justify-self: center;
 }
@@ -138,4 +139,245 @@
 
 .myExperienceInside {
   margin: 0 10px;
+}
+
+*/
+.sectionDetails {
+  background-color: #f4cba4;
+  display: flex;
+  justify-content: center;
+}
+
+.titleDetails {
+  text-align: center;
+  color: #2d2d2d;
+  align-content: center;
+  font-size: x-large;
+}
+
+.divDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  color: #2d2d2d;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  width: 85vw;
+  max-width: 650px;
+  height: auto;
+  box-shadow:  10px 10px 30px #4444443d,
+             -10px -10px 30px #44444480;
+}
+
+
+
+.experienceImgDetails {
+  width: 100%;
+  max-width: 50rem;
+  max-height: 15rem;
+  border-radius: 0.8rem;
+  object-fit: cover;
+  object-position: left;
+}
+
+.imageRate {
+  position: relative; /* Establece el contenedor como relativo */
+}
+
+.experienceRateDetails {
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  font-weight: bold;
+  color:#f8f8f8;
+  margin: 0.3rem; 
+  background-color: #30303067;
+  padding: 0.2rem 0.7rem 0.2rem;
+  border-radius: 5rem;
+}
+
+.experienceDescriptionDetails{
+  text-align: center;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.experienceDateDetails {
+  font-weight: bold;
+  margin-top: 0.7rem;
+}
+
+.sectionData {
+  display: flex;
+  justify-content: space-around;
+  margin-top:0.5rem;
+  margin: 0.5rem -1rem;
+}
+
+.leftInfo, .rightInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.experienceCityDetails {
+  background-color: #bdff80ad;
+  font-weight: 500;
+  padding: 0.2rem 0.7rem 0.2rem;
+  border-radius: 5rem;
+  margin-bottom: 0.3rem;
+}
+
+
+.experienceLevelDetails, .experienceFreeDetails, .experiencePriceDetails {
+  font-weight: 500;
+  padding: 0.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.bookButton {
+  background-color: #2d2d2d;
+  font-weight: bold;
+  width: 100%;
+  max-width: 300px;
+  margin: 1rem 0;
+  outline: none;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #2d2d2d;
+  color: #f8f8f8;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+
+.bookButton:hover {
+  background-color: #2d2d2d;
+  color: #9ef08e;
+  border: none;
+}
+
+.cancelButton {
+  background-color: #2d2d2d;
+  font-weight: bold;
+  width: 100%;
+  margin: 1rem 0;
+  outline: none;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #2d2d2d;
+  color: #f8f8f8;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background-color: #2d2d2d;
+  color: #ff4444;
+  border: none;
+}
+.commentBox {
+  background-color: #f4cba4;
+  display: flex;
+  
+  justify-content: center;
+
+}
+.commentsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  color: #2d2d2d;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  width: 85vw;
+  max-width: 650px;
+  height: auto;
+  box-shadow:  10px 10px 30px #4444443d,
+             -10px -10px 30px #44444480;
+
+}
+
+.userComment {
+  background-color: #bdff8059;
+  border-radius: 0.8rem;
+  margin: 0.5rem;
+  padding: 0.7rem;
+  width: 100%;
+  border: 1px solid #000000;
+}
+
+.userNameInfo {
+  font-weight: bold;
+}
+
+.myExperiencesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myExperienceInside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  color: #2d2d2d;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  width: 85vw;
+  max-width: 650px;
+  height: auto;
+  box-shadow:  10px 10px 30px #4444443d,
+             -10px -10px 30px #44444480;
+            
+}
+
+.myExperienceInside h3 {
+  margin-bottom: 0.8rem;
+}
+
+.commentSectionMyExperiences {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commentButton {
+  background-color: #2d2d2d;
+  font-weight: bold;
+  width: 100%;
+  max-width: 300px;
+
+  outline: none;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #2d2d2d;
+  color: #f8f8f8;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.commentButton:hover {
+  background-color: #2d2d2d;
+  color: #9ef08e;
+  border: none;
+}
+
+
+.inputComment {
+  background-color: #f8f8f8;
+  width: 100%;
+  margin: 1rem 0;
+  outline: none;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #2d2d2d;
+  color: #2d2d2d;
+  padding: 0.5rem;
 }

@@ -19,20 +19,13 @@ function InactiveExperiencesItem({ inactiveExperience }) {
     const experienceId = inactiveExperience.id;
 
     let printRating;
-    let printComments;
+
 
     if (rating <= 0) {
         printRating = <><strong>Aún no hay valoraciones.</strong></>;
     } else {
         printRating = <><strong>Valoración:</strong> {rating}<strong>★</strong></>;
     }
-
-    if (comments[0].content === null) {
-        printComments = <><h3>Comentarios</h3><strong>Aún no hay comentarios.</strong></>;
-    } else {
-        printComments = <><h3>Comentarios</h3> {comments.map((comment, index) => (<div key={index}><p>{comment.content}</p><p>Por: {comment.username}</p></div>))}</>;
-    }
-    
 
 
     return (

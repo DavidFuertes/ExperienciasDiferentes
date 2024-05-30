@@ -83,26 +83,47 @@ export const ExperienceData = ({
   if (experience)
     return (
     <>
-        <h1  className={styles.titleDetails}>Detalle de la experiencia</h1>
+        <h1  className={styles.titleDetails}>{experience.title}</h1>
+        <section className={styles.sectionDetails}>
+
         <div className={styles.divDetails}>
-        <h2 className={styles.experienceTitleDetails}>{experience.title}</h2>
-        <img
-          className={styles.experienceImgDetails}
-          src={experience.image}
-          alt={experience.title}
-          style={{ width: "350px" }}
-        />
+          <div className={styles.imageRate}>
+            <img
+              className={styles.experienceImgDetails}
+              src={experience.image}
+              alt={experience.title}
+            />
+            <p className={styles.experienceRateDetails}>
+              {!isNaN(roundedRating) ? `${roundedRating}⭐` : "Sin valoración"}
+            </p>
+
+          </div>
         <p className={styles.experienceDescriptionDetails}>{experience.description}</p>
-        <p className={styles.experienceCityDetails}>  {experience.city}</p>
-        <p className={styles.experienceLevelDetails}> {experience.type}</p>
-        {/* <p className={styles.experienceTotalDetails}>Plazas totales: {experience.total_places}</p> */}
-        <p className={styles.experienceFreeDetails}>Plazas libres: {experience.total_places - reserved_places}</p>
         <p className={styles.experienceDateDetails}> {formattedDate}</p>
-        <p className={styles.experienceRateDetails}>
-          Rating:{" "}
-          {!isNaN(roundedRating) ? `${roundedRating}⭐` : "Sin valoración"}
-        </p>
-        <p className={styles.experiencePriceDetails}>Precio: {experience.price}€</p>
+        <section className={styles.sectionData}>
+          <div className={styles.leftInfo}>
+            <p className={styles.experienceCityDetails}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    fill="currentColor"
+                    className="bi bi-geo-alt-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                  </svg>{" "}
+                  {experience.city}
+            </p>
+            <p className={styles.experienceFreeDetails}>Plazas: {experience.total_places - reserved_places}</p>
+          </div>
+          <div className={styles.rightInfo}>
+            <p className={styles.experienceLevelDetails}> {experience.type}</p>
+            <p className={styles.experiencePriceDetails}>{experience.price}€</p>
+          </div>
+
+
+        </section>
         {cancelation === 0 ? (
           <button className={styles.bookButton} type="button" onClick={(e) => handleSubmit(e, 1)}>
             Reservar
@@ -113,6 +134,7 @@ export const ExperienceData = ({
           </button>
         )}
       </div>
+        </section>
       </>
     );
 };

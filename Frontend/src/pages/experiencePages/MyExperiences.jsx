@@ -43,8 +43,9 @@ function MyExperiences() {
     <>
       <ToastContainer />
       <section className={styles.myExperiencesSection}>
-        <section className={styles.myExperienceInside}>
-          <h1 className={styles.titleDetails}>Experiencias por vivir</h1>
+      <h1 className={styles.titleDetails}>Experiencias por vivir</h1>
+        <section>
+          
           {activeExperiences.length > 0 ? (
             <ActiveExperienceList activeExperiences={activeExperiences} />
           ) : (
@@ -53,8 +54,8 @@ function MyExperiences() {
             </p>
           )}
         </section>
-        <section className={styles.myExperienceInside}>
-          <h1 className={styles.titleDetails}>Experiencias pasadas</h1>
+        <h1 className={styles.titleDetails}>Experiencias pasadas</h1>
+        <section >
           {inactiveExperiences.length > 0 ? (
             <InactiveExperienceList inactiveExperiences={inactiveExperiences} />
           ) : (
