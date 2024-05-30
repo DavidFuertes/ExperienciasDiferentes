@@ -1,82 +1,80 @@
-
-.formSection{
-    width: 100vw;
-    background-color: #f4cba4;
-    display: flex;
-    justify-content: center;
+.formSection {
+  width: 100vw;
+  background-color: #f4cba4;
+  display: flex;
+  justify-content: center;
 }
 
 .form {
-    width: 75vw;
-    background-color: #f8f8f8;
-    padding: 1rem;
-    color: #2d2d2d;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.8rem;
-    box-shadow:  10px 10px 30px #4444443d,
-                -10px -10px 30px #4444443d;
+  width: 75vw;
+  background-color: #f8f8f8;
+  padding: 1rem;
+  color: #2d2d2d;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.8rem;
+  box-shadow: 10px 10px 30px #4444443d, -10px -10px 30px #4444443d;
 }
 
 .h1LogIn {
-    text-align: center;
-    color: #2d2d2d;
-    align-content: center;
+  text-align: center;
+  color: #2d2d2d;
+  align-content: center;
 }
 
+.inputEmail,
+.inputPassword,
+.inputUsername {
+  background-color: #f8f8f8;
+  width: 100%;
+  margin: 1rem 0;
+  outline: none;
+  border-radius: 0.8rem;
+  border: 0.1rem solid #2d2d2d;
+  color: #2d2d2d;
+  padding: 0.5rem;
+}
 
-.inputEmail, .inputPassword, .inputUsername {
-    background-color: #f8f8f8;
-    width: 100%;
-    margin: 1rem 0;
-    outline: none;
-    border-radius: 0.8rem;
-    border: 0.1rem solid #2d2d2d;
-    color: #2d2d2d;
-    padding: 0.5rem;
-  }
-
-  .errorMsg {
-    text-align: center;
-    color: #ff5959;
-    font-size:small;
-    font-weight: bolder;
-    margin-top: -0.7rem;
-  }
+.errorMsg {
+  text-align: center;
+  color: #ff5959;
+  font-size: small;
+  font-weight: bolder;
+  margin-top: -0.7rem;
+}
 
 .createButton {
-    margin-top: 1rem;
-    background-color: #2d2d2d;
-    color: #f8f8f8;
-    border: none;
-    outline: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    padding: 0.8rem;
-    justify-content: left;
+  margin-top: 1rem;
+  background-color: #2d2d2d;
+  color: #f8f8f8;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.8rem;
+  justify-content: left;
 }
 
 .createButton:hover {
-    background-color: #2d2d2d;
-    color: #f08e8e;
-    border: none;
-
+  background-color: #2d2d2d;
+  color: #f08e8e;
+  border: none;
 }
 
 .createButton:disabled {
-    background-color: #2d2d2da8;
-    color: #dadada;
-    border: none;
-    cursor: default;
+  background-color: #2d2d2da8;
+  color: #dadada;
+  border: none;
+  cursor: default;
 }
 
 .forgotPassword {
-    margin-top: 0.8rem;
-    color:#a84a4a;
-    text-decoration: none;
+  margin-top: 0.8rem;
+  color: #a84a4a;
+  text-decoration: none;
 }
 
 .forgotPassword:hover {
-    color:#ff5959;
-    text-decoration: underline;
+  color: #ff5959;
+  text-decoration: underline;
 }

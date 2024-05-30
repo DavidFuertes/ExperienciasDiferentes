@@ -3,6 +3,7 @@ import ExperienceList from "../../components/ExperienceList";
 import EditExperience from "../../components/EditExperience";
 import { UserContext } from "../../context/UserContext.jsx";
 import { getAllExperiencesService } from "../../services/index.js";
+import styles from "./ExperienceAdministration.module.css";
 
 function ExperienceAdministration() {
   const [experiences, setExperiences] = useState([]);
@@ -23,22 +24,19 @@ function ExperienceAdministration() {
   }, []); // Se pasa un arreglo vacío como dependencia para que se ejecute solo una vez al montar el componente
 
   return (
-    <>
-      <section className="formSection">
-        <h1>Administración de Experiencias</h1>
-        <ExperienceList
-          experiences={experiences}
-          onSelectExperience={handleExperienceSelect}
-        />
-      </section>
-      <section className="formSection">
-        <EditExperience
-          experiences={experiences}
-          experienceId={selectedExperienceId}
-          token={token}
-        />
-      </section>
-    </>
+    <section className={styles.PanelControl}>
+      <h1 className={styles.title}>Panel de Control</h1>
+
+      <ExperienceList
+        experiences={experiences}
+        onSelectExperience={handleExperienceSelect}
+      />
+      <EditExperience
+        experiences={experiences}
+        experienceId={selectedExperienceId}
+        token={token}
+      />
+    </section>
   );
 }
 

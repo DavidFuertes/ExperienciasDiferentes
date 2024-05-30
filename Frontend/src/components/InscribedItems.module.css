@@ -20,7 +20,7 @@
 }
 
 .modalContent {
-  background-color: #585858be;
+  background-color: #2d2d2d;
   padding: 20px;
   border-radius: 5px;
   max-width: 400px;
@@ -47,8 +47,20 @@
   cursor: pointer;
 }
 
-.row:hover {
-  background-color: #00000065;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.avatar {
+  object-fit: cover;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 5rem;
+}
+
+.userInfo {
+  font-weight: bold;
 }

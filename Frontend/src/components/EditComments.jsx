@@ -1,9 +1,10 @@
+import styles from "./EditExperienceForm.module.css";
+
 function EditComments({ comment, selectedCommentId, onCommentSelect }) {
   const { id, content } = comment;
 
   return (
-    <li>
-      <label>ID: {id}</label>
+    <li className={styles.listItem}>
       <input
         type="radio"
         name="comment"
