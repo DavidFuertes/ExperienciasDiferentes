@@ -43,6 +43,7 @@ function MyExperiences() {
     <>
       <ToastContainer />
       <section className={styles.myExperiencesSection}>
+      <div>
       <h1 className={styles.titleDetails}>Experiencias por vivir</h1>
         <section>
           
@@ -54,6 +55,8 @@ function MyExperiences() {
             </p>
           )}
         </section>
+        </div>
+        <div>
         <h1 className={styles.titleDetails}>Experiencias pasadas</h1>
         <section >
           {inactiveExperiences.length > 0 ? (
@@ -64,6 +67,7 @@ function MyExperiences() {
             </p>
           )}
         </section>
+        </div>
       </section>
     </>
   );

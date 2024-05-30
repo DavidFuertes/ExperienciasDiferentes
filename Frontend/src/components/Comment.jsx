@@ -139,10 +139,9 @@ function Comment({ active, experienceId, comments }) {
   } else {
     return (
       <>
-        <section>
           {printComments}
-        </section>
-        <form onSubmit={sendComment}>
+
+        <form className={styles.divRate} onSubmit={sendComment}>
           <input
             className={styles.inputComment}
             type="text"
@@ -154,8 +153,8 @@ function Comment({ active, experienceId, comments }) {
               setCommentValue(event.target.value);
             }}
           />
-          <div>
-            <input
+            <input 
+              className={styles.inputRange}
               type="range"
               min="1"
               max="5"
@@ -164,9 +163,8 @@ function Comment({ active, experienceId, comments }) {
               onChange={(event) => {
                 setRating(event.target.value);
               }}
-            ></input>
-            <span>{rating}</span>
-          </div>
+              ></input>
+              <p>{rating} ⭐</p>
           <button className={styles.commentButton} type="submit">Comentar</button>
         </form>
       </>

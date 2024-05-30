@@ -29,7 +29,7 @@ export const ListadoExperiencias = ({ experiences }) => {
       hasMore={visibleExperiences < experiences.length}
       loader={<Loading />}
       endMessage={<p>No hay más experiencias por el momento.</p>}
-      // height={"100%"} // Establece la altura del componente InfiniteScroll
+
       scrollableTarget={parentElementRef.current}
     >
       <section className={styles.listSectionSection}>
@@ -53,6 +53,7 @@ export const ListadoExperiencias = ({ experiences }) => {
                     : "Sin valorar"}
                 </p>
                 </div>
+                <div className={styles.expCardDiv}>
                 <h2 className={styles.cardTitle}>{experience.title}</h2>
                 <section className={styles.cardInfo}>
                 <p className={styles.cardCity}>
@@ -69,7 +70,7 @@ export const ListadoExperiencias = ({ experiences }) => {
                   {experience.city}
                 </p>
                 <p className={styles.cardIntensity}>{experience.type}</p>
-                {/* <p className={styles.cardTotalPlaces}>Plazas Totales: {experience.total_places}</p> */}
+
                 <p className={styles.cardAvailablePlaces}>
                   Plazas libres:{" "}
                   {experience.total_places - experience.num_reservations}
@@ -79,15 +80,13 @@ export const ListadoExperiencias = ({ experiences }) => {
                 </section>
 
                 <p className={styles.cardDate}>{experience.date}</p>
-                {/* <RedirectButton
-                  text="Detalles"
-                  redirectUrl={`/experience/${experience.id}`}
-                RedirectButton/> */}
+                </div>
               </div>
             </li>
           ))}
         </ul>
       </section>
+      
     </InfiniteScroll>
   );
 };
