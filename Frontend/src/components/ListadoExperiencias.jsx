@@ -39,13 +39,23 @@ export const ListadoExperiencias = ({ experiences }) => {
               <div
                 className={styles.expCard}
                 onClick={() => {
+                  window.scrollTo(0, 0);
                   navigate(`/experience/${experience.id}`);
                 }}
               >
+                <div className={styles.imageRate}>
                 <img src={experience.image} className={styles.cardImg}></img>
+                <p className={styles.cardRate}>
+                  {experience.average_rating
+                    ? `${parseFloat(
+                        experience.average_rating
+                      ).toFixed(1)} ⭐`
+                    : "Sin valorar"}
+                </p>
+                </div>
                 <h2 className={styles.cardTitle}>{experience.title}</h2>
+                <section className={styles.cardInfo}>
                 <p className={styles.cardCity}>
-                  {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
@@ -58,21 +68,17 @@ export const ListadoExperiencias = ({ experiences }) => {
                   </svg>{" "}
                   {experience.city}
                 </p>
-                <p className={styles.cardIntensity}> {experience.type}</p>
-                <p className={styles.cardDate}> {experience.date}</p>
-                {/* <p className={styles.cardTotalPlaces} >Plazas Totales: {experience.total_places}</p> */}
+                <p className={styles.cardIntensity}>{experience.type}</p>
+                {/* <p className={styles.cardTotalPlaces}>Plazas Totales: {experience.total_places}</p> */}
                 <p className={styles.cardAvailablePlaces}>
                   Plazas libres:{" "}
                   {experience.total_places - experience.num_reservations}
                 </p>
                 <p className={styles.cardPrice}>Precio: {experience.price} €</p>
-                <p className={styles.cardRate}>
-                  {experience.average_rating
-                    ? `Valoración:  ${parseFloat(
-                        experience.average_rating
-                      ).toFixed(1)}⭐`
-                    : "Sin valorar"}
-                </p>
+
+                </section>
+
+                <p className={styles.cardDate}>{experience.date}</p>
                 {/* <RedirectButton
                   text="Detalles"
                   redirectUrl={`/experience/${experience.id}`}

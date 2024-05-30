@@ -75,50 +75,42 @@ export const ChangePassword = () => {
   return (
     <>
     <h1 className={styles.h1LogIn} >Cambiar contraseña</h1>
-    <div className={styles.divLogin}>
-    <section>
+
+    <section className={styles.formSection}>
       <ToastContainer />
-      <form className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
-        <fieldset>
-          <label className={styles.labelPassword}>Contraseña actual:</label>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+
           <input
             className={styles.inputPassword}
             type="password"
-            placeholder="Contraseña..."
+            placeholder="Contraseña actual..."
             {...register("currentPassword")}
           />
-          <div>{errors.password?.message}</div>
-          <p id="message-error-password"></p>
-        </fieldset>
-        <fieldset>
-          <label className={styles.labelPassword}>Introduce tu nueva contraseña:</label>
+          <p className={styles.errorMsg}>{errors.currentPassword?.message}</p>
           <input
             className={styles.inputPassword}
             type="password"
-            placeholder="Contraseña..."
+            placeholder="Nueva contraseña..."
             {...register("newPassword")}
           />
-          <div>{errors.newPassword?.message}</div>
-        </fieldset>
-        <fieldset>
-          <label>Confirma tu nueva contraseña:</label>
+          <p className={styles.errorMsg}>{errors.newPassword?.message}</p>
           <input
+            className={styles.inputPassword}
             type="password"
-            placeholder="Confirma tu contraseña..."
+            placeholder="Confirma tu nueva contraseña..."
             {...register("confirmNewPassword", {
               validate: (value) =>
                 value === getValues("newPassword") ||
                 "Las contraseñas no coinciden",
             })}
           />
-          <div>{errors.confirmNewPassword?.message}</div>
-        </fieldset>
+          <p className={styles.errorMsg}>{errors.confirmNewPassword?.message}</p>
+
         <button className={styles.createButton} disabled={!isValid} type="submit">
-          Crea una nueva contraseña
+          Crear una nueva contraseña
         </button>
       </form>
     </section>
-    </div>
     </>
   );
 };

@@ -57,9 +57,9 @@ export const Experience = () => {
           rate={data.rate}
         />
       </section>
-      <section className="listSection">
-        <h1 className={styles.titleDetails}>Comentarios</h1>
-        <div className={styles.commentsDiv}>
+      <div className={styles.commentBox}>
+      <section className={styles.commentsSection}>
+        <h1 className={styles.titleComments}>Comentarios</h1>
           {data.comments.map((comment) => (
             <ExperienceComment
               key={comment.id}
@@ -67,8 +67,8 @@ export const Experience = () => {
               comment={comment.content}
             />
           ))}
-        </div>
       </section>
+      </div>
     </>
   );
 };

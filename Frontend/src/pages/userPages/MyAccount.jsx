@@ -137,7 +137,7 @@ export const MyAccount = () => {
         throw new Error("Error al actualizar los datos");
       }
       setModalMessage(
-        "Información actualizada correctamente. ¿Quieres recargar la página?"
+        `Información actualizada correctamente. ¿Quieres recargar la página?`
       );
       setShowModal(true);
       console.log("Datos actualizados:", userData);
@@ -254,8 +254,14 @@ export const MyAccount = () => {
           </div>
 
           <div className={styles.divInputs}>
+          {imagePreview && (
+              <img
+                className={styles.imgPreview}
+                src={imagePreview}
+                alt="preview"
+              />
+            )}
             <label className={styles.imgButton}>
-              {}
               <input
                 name="avatar"
                 type="file"
@@ -263,13 +269,6 @@ export const MyAccount = () => {
                 style={{ display: "none" }}
               />
             </label>
-            {imagePreview && (
-              <img
-                className={styles.imgPreview}
-                src={imagePreview}
-                alt="preview"
-              />
-            )}
           </div>
 
           <button className={styles.saveButton} type="submit">
@@ -277,6 +276,12 @@ export const MyAccount = () => {
           </button>
         </form>
 
+        
+        <div className={styles.finalButtons}>
+
+        <Link to="/account/ChangePassword" >
+          <button className={styles.changePassword}>Cambiar Contraseña</button>
+        </Link>
         <button
           className={styles.deleteButton}
           onClick={() => setShowDeleteModal(true)}
@@ -284,10 +289,13 @@ export const MyAccount = () => {
           Eliminar Cuenta
         </button>
 
+        </div>
+
+
         {showDeleteModal && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
-              <p style={{ color: "#ffffff" }}>
+              <p style={{ color: "#2d2d2d" }}>
                 ¿Estás seguro de que deseas eliminar tu cuenta?
               </p>
               <button
@@ -309,7 +317,7 @@ export const MyAccount = () => {
         {showDeleteModal && confirmDelete && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
-              <p style={{ color: "#ffffff" }}>
+              <p style={{ color: "#2d2d2d" }}>
                 ¡Es una lástima que hayas decidido abandonarnos! Esperamos
                 volverte a ver :D.
               </p>
@@ -326,7 +334,7 @@ export const MyAccount = () => {
         {showModal && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
-              <p style={{ color: "#ffffff" }}>{modalMessage}</p>
+              <p style={{ color: "#2d2d2d" }}>{modalMessage}</p>
               <button
                 className={styles.modalContentButton}
                 onClick={() => closeModal(true)}
@@ -362,9 +370,7 @@ export const MyAccount = () => {
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
       `}</style> */}
-        <Link to="/account/ChangePassword" className={styles.changePassword}>
-          Cambiar contraseña
-        </Link>
+
       </div>
     </section>
   );

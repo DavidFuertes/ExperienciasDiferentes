@@ -1,19 +1,17 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserAuth } from "./UserAuth.jsx";
 import styles from "./Header.module.css";
 export const Header = () => {
+  const navigate = useNavigate();
   return (
     <header className={styles.headerEd}>
-      <span>
-        <Link to={"/"}>
-          {" "}
+
           <img
             className={styles.logoHeader}
-            src="https://res.cloudinary.com/dgokuinpf/image/upload/v1716744927/jmfblcuarh02e4br5088.png"
+            src="https://res.cloudinary.com/dgokuinpf/image/upload/v1717031618/l1mt3pzuolq9uo5msfhn.png"
             alt="Logo experiencias diferentes"
-          />{" "}
-        </Link>
-      </span>
+            onClick={() => navigate("/")}
+          />
 
       <nav>
         <UserAuth />

@@ -119,25 +119,25 @@ export const LogIn = () => {
   return (
     <>
       <h1 className={styles.h1LogIn} >Inicio de sesión</h1>
-      <div className={styles.divLogin}>
+
       <ToastContainer />
-      <section>
-        <form  className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
-          <fieldset>
-            <label className={styles.labelEmail} >Correo electrónico:</label>
+      <section className={styles.formSection} >
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          
+            
             <input className={styles.inputEmail} type="email" placeholder="example@example.com" {...register("email")} />
             <p className={styles.errorMsg}>{errors.email?.message}</p>
-          </fieldset>
-          <fieldset>
-            <label className={styles.labelPassword}>Contraseña:</label>
+          
+          
+            
             <input
               className={styles.inputPassword}
               type="password"
               placeholder="Contraseña"
               {...register("password")}
             />
-            <div className={styles.errorMsg} >{errors.password?.message}</div>
-          </fieldset>
+            <p className={styles.errorMsg} >{errors.password?.message}</p>
+          
           <button className={styles.createButton} disabled={!isValid} type="submit">
             Iniciar sesión
           </button>
@@ -152,7 +152,7 @@ export const LogIn = () => {
           <Link className={styles.forgotPassword} to="/forget_password">Olvidé mi contraseña</Link>
         </form>
       </section>
-    </div>
+
     </>
   );
 };

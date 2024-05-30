@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { Slide, toast } from "react-toastify";
+import styles from "./ExperienceData.module.css";
 
 function Comment({ active, experienceId, comments }) {
   const [rating, setRating] = useState(5);
@@ -104,9 +105,9 @@ function Comment({ active, experienceId, comments }) {
         <>
             <h3>Comentarios</h3>{' '}
             {newComments.map((comment, index) => (
-                <div key={index}>
-                    <p>{comment.content}</p>
-                    <p>Por: {comment.name}</p>
+                <div key={index} className={styles.userComment}>
+                    <p className={styles.userNameInfo}>{comment.name}</p>
+                    <p className={styles.userCommentInfo}>{comment.content}</p>
                 </div>
             ))}
         </>
@@ -116,11 +117,12 @@ function Comment({ active, experienceId, comments }) {
   if (active) {
     return (
       <>
-      <section>
+
         {printComments}
-      </section>
+
         <form onSubmit={sendComment}>
           <input
+            className={styles.inputComment}
             type="text"
             placeholder="¡Añade un comentario!"
             value={commentValue}
@@ -130,7 +132,7 @@ function Comment({ active, experienceId, comments }) {
               setCommentValue(event.target.value);
             }}
           />
-          <button type="submit">Comentar</button>
+          <button className={styles.commentButton} type="submit">Comentar</button>
         </form>
       </>
     );
@@ -142,6 +144,7 @@ function Comment({ active, experienceId, comments }) {
         </section>
         <form onSubmit={sendComment}>
           <input
+            className={styles.inputComment}
             type="text"
             placeholder="¡Cuéntanos cómo te fué!"
             value={commentValue}
@@ -164,7 +167,7 @@ function Comment({ active, experienceId, comments }) {
             ></input>
             <span>{rating}</span>
           </div>
-          <button type="submit">Comentar</button>
+          <button className={styles.commentButton} type="submit">Comentar</button>
         </form>
       </>
     );

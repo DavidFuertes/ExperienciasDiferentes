@@ -124,23 +124,87 @@
 */
 
 .listSectionSection {
-  background-color: aquamarine;
-  width: 100vw;
+  background-color: #f4cba4;
+  display: flex;
+  justify-content: center;
+  list-style-type: none; 
+}
+
+.listSectionSection:first-child{
+  margin-top: 2rem;
+}
+.listSectionSection ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .expCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #f8f8f8;
   color: #2d2d2d;
   padding: 1rem;
   border-radius: 8px;
+  margin: 1rem 0;
+  width: 75vw;
+  height: auto;
+  box-shadow:  10px 10px 30px #4444443d,
+             -10px -10px 30px #44444480;
+}
+
+h2 {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0.5rem 0 0.65rem;
+  
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 110%;
+}
+
+.cardCity {
+  background-color: #bdff80ad;
+  padding: 0.2rem 0.7rem 0.2rem;
+  border-radius: 5rem;
+  margin-bottom: 0.3rem;
+}
+
+.cardIntensity {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+.cardDate {
+  font-weight: bold;
+  margin-top: 0.7rem;
+}
+
+.imageRate {
+  position: relative; /* Establece el contenedor como relativo */
 }
 
 .cardImg {
-  width: 200px;
-  height: 200px;
-  max-width: 15rem;
+  width: 100%;
+  max-width: 50rem;
   max-height: 15rem;
   border-radius: 0.8rem;
   object-fit: cover;
   object-position: left;
+}
+
+.cardRate {
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  font-weight: bold;
+  color:#f8f8f8;
+  margin: 0.3rem; 
+  background-color: #30303067;
+  padding: 0.2rem 0.7rem 0.2rem;
+  border-radius: 5rem;
 }

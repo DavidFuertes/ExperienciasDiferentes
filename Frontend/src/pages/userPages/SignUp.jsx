@@ -61,41 +61,35 @@ export const SignUp = () => {
   return (
     <>
         <h1 className={styles.h1LogIn}>Página de Registro</h1>
-    <div className={styles.divLogin}>
       <ToastContainer />
-      <section >
-        <form className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
-          <fieldset>
-            <label className={styles.labelUsername}>Nombre de usuario:</label>
+      <section className={styles.formSection}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+
             <input
               className={styles.inputUsername}
               type="text"
               placeholder="Introduce un nombre"
               {...register("username")}
             />
-            <p>{errors.username?.message}</p>
-          </fieldset>
-          <fieldset>
-            <label className={styles.labelEmail}>Correo electrónico:</label>
+            <p className={styles.errorMsg}>{errors.username?.message}</p>
             <input className={styles.inputEmail} type="email" placeholder="example@example.com" {...register("email")} />
-            <p>{errors.email?.message}</p>
-          </fieldset>
-          <fieldset>
-            <label className={styles.labelPassword}>Contraseña:</label>
+            <p className={styles.errorMsg}>{errors.email?.message}</p>
+
+
+
             <input
             className={styles.inputPassword}
               type="password"
               placeholder="Contraseña"
               {...register("password")}
             />
-            <p>{errors.password?.message}</p>
-          </fieldset>
+            <p className={styles.errorMsg}>{errors.password?.message}</p>
+
           <button className={styles.createButton} disabled={!isValid} type="submit">
             Registrarse
           </button>
         </form>
       </section>
-    </div>
     </>
   );
 };

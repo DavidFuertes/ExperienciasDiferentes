@@ -62,21 +62,21 @@ export const ForgetPassword = () => {
   return (
     <>
         <h1 className={styles.h1LogIn}>Olvidé mi contraseña</h1>
-    <div className={styles.divLogin}>
+
       <ToastContainer />
-      <section>
-        <form className={styles.formSection} onSubmit={handleSubmit(onSubmit)}>
-          <fieldset>
-            <label className={styles.labelEmail} htmlFor="email">Correo electrónico:</label>
+      <section className={styles.formSection}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+
+  
             <input className={styles.inputEmail} type="email" placeholder="example@example.com" {...register("email")} />
-            <p>{errors.email?.message}</p>
-          </fieldset>
+            <p className={styles.errorMsg}>{errors.email?.message}</p>
+
           <button className={styles.createButton} disabled={!isValid} type="submit">
             Recuperar contraseña
           </button>
         </form>
       </section>
-    </div>
+
     </>
   );
 };
