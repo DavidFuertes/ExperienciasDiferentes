@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import HandleAddDuplicateExperience from "./HandleAddDuplicateExperience";
 import { ToastContainer } from "react-toastify";
+import styles from "./EditExperienceForm.module.css";
 
 function EditExperienceForm({ experienceInfo }) {
   const {
@@ -98,134 +99,134 @@ function EditExperienceForm({ experienceInfo }) {
   return (
     <>
       <ToastContainer />
-      <div>
-        <section className="formsection">
-          <form onSubmit={handleSubmit}>
-            <h2>Editar Experiencia</h2>
-            <div>
-              <p>ID: {id}</p>
-              <fieldset>
-                <label>TÍTULO:</label>
-                <input
-                  type="text"
-                  placeholder={titleValue}
-                  value={titleValue}
-                  minLength={10}
-                  maxLength={50}
-                  onChange={(event) => {
-                    setTitleValue(event.target.value);
-                  }}
-                />
-              </fieldset>
-              <fieldset>
-                <label>DESCRIPCIÓN:</label>
-                <input
-                  type="text"
-                  placeholder={descriptionValue}
-                  value={descriptionValue}
-                  minLength={10}
-                  maxLength={200}
-                  onChange={(event) => {
-                    setDescriptionValue(event.target.value);
-                  }}
-                />
-              </fieldset>
-              <fieldset>
-                <label>TIPO:</label>
-                <select
-                  value={typeValue}
-                  onChange={(event) => {
-                    setTypeValue(event.target.value);
-                  }}
-                >
-                  <option value="Adrenalina pura">Adrenalina pura</option>
-                  <option value="Medio">Medio</option>
-                  <option value="Relajado">Relajado</option>
-                </select>
-              </fieldset>
-              <fieldset>
-                <label>LUGAR:</label>
-                <input
-                  type="text"
-                  placeholder={cityValue}
-                  value={cityValue}
-                  minLength={3}
-                  maxLength={30}
-                  onChange={(event) => {
-                    setCityValue(event.target.value);
-                  }}
-                />
-              </fieldset>
-              <fieldset>
-                <label>IMAGEN:</label>
-                {imagePreview && <img src={imagePreview} width="300" />}
-                <input
-                  className="input"
-                  type="file"
-                  onChange={handleImageChange}
-                />
-              </fieldset>
-              <fieldset>
-                <label>FECHA: {dateValue}</label>
-                <input
-                  type="date"
-                  value={dateValue}
-                  onChange={(event) => {
-                    setDateValue(event.target.value);
-                  }}
-                />
-              </fieldset>
-              <fieldset>
-                <label>PRECIO:</label>
-                <input
-                  type="number"
-                  placeholder={priceValue.toString()}
-                  value={priceValue.toString()}
-                  min={0}
-                  onChange={(event) => {
-                    setPriceValue(parseInt(event.target.value));
-                  }}
-                />
-              </fieldset>
-              <fieldset>
-                <label>PLAZAS MÍNIMAS:</label>
-                <input
-                  type="number"
-                  placeholder={minPlacesValue.toString()}
-                  value={minPlacesValue.toString()}
-                  min={1}
-                  onChange={(event) => {
-                    setMinPlacesValue(parseInt(event.target.value));
-                  }}
-                />
-              </fieldset>
-              <fieldset>
-                <label>PLAZAS TOTALES:</label>
-                <input
-                  type="number"
-                  placeholder={totalPlacesValue.toString()}
-                  value={totalPlacesValue.toString()}
-                  min={1}
-                  onChange={(event) => {
-                    setTotalPlacesValue(parseInt(event.target.value));
-                  }}
-                />
-              </fieldset>
-              <fieldset>
-                <label>ACTIVO:</label>
-                <input
-                  type="checkbox"
-                  checked={activeValue}
-                  onChange={(event) => {
-                    setActiveValue(event.target.checked ? 1 : 0);
-                  }}
-                />
-              </fieldset>
-            </div>
-            <button type="submit">Visualizar cambios</button>
-          </form>
-        </section>
-      </div>
+      <section className={styles.formSectionPanelControl}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <h2>Editar Experiencia</h2>
+          <p className={styles.id}>ID: {id}</p>
+
+          <label>TÍTULO</label>
+          <input
+            className={styles.textInput}
+            type="text"
+            placeholder={titleValue}
+            value={titleValue}
+            minLength={10}
+            maxLength={50}
+            onChange={(event) => {
+              setTitleValue(event.target.value);
+            }}
+          />
+          <label>DESCRIPCIÓN</label>
+          <textarea
+            className={styles.textInput}
+            type="text"
+            placeholder={descriptionValue}
+            value={descriptionValue}
+            minLength={10}
+            maxLength={200}
+            onChange={(event) => {
+              setDescriptionValue(event.target.value);
+            }}
+          />
+
+          <label>TIPO</label>
+          <select
+            className={styles.select}
+            value={typeValue}
+            onChange={(event) => {
+              setTypeValue(event.target.value);
+            }}
+          >
+            <option value="Adrenalina pura">Adrenalina pura</option>
+            <option value="Medio">Medio</option>
+            <option value="Relajado">Relajado</option>
+          </select>
+          <label>LUGAR</label>
+          <input
+            className={styles.textInput}
+            type="text"
+            placeholder={cityValue}
+            value={cityValue}
+            minLength={3}
+            maxLength={30}
+            onChange={(event) => {
+              setCityValue(event.target.value);
+            }}
+          />
+          <div className={styles.divInputs}>
+            {imagePreview && (
+              <img
+                className={styles.imgPreview}
+                src={imagePreview}
+                width="300"
+              />
+            )}
+            <label className={styles.imgButton}>
+              <input
+                type="file"
+                onChange={handleImageChange}
+                style={{ display: "none" }}
+              />
+            </label>
+          </div>
+          <label>FECHA</label>
+          <input
+            className={styles.textInput}
+            type="date"
+            value={dateValue}
+            onChange={(event) => {
+              setDateValue(event.target.value);
+            }}
+          />
+
+          <label>PRECIO</label>
+          <input
+            className={styles.textInput}
+            type="number"
+            placeholder={priceValue.toString()}
+            value={priceValue.toString()}
+            min={0}
+            onChange={(event) => {
+              setPriceValue(parseInt(event.target.value));
+            }}
+          />
+
+          <label>PLAZAS MÍNIMAS</label>
+          <input
+            className={styles.textInput}
+            type="number"
+            placeholder={minPlacesValue.toString()}
+            value={minPlacesValue.toString()}
+            min={1}
+            onChange={(event) => {
+              setMinPlacesValue(parseInt(event.target.value));
+            }}
+          />
+          <label>PLAZAS TOTALES</label>
+          <input
+            className={styles.textInput}
+            type="number"
+            placeholder={totalPlacesValue.toString()}
+            value={totalPlacesValue.toString()}
+            min={1}
+            onChange={(event) => {
+              setTotalPlacesValue(parseInt(event.target.value));
+            }}
+          />
+
+          <label>ACTIVO</label>
+          <input
+            type="checkbox"
+            checked={activeValue}
+            onChange={(event) => {
+              setActiveValue(event.target.checked ? 1 : 0);
+            }}
+          />
+          <button className={styles.createButton} type="submit">
+            Visualizar cambios
+          </button>
+        </form>
+      </section>
 
       <HandleAddDuplicateExperience
         data={modifiedExperience}

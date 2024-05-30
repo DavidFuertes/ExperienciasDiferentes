@@ -19,7 +19,7 @@ function ExperienceList({ experiences, onSelectExperience }) {
   };
 
   return (
-    <>
+    <section className={styles.filterBox}>
       <div className={styles.filterDiv}>
         <input
           type="text"
@@ -30,18 +30,20 @@ function ExperienceList({ experiences, onSelectExperience }) {
           ref={selectRef}
         />
       </div>
-      <div className={styles.results}>
-        {filteredExperiences.map((experience) => (
-          <span
-            onClick={() => handleSelectChange(experience.id)}
-            key={experience.id}
-            value={experience.id}
-          >
-            <p>{experience.title}</p>
-          </span>
-        ))}
+      <div className={styles.resultsDiv}>
+        <div className={styles.results}>
+          {filteredExperiences.map((experience) => (
+            <span
+              onClick={() => handleSelectChange(experience.id)}
+              key={experience.id}
+              value={experience.id}
+            >
+              <p>{experience.title}</p>
+            </span>
+          ))}
+        </div>
       </div>
-    </>
+    </section>
   );
 }
 

@@ -4,6 +4,7 @@ import InscribedItems from "./InscribedItems.jsx";
 import EditExperienceForm from "./EditExperienceForm.jsx";
 import { deleteCommentFromExperienceService } from "../services/index.js";
 import { Slide, toast } from "react-toastify";
+import styles from "./EditExperienceForm.module.css";
 
 function EditExperience({ experienceId, token }) {
   const [experience, setExperience] = useState(null);
@@ -108,8 +109,9 @@ function EditExperience({ experienceId, token }) {
           <EditExperienceForm experienceInfo={experience.data} />
         </section>
 
-        <section>
+        <section className={styles.formSectionPanelControl}>
           <form
+            className={styles.form}
             onSubmit={(event) => {
               event.preventDefault();
               handleDeleteComment(selectedCommentId, token);
@@ -126,33 +128,23 @@ function EditExperience({ experienceId, token }) {
                 />
               ))}
             </ul>
-            <button type="submit">Eliminar Comentario</button>
+            <button className={styles.createButton} type="submit">
+              Eliminar Comentario
+            </button>
           </form>
         </section>
-        <section>
-          <h4>Puntuación: {averageRate}</h4>
-        </section>
-        <section>
-          <h2>Inscritos</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>AVATAR</th>
-                <th>NOMBRE</th>
-                <th>EMAIL</th>
-                <th>ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              {inscribed.map((inscribed) => (
-                <InscribedItems
-                  key={inscribed.name}
-                  inscribed={{ inscribed }}
-                  filterInscribed={filterInscribed}
-                />
-              ))}
-            </tbody>
-          </table>
+        <section className={styles.formSectionPanelControl}>
+          <div className={styles.form}>
+            <h2>Inscritos</h2>
+
+            {inscribed.map((inscribed) => (
+              <InscribedItems
+                key={inscribed.name}
+                inscribed={{ inscribed }}
+                filterInscribed={filterInscribed}
+              />
+            ))}
+          </div>
         </section>
       </>
     );

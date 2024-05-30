@@ -54,14 +54,12 @@ function InscribedItems({ inscribed, filterInscribed }) {
 
   return (
     <>
-      <tr className={styles.row} onClick={handleRowClick}>
-        <td>
-          <img src={avatar} alt="Avatar" style={{ maxWidth: "100px" }} />
-        </td>
-        <td>{name}</td>
-        <td>{email}</td>
-        <td>{id}</td>
-      </tr>
+      <div className={styles.row} onClick={handleRowClick}>
+        <img src={avatar} alt="Avatar" className={styles.avatar} />
+        <p className={styles.userInfo}>{id}</p>
+        <p className={styles.userInfo}>{name}</p>
+        <p className={styles.userInfo}>{email}</p>
+      </div>
 
       {showModal && (
         <div className={`${styles.modal} ${showModal ? styles.active : ""}`}>
